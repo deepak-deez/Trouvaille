@@ -1,0 +1,21 @@
+$nav-input-grey-bg: #e2e2e2;
+$nav-profile-grey-bg: #dadbe0;
+
+/* Navbar */
+
+nav {
+  .nav-serach-area {
+    background-color: $nav-input-grey-bg;
+    padding: 0.9rem 3rem 0.9rem 2rem;
+    border-radius: 2rem;
+    img {
+      width: 30px;
+    }
+    .nav-search-input {
+      all: unset;
+    }
+    .nav-search-input::placeholder {
+      color: rgb(96, 96, 96);
+    }
+  }
+}
