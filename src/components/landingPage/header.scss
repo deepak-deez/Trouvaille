@@ -1,0 +1,53 @@
+@mixin display {
+  display: flex;
+}
+
+.header {
+  @include display;
+  padding-top: 1rem;
+  padding-left: 2rem;
+  img {
+    width: 3rem;
+  }
+  .title {
+    @include display;
+    flex-flow: column;
+    margin-top: -0.5rem;
+    padding-left: 0.3rem;
+  
+  .subTitle {
+    margin-top: -1.2rem;
+    font-size: 0.4rem;
+    font-weight: 300;
+    letter-spacing: 0.1rem;
+  }
+}
+}
+
+@media screen and (min-width: 1440px) {
+  .header {
+    .title {
+        font-size: 1.6rem;
+        margin-top: -1.3rem;
+        .subTitle {
+          margin-top: -2rem;
+        }
+    }
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .header {
+    img {
+      width: 5rem;
+    }
+    .title {
+        font-size: 2rem;
+        margin-top: -1rem;
+        .subTitle {
+          margin-top: -2rem;
+          font-size: 0.7rem;
+        }
+    }
+  }
+}

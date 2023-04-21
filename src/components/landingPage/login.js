@@ -1,16 +1,34 @@
 import React from "react";
-import Logo from "../../assets/images/logo.png";
-// import Background from "../../assets/images/camelsBackground.png";
+import "../landingPage/login.scss";
 
 const Login = () => {
   return (
     <div>
-      <section className="header">
-        <img src={Logo} alt="logo" />
-        <div className="title">
-          <p classname="logoName">trouvaille.</p>
-          <p className="subTitle">Front-facing website</p>
-        </div>
+      <section className="loginTexts">
+        <p className="signIn">Signin</p>
+        <p className="welcomeText">
+          Welcome back, <span className="userName">Raja Kumari</span>
+        </p>
+      </section>
+
+      <section className="loginForm">
+        <form>
+          <div className="formInput">
+            <input type="text" placeholder="Enter Email Id" />
+            <input type="text" placeholder="Password" />
+
+            <div className="check">
+              <input type="checkbox" className="checkBox" />
+              <p>Remember me</p>
+            </div>
+            <button type="submit" className="continueButton">
+              continue
+            </button>
+            <p href="#" target="_blank" classname="forgetPassword">
+              Forget Password
+            </p>
+          </div>
+        </form>
       </section>
     </div>
   );

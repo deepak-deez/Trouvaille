@@ -1,34 +1,11 @@
 body {
-  font-family: 'Roboto', sans-serif;
+  // font-family: "Roboto", sans-serif;
+  font-family: 'Poppins', sans-serif;
+  background-image: url(./assets/images/camelsBackground.png);
+  background-size: cover;
+  overflow-x: hidden;
 }
 
-// code {
-//   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-//     monospace;
-// }
+// @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
-
-.header {
-  display: flex;
-}
-
-.header img {
-  padding-top: 1rem;
-  padding-left: 2rem;
-  width: 3.5rem;
-}
-
-.header .title {
-  display: flex;
-  flex-flow: column;
-  padding-top: 0.7rem;
-  padding-left: 0.3rem;
-  font-weight: 500;
-}
-
-.header .subTitle {
-  margin-top: -1rem;
-  font-size: 0.6rem;
-  font-weight: 300;
-} 
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
