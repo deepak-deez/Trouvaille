@@ -24,6 +24,9 @@ nav {
   top: 0;
   $color-nav-li: #444a61;
   $color-nav-li-hover: #051b25;
+  li {
+    font-size: 22px;
+  }
   .nav-lg-view {
     li {
       color: $color-nav-li;
