@@ -15,4 +15,9 @@ $color-primary-blue: #1e242a;
       border: 5px solid $color-primary-white;
     }
   }
+  .filter-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 179px);
+    gap: 2.2rem;
+  }
 }

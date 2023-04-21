@@ -9,6 +9,12 @@ import riversideIcon from "../../assets/images/tripCategory/riverside-icon.svg";
 import sortIcon from "../../assets/images/tripCategory/sort-icon.svg";
 import filterIcon from "../../assets/images/tripCategory/filter-icon.svg";
 import dropdownIcon from "../../assets/images/tripCategory/drop-drown-icon.svg";
+import tripCategoryImg1 from "../../assets/images/tripCategory/trip-category-card-img-1.png";
+import tripCategoryImg2 from "../../assets/images/tripCategory/trip-category-card-img-2.png";
+import tripCategoryImg2 from "../../assets/images/tripCategory/trip-category-card-img-3.png";
+import tripCategoryImg3 from "../../assets/images/tripCategory/trip-category-card-img-4.png";
+import tripCategoryImg4 from "../../assets/images/tripCategory/trip-category-card-img-5.png";
+import tripCategoryImg5 from "../../assets/images/tripCategory/trip-category-card-img-6.png";
 
 export default function TripCategory() {
   const [ocassionFilterCollapse, setocassionFilterCollapse] = useState(false);
@@ -124,7 +130,26 @@ export default function TripCategory() {
               </ul>
             )}
           </div>
-          <div className="filter-results w-[75%]"></div>
+          <div className="filter-results w-[75%]">
+            <div>
+              <img src="" alt="" />
+            </div>
+            <div>
+              <img src="" alt="" />
+            </div>
+            <div>
+              <img src="" alt="" />
+            </div>
+            <div>
+              <img src="" alt="" />
+            </div>
+            <div>
+              <img src="" alt="" />
+            </div>
+            <div>
+              <img src="" alt="" />
+            </div>
+          </div>
         </div>
       </section>
     </>
