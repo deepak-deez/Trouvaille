@@ -1,0 +1,18 @@
+$color-primary-white: #d0d5d8;
+$color-primary-orange: #bc4e37;
+$color-primary-yellow: #f2994a;
+$color-primary-blue: #1e242a;
+
+.trip-category {
+  margin-top: 40rem;
+  color: $color-primary-white;
+  .filter-categories {
+    background: $color-primary-blue;
+    input {
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      border: 5px solid $color-primary-white;
+    }
+  }
+}
