@@ -133,24 +133,24 @@ export default function TripCategory() {
           <div className="filter-results w-[75%]">
             <div className="flex gap-[2rem]">
               <div>
-                <img src={tripCategoryImg1} alt="" />
+                <img src={tripCategoryImg1} alt="trip-category-img" />
               </div>
               <div>
-                <img src={tripCategoryImg2} alt="" />
+                <img src={tripCategoryImg2} alt="trip-category-img" />
               </div>
               <div>
-                <img src={tripCategoryImg3} alt="" />
+                <img src={tripCategoryImg3} alt="trip-category-img" />
               </div>
             </div>
             <div className="flex gap-[2rem] mt-[2rem]">
               <div>
-                <img src={tripCategoryImg4} alt="" />
+                <img src={tripCategoryImg4} alt="trip-category-img" />
               </div>
               <div>
-                <img src={tripCategoryImg5} alt="" />
+                <img src={tripCategoryImg5} alt="trip-category-img" />
               </div>
               <div>
-                <img src={tripCategoryImg6} alt="" />
+                <img src={tripCategoryImg6} alt="trip-category-img" />
               </div>
             </div>
           </div>
