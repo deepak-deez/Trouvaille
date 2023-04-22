@@ -16,8 +16,11 @@ $color-primary-blue: #1e242a;
     }
   }
   .filter-results {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 179px);
-    gap: 2.2rem;
+    // display: grid;
+    // grid-template-columns: repeat(auto-fill, 274px);
+    // gap: 2.2rem;
+    // display: flex;
+    // flex-wrap: wrap;
+    // gap: 1rem;
   }
 }
