@@ -25,7 +25,7 @@ export default function TripCategory() {
   return (
     <>
       <section className="trip-category 2xl:mx-[24rem]">
-        <div className="flex justify-between flex-wrap">
+        <div className="flex justify-center flex-wrap gap-10 lg:gap-24 trip-category-icons">
           <img src={seaIcon} alt="sea-icon" />
           <img src={hillsIcon} alt="hills-icon" />
           <img src={forestIcon} alt="forest-icon" />

@@ -6,6 +6,17 @@ $color-primary-blue: #1e242a;
 .trip-category {
   margin-top: 40rem;
   color: $color-primary-white;
+  .trip-category-icons {
+    img {
+      width: 4rem;
+    }
+    //media queries
+    @media only screen and (min-width: 1024px) {
+      img {
+        width: 140px;
+      }
+    }
+  }
   .filter-categories {
     background: $color-primary-blue;
     input {
