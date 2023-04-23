@@ -1,0 +1,37 @@
+$color-primary-white: #d0d5d8;
+$color-primary-orange: #bc4e37;
+$color-primary-yellow: #f2994a;
+$color-primary-blue: #1e242a;
+
+.trip-category {
+  margin-top: 40rem;
+  color: $color-primary-white;
+  .trip-category-icons {
+    img {
+      width: 4rem;
+    }
+    //media queries
+    @media only screen and (min-width: 1024px) {
+      img {
+        width: 140px;
+      }
+    }
+  }
+  .filter-categories {
+    background: $color-primary-blue;
+    input {
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      border: 5px solid $color-primary-white;
+    }
+  }
+  .filter-results {
+    // display: grid;
+    // grid-template-columns: repeat(auto-fill, 274px);
+    // gap: 2.2rem;
+    // display: flex;
+    // flex-wrap: wrap;
+    // gap: 1rem;
+  }
+}
