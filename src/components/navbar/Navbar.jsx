@@ -60,8 +60,13 @@ export default function Navbar() {
       {navCollapse ? (
         ""
       ) : (
-        <div className="flex flex-col gap-10 mt-10 nav-tab-menu">
-          <ul className="flex flex-col gap-10 2xl:gap-[88px] my-auto">
+        <div
+          className={
+            "flex flex-col gap-10 mt-10 nav-tab-menu " +
+            (navCollapse ? "nav-close" : "nav-open")
+          }
+        >
+          <ul className={"flex flex-col gap-10 2xl:gap-[88px] my-auto "}>
             <li className="flex justify-between">
               <span>Home</span>{" "}
               <div className="flex gap-10">
