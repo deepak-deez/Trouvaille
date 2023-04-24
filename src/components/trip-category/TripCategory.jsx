@@ -45,105 +45,108 @@ export default function TripCategory() {
             <p className="">Filter</p>
           </div>
         </div>
-        <div className="trip-category-filters flex flex-col lg:flex-row flex-wrap justify-between xl:flex-col gap-5 xl:gap-20 xl:w-[25%]">
-          <div className="flex flex-col gap-5">
-            <h4>Price</h4>
-            <Slider />
-            <div className="flex justify-between">
-              <span>₹5,241</span>
-              <span>₹22,500</span>
+        <div>
+          <div className="trip-category-filters flex flex-col lg:flex-row flex-wrap justify-between xl:flex-col gap-5 xl:gap-20 xl:w-[25%] p-10 lg:p-5 2xl:p-[2rem]">
+            <div className="flex flex-col gap-5">
+              <h4>Price</h4>
+              <Slider />
+              <div className="flex justify-between">
+                <span>₹5,241</span>
+                <span>₹22,500</span>
+              </div>
+            </div>
+            <div className="lg:w-[12rem] xl:w-[auto]">
+              <div className="flex justify-between ">
+                <h4>Ocassion</h4>
+                <button>
+                  <img
+                    src={dropdownIcon}
+                    onClick={() => {
+                      setocassionFilterCollapse(!ocassionFilterCollapse);
+                    }}
+                    alt="dropdownIcon"
+                  />
+                </button>
+              </div>
+              {ocassionFilterCollapse && (
+                <ul className="flex flex-col xl:gap-[1.8rem] xl:text-[20px] mt-[1rem]">
+                  <li className="flex justify-between">
+                    <input type="checkbox" />
+                    <label htmlFor="">Family Vacation</label>
+                  </li>
+                  <li className="flex justify-between">
+                    <input type="checkbox" />
+                    <label htmlFor="">Romantic Gateway</label>
+                  </li>
+                  <li className="flex justify-between">
+                    <input type="checkbox" />
+                    <label htmlFor="">Adventure</label>
+                  </li>
+                  <li className="flex justify-between">
+                    <input type="checkbox" />
+                    <label htmlFor="">Business</label>
+                  </li>
+                  <li className="flex justify-between">
+                    <input type="checkbox" />
+                    <label htmlFor="">Relaxation</label>
+                  </li>
+                </ul>
+              )}
+            </div>
+            <div className="lg:w-[12rem] xl:w-[auto]">
+              <div className="flex justify-between">
+                <h4>Travel Type</h4>
+                <button>
+                  <img
+                    src={dropdownIcon}
+                    onClick={() => {
+                      settravelFilterCollapse(!travelFilterCollapse);
+                    }}
+                    alt="dropdownIcon"
+                  />
+                </button>
+              </div>
+              {travelFilterCollapse && (
+                <ul className="flex flex-col xl:gap-[1.8rem] xl:text-[20px] mt-[1rem]">
+                  <li className="flex justify-between">
+                    <input type="checkbox" />
+                    <label htmlFor="">Independent Tour</label>
+                  </li>
+                  <li className="flex justify-between">
+                    <input type="checkbox" />
+                    <label htmlFor="">Escorted tour</label>
+                  </li>
+                </ul>
+              )}
+            </div>
+            <div className="lg:w-[12rem] xl:w-[auto]">
+              <div className="flex justify-between">
+                <h4>Ammenities</h4>
+                <button>
+                  <img
+                    src={dropdownIcon}
+                    onClick={() => {
+                      setammenitiesFilterCollapse(!ammenitiesFilterCollapse);
+                    }}
+                    alt="dropdownIcon"
+                  />
+                </button>
+              </div>
+              {ammenitiesFilterCollapse && (
+                <ul className="flex flex-col xl:gap-[1.8rem] xl:text-[20px] mt-[1rem]">
+                  <li className="flex justify-between">
+                    <input type="checkbox" />
+                    <label htmlFor="">Some Option</label>
+                  </li>
+                  <li className="flex justify-between">
+                    <input type="checkbox" />
+                    <label htmlFor="">Some Option</label>
+                  </li>
+                </ul>
+              )}
             </div>
           </div>
-          <div className="lg:w-[12rem] xl:w-[auto]">
-            <div className="flex justify-between ">
-              <h4>Ocassion</h4>
-              <button>
-                <img
-                  src={dropdownIcon}
-                  onClick={() => {
-                    setocassionFilterCollapse(!ocassionFilterCollapse);
-                  }}
-                  alt="dropdownIcon"
-                />
-              </button>
-            </div>
-            {ocassionFilterCollapse && (
-              <ul className="flex flex-col xl:gap-[1.8rem] xl:text-[20px] mt-[1rem]">
-                <li className="flex justify-between">
-                  <input type="checkbox" />
-                  <label htmlFor="">Family Vacation</label>
-                </li>
-                <li className="flex justify-between">
-                  <input type="checkbox" />
-                  <label htmlFor="">Romantic Gateway</label>
-                </li>
-                <li className="flex justify-between">
-                  <input type="checkbox" />
-                  <label htmlFor="">Adventure</label>
-                </li>
-                <li className="flex justify-between">
-                  <input type="checkbox" />
-                  <label htmlFor="">Business</label>
-                </li>
-                <li className="flex justify-between">
-                  <input type="checkbox" />
-                  <label htmlFor="">Relaxation</label>
-                </li>
-              </ul>
-            )}
-          </div>
-          <div className="lg:w-[12rem] xl:w-[auto]">
-            <div className="flex justify-between">
-              <h4>Travel Type</h4>
-              <button>
-                <img
-                  src={dropdownIcon}
-                  onClick={() => {
-                    settravelFilterCollapse(!travelFilterCollapse);
-                  }}
-                  alt="dropdownIcon"
-                />
-              </button>
-            </div>
-            {travelFilterCollapse && (
-              <ul className="flex flex-col xl:gap-[1.8rem] xl:text-[20px] mt-[1rem]">
-                <li className="flex justify-between">
-                  <input type="checkbox" />
-                  <label htmlFor="">Independent Tour</label>
-                </li>
-                <li className="flex justify-between">
-                  <input type="checkbox" />
-                  <label htmlFor="">Escorted tour</label>
-                </li>
-              </ul>
-            )}
-          </div>
-          <div className="lg:w-[12rem] xl:w-[auto]">
-            <div className="flex justify-between">
-              <h4>Travel Type</h4>
-              <button>
-                <img
-                  src={dropdownIcon}
-                  onClick={() => {
-                    setammenitiesFilterCollapse(!ammenitiesFilterCollapse);
-                  }}
-                  alt="dropdownIcon"
-                />
-              </button>
-            </div>
-            {ammenitiesFilterCollapse && (
-              <ul className="flex flex-col xl:gap-[1.8rem] xl:text-[20px] mt-[1rem]">
-                <li className="flex justify-between">
-                  <input type="checkbox" />
-                  <label htmlFor="">Some Option</label>
-                </li>
-                <li className="flex justify-between">
-                  <input type="checkbox" />
-                  <label htmlFor="">Some Option</label>
-                </li>
-              </ul>
-            )}
-          </div>
+          <div className="trip-category-filter-results"></div>
         </div>
       </section>
     </>
