@@ -9,6 +9,12 @@ body {
   font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding: 15px;
+}
+@media screen and (min-width: 1024px) {
+  body {
+    padding: 0;
+  }
 }
 
 code {
