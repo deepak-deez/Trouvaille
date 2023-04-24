@@ -1,7 +1,7 @@
 import React from "react";
 import Router from "./Routes";
 import Navbar from "./components/navbar/Navbar";
-import TripCategory from "./components/trip-category/TripCategory";
+import TripCategory from "./components/trip-category/Child";
 
 const App = () => {
   return (
