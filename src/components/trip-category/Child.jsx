@@ -231,7 +231,7 @@ export default function TripCategory() {
               alt="trip-category-img"
             />
             <div className="flex gap-5 show-detail-text">
-              <pp>Show detail</pp>
+              <p>Show detail</p>
               <img src={readMoreIcon} alt="read-more-icon" />
             </div>
             <div className="flex gap-2 review-stars">
