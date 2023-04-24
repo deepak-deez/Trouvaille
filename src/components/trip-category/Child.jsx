@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./tripCategory.scss";
+import "./child.scss";
 import seaIcon from "../../assets/images/tripCategory/sea-icon.svg";
 import hillsIcon from "../../assets/images/tripCategory/hills-icon.svg";
 import forestIcon from "../../assets/images/tripCategory/forest-icon.svg";

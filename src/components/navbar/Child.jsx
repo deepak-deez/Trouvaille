@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import "./navbar.scss";
+import "./child.scss";
 import logo from "../../assets/images/header/logo.svg";
 import searchIcon from "../../assets/images/header/search-icon.svg";
 import notificationIcon from "../../assets/images/header/notification-icon.svg";
 import documentIcon from "../../assets/images/header/document-icon.svg";
 import profileIcon from "../../assets/images/header/user-profile-icon.svg";
-import { isValidInputTimeValue } from "@testing-library/user-event/dist/utils";
 import menuHamburger from "../../assets/images/header/menu-hamburger.svg";
 
 export default function Navbar() {
