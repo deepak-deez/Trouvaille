@@ -15,6 +15,8 @@ import tripCategoryImg3 from "../../assets/images/tripCategory/trip-category-car
 import tripCategoryImg4 from "../../assets/images/tripCategory/trip-category-card-img-4.png";
 import tripCategoryImg5 from "../../assets/images/tripCategory/trip-category-card-img-5.png";
 import tripCategoryImg6 from "../../assets/images/tripCategory/trip-category-card-img-6.png";
+import Slider, { Range } from "rc-slider";
+import "rc-slider/assets/index.css";
 
 export default function TripCategory() {
   const [ocassionFilterCollapse, setocassionFilterCollapse] = useState(false);
@@ -24,8 +26,8 @@ export default function TripCategory() {
 
   return (
     <>
-      <section className="trip-category 2xl:mx-[24rem]">
-        <div className="flex justify-center flex-wrap gap-10 lg:gap-24 trip-category-icons">
+      <section className="trip-category lg:mx-[10rem] 2xl:mx-[24rem]">
+        <div className="flex justify-center 2xl:justify-between flex-wrap gap-10 lg:gap-12 trip-category-icons">
           <img src={seaIcon} alt="sea-icon" />
           <img src={hillsIcon} alt="hills-icon" />
           <img src={forestIcon} alt="forest-icon" />
@@ -43,26 +45,30 @@ export default function TripCategory() {
             <p className="">Filter</p>
           </div>
         </div>
-        <div className="flex gap-[2rem]">
-          <div className="filter-categories w-[25%] p-[2.25rem] text-[24px]">
-            <h4 className="text-[1.5rem]">Price</h4>
-            <p className="my-[20px]">Slider here</p>
+        <div className="trip-category-filters flex flex-col lg:flex-row flex-wrap justify-between xl:flex-col gap-5 xl:gap-20 xl:w-[25%]">
+          <div className="flex flex-col gap-5">
+            <h4>Price</h4>
+            <Slider />
             <div className="flex justify-between">
-              <p>₹5,241</p>
-              <p>₹22,500</p>
+              <span>₹5,241</span>
+              <span>₹22,500</span>
             </div>
-            <div className="flex justify-between mt-[3.4rem]">
-              <p>Ocassion</p>
-              <button
-                onClick={() => {
-                  setocassionFilterCollapse(!ocassionFilterCollapse);
-                }}
-              >
-                <img src={dropdownIcon} alt="drop-down-Icon" />
+          </div>
+          <div className="lg:w-[12rem] xl:w-[auto]">
+            <div className="flex justify-between ">
+              <h4>Ocassion</h4>
+              <button>
+                <img
+                  src={dropdownIcon}
+                  onClick={() => {
+                    setocassionFilterCollapse(!ocassionFilterCollapse);
+                  }}
+                  alt="dropdownIcon"
+                />
               </button>
             </div>
             {ocassionFilterCollapse && (
-              <ul className="flex flex-col gap-[1.8rem] text-[20px] mt-[1rem]">
+              <ul className="flex flex-col xl:gap-[1.8rem] xl:text-[20px] mt-[1rem]">
                 <li className="flex justify-between">
                   <input type="checkbox" />
                   <label htmlFor="">Family Vacation</label>
@@ -85,18 +91,22 @@ export default function TripCategory() {
                 </li>
               </ul>
             )}
-            <div className="flex justify-between mt-[3.4rem]">
-              <p>Travel Type</p>
-              <button
-                onClick={() => {
-                  settravelFilterCollapse(!travelFilterCollapse);
-                }}
-              >
-                <img src={dropdownIcon} alt="drop-down-Icon" />
+          </div>
+          <div className="lg:w-[12rem] xl:w-[auto]">
+            <div className="flex justify-between">
+              <h4>Travel Type</h4>
+              <button>
+                <img
+                  src={dropdownIcon}
+                  onClick={() => {
+                    settravelFilterCollapse(!travelFilterCollapse);
+                  }}
+                  alt="dropdownIcon"
+                />
               </button>
             </div>
             {travelFilterCollapse && (
-              <ul className="flex flex-col gap-[1.8rem] text-[20px] mt-[1rem]">
+              <ul className="flex flex-col xl:gap-[1.8rem] xl:text-[20px] mt-[1rem]">
                 <li className="flex justify-between">
                   <input type="checkbox" />
                   <label htmlFor="">Independent Tour</label>
@@ -107,18 +117,22 @@ export default function TripCategory() {
                 </li>
               </ul>
             )}
-            <div className="flex justify-between mt-[3.4rem]">
-              <p>Ammenities</p>
-              <button
-                onClick={() => {
-                  setammenitiesFilterCollapse(!ammenitiesFilterCollapse);
-                }}
-              >
-                <img src={dropdownIcon} alt="drop-down-Icon" />
+          </div>
+          <div className="lg:w-[12rem] xl:w-[auto]">
+            <div className="flex justify-between">
+              <h4>Travel Type</h4>
+              <button>
+                <img
+                  src={dropdownIcon}
+                  onClick={() => {
+                    setammenitiesFilterCollapse(!ammenitiesFilterCollapse);
+                  }}
+                  alt="dropdownIcon"
+                />
               </button>
             </div>
             {ammenitiesFilterCollapse && (
-              <ul className="flex flex-col gap-[1.8rem] text-[20px] mt-[1rem]">
+              <ul className="flex flex-col xl:gap-[1.8rem] xl:text-[20px] mt-[1rem]">
                 <li className="flex justify-between">
                   <input type="checkbox" />
                   <label htmlFor="">Some Option</label>
@@ -129,30 +143,6 @@ export default function TripCategory() {
                 </li>
               </ul>
             )}
-          </div>
-          <div className="filter-results w-[75%]">
-            <div className="flex gap-[2rem]">
-              <div>
-                <img src={tripCategoryImg1} alt="trip-category-img" />
-              </div>
-              <div>
-                <img src={tripCategoryImg2} alt="trip-category-img" />
-              </div>
-              <div>
-                <img src={tripCategoryImg3} alt="trip-category-img" />
-              </div>
-            </div>
-            <div className="flex gap-[2rem] mt-[2rem]">
-              <div>
-                <img src={tripCategoryImg4} alt="trip-category-img" />
-              </div>
-              <div>
-                <img src={tripCategoryImg5} alt="trip-category-img" />
-              </div>
-              <div>
-                <img src={tripCategoryImg6} alt="trip-category-img" />
-              </div>
-            </div>
           </div>
         </div>
       </section>
