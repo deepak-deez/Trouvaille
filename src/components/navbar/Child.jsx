@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./navbar.scss";
+import "./child.scss";
 import logo from "../../assets/images/header/logo.svg";
 import searchIcon from "../../assets/images/header/search-icon.svg";
 import notificationIcon from "../../assets/images/header/notification-icon.svg";
