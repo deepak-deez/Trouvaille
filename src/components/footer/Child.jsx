@@ -12,7 +12,9 @@ import pinterestIcon from "../../assets/images/footer/pinterest-icon.svg";
 export default function Child() {
   return (
     <footer className="flex flex-col gap-5 lg:gap-10 xl:gap-0">
-      <p className="text-center xl:mb-[2rem]">Get Social with us</p>
+      <p className="text-center xl:mb-[2rem] text-[#B4BBC1] text-[22px]">
+        Get Social with us
+      </p>
       <ul className="flex flex-wrap justify-center gap-10 xl:gap-[3rem] xl:mb-[4.5rem]">
         <li>
           <img src={facebookIcon} alt="facebook-icon" />
