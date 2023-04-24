@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./navbar.scss";
+import "./child.scss";
 import logo from "../../assets/images/header/logo.svg";
 import searchIcon from "../../assets/images/header/search-icon.svg";
 import notificationIcon from "../../assets/images/header/notification-icon.svg";
@@ -14,7 +14,7 @@ export default function Navbar() {
     <nav className="p-2 sm:p-10 lg:px-[20] lg:py-10 2xl:px-[4rem] 2xl:py[2.6rem]">
       <div className="flex justify-between flex-wrap">
         <button
-          className="lg:hidden"
+          className="xl:hidden"
           onClick={() => {
             navCollapse ? setnavColapse(false) : setnavColapse(true);
           }}
@@ -30,13 +30,13 @@ export default function Navbar() {
             </p>
           </div>
         </div>
-        <ul className="hidden lg:flex gap-10 2xl:gap-[88px] my-auto nav-lg-view">
+        <ul className="hidden xl:flex gap-10 2xl:gap-[88px] my-auto nav-lg-view">
           <li>Home</li>
           <li>Trips</li>
           <li>Contacts</li>
         </ul>
         <div className="flex gap-10 2xl:gap-[4.1rem]">
-          <div className="nav-serach-area hidden lg:flex">
+          <div className="nav-serach-area hidden xl:flex">
             <input
               type="text"
               className="nav-search-input"
@@ -46,12 +46,12 @@ export default function Navbar() {
           </div>
           <img
             src={notificationIcon}
-            className="hidden lg:block"
+            className="hidden xl:block"
             alt="notification-icon"
           />
           <img
             src={documentIcon}
-            className="hidden lg:block"
+            className="hidden xl:block"
             alt="document-icon"
           />
           <img src={profileIcon} alt="profile-icon" />
