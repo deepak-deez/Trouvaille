@@ -62,7 +62,7 @@ export default function Navbar() {
       ) : (
         <div
           className={
-            "flex flex-col gap-10 mt-10 nav-tab-menu " +
+            "flex flex-col gap-10 sm:mt-10 nav-tab-menu " +
             (navCollapse ? "nav-close" : "nav-open")
           }
         >
