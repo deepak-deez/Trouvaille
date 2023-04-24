@@ -2,6 +2,7 @@ $color-primary-white: #d0d5d8;
 $color-primary-orange: #bc4e37;
 $color-primary-yellow: #f2994a;
 $color-primary-blue: #1e242a;
+$bg-color-blue: #212b33;
 
 .trip-category {
   margin-top: 40rem;
@@ -18,9 +19,11 @@ $color-primary-blue: #1e242a;
     }
   }
   .trip-category-filters {
-    font-size: 20px;
+    font-size: 16px;
+    background-color: $bg-color-blue;
+    border-radius: 2rem;
     h4 {
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 600;
     }
   }
