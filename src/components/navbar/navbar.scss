@@ -78,6 +78,28 @@ nav {
       color: rgb(0, 0, 240);
     }
   }
+  .nav-open {
+    animation: nav-open 0.5s;
+  }
+  @keyframes nav-open {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+  .nav-close {
+    animation: nav-close 0.5sS;
+  }
+  @keyframes nav-close {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
 }
 
 /* Navbar Ends */
