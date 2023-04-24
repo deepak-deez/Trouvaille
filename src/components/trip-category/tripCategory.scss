@@ -17,21 +17,11 @@ $color-primary-blue: #1e242a;
       }
     }
   }
-  .filter-categories {
-    background: $color-primary-blue;
-    input {
-      cursor: pointer;
-      width: 30px;
-      height: 30px;
-      border: 5px solid $color-primary-white;
+  .trip-category-filters {
+    font-size: 20px;
+    h4 {
+      font-size: 24px;
+      font-weight: 600;
     }
-  }
-  .filter-results {
-    // display: grid;
-    // grid-template-columns: repeat(auto-fill, 274px);
-    // gap: 2.2rem;
-    // display: flex;
-    // flex-wrap: wrap;
-    // gap: 1rem;
   }
 }
