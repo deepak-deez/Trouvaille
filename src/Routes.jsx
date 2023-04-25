@@ -1,10 +1,10 @@
 
 import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Signin from "./pages/signIn/signin.jsx";
-import SetPassword from "./pages/setPassword/setPassword.jsx";
-import ResetPassword from "./pages/resetPassword/resetPassword.jsx"
-import Signup from "./pages/signUp/signup.jsx"
+import Signin from "./pages/signIn/Child.jsx";
+import SetPassword from "./pages/setPassword/Child.jsx";
+import ResetPassword from "./pages/resetPassword/Child.jsx"
+import Signup from "./pages/signUp/Child.jsx"
 
 const Router = () => {
     return (

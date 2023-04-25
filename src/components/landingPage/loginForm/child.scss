@@ -7,9 +7,9 @@ $font-name-poppins: 'Poppins', sans-serif;
 $font-color-grey: #444A61;
 $font-color-grey-v2: #A89C98;
 $button-color-green: #219653;
+$button-color-green-v2: #022f15;
 
 .login-form{
-  
   p{
     color: $font-color-grey;
     font-family: $font-name-poppins;
@@ -40,5 +40,8 @@ $button-color-green: #219653;
     background: $button-color-green;
     border-radius: 22px;
     color: white;
+  }
+  .continue-button:hover{
+    background-color: $button-color-green-v2;
   }
 }

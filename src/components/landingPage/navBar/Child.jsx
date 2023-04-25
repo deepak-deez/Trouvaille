@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../../../assets/images/navBar/logo.svg";
-import "./navbar.scss";
+import "./child.scss";
 
 const Header = () => {
   return (

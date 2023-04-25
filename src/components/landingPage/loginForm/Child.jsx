@@ -1,5 +1,5 @@
 import React from "react";
-import "./login.scss";
+import "./child.scss";
 import { Outlet, Link } from "react-router-dom";
 import eye from "../../../assets/images/loginForm/eye.svg"
 
@@ -28,16 +28,16 @@ const Header = () => {
           </div>
           <div className="flex flex-row mt-[20px] lg:mt-[26px] text-[14px] gap-[11px]">
             <input type="checkbox" name="remember-me" value="yes" />
-            <p className=" grey-text">Remember Me</p>
+            <p className="text-[20px] grey-text">Remember Me</p>
           </div>
           <button className="lg:mt-[27px] mt-[20px] px-[15px] py-[20px] lg:py-[24px] text-center continue-button">
             CONTINUE
           </button>
           <div className="flex justify-between">
-            <Link className="text-center grey-text mt-[10px] lg:mt-[30px]" to="/setPassword">
+            <Link className="text-center grey-text mt-[10px] text-[20px] lg:mt-[30px]" to="/setPassword">
               Forget Password
             </Link>
-            <Link className="text-center lg:text[25px] grey-text mt-[10px] lg:mt-[30px]" to="/signup">
+            <Link className="text-center lg:text[25px text-[20px] grey-text mt-[10px] lg:mt-[30px]" to="/signup">
               Create Account
             </Link>
           </div>

@@ -6,6 +6,7 @@ $font-name-roboto: 'Roboto', sans-serif;
 $font-name-poppins: 'Poppins', sans-serif;
 $font-color-grey: #0D111E;
 $button-color-green: #219653;
+$button-color-green-v2: #022f15;
 
 .reset-password {
 
@@ -36,5 +37,8 @@ $button-color-green: #219653;
         background: $button-color-green;
         border-radius: 22px;
         color: white;
+    }
+    .save-button:hover{
+        background: $button-color-green-v2;
     }
 }
