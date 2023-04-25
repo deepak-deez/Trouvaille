@@ -2,7 +2,7 @@
 $color-grey-footer: #73797e;
 
 footer {
-  margin-top: 100vh;
+  margin-top: 100vh !important;
   color: $color-grey-footer;
   font-weight: 500;
   font-size: 20px;
@@ -18,7 +18,6 @@ footer {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-fill-color: transparent;
   }
 }
 
