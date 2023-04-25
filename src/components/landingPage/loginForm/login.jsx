@@ -32,7 +32,9 @@ const Header = () => {
           <button className="lg:mt-[27px] mt-[20px] px-[15px] py-[20px] lg:py-[24px] text-center continue-button">
             CONTINUE
           </button>
-          <p className="text-center grey-text mt-[10px] lg:mt-[30px]">Forget Password</p>
+          <Link to="/setPassword">
+            <p className="text-center grey-text mt-[10px] lg:mt-[30px]">Forget Password</p>
+          </Link>
       </div>
     </section>
   );
