@@ -28,3 +28,8 @@ $font-name-poppins: 'Poppins', sans-serif;
 .footer-text-color{
     color: $font-color-grey-v2;
 }
+footer{
+    position: fixed;
+    width: 100%;
+    bottom: 0vh;
+}

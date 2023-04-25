@@ -1,11 +1,11 @@
 import React from "react";
-import "./signin.scss";
+import "./setPassword.scss";
 import NavBar from "../../components/landingPage/navBar/navbar.jsx";
 import SetPassword from "../../components/landingPage/setPassword/Child.jsx"
 import Footer from "../../components/landingPage/footer/footer.jsx"
 const signin = () => {
   return (
-        <header className="sign-in-page">
+        <header className="set-password-page">
           <NavBar />
           <SetPassword />
           <Footer />
