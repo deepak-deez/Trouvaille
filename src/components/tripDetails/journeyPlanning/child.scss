@@ -1,0 +1,73 @@
+$color-grey-v1: #b4bbc1;
+$color-orange: #bc4e37;
+
+section {
+  color: white;
+  h1 {
+    font-size: 50px;
+    background: linear-gradient(266.53deg, #d25e46 -18.39%, #8c2009 146.29%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  h2 {
+    color: $color-orange;
+    font-size: 30px;
+    font-weight: 600;
+  }
+  .available-dates {
+    li {
+      padding: 1rem 1.8rem;
+      background: rgba(224, 225, 232, 0.12);
+      backdrop-filter: blur(5px);
+      transition: all 0.5s;
+
+      border-radius: 32px;
+    }
+    li:hover {
+      background-color: #d25e46;
+    }
+    h4 {
+      font-size: 1.5rem;
+    }
+    p {
+      font-size: 12px;
+    }
+    @media screen and (min-width: 1024px) {
+      li {
+        padding: 1rem 2rem;
+      }
+      h4 {
+        font-size: 3rem;
+      }
+      p {
+        margin-top: -1rem;
+        font-size: 20px;
+      }
+    }
+  }
+  p {
+    color: $color-grey-v1;
+  }
+  .trip-highlights-container {
+    h2 {
+      color: $color-orange;
+    }
+  }
+  .occassions-cards {
+    img {
+      background: rgba(238, 240, 244, 0.12);
+      border-radius: 28px;
+      padding: 1rem;
+      margin: auto;
+    }
+    p {
+      text-align: center;
+    }
+    @media screen and (min-width: 1024px) {
+      img {
+        padding: 2rem;
+      }
+    }
+  }
+}
