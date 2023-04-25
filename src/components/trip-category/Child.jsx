@@ -28,8 +28,9 @@ export default function TripCategory() {
     useState(false);
 
   return (
-    <section className="trip-category">
-      <div className="flex justify-center 2xl:justify-between flex-wrap gap-10 lg:gap-12 trip-category-icons">
+    <section className="trip-category 2xl:mt-[20rem]">
+      <h1 className="bg-[#BC4E37]">Choose your exotic holidays</h1>
+      <div className="flex justify-center 2xl:justify-between flex-wrap gap-10 lg:gap-12 trip-category-icons 2xl:mt-[6rem]">
         <img src={seaIcon} alt="sea-icon" />
         <img src={hillsIcon} alt="hills-icon" />
         <img src={forestIcon} alt="forest-icon" />
@@ -37,7 +38,7 @@ export default function TripCategory() {
         <img src={desertIcon} alt="desert-icon" />
         <img src={riversideIcon} alt="riverside-icon" />
       </div>
-      <div className="my-[3.75rem] flex justify-end text-[26px] gap-[4.75rem]">
+      <div className="my-[3.75rem] flex justify-between xl:justify-end px-5 xl:px-0 text-[26px] gap-[4.75rem]">
         <div className="flex gap-[1.5rem]">
           <img src={sortIcon} alt="sort-icon" />
           <p className="">Sort</p>
