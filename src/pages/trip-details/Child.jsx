@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../../components/tripDetails/navbar/Child";
-import Header from "../../components/tripDetails/journeyPlanning/Child";
+import Header from "../../components/tripDetails/header/Child";
 import JourneyPlanning from "../../components/tripDetails/journeyPlanning/Child";
 import Footer from "../../components/tripDetails/footer/Child";
 
