@@ -1,5 +1,10 @@
 $color-grey-v1: #b4bbc1;
 $color-orange: #bc4e37;
+$bg-orange-gradient: linear-gradient(
+  241.6deg,
+  #e6664c -19.43%,
+  #8c2009 109.14%
+);
 
 section {
   color: white;
@@ -67,6 +72,50 @@ section {
     @media screen and (min-width: 1024px) {
       img {
         padding: 2rem;
+      }
+    }
+  }
+  .payment-details-container {
+    select {
+      background-color: transparent;
+    }
+    button {
+      background: $bg-orange-gradient;
+      padding: 1rem 2rem;
+      border-radius: 1rem;
+    }
+  }
+  .ammenities-container {
+    img {
+      background: #adaebb3b;
+      border-radius: 2rem;
+    }
+    p {
+      text-align: center;
+    }
+  }
+  .faqs-container {
+    li {
+      .faqs-heading {
+        padding: 1rem 1rem;
+        background-color: rgba(173, 174, 187, 0.23);
+      }
+      .faqs-heading,
+      p {
+        background-color: rgba(173, 174, 187, 0.23);
+        border-radius: 1rem;
+      }
+      p {
+        padding: 1rem 1rem;
+        background-color: rgba(255, 255, 255, 0.084);
+      }
+    }
+    @media screen and (min-width: 1024px) {
+      li {
+        .faqs-heading,
+        p {
+          padding: 1rem 4rem;
+        }
       }
     }
   }
