@@ -1,13 +1,13 @@
 import React from "react";
 import "./child.scss";
 import NavBar from "../../components/landingPage/navBar/Child.jsx";
-import Signup from "../../components/landingPage/signUp/Child.jsx";
+import Details from "../../components/landingPage/details/Child.jsx";
 import Footer from "../../components/landingPage/footer/Child.jsx";
 const signin = () => {
   return (
-    <header className="sign-up-page">
+    <header className="details-page">
       <NavBar />
-      <Signup />
+      <Details />
       <Footer />
     </header>
   );
