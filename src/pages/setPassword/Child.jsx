@@ -5,7 +5,7 @@ import SetPassword from "../../components/landingPage/setPassword/Child.jsx"
 import Footer from "../../components/landingPage/footer/Child.jsx"
 const signin = () => {
   return (
-        <header className="set-password-page">
+        <header className="set-password-pag flex flex-col">
           <NavBar />
           <SetPassword />
           <Footer />

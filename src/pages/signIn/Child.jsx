@@ -5,7 +5,7 @@ import Signin from "../../components/landingPage/loginForm/Child.jsx"
 import Footer from "../../components/landingPage/footer/Child.jsx"
 const signin = () => {
   return (
-        <header className="sign-in-page">
+        <header className="sign-in-page flex flex-col">
           <NavBar />
           <Signin />
           <Footer />
