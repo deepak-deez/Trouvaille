@@ -18,7 +18,9 @@ $button-color-green-v2: #022f15;
     h2 {
         font-family: $font-name-poppins;
     }
-
+    input:focus {
+        outline: none;
+    }
     .input-fields {
         background: rgba(255, 255, 255, 0.78);
         border-radius: 21px;

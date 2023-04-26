@@ -5,7 +5,7 @@ $font-name-montserrat: 'Montserrat', sans-serif;
 $font-name-roboto: 'Roboto', sans-serif;
 $font-name-poppins: 'Poppins', sans-serif;
 $font-color-grey: #444A61;
-$font-color-grey-v2: #A89C98;
+$font-color-grey-v2: #ded3cf;
 $button-color-green: #219653;
 $button-color-green-v2: #022f15;
 
@@ -15,7 +15,9 @@ $button-color-green-v2: #022f15;
         color: $font-color-grey;
         font-family: $font-name-poppins;
     }
-
+    input:focus {
+        outline: none;
+    }
     h2 {
         font-family: $font-name-poppins;
         background: linear-gradient(268.24deg, #D25E46 19.54%, #8C2009 110.31%);

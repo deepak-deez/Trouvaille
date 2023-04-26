@@ -14,7 +14,9 @@ $button-color-green-v2: #022f15;
         color: $font-color-grey;
         font-family: $font-name-poppins;
     }
-
+    input:focus {
+        outline: none;
+    }
     h2 {
         font-family: $font-name-poppins;
     }
