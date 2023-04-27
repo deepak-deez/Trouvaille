@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./child.scss";
 
 export default function Child() {
@@ -27,9 +28,9 @@ export default function Child() {
           <p className="mb-[3.1rem]">suresh@sample.com</p>
           <h4 className="mb-[1.5rem]">Password</h4>
           <p>********</p>
-          <button className="mt-[4rem] rounded-2xl text-white bg-[#219653] text-center py-4 xl:py-[1.5rem] xl:mx-[6rem]">
+          <Link to="/editAccDetails" className="mt-[4rem] rounded-2xl text-white bg-[#219653] text-center py-4 xl:py-[1.5rem] xl:mx-[6rem]">
             EDIT ACCOUNT DETAIL
-          </button>
+          </Link>
         </div>
       </div>
     </header>
