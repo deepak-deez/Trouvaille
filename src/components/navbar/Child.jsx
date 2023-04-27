@@ -30,11 +30,6 @@ export default function Navbar() {
             </p>
           </div>
         </div>
-        <ul className="hidden xl:flex gap-10 2xl:gap-[88px] my-auto nav-lg-view">
-          <li>Home</li>
-          <li>Trips</li>
-          <li>Contacts</li>
-        </ul>
         <div className="flex gap-10 2xl:gap-[4.1rem]">
           <div className="nav-serach-area hidden xl:flex">
             <input
@@ -68,14 +63,14 @@ export default function Navbar() {
         >
           <ul className={"flex flex-col gap-10 2xl:gap-[88px] my-auto "}>
             <li className="flex justify-between">
-              <span>Home</span>{" "}
+              <span>Profile</span>
               <div className="flex gap-10">
                 <img src={notificationIcon} alt="notification-icon" />
                 <img src={documentIcon} alt="document-icon" />
               </div>
             </li>
-            <li>Trips</li>
-            <li>Contacts</li>
+            <li>Account Details</li>
+            <li>My Booking</li>
           </ul>
           <div className="flex nav-serach-area justify-between">
             <input
