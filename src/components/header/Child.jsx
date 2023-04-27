@@ -16,7 +16,7 @@ export default function Child() {
           <li>Account Details</li>
           <li>My Booking</li>
         </ul>
-        <div className="login-details flex flex-col lg:text-[22px]  bg-[#f3f3f3f0] p-5 lg:p-10 2xl:p-[2.2rem] rounded-2xl xl:w-[80%]">
+        <div className="login-details flex flex-col lg:text-[22px]  p-5 lg:p-10 2xl:p-[2.2rem] rounded-2xl xl:w-[80%] backdrop-blur-sm">
           <h2 className="font-[600]">Login Details</h2>
           <h5 className="mb-[2rem] text-[1rem]">
             Manage your email address mobile number and password
