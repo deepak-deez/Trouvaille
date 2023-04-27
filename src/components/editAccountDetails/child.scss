@@ -1,5 +1,10 @@
+$font-color-grey: #444A61;
+
 header {
-    .login-details {
+    .grey-text{
+        color: $font-color-grey;
+    }
+    .edit-details {
         background: #ffffff8b;
 
         p {
@@ -7,7 +12,5 @@ header {
             padding: 14px 25px;
             border-radius: 0.6rem;
         }
-
-        @media screen and (min-width: 1280px) {}
     }
 }

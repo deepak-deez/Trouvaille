@@ -1,4 +1,9 @@
+$font-color-grey: #444A61;
+
 header {
+  .grey-text {
+      color: $font-color-grey;
+    }
   .login-details {
     background: #ffffff8b;
     p {

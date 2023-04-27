@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./child.scss";
 import logo from "../../assets/images/header/logo.svg";
 import searchIcon from "../../assets/images/header/search-icon.svg";
@@ -63,14 +64,14 @@ export default function Navbar() {
         >
           <ul className={"flex flex-col gap-10 2xl:gap-[88px] my-auto "}>
             <li className="flex justify-between">
-              <span>Profile</span>
+              <Link to="/profile">Profile</Link>
               <div className="flex gap-10">
                 <img src={notificationIcon} alt="notification-icon" />
                 <img src={documentIcon} alt="document-icon" />
               </div>
             </li>
-            <li>Account Details</li>
-            <li>My Booking</li>
+            <li><Link to="/">Account Details</Link></li>
+            <li><Link to="/booking">My Booking</Link></li>
           </ul>
           <div className="flex nav-serach-area justify-between">
             <input
