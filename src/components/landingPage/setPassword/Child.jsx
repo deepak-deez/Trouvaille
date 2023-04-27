@@ -4,7 +4,7 @@ import "./child.scss";
 
 const Header = () => {
   return (
-    <section className="flex flex-col set-password justify-center items-center mt-[100px] my-auto">
+    <header className="flex flex-col set-password justify-center items-center mt-[100px] my-auto">
       <h2 className="md:text-[64px] text-center mt-[10px] lg:mt-[30px] text-[50px]">
         Set profile password
       </h2>
@@ -21,7 +21,7 @@ const Header = () => {
           SEND PASSWORD
         </Link>
       </div>
-    </section>
+    </header>
   );
 };
 
