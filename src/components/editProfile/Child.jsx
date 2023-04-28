@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "./child.scss";
 import profileImg from "../../assets/images/profileSettings/profile-img.png";
 import editIcon from "../../assets/images/profileSettings/edit.svg";
-import arrow from "../../assets/images/profileSettings/arrow.svg";
 import accountSettingsImgChange from "../../assets/images/profileSettings/edit-img.svg";
 
 export default function Child() {
@@ -34,7 +33,7 @@ export default function Child() {
           </h2>
           <div className="flex gap-[1rem] items-center">
             <span className="lg:text-[1.6rem] grey-text">Paris, Frace</span>
-            <i class="fa-solid fa-circle text-[0.8rem]"></i>
+            <img src={editIcon} alt="edit-icon" />
             <span className="lg:text-[1.6rem] grey-text">Joined in 2020</span>
           </div>
         </div>
