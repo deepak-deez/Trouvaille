@@ -1,18 +1,19 @@
 import React, { useRef, useState } from "react";
 import "./child.scss";
-import { Outlet, Link } from "react-router-dom";
 import eye from "../../../assets/images/loginForm/eye.svg";
 import axios from "axios";
+
+console.log(process.env.REACT_APP_apiHost);
 
 const Header = () => {
   const emailRef = useRef();
   const phoneNoRef = useRef();
   const passowrdRef = useRef();
   const confirmPasswordRef = useRef();
-
-  const [showPassword, setshowPassword] = useState(false);
-  const [showConfirmPassword, setshowCofirmPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowCofirmPassword] = useState(false);
   const [differentPassword, setDifferentPassword] = useState(false);
+  let [apiMessage, setApiMessage] = useState("");
 
   const newUserDetails = {};
 
@@ -45,7 +46,7 @@ const Header = () => {
           <button
             type="button"
             onClick={() => {
-              setshowPassword(!showPassword);
+              setShowPassword(!showPassword);
             }}
           >
             <img className="input-icon" src={eye} alt="view-icon" />
@@ -61,7 +62,7 @@ const Header = () => {
           <button
             type="button"
             onClick={() => {
-              setshowCofirmPassword(!showConfirmPassword);
+              setShowCofirmPassword(!showConfirmPassword);
             }}
           >
             <img className="input-icon" src={eye} alt="view-icon" />
@@ -75,6 +76,7 @@ const Header = () => {
         >
           Password Doesn't Match
         </p>
+        <p className="api-message">{apiMessage}</p>
         <button
           className="lg:mt-[60px] mt-[20px] px-[15px] py-[20px] lg:py-[26px] text-center continue-button"
           onClick={async () => {
@@ -82,27 +84,33 @@ const Header = () => {
               confirmPasswordRef.current.value === passowrdRef.current.value
             ) {
               setDifferentPassword(false);
+
               newUserDetails["email"] = emailRef.current.value;
               newUserDetails["phone"] = phoneNoRef.current.value;
               newUserDetails["password"] = passowrdRef.current.value;
+
               console.log(newUserDetails);
+
+              const response = await axios
+                .post(
+                  `${process.env.REACT_APP_apiHost}register/Frontend-user`,
+                  newUserDetails
+                )
+                .then((response) => {
+                  return response;
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
+
+              setApiMessage(response.data.message);
+
+              console.log(apiMessage);
+
+              console.log(response.data.message);
             } else {
               setDifferentPassword(true);
             }
-
-            const response = await axios
-              .post(
-                "http://localhost:7080/register/Frontend-user",
-                newUserDetails
-              )
-              .then((response) => {
-                return response;
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-
-            console.log(response);
           }}
         >
           CONTINUE

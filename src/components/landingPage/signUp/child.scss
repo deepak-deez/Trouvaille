@@ -23,7 +23,6 @@ $button-color-green-v2: #022f15;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-fill-color: transparent;
   }
 
   .input-fields {
@@ -52,7 +51,6 @@ $button-color-green-v2: #022f15;
     backdrop-filter: blur(10px);
     border-radius: 37px;
   }
-
   .continue-button {
     background: $button-color-green;
     border-radius: 22px;
@@ -60,5 +58,11 @@ $button-color-green-v2: #022f15;
   }
   .continue-button:hover {
     background: $button-color-green-v2;
+  }
+  .api-message {
+    margin-top: 3rem;
+    color: white;
+    text-align: center;
+    font-size: 2rem;
   }
 }
