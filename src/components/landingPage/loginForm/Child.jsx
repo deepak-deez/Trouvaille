@@ -1,14 +1,17 @@
 import React, { useRef, useState } from "react";
 import "./child.scss";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, Await } from "react-router-dom";
 import axios from "axios";
 import eye from "../../../assets/images/loginForm/eye.svg";
 
 const Header = () => {
-  const [showPassword, setshowPassowrd] = useState(true);
+  const [showPassword, setshowPassowrd] = useState(false);
   const emailRef = useRef();
   const passwordRef = useRef();
   const accDetails = {};
+  const [apiMessage, setApiMessage] = useState("");
+  const [empyFieldsMessage, setEmptyFieldsMessage] = useState(false);
+
   return (
     <header className="flex flex-col login-form justify-center items-center my-auto">
       <p className="md:text-[34px]">Signin</p>
@@ -42,24 +45,44 @@ const Header = () => {
           <input type="checkbox" name="remember-me" value="yes" />
           <p className="text-[20px] grey-text">Remember Me</p>
         </div>
+        <p className={" api-message " + (!!apiMessage.length ? "my-10" : "")}>
+          {apiMessage}
+        </p>
+        <p
+          className={" api-message " + (empyFieldsMessage ? "block" : "hidden")}
+        >
+          Fields Cannot be Empty
+        </p>
         <button
           className="lg:mt-[27px] mt-[20px] px-[15px] py-[20px] lg:py-[24px] text-center continue-button"
           onClick={async () => {
             accDetails["email"] = emailRef.current.value;
-            accDetails["passoword"] = passwordRef.current.value;
+            accDetails["password"] = passwordRef.current.value;
 
             console.log(accDetails);
 
-            const response3 = await axios
-              .get("http://192.168.68.104:7080/database/Frontend-user")
-              .then((res) => {
-                return res;
-              })
-              .catch((err) => {
-                return err;
-              });
+            if (
+              !!emailRef.current.value.length &&
+              !!passwordRef.current.value.length
+            ) {
+              setEmptyFieldsMessage(false);
 
-            console.log(response3);
+              const response = await axios
+                .post(`http://localhost:7080/login/Frontend-user`, accDetails)
+                .then((response) => {
+                  return response;
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
+              console.log(response);
+
+              setApiMessage(response.data.message);
+
+              console.log(response.data.message);
+            } else {
+              setEmptyFieldsMessage(true);
+            }
           }}
         >
           CONTINUE
