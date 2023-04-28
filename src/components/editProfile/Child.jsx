@@ -4,6 +4,8 @@ import "./child.scss";
 import profileImg from "../../assets/images/profileSettings/profile-img.png";
 import editIcon from "../../assets/images/profileSettings/edit.svg";
 import arrow from "../../assets/images/profileSettings/arrow.svg";
+import accountSettingsImgChange from "../../assets/images/profileSettings/edit-img.svg";
+
 export default function Child() {
   return (
     <header className="mt-[5rem] sm:mt-[8rem] lg:mt-[10rem] sm:mx-20 2xl:mx-[18.75rem]">
@@ -14,8 +16,14 @@ export default function Child() {
         <h2 className="underline font-[600]">Signout</h2>
       </div>
       <div className="flex flex-col sm:flex-row gap-[2rem] mt-[1.5rem] sm:mt-[2rem] profile-section">
-        <div className="flex flex-col">
-          <img className="profile-img" src={profileImg} alt="profile-img" />
+        <div className="flex flex-col items-center">
+          <div className="flex flex-col profile-img-container">
+            <div className="change-profile-img">
+              <img src={accountSettingsImgChange} alt="change-profile-image" />
+              <p className="underline text-white">Change</p>
+            </div>
+            <img className="profile-img" src={profileImg} alt="profile-img" />
+          </div>
           <h4 className="text-center grey-text grey-text underline mt-[0.8rem]">
             User Dashboard
           </h4>
@@ -63,28 +71,36 @@ export default function Child() {
           />
           <h4 className="mb-[1.5rem] grey-text">Gender</h4>
           <div className="bg-white mb-[3.1rem] px-[1.2rem] rounded-2xl">
-              <select className="bg-transparent w-[100%] py-[1rem] outline-none" name="gender" id="gender">
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Others">Others</option>
-              </select>
+            <select
+              className="bg-transparent w-[100%] py-[1rem] outline-none"
+              name="gender"
+              id="gender"
+            >
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Others">Others</option>
+            </select>
           </div>
           <h4 className="mb-[1.5rem] grey-text">Marital Status</h4>
           <div className="bg-white mb-[3.1rem] px-[1.2rem] rounded-2xl">
-              <select className="bg-transparent w-[100%] py-[1rem] outline-none" name="Marital Status" id="maritalStatus">
-                <option value="Single">Single</option>
-                <option value="Married">Married</option>
-                <option value="Divorced">Divorced</option>
-                <option value="Relationship">In a Relationship</option>
-              </select>
+            <select
+              className="bg-transparent w-[100%] py-[1rem] outline-none"
+              name="Marital Status"
+              id="maritalStatus"
+            >
+              <option value="Single">Single</option>
+              <option value="Married">Married</option>
+              <option value="Divorced">Divorced</option>
+              <option value="Relationship">In a Relationship</option>
+            </select>
           </div>
           <div className="flex gap-[1.2rem]">
-              <button className="mt-[2rem] rounded-2xl text-white bg-[#555B58] w-[100%] text-center py-4 xl:py-[1.5rem] ">
-                CANCEL
-              </button>
-              <button className="mt-[2rem] rounded-2xl text-white bg-[#219653] w-[100%] text-center py-4 xl:py-[1.5rem] ">
-                SUBMIT
-              </button>
+            <button className="mt-[2rem] rounded-2xl text-white bg-[#555B58] w-[100%] text-center py-4 xl:py-[1.5rem] ">
+              CANCEL
+            </button>
+            <button className="mt-[2rem] rounded-2xl text-white bg-[#219653] w-[100%] text-center py-4 xl:py-[1.5rem] ">
+              SUBMIT
+            </button>
           </div>
         </div>
       </div>
