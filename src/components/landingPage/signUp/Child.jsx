@@ -94,7 +94,7 @@ const Header = () => {
 
               const response = await axios
                 .post(
-                  `http://localhost:7080/login/Frontend-user`,
+                  `${process.env.REACT_APP_apiHost}register/Frontend-user`,
                   newUserDetails
                 )
                 .then((response) => {

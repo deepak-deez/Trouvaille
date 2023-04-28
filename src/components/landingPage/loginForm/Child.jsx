@@ -68,7 +68,10 @@ const Header = () => {
               setEmptyFieldsMessage(false);
 
               const response = await axios
-                .post(`http://localhost:7080/login/Frontend-user`, accDetails)
+                .post(
+                  `${process.env.REACT_APP_apiHost}login/Frontend-user`,
+                  accDetails
+                )
                 .then((response) => {
                   return response;
                 })
