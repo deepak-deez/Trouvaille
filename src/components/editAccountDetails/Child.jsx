@@ -14,7 +14,7 @@ export default function Child() {
       <div className="mt-[5rem] xl:flex xl:justify-between xl:gap-14 lg:text-[20px]">
         <ul className="hidden xl:flex flex-col gap-10">
           <li className="grey-text"><Link to="/profile">Profile</Link></li>
-          <li className="grey-text"><Link to="/">Account Details</Link></li>
+          <li className="grey-text font-bold"><Link to="/">Account Details</Link></li>
           <li className="grey-text"><Link to="/booking">My Booking</Link></li>
         </ul>
         <div className="edit-details flex flex-col lg:text-[22px]  p-5 lg:p-10 2xl:p-[2.2rem] rounded-2xl xl:w-[80%] backdrop-blur-sm">

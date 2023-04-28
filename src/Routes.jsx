@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ViewAccDetails from "./pages/viewAccountDetails/Child";
 import EditAccDetails from "./pages/editAccountDetails/Child";
 import Profile from "./pages/profileSettings/Child";
+import EditProfile from "./pages/editProfile/Child"
 
 
 
@@ -14,6 +15,7 @@ const Router = () => {
                     <Route path="/" element={<ViewAccDetails/>} exact />
                     <Route path="/editAccDetails"  element={<EditAccDetails/>} />
                     <Route path="/profile"  element={<Profile/>} />
+                    <Route path="/editProfile"  element={<EditProfile/>} />
             </Routes>
         </BrowserRouter>
     );

@@ -27,7 +27,7 @@ export default function Child() {
           </div>
           <div className="flex gap-[1.3rem] items-center">
             <img src={editIcon} alt="edit-icon" />
-            <p className="lg:text-[1.6rem] underline grey-text">Edit Profile</p>
+            <p className="lg:text-[1.6rem] underline grey-text"><Link to="/editProfile">Edit Profile</Link></p>
           </div>
         </div>
       </div>
