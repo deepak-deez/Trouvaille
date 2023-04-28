@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../../assets/images/navBar/logo.svg";
+import logo from "../../../assets/images/bookingForm/navBar/logo.svg";
 import "./child.scss";
 
 const Header = () => {
@@ -17,4 +17,3 @@ const Header = () => {
 };
 
 export default Header;
-

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./child.scss";
 import { Link } from "react-router-dom";
-import arrow from "../../../assets/images/loginForm/arrow.svg";
+import arrow from "../../../assets/images/bookingForm/loginForm/arrow.svg";
 import Success from "../successBox/Child";
 
 const Header = () => {
@@ -25,7 +25,8 @@ const Header = () => {
             placeholder="Phone Number"
           />
           <div className="flex input-fields items-center justify-between lg:mt-[60px] lg:px-[39px] px-[15px] mt-[30px]">
-            <input className=" w-[100%] lg:py-[32px] py-[20px] bg-transparent text-[20px] other-passenger"
+            <input
+              className=" w-[100%] lg:py-[32px] py-[20px] bg-transparent text-[20px] other-passenger"
               type="text"
               placeholder="Other Passenger (number)"
             />
@@ -34,7 +35,11 @@ const Header = () => {
                 setpassenger(!passenger);
               }}
             >
-              <img src={arrow} className={'rotate-180' + (passenger?'rotate-0':'')} alt="arrow-img" />
+              <img
+                src={arrow}
+                className={"rotate-180" + (passenger ? "rotate-0" : "")}
+                alt="arrow-img"
+              />
             </button>
           </div>
           {/* Passenger Starts */}
