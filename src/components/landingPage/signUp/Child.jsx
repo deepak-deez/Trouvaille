@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import "./child.scss";
-import eye from "../../../assets/images/loginForm/eye.svg";
+import eye from "../../../assets/images/landingPage/loginForm/eye.svg";
 import axios from "axios";
 
 console.log(process.env.REACT_APP_apiHost);

@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import "./child.scss";
 import { Outlet, Link, Await } from "react-router-dom";
 import axios from "axios";
-import eye from "../../../assets/images/loginForm/eye.svg";
+import eye from "../../../assets/images/landingPage/loginForm/eye.svg";
 
 const Header = () => {
   const [showPassword, setshowPassowrd] = useState(false);
