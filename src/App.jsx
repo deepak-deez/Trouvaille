@@ -4,7 +4,7 @@ import Router from "./Routes";
 import TripDetails from "./pages/trip-details/Child";
 
 const App = () => {
-  return <Router />;
+  return <TripDetails />;
 };
 
 export default App;

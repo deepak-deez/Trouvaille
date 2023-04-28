@@ -1,13 +1,14 @@
 import "./child.scss";
 import React from "react";
-import logo from "../../../assets/images/header/logo.svg";
-import facebookIcon from "../../../assets/images/footer/faceboox-icon.svg";
-import twitterIcon from "../../../assets/images/footer/twitter-icon.svg";
-import instagramIcon from "../../../assets/images/footer/instagram-icon.svg";
-import linkedinIcon from "../../../assets/images/footer/linked-in-icon.svg";
-import youtubeIcon from "../../../assets/images/footer/youtube-icon.svg";
-import appleIcon from "../../../assets/images/footer/apple-icon.svg";
-import pinterestIcon from "../../../assets/images/footer/pinterest-icon.svg";
+
+import logo from "../../../assets/images/tripsDetailsPage/header/logo.svg";
+import facebookIcon from "../../../assets/images/tripsDetailsPage/footer/faceboox-icon.svg";
+import twitterIcon from "../../../assets/images/tripsDetailsPage/footer/twitter-icon.svg";
+import instagramIcon from "../../../assets/images/tripsDetailsPage/footer/instagram-icon.svg";
+import linkedinIcon from "../../../assets/images/tripsDetailsPage/footer/linked-in-icon.svg";
+import youtubeIcon from "../../../assets/images/tripsDetailsPage/footer/youtube-icon.svg";
+import appleIcon from "../../../assets/images/tripsDetailsPage/footer/apple-icon.svg";
+import pinterestIcon from "../../../assets/images/tripsDetailsPage/footer/pinterest-icon.svg";
 
 export default function Child() {
   return (
