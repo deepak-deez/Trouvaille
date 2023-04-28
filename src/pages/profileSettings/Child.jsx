@@ -1,7 +1,8 @@
 import React from "react";
-import Navbar from "../../components/navbar/Child";
-import Footer from "../../components/footer/Child";
-import Header from "../../components/profileSettings/Child";
+import "./child.scss";
+import Navbar from "../../components/accountDetails/navbar/Child";
+import Footer from "../../components/accountDetails/footer/Child";
+import Header from "../../components/accountDetails/profileSettings/Child";
 
 const editAccDetails = () => {
   return (

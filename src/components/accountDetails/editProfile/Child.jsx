@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./child.scss";
-import profileImg from "../../assets/images/profileSettings/profile-img.png";
-import editIcon from "../../assets/images/profileSettings/edit.svg";
-import accountSettingsImgChange from "../../assets/images/profileSettings/edit-img.svg";
+import profileImg from "../../../assets/images/accountDetails/profileSettings/profile-img.png";
+import editIcon from "../../../assets/images/accountDetails/profileSettings/edit.svg";
+import accountSettingsImgChange from "../../../assets/images/accountDetails/profileSettings/edit-img.svg";
 
 export default function Child() {
   return (

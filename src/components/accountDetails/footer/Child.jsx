@@ -1,13 +1,13 @@
 import "./child.scss";
 import React from "react";
-import logo from "../../assets/images/header/logo.svg";
-import facebookIcon from "../../assets/images/footer/faceboox-icon.svg";
-import twitterIcon from "../../assets/images/footer/twitter-icon.svg";
-import instagramIcon from "../../assets/images/footer/instagram-icon.svg";
-import linkedinIcon from "../../assets/images/footer/linked-in-icon.svg";
-import youtubeIcon from "../../assets/images/footer/youtube-icon.svg";
-import appleIcon from "../../assets/images/footer/apple-icon.svg";
-import pinterestIcon from "../../assets/images/footer/pinterest-icon.svg";
+import logo from "../../../assets/images/accountDetails/header/logo.svg";
+import facebookIcon from "../../../assets/images/accountDetails/footer/faceboox-icon.svg";
+import twitterIcon from "../../../assets/images/accountDetails/footer/twitter-icon.svg";
+import instagramIcon from "../../../assets/images/accountDetails/footer/instagram-icon.svg";
+import linkedinIcon from "../../../assets/images/accountDetails/footer/linked-in-icon.svg";
+import youtubeIcon from "../../../assets/images/accountDetails/footer/youtube-icon.svg";
+import appleIcon from "../../../assets/images/accountDetails/footer/apple-icon.svg";
+import pinterestIcon from "../../../assets/images/accountDetails/footer/pinterest-icon.svg";
 
 export default function Child() {
   return (
