@@ -1,5 +1,6 @@
 import React from "react";
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 import Router from "./Routes";
@@ -10,6 +11,8 @@ const App = () => {
       <Router />
 =======
 >>>>>>> TROUV-4-landing-page
+=======
+>>>>>>> test-merge-2
 const App = () => {
   return (
     <>
