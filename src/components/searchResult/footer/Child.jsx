@@ -1,5 +1,6 @@
 import "./child.scss";
 import React from "react";
+<<<<<<<< HEAD:src/components/searchResult/footer/Child.jsx
 import logo from "../../../assets/images/searchResult/header/logo.svg";
 import facebookIcon from "../../../assets/images/searchResult/footer/faceboox-icon.svg";
 import twitterIcon from "../../../assets/images/searchResult/footer/twitter-icon.svg";
@@ -8,6 +9,17 @@ import linkedinIcon from "../../../assets/images/searchResult/footer/linked-in-i
 import youtubeIcon from "../../../assets/images/searchResult/footer/youtube-icon.svg";
 import appleIcon from "../../../assets/images/searchResult/footer/apple-icon.svg";
 import pinterestIcon from "../../../assets/images/searchResult/footer/pinterest-icon.svg";
+========
+
+import logo from "../../../assets/images/tripsDetailsPage/header/logo.svg";
+import facebookIcon from "../../../assets/images/tripsDetailsPage/footer/faceboox-icon.svg";
+import twitterIcon from "../../../assets/images/tripsDetailsPage/footer/twitter-icon.svg";
+import instagramIcon from "../../../assets/images/tripsDetailsPage/footer/instagram-icon.svg";
+import linkedinIcon from "../../../assets/images/tripsDetailsPage/footer/linked-in-icon.svg";
+import youtubeIcon from "../../../assets/images/tripsDetailsPage/footer/youtube-icon.svg";
+import appleIcon from "../../../assets/images/tripsDetailsPage/footer/apple-icon.svg";
+import pinterestIcon from "../../../assets/images/tripsDetailsPage/footer/pinterest-icon.svg";
+>>>>>>>> TROUV-24-Trip-Details-Page:src/components/tripDetails/footer/Child.jsx
 
 export default function Child() {
   return (
