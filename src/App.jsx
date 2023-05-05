@@ -1,5 +1,9 @@
 import React from "react";
+<<<<<<< HEAD
 
+=======
+import Router from "./Routes";
+>>>>>>> TROUV-4-landing-page
 const App = () => {
   return (
     <>
