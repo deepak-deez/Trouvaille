@@ -1,0 +1,31 @@
+$font-color-grey: #444a61;
+
+header {
+  .grey-text {
+    color: $font-color-grey;
+  }
+
+  .edit-details {
+    background: #ffffff8b;
+    p {
+      background-color: rgba(255, 255, 255, 0.588);
+      padding: 14px 25px;
+      border-radius: 0.6rem;
+    }
+  }
+
+  .profile-img-container {
+    position: relative;
+    .change-profile-img {
+      background: rgba(0, 0, 0, 0.597);
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      border-radius: 1rem;
+    }
+  }
+}
