@@ -1,0 +1,27 @@
+header {
+  margin-top: 10.5rem;
+  h1 {
+    font-size: 50px;
+    text-shadow: 0.1rem 0.1rem 0.3rem black;
+    color: white;
+    text-align: center;
+    margin: auto;
+  }
+  @media screen and (min-width: 500px) {
+    h1 {
+      font-size: 80px;
+    }
+  }
+  @media screen and (min-width: 774px) {
+    h1 {
+      font-size: 104px;
+      width: 774px;
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  header {
+    margin-top: 20.5rem;
+  }
+}
