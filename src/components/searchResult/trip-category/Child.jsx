@@ -1,25 +1,8 @@
-import React, { useState } from "react";
 import "./child.scss";
-<<<<<<<< HEAD:src/components/searchResult/trip-category/Child.jsx
-import seaIcon from "../../../assets/images/searchResult/tripCategory/sea-icon.svg";
-import hillsIcon from "../../../assets/images/searchResult/tripCategory/hills-icon.svg";
-import forestIcon from "../../../assets/images/searchResult/tripCategory/forest-icon.svg";
-import tropicalFallsIcon from "../../../assets/images/searchResult/tripCategory/tropical-falls.svg";
-import desertIcon from "../../../assets/images/searchResult/tripCategory/desert-icon.svg";
-import riversideIcon from "../../../assets/images/searchResult/tripCategory/riverside-icon.svg";
-import sortIcon from "../../../assets/images/searchResult/tripCategory/sort-icon.svg";
-import filterIcon from "../../../assets/images/searchResult/tripCategory/filter-icon.svg";
-import dropdownIcon from "../../../assets/images/searchResult/tripCategory/drop-drown-icon.svg";
-import tripCategoryImg1 from "../../../assets/images/searchResult/tripCategory/trip-category-card-img-1.png";
-import tripCategoryImg2 from "../../../assets/images/searchResult/tripCategory/trip-category-card-img-2.png";
-import tripCategoryImg3 from "../../../assets/images/searchResult/tripCategory/trip-category-card-img-3.png";
-import tripCategoryImg4 from "../../../assets/images/searchResult/tripCategory/trip-category-card-img-4.png";
-import tripCategoryImg5 from "../../../assets/images/searchResult/tripCategory/trip-category-card-img-5.png";
-import tripCategoryImg6 from "../../../assets/images/searchResult/tripCategory/trip-category-card-img-6.png";
-import readMoreIcon from "../../../assets/images/searchResult/tripCategory/more-arrow.svg";
-import reviewStarIcon from "../../../assets/images/searchResult/tripCategory/review-star-icon.svg";
-import shareIcon from "../../../assets/images/searchResult/tripCategory/share-icon.svg";
-========
+import Slider, { Range } from "rc-slider";
+import "rc-slider/assets/index.css";
+import React, { useState } from "react";
+
 import seaIcon from "../../../assets/images/tripsPage/tripCategory/sea-icon.svg";
 import hillsIcon from "../../../assets/images/tripsPage/tripCategory/hills-icon.svg";
 import forestIcon from "../../../assets/images/tripsPage/tripCategory/forest-icon.svg";
@@ -38,9 +21,6 @@ import tripCategoryImg6 from "../../../assets/images/tripsPage/tripCategory/trip
 import readMoreIcon from "../../../assets/images/tripsPage/tripCategory/more-arrow.svg";
 import reviewStarIcon from "../../../assets/images/tripsPage/tripCategory/review-star-icon.svg";
 import shareIcon from "../../../assets/images/tripsPage/tripCategory/share-icon.svg";
->>>>>>>> TROUV-20-Trips-Page:src/components/tripsPage/trip-category/Child.jsx
-import Slider, { Range } from "rc-slider";
-import "rc-slider/assets/index.css";
 
 export default function TripCategory() {
   const [ocassionFilterCollapse, setocassionFilterCollapse] = useState(false);

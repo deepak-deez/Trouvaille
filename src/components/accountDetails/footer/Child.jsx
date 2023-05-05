@@ -1,4 +1,3 @@
-<<<<<<< HEAD:src/components/accountDetails/footer/Child.jsx
 import "./child.scss";
 import React from "react";
 import logo from "../../../assets/images/accountDetails/header/logo.svg";
@@ -61,5 +60,3 @@ export default function Child() {
     </footer>
   );
 }
-=======
->>>>>>> test-merge-2:src/components/footer/Child.jsx
