@@ -1,5 +1,9 @@
 import React from "react";
+<<<<<<< HEAD:src/components/bookingForm/navBar/Child.jsx
 import logo from "../../../assets/images/bookingForm/navBar/logo.svg";
+=======
+import logo from "../../../assets/images/landingPage/navBar/logo.svg";
+>>>>>>> TROUV-4-landing-page:src/components/landingPage/navBar/Child.jsx
 import "./child.scss";
 
 const Header = () => {
