@@ -1,27 +1,37 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import ViewAccDetails from "./pages/viewAccountDetails/Child";
-import EditAccDetails from "./pages/editAccountDetails/Child";
-import Profile from "./pages/profileSettings/Child";
-import EditProfile from "./pages/editProfile/Child"
-
-
-
+import Signin from "./pages/signIn/Child.jsx";
+import SetPassword from "./pages/setPassword/Child.jsx";
+import ResetPassword from "./pages/resetPassword/Child.jsx";
+import Signup from "./pages/signUp/Child.jsx";
+import SearchResult from "./pages/searchResult/Child.jsx";
+import TripsPage from "./pages/trips/Child.jsx";
+import TripDetails from "./pages/trip-details/Child.jsx";
 import BookingForm from "./pages/bookingForm/Child.jsx";
+import AccountDetails from "./pages/viewAccountDetails/Child.jsx";
+import EditAccountDetails from "./pages/editAccountDetails/Child.jsx";
+import Profile from "./pages/profileSettings/Child.jsx";
+import EditProfile from "./pages/editProfile/Child.jsx";
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<BookingForm />} exact />
-                    <Route path="/" element={<ViewAccDetails/>} exact />
-                    <Route path="/editAccDetails"  element={<EditAccDetails/>} />
-                    <Route path="/profile"  element={<Profile/>} />
-                    <Route path="/editProfile"  element={<EditProfile/>} />
+        <Route path="/" element={<Signin />} exact />
+        <Route path="/setPassword" element={<SetPassword />} />
+        <Route path="/resetPassword" element={<ResetPassword />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/searchResult" element={<SearchResult />} />
+        <Route path="/trips" element={<TripsPage />} />
+        <Route path="/tripDetails" element={<TripDetails />} />
+        <Route path="/bookingForm" element={<BookingForm />} />
+        <Route path="/accountDetails" element={<AccountDetails />} />
+        <Route path="/editAccDetails" element={<EditAccountDetails />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/editProfile" element={<EditProfile />} />
       </Routes>
     </BrowserRouter>
   );
 };
-
 
 export default Router;

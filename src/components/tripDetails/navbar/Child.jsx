@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import "./child.scss";
 
 import logo from "../../../assets/images/searchResult/header/logo.svg";
@@ -31,6 +30,11 @@ export default function Navbar() {
             </p>
           </div>
         </div>
+        <ul className="hidden xl:flex gap-10 2xl:gap-[88px] my-auto nav-lg-view">
+          <li>Home</li>
+          <li>Trips</li>
+          <li>Contacts</li>
+        </ul>
         <div className="flex gap-10 2xl:gap-[4.1rem]">
           <div className="nav-serach-area hidden xl:flex">
             <input
@@ -64,18 +68,14 @@ export default function Navbar() {
         >
           <ul className={"flex flex-col gap-10 2xl:gap-[88px] my-auto "}>
             <li className="flex justify-between">
-              <Link to="/profile">Profile</Link>
+              <span>Home</span>{" "}
               <div className="flex gap-10">
                 <img src={notificationIcon} alt="notification-icon" />
                 <img src={documentIcon} alt="document-icon" />
               </div>
             </li>
-            <li>
-              <Link to="/">Account Details</Link>
-            </li>
-            <li>
-              <Link to="/booking">My Booking</Link>
-            </li>
+            <li>Trips</li>
+            <li>Contacts</li>
           </ul>
           <div className="flex nav-serach-area justify-between">
             <input
