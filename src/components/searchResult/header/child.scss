@@ -1,5 +1,15 @@
 header {
-  margin-top: 10.5rem;
+  margin-top: 8.5rem;
+  h4 {
+    font-weight: 700;
+  }
+  slect:focus,
+  :focus {
+    outline: none;
+  }
+  input::placeholder {
+    color: black;
+  }
   h1 {
     font-size: 50px;
     text-shadow: 0.1rem 0.1rem 0.3rem black;
@@ -9,12 +19,12 @@ header {
   }
   @media screen and (min-width: 500px) {
     h1 {
-      font-size: 80px;
+      font-size: 90px;
     }
   }
-  @media screen and (min-width: 774px) {
+  @media screen and (min-width: 1500px) {
     h1 {
-      font-size: 104px;
+      font-size: 100px;
       width: 774px;
     }
   }
@@ -22,6 +32,6 @@ header {
 
 @media screen and (min-width: 1024px) {
   header {
-    margin-top: 20.5rem;
+    margin-top: 10rem;
   }
 }

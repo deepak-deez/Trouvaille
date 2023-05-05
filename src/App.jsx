@@ -4,7 +4,7 @@ import SearchResult from "./pages/searchResult/Child";
 const App = () => {
   return (
     <>
-      <SearchResult />
+      <Trips />
     </>
   );
 };
