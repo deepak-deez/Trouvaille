@@ -1,25 +1,9 @@
 import React from "react";
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
 import Router from "./Routes";
-<<<<<<< HEAD
+
 const App = () => {
-  return (
-    <>
-      <Router />
-=======
->>>>>>> TROUV-4-landing-page
-=======
->>>>>>> test-merge-2
-const App = () => {
-  return (
-    <>
-      <h1>Hello World</h1>
->>>>>>> test-merge-2
-    </>
-  );
+  return <Router />;
 };
 
 export default App;
