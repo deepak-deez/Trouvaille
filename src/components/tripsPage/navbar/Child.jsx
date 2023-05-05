@@ -1,12 +1,12 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./child.scss";
-
-import logo from "../../../assets/images/searchResult/header/logo.svg";
-import searchIcon from "../../../assets/images/searchResult/header/search-icon.svg";
-import notificationIcon from "../../../assets/images/searchResult/header/notification-icon.svg";
-import documentIcon from "../../../assets/images/searchResult/header/document-icon.svg";
-import profileIcon from "../../../assets/images/searchResult/header/user-profile-icon.svg";
-import menuHamburger from "../../../assets/images/searchResult/header/menu-hamburger.svg";
+import logo from "../../../assets/images/tripsPage/header/logo.svg";
+import searchIcon from "../../../assets/images/tripsPage/header/search-icon.svg";
+import notificationIcon from "../../../assets/images/tripsPage/header/notification-icon.svg";
+import documentIcon from "../../../assets/images/tripsPage/header/document-icon.svg";
+import profileIcon from "../../../assets/images/tripsPage/header/user-profile-icon.svg";
+import menuHamburger from "../../../assets/images/tripsPage/header/menu-hamburger.svg";
 
 export default function Navbar() {
   const [navCollapse, setnavColapse] = useState(true);
@@ -54,7 +54,9 @@ export default function Navbar() {
             className="hidden xl:block"
             alt="document-icon"
           />
-          <img src={profileIcon} alt="profile-icon" />
+          <Link to="/accountDetails">
+            <img src={profileIcon} alt="profile-icon" />
+          </Link>
         </div>
       </div>
       {navCollapse ? (

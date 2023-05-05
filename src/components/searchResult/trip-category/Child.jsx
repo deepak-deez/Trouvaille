@@ -1,45 +1,26 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./child.scss";
-import seaIcon from "../../assets/images/tripCategory/sea-icon.svg";
-import hillsIcon from "../../assets/images/tripCategory/hills-icon.svg";
-import forestIcon from "../../assets/images/tripCategory/forest-icon.svg";
-import tropicalFallsIcon from "../../assets/images/tripCategory/tropical-falls.svg";
-import desertIcon from "../../assets/images/tripCategory/desert-icon.svg";
-import riversideIcon from "../../assets/images/tripCategory/riverside-icon.svg";
-import sortIcon from "../../assets/images/tripCategory/sort-icon.svg";
-import filterIcon from "../../assets/images/tripCategory/filter-icon.svg";
-import dropdownIcon from "../../assets/images/tripCategory/drop-drown-icon.svg";
-import tripCategoryImg1 from "../../assets/images/tripCategory/trip-category-card-img-1.png";
-import tripCategoryImg2 from "../../assets/images/tripCategory/trip-category-card-img-2.png";
-import tripCategoryImg3 from "../../assets/images/tripCategory/trip-category-card-img-3.png";
-import tripCategoryImg4 from "../../assets/images/tripCategory/trip-category-card-img-4.png";
-import tripCategoryImg5 from "../../assets/images/tripCategory/trip-category-card-img-5.png";
-import tripCategoryImg6 from "../../assets/images/tripCategory/trip-category-card-img-6.png";
-import readMoreIcon from "../../assets/images/tripCategory/more-arrow.svg";
-import reviewStarIcon from "../../assets/images/tripCategory/review-star-icon.svg";
-import shareIcon from "../../assets/images/tripCategory/share-icon.svg";
+import seaIcon from "../../../assets/images/searchResult/tripCategory/sea-icon.svg";
+import hillsIcon from "../../../assets/images/searchResult/tripCategory/hills-icon.svg";
+import forestIcon from "../../../assets/images/searchResult/tripCategory/forest-icon.svg";
+import tropicalFallsIcon from "../../../assets/images/searchResult/tripCategory/tropical-falls.svg";
+import desertIcon from "../../../assets/images/searchResult/tripCategory/desert-icon.svg";
+import riversideIcon from "../../../assets/images/searchResult/tripCategory/riverside-icon.svg";
+import sortIcon from "../../../assets/images/searchResult/tripCategory/sort-icon.svg";
+import filterIcon from "../../../assets/images/searchResult/tripCategory/filter-icon.svg";
+import dropdownIcon from "../../../assets/images/searchResult/tripCategory/drop-drown-icon.svg";
+import tripCategoryImg1 from "../../../assets/images/searchResult/tripCategory/trip-category-card-img-1.png";
+import tripCategoryImg2 from "../../../assets/images/searchResult/tripCategory/trip-category-card-img-2.png";
+import tripCategoryImg3 from "../../../assets/images/searchResult/tripCategory/trip-category-card-img-3.png";
+import tripCategoryImg4 from "../../../assets/images/searchResult/tripCategory/trip-category-card-img-4.png";
+import tripCategoryImg5 from "../../../assets/images/searchResult/tripCategory/trip-category-card-img-5.png";
+import tripCategoryImg6 from "../../../assets/images/searchResult/tripCategory/trip-category-card-img-6.png";
+import readMoreIcon from "../../../assets/images/searchResult/tripCategory/more-arrow.svg";
+import reviewStarIcon from "../../../assets/images/searchResult/tripCategory/review-star-icon.svg";
+import shareIcon from "../../../assets/images/searchResult/tripCategory/share-icon.svg";
 import Slider, { Range } from "rc-slider";
 import "rc-slider/assets/index.css";
-import React, { useState } from "react";
-
-import seaIcon from "../../../assets/images/tripsPage/tripCategory/sea-icon.svg";
-import hillsIcon from "../../../assets/images/tripsPage/tripCategory/hills-icon.svg";
-import forestIcon from "../../../assets/images/tripsPage/tripCategory/forest-icon.svg";
-import tropicalFallsIcon from "../../../assets/images/tripsPage/tripCategory/tropical-falls.svg";
-import desertIcon from "../../../assets/images/tripsPage/tripCategory/desert-icon.svg";
-import riversideIcon from "../../../assets/images/tripsPage/tripCategory/riverside-icon.svg";
-import sortIcon from "../../../assets/images/tripsPage/tripCategory/sort-icon.svg";
-import filterIcon from "../../../assets/images/tripsPage/tripCategory/filter-icon.svg";
-import dropdownIcon from "../../../assets/images/tripsPage/tripCategory/drop-drown-icon.svg";
-import tripCategoryImg1 from "../../../assets/images/tripsPage/tripCategory/trip-category-card-img-1.png";
-import tripCategoryImg2 from "../../../assets/images/tripsPage/tripCategory/trip-category-card-img-2.png";
-import tripCategoryImg3 from "../../../assets/images/tripsPage/tripCategory/trip-category-card-img-3.png";
-import tripCategoryImg4 from "../../../assets/images/tripsPage/tripCategory/trip-category-card-img-4.png";
-import tripCategoryImg5 from "../../../assets/images/tripsPage/tripCategory/trip-category-card-img-5.png";
-import tripCategoryImg6 from "../../../assets/images/tripsPage/tripCategory/trip-category-card-img-6.png";
-import readMoreIcon from "../../../assets/images/tripsPage/tripCategory/more-arrow.svg";
-import reviewStarIcon from "../../../assets/images/tripsPage/tripCategory/review-star-icon.svg";
-import shareIcon from "../../../assets/images/tripsPage/tripCategory/share-icon.svg";
 
 export default function TripCategory() {
   const [ocassionFilterCollapse, setocassionFilterCollapse] = useState(false);
@@ -48,9 +29,8 @@ export default function TripCategory() {
     useState(false);
 
   return (
-    <section className="trip-category 2xl:mt-[20rem]">
-      <h1 className="bg-[#BC4E37]">Choose your exotic holidays</h1>
-      <div className="flex justify-center 2xl:justify-between flex-wrap gap-10 lg:gap-12 trip-category-icons 2xl:mt-[6rem]">
+    <section className="trip-category">
+      <div className="flex justify-center 2xl:justify-between flex-wrap gap-10 lg:gap-12 trip-category-icons">
         <img src={seaIcon} alt="sea-icon" />
         <img src={hillsIcon} alt="hills-icon" />
         <img src={forestIcon} alt="forest-icon" />
@@ -58,7 +38,7 @@ export default function TripCategory() {
         <img src={desertIcon} alt="desert-icon" />
         <img src={riversideIcon} alt="riverside-icon" />
       </div>
-      <div className="my-[3.75rem] flex justify-between xl:justify-end px-5 xl:px-0 text-[26px] gap-[4.75rem]">
+      <div className="my-[3.75rem] flex justify-end text-[26px] gap-[4.75rem]">
         <div className="flex gap-[1.5rem]">
           <img src={sortIcon} alt="sort-icon" />
           <p className="">Sort</p>
@@ -181,7 +161,9 @@ export default function TripCategory() {
               alt="trip-category-img"
             />
             <div className="flex gap-5 show-detail-text">
-              <p>Show detail</p>
+              <Link to="/tripDetails">
+                <p>Show detail</p>
+              </Link>
               <img src={readMoreIcon} alt="read-more-icon" />
             </div>
             <div className="flex gap-2 review-stars">
@@ -205,7 +187,9 @@ export default function TripCategory() {
               alt="trip-category-img"
             />
             <div className="flex gap-5 show-detail-text">
-              <p>Show detail</p>
+              <Link to="/tripDetails">
+                <p>Show detail</p>
+              </Link>
               <img src={readMoreIcon} alt="read-more-icon" />
             </div>
             <div className="flex gap-2 review-stars">
@@ -229,7 +213,9 @@ export default function TripCategory() {
               alt="trip-category-img"
             />
             <div className="flex gap-5 show-detail-text">
-              <p>Show detail</p>
+              <Link to="/tripDetails">
+                <p>Show detail</p>
+              </Link>
               <img src={readMoreIcon} alt="read-more-icon" />
             </div>
             <div className="flex gap-2 review-stars">
@@ -252,7 +238,9 @@ export default function TripCategory() {
               alt="trip-category-img"
             />
             <div className="flex gap-5 show-detail-text">
-              <p>Show detail</p>
+              <Link to="/tripDetails">
+                <p>Show detail</p>
+              </Link>
               <img src={readMoreIcon} alt="read-more-icon" />
             </div>
             <div className="flex gap-2 review-stars">
@@ -276,7 +264,9 @@ export default function TripCategory() {
               alt="trip-category-img"
             />
             <div className="flex gap-5 show-detail-text">
-              <p>Show detail</p>
+              <Link to="/tripDetails">
+                <p>Show detail</p>
+              </Link>
               <img src={readMoreIcon} alt="read-more-icon" />
             </div>
             <div className="flex gap-2 review-stars">
@@ -300,7 +290,9 @@ export default function TripCategory() {
               alt="trip-category-img"
             />
             <div className="flex gap-5 show-detail-text">
-              <p>Show detail</p>
+              <Link to="/tripDetails">
+                <p>Show detail</p>
+              </Link>
               <img src={readMoreIcon} alt="read-more-icon" />
             </div>
             <div className="flex gap-2 review-stars">

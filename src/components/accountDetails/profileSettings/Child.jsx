@@ -41,7 +41,7 @@ export default function Child() {
         <ul className="hidden xl:flex flex-col gap-10">
           <li className="grey-text font-bold">Profile</li>
           <li className="grey-text">
-            <Link to="/">Account Details</Link>
+            <Link to="/accountDetails">Account Details</Link>
           </li>
           <li className="grey-text">
             <Link to="/booking">My Booking</Link>

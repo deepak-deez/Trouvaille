@@ -1,16 +1,16 @@
-$font-color-grey: #444A61;
+$font-color-grey: #444a61;
 
 header {
-    .grey-text{
-        color: $font-color-grey;
-    }
-    .edit-details {
-        background: #ffffff8b;
+  .grey-text {
+    color: $font-color-grey;
+  }
+  .edit-details {
+    background: #ffffff8b;
 
-        p {
-            background-color: rgba(255, 255, 255, 0.588);
-            padding: 14px 25px;
-            border-radius: 0.6rem;
-        }
+    p {
+      background-color: rgba(255, 255, 255, 0.588);
+      padding: 14px 25px;
+      border-radius: 0.6rem;
     }
+  }
 }

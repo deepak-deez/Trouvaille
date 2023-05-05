@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import Slider, { Range } from "rc-slider";
-import "rc-slider/assets/index.css";
-
+import { Link } from "react-router-dom";
+import "./child.scss";
 import seaIcon from "../../../assets/images/tripsPage/tripCategory/sea-icon.svg";
 import hillsIcon from "../../../assets/images/tripsPage/tripCategory/hills-icon.svg";
 import forestIcon from "../../../assets/images/tripsPage/tripCategory/forest-icon.svg";
@@ -20,7 +19,6 @@ import tripCategoryImg6 from "../../../assets/images/tripsPage/tripCategory/trip
 import readMoreIcon from "../../../assets/images/tripsPage/tripCategory/more-arrow.svg";
 import reviewStarIcon from "../../../assets/images/tripsPage/tripCategory/review-star-icon.svg";
 import shareIcon from "../../../assets/images/tripsPage/tripCategory/share-icon.svg";
-
 import Slider, { Range } from "rc-slider";
 import "rc-slider/assets/index.css";
 
@@ -164,7 +162,9 @@ export default function TripCategory() {
               alt="trip-category-img"
             />
             <div className="flex gap-5 show-detail-text">
-              <p>Show detail</p>
+              <Link to="/tripDetails">
+                <p>Show detail</p>
+              </Link>
               <img src={readMoreIcon} alt="read-more-icon" />
             </div>
             <div className="flex gap-2 review-stars">
@@ -188,7 +188,9 @@ export default function TripCategory() {
               alt="trip-category-img"
             />
             <div className="flex gap-5 show-detail-text">
-              <p>Show detail</p>
+              <Link to="/tripDetails">
+                <p>Show detail</p>
+              </Link>
               <img src={readMoreIcon} alt="read-more-icon" />
             </div>
             <div className="flex gap-2 review-stars">
@@ -212,7 +214,9 @@ export default function TripCategory() {
               alt="trip-category-img"
             />
             <div className="flex gap-5 show-detail-text">
-              <p>Show detail</p>
+              <Link to="/tripDetails">
+                <p>Show detail</p>
+              </Link>
               <img src={readMoreIcon} alt="read-more-icon" />
             </div>
             <div className="flex gap-2 review-stars">
@@ -235,7 +239,9 @@ export default function TripCategory() {
               alt="trip-category-img"
             />
             <div className="flex gap-5 show-detail-text">
-              <p>Show detail</p>
+              <Link to="/tripDetails">
+                <p>Show detail</p>
+              </Link>
               <img src={readMoreIcon} alt="read-more-icon" />
             </div>
             <div className="flex gap-2 review-stars">
@@ -259,7 +265,9 @@ export default function TripCategory() {
               alt="trip-category-img"
             />
             <div className="flex gap-5 show-detail-text">
-              <p>Show detail</p>
+              <Link to="/tripDetails">
+                <p>Show detail</p>
+              </Link>
               <img src={readMoreIcon} alt="read-more-icon" />
             </div>
             <div className="flex gap-2 review-stars">
@@ -283,7 +291,9 @@ export default function TripCategory() {
               alt="trip-category-img"
             />
             <div className="flex gap-5 show-detail-text">
-              <p>Show detail</p>
+              <Link to="/tripDetails">
+                <p>Show detail</p>
+              </Link>
               <img src={readMoreIcon} alt="read-more-icon" />
             </div>
             <div className="flex gap-2 review-stars">

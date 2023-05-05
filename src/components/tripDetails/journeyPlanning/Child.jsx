@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./child.scss";
 import divingIcon from "../../../assets/images/tripsDetailsPage/journeyPlanning/diving-icon.svg";
 import waveIcon from "../../../assets/images/tripsDetailsPage/journeyPlanning/wave-icon.svg";
@@ -197,7 +198,9 @@ export default function Child() {
                   <span className="line-through font-[400]">₹36,576 </span>
                   ₹29,261 /night
                 </h2>
-                <button>Reserve</button>
+                <Link to="/bookingForm">
+                  <button className="w-[100%]">Reserve</button>
+                </Link>
                 <p className="text-center">You won't be charged yet</p>
               </div>
             </div>

@@ -1,11 +1,12 @@
 import React, { useRef, useState } from "react";
 import "./child.scss";
-import { Outlet, Link, Await } from "react-router-dom";
+import { Outlet, Link, Await, useNavigate } from "react-router-dom";
 import axios from "axios";
 import eye from "../../../assets/images/landingPage/loginForm/eye.svg";
 
 const Header = () => {
-  const [showPassword, setshowPassowrd] = useState(false);
+  const navigate = useNavigate();
+  const [showPassword, setshowPassword] = useState(false);
   const emailRef = useRef();
   const passwordRef = useRef();
   const accDetails = {};
@@ -15,9 +16,11 @@ const Header = () => {
   return (
     <header className="flex flex-col login-form justify-center items-center my-auto">
       <p className="md:text-[34px]">Signin</p>
-      <h2 className="md:text-[64px] text-center mt-[10px] lg:mt-[30px] text-[50px]">
-        Welcome to Trouvaille
-      </h2>
+      <Link to="/searchResult">
+        <h2 className="md:text-[64px] text-center mt-[10px] lg:mt-[30px] text-[50px]">
+          Welcome to Trouvaille
+        </h2>
+      </Link>
       <div className="flex flex-col lg:w-[975px] w-[90%] md:px-[30px] md:py-[30px] mt-[15px] login-details px-[25px] py-[15px] lg:py-[67px] lg:px-[97px] justify-center">
         <input
           className=" text-[20px] input-fields lg:px-[39px] px-[15px] py-[20px] lg:py-[32px] mt-[9px] w-[100%]"
@@ -35,7 +38,7 @@ const Header = () => {
           <button
             type="button"
             onClick={() => {
-              setshowPassowrd(!showPassword);
+              setshowPassword(!showPassword);
             }}
           >
             <img className="input-icon" src={eye} alt="view-icon" />
@@ -81,6 +84,11 @@ const Header = () => {
               console.log(response);
 
               setApiMessage(response.data.message);
+
+              if (response.data.message === "Login Sucessfull!") {
+                console.log("Its Here");
+                navigate("/searchResult");
+              }
 
               console.log(response.data.message);
             } else {

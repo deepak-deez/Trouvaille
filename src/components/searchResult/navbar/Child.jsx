@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./child.scss";
-
 import logo from "../../../assets/images/searchResult/header/logo.svg";
 import searchIcon from "../../../assets/images/searchResult/header/search-icon.svg";
 import notificationIcon from "../../../assets/images/searchResult/header/notification-icon.svg";
@@ -37,11 +37,13 @@ export default function Navbar() {
         </ul>
         <div className="flex gap-10 2xl:gap-[4.1rem]">
           <div className="nav-serach-area hidden xl:flex">
-            <input
-              type="text"
-              className="nav-search-input"
-              placeholder="Search"
-            />
+            <Link to="/trips">
+              <input
+                type="text"
+                className="nav-search-input"
+                placeholder="Search"
+              />
+            </Link>
             <img src={searchIcon} alt="search-icon" />
           </div>
           <img
@@ -54,7 +56,9 @@ export default function Navbar() {
             className="hidden xl:block"
             alt="document-icon"
           />
-          <img src={profileIcon} alt="profile-icon" />
+          <Link to="/accountDetails">
+            <img src={profileIcon} alt="profile-icon" />
+          </Link>
         </div>
       </div>
       {navCollapse ? (
@@ -78,12 +82,13 @@ export default function Navbar() {
             <li>Contacts</li>
           </ul>
           <div className="flex nav-serach-area justify-between">
-            <input
-              type="text"
-              className="nav-search-input"
-              placeholder="Search"
-            />
-
+            <Link to="/trips">
+              <input
+                type="text"
+                className="nav-search-input"
+                placeholder="Search"
+              />
+            </Link>
             <img src={searchIcon} alt="search-icon" />
           </div>
         </div>

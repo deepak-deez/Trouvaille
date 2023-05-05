@@ -1,23 +1,23 @@
-$font-color-grey: #444A61;
+$font-color-grey: #444a61;
 
 header {
-    .grey-text {
-            color: $font-color-grey;
-        }
-    .profile-section{
-        h2{
-            font-weight: 600;
-        }
-        .profile-img{
-            border-radius: 26.0741px;
-        }
+  .grey-text {
+    color: $font-color-grey;
+  }
+  .profile-section {
+    h2 {
+      font-weight: 600;
     }
-    .profile-details {
-        background: #ffffff8b;
-        p {
-            background-color: rgba(255, 255, 255, 0.588);
-            padding: 14px 25px;
-            border-radius: 0.6rem;
-        }
+    .profile-img {
+      border-radius: 26.0741px;
     }
+  }
+  .profile-details {
+    background: #ffffff8b;
+    p {
+      background-color: rgba(255, 255, 255, 0.588);
+      padding: 14px 25px;
+      border-radius: 0.6rem;
+    }
+  }
 }

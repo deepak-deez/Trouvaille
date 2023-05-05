@@ -8,20 +8,6 @@ $color-primary-grey: #b2b8bd;
 $bg-color-blue: #212b33;
 
 .trip-category {
-  h1 {
-    font-size: 104px;
-    text-align: center;
-    background: linear-gradient(
-      315deg,
-      #ffffff,
-      rgb(255, 255, 255) 50%,
-      #bc4e37 0%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
-  }
   margin-top: 5rem;
   color: $color-primary-white;
   .trip-category-icons {

@@ -7,11 +7,11 @@ import Footer from "../../components/tripDetails/footer/Child";
 
 export default function TripDetails() {
   return (
-    <>
+    <section className="trip-details">
       <Navbar />
       <Header />
       <JourneyPlanning />
       <Footer />
-    </>
+    </section>
   );
 }

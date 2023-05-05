@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import "./child.scss";
-
-import logo from "../../../assets/images/searchResult/header/logo.svg";
-import searchIcon from "../../../assets/images/searchResult/header/search-icon.svg";
-import notificationIcon from "../../../assets/images/searchResult/header/notification-icon.svg";
-import documentIcon from "../../../assets/images/searchResult/header/document-icon.svg";
-import profileIcon from "../../../assets/images/searchResult/header/user-profile-icon.svg";
-import menuHamburger from "../../../assets/images/searchResult/header/menu-hamburger.svg";
+import logo from "../../../assets/images/tripsDetailsPage/header/logo.svg";
+import searchIcon from "../../../assets/images/tripsDetailsPage/header/search-icon.svg";
+import notificationIcon from "../../../assets/images/tripsDetailsPage/header/notification-icon.svg";
+import documentIcon from "../../../assets/images/tripsDetailsPage/header/document-icon.svg";
+import profileIcon from "../../../assets/images/tripsDetailsPage/header/user-profile-icon.svg";
+import menuHamburger from "../../../assets/images/tripsDetailsPage/header/menu-hamburger.svg";
 
 export default function Navbar() {
   const [navCollapse, setnavColapse] = useState(true);

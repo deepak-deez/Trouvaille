@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./child.scss";
-
-import logo from "../../../assets/images/searchResult/header/logo.svg";
-import searchIcon from "../../../assets/images/searchResult/header/search-icon.svg";
-import notificationIcon from "../../../assets/images/searchResult/header/notification-icon.svg";
-import documentIcon from "../../../assets/images/searchResult/header/document-icon.svg";
-import profileIcon from "../../../assets/images/searchResult/header/user-profile-icon.svg";
-import menuHamburger from "../../../assets/images/searchResult/header/menu-hamburger.svg";
+import logo from "../../../assets/images/accountDetails/header/logo.svg";
+import searchIcon from "../../../assets/images/accountDetails/header/search-icon.svg";
+import notificationIcon from "../../../assets/images/accountDetails/header/notification-icon.svg";
+import documentIcon from "../../../assets/images/accountDetails/header/document-icon.svg";
+import profileIcon from "../../../assets/images/accountDetails/header/user-profile-icon.svg";
+import menuHamburger from "../../../assets/images/accountDetails/header/menu-hamburger.svg";
 
 export default function Navbar() {
   const [navCollapse, setnavColapse] = useState(true);
@@ -71,7 +70,7 @@ export default function Navbar() {
               </div>
             </li>
             <li>
-              <Link to="/">Account Details</Link>
+              <Link to="/accountDetails">Account Details</Link>
             </li>
             <li>
               <Link to="/booking">My Booking</Link>

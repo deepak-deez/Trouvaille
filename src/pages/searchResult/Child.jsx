@@ -7,11 +7,11 @@ import Footer from "../../components/searchResult/footer/Child";
 
 export default function Child() {
   return (
-    <>
+    <section className="searchResult">
       <Navbar />
       <Header />
       <TripCategory />
       <Footer />
-    </>
+    </section>
   );
 }

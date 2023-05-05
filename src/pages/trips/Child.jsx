@@ -7,11 +7,11 @@ import Footer from "../../components/tripsPage/footer/Child";
 
 export default function Child() {
   return (
-    <>
+    <section className="trips">
       <Navbar />
       <Header />
       <TripCategory />
       <Footer />
-    </>
+    </section>
   );
 }

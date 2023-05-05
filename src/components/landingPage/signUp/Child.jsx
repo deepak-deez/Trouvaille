@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./child.scss";
 import eye from "../../../assets/images/landingPage/loginForm/eye.svg";
 import axios from "axios";
@@ -6,6 +7,7 @@ import axios from "axios";
 console.log(process.env.REACT_APP_apiHost);
 
 const Header = () => {
+  const navigate = useNavigate();
   const emailRef = useRef();
   const phoneNoRef = useRef();
   const passowrdRef = useRef();
@@ -105,6 +107,9 @@ const Header = () => {
                 });
 
               setApiMessage(response.data.message);
+
+              console.log("Its Here");
+              navigate("/searchResult");
 
               console.log(apiMessage);
 
