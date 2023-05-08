@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import "./child.scss";
+import axios from "axios";
 
 const Header = () => {
+  const emailref = useRef();
+  const sendLink = async () => {
+    const data = {
+      email: emailref.current.value,
+    };
+
+    const response = await axios.post(
+      `${process.env.REACT_APP_apiHost}send-reset-mail/Frontend-user`,
+      data
+    );
+
+    console.log(response);
+  };
   return (
     <header className="flex flex-col set-password justify-center items-center mt-[100px] my-auto">
       <h2 className="md:text-[64px] text-center mt-[10px] lg:mt-[30px] text-[50px]">
@@ -12,14 +26,16 @@ const Header = () => {
         <input
           className="text-[20px] input-fields lg:px-[39px] px-[15px] py-[20px] lg:py-[32px] mt-[9px] bg-transparent"
           type="text"
+          ref={emailref}
           placeholder="Enter Your Email Address"
         />
-        <Link
+        <button
           to="/resetPassword"
+          onClick={sendLink}
           className="lg:mt-[27px] mt-[20px] px-[15px] py-[20px] lg:py-[24px] text-center send-password-button"
         >
-          SEND PASSWORD
-        </Link>
+          SEND LINK
+        </button>
       </div>
     </header>
   );
