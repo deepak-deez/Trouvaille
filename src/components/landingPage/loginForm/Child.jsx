@@ -16,11 +16,11 @@ const Header = () => {
   return (
     <header className="flex flex-col login-form justify-center items-center my-auto">
       <p className="md:text-[34px]">Signin</p>
-      <Link to="/searchResult">
-        <h2 className="md:text-[64px] text-center mt-[10px] lg:mt-[30px] text-[50px]">
-          Welcome to Trouvaille
-        </h2>
-      </Link>
+
+      <h2 className="md:text-[64px] text-center mt-[10px] lg:mt-[30px] text-[50px]">
+        Welcome to Trouvaille
+      </h2>
+
       <div className="flex flex-col lg:w-[975px] w-[90%] md:px-[30px] md:py-[30px] mt-[15px] login-details px-[25px] py-[15px] lg:py-[67px] lg:px-[97px] justify-center">
         <input
           className=" text-[20px] input-fields lg:px-[39px] px-[15px] py-[20px] lg:py-[32px] mt-[9px] w-[100%]"
