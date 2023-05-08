@@ -70,6 +70,7 @@ const Header = () => {
             ) {
               setEmptyFieldsMessage(false);
 
+              console.log(process.env.REACT_APP_apiHost);
               const response = await axios
                 .post(
                   `${process.env.REACT_APP_apiHost}login/Frontend-user`,
@@ -79,14 +80,14 @@ const Header = () => {
                   return response;
                 })
                 .catch((error) => {
-                  console.log(error);
+                  return error;
                 });
+
               console.log(response);
 
               setApiMessage(response.data.message);
 
               if (response.data.message === "Login Sucessfull!") {
-                console.log("Its Here");
                 navigate("/searchResult");
               }
 
