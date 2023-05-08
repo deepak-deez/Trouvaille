@@ -91,9 +91,6 @@ const Header = () => {
               newUserDetails["phone"] = phoneNoRef.current.value;
               newUserDetails["password"] = passowrdRef.current.value;
 
-              console.log(newUserDetails);
-              console.log(process.env.REACT_APP_apiHost);
-
               const response = await axios
                 .post(
                   `${process.env.REACT_APP_apiHost}register/Frontend-user`,

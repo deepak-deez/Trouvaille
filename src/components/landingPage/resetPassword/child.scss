@@ -14,6 +14,17 @@ $button-color-green-v2: #022f15;
       color: $font-color-grey;
       font-family: $font-name-poppins;
     }
+    .different-password {
+      color: red;
+      text-align: center;
+      font-size: 2rem;
+    }
+    .different-password-hidden {
+      display: none;
+    }
+    .different-password-block {
+      display: block;
+    }
     input:focus {
       outline: none;
     }
