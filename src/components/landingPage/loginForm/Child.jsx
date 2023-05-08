@@ -3,6 +3,7 @@ import "./child.scss";
 import { Outlet, Link, Await, useNavigate } from "react-router-dom";
 import axios from "axios";
 import eye from "../../../assets/images/landingPage/loginForm/eye.svg";
+import Cookies from "js-cookie";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -85,9 +86,11 @@ const Header = () => {
 
               console.log(response);
 
+              const token = response.data.data.token;
+              Cookies.set('TOKEN', token, { expires: 7 });  
               setApiMessage(response.data.message);
 
-              if (response.data.message === "Login Sucessfull!") {
+              if (response.data.message === "Login Sucessfull!" && token) {
                 navigate("/searchResult");
               }
 
