@@ -1,107 +1,109 @@
-$nav-input-grey-bg: #e2e2e2;
-$nav-profile-grey-bg: #dadbe0;
-
 /* Navbar */
 
-nav {
-  z-index: 99;
-  -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px);
-  h4 {
-    font-family: "Montserrat", sans-serif;
-    font-weight: 600;
-    background: linear-gradient(
-      90deg,
-      #051a25 -7.55%,
-      rgba(5, 26, 37, 0.47) 54.06%,
-      #051a25 115.66%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
-  }
-  position: fixed;
-  width: 100%;
-  left: 0;
-  top: 0;
-  $color-nav-li: #444a61;
-  $color-nav-li-hover: #051b25;
-  li {
-    font-size: 22px;
-  }
-  .nav-lg-view {
-    li {
-      color: $color-nav-li;
-      display: inline-block;
-      position: relative;
-    }
-    li:hover {
-      color: $color-nav-li-hover;
-    }
-    li::after {
-      content: "";
-      position: absolute;
-      bottom: -1rem;
-      left: 0;
-      width: 100%;
-      transform: scaleX(0);
-      height: 2px;
-      background-color: $color-nav-li-hover;
-      transform-origin: bottom;
-      transition: all 0.5s;
-    }
-    li:hover::after {
-      transform: scale(100%);
-    }
-  }
-  .nav-serach-area {
-    background-color: $nav-input-grey-bg;
-    padding: 0.9rem 3rem 0.9rem 2rem;
-    border-radius: 2rem;
+.search-result {
+  $nav-input-grey-bg: #e2e2e2;
+  $nav-profile-grey-bg: #dadbe0;
 
-    .nav-search-input {
-      all: unset;
-    }
-    .nav-search-input::placeholder {
-      color: rgb(96, 96, 96);
-    }
-  }
-  .nav-tab-menu {
-    position: fixed;
-    width: 100%;
-    padding: 2rem;
-    left: 0;
-    background-color: rgba(255, 255, 255, 0.48);
+  nav {
+    z-index: 99;
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
+    h4 {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 600;
+      background: linear-gradient(
+        90deg,
+        #051a25 -7.55%,
+        rgba(5, 26, 37, 0.47) 54.06%,
+        #051a25 115.66%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+    }
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+    $color-nav-li: #444a61;
+    $color-nav-li-hover: #051b25;
     li {
-      transition: all 0.2s;
+      font-size: 22px;
     }
-    li:hover {
-      color: rgb(0, 0, 240);
+    .nav-lg-view {
+      li {
+        color: $color-nav-li;
+        display: inline-block;
+        position: relative;
+      }
+      li:hover {
+        color: $color-nav-li-hover;
+      }
+      li::after {
+        content: "";
+        position: absolute;
+        bottom: -1rem;
+        left: 0;
+        width: 100%;
+        transform: scaleX(0);
+        height: 2px;
+        background-color: $color-nav-li-hover;
+        transform-origin: bottom;
+        transition: all 0.5s;
+      }
+      li:hover::after {
+        transform: scale(100%);
+      }
     }
-  }
-  .nav-open {
-    animation: nav-open 0.5s;
-  }
-  @keyframes nav-open {
-    0% {
-      transform: translateX(-100%);
+    .nav-serach-area {
+      background-color: $nav-input-grey-bg;
+      padding: 0.9rem 3rem 0.9rem 2rem;
+      border-radius: 2rem;
+
+      .nav-search-input {
+        all: unset;
+      }
+      .nav-search-input::placeholder {
+        color: rgb(96, 96, 96);
+      }
     }
-    100% {
-      transform: translateX(0%);
+    .nav-tab-menu {
+      position: fixed;
+      width: 100%;
+      padding: 2rem;
+      left: 0;
+      background-color: rgba(255, 255, 255, 0.48);
+      -webkit-backdrop-filter: blur(5px);
+      backdrop-filter: blur(5px);
+      li {
+        transition: all 0.2s;
+      }
+      li:hover {
+        color: rgb(0, 0, 240);
+      }
     }
-  }
-  .nav-close {
-    animation: nav-close 0.5sS;
-  }
-  @keyframes nav-close {
-    0% {
-      transform: translateX(0%);
+    .nav-open {
+      animation: nav-open 0.5s;
     }
-    100% {
-      transform: translateX(-100%);
+    @keyframes nav-open {
+      0% {
+        transform: translateX(-100%);
+      }
+      100% {
+        transform: translateX(0%);
+      }
+    }
+    .nav-close {
+      animation: nav-close 0.5sS;
+    }
+    @keyframes nav-close {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
     }
   }
 }
