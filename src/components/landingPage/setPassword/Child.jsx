@@ -1,10 +1,11 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "./child.scss";
 import axios from "axios";
 
 const Header = () => {
   const emailref = useRef();
+  const [apiMessage, setApiMessage] = useState("");
   const sendLink = async () => {
     const data = {
       email: emailref.current.value,
@@ -15,6 +16,8 @@ const Header = () => {
       data
     );
 
+    setApiMessage(response.data.message);
+
     console.log(response);
   };
   return (
@@ -23,6 +26,14 @@ const Header = () => {
         Set profile password
       </h2>
       <div className="flex flex-col lg:w-[975px] w-[90%] md:px-[30px] md:py-[30px] mt-[15px] login-details px-[25px] py-[15px] lg:py-[67px] lg:px-[97px] justify-center">
+        <p
+          className={
+            "text-3xl text-white text-center api-message " +
+            (!!apiMessage.length ? "mb-5" : "")
+          }
+        >
+          {apiMessage}
+        </p>
         <input
           className="text-[20px] input-fields lg:px-[39px] px-[15px] py-[20px] lg:py-[32px] mt-[9px] bg-transparent"
           type="text"
