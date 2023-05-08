@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./child.scss";
+import { Link } from "react-router-dom";
 import logo from "../../../assets/images/tripsDetailsPage/header/logo.svg";
 import searchIcon from "../../../assets/images/tripsDetailsPage/header/search-icon.svg";
 import notificationIcon from "../../../assets/images/tripsDetailsPage/header/notification-icon.svg";
@@ -53,7 +54,13 @@ export default function Navbar() {
             className="hidden xl:block"
             alt="document-icon"
           />
-          <img src={profileIcon} alt="profile-icon" />
+          <Link to="/accountDetails">
+            <img
+              className="w-[100%] h-[100%]"
+              src={profileIcon}
+              alt="profile-icon"
+            />
+          </Link>
         </div>
       </div>
       {navCollapse ? (

@@ -6,11 +6,11 @@ import Header from "../../components/accountDetails/viewAccountDetails/Child";
 
 const viewAccDetails = () => {
   return (
-    <>
+    <section className="account-details">
       <Navbar />
       <Header />
       <Footer />
-    </>
+    </section>
   );
 };
 

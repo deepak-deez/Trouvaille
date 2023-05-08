@@ -1,23 +1,25 @@
 /* Footer */
 $color-grey-footer: #73797e;
 
-footer {
-  color: $color-grey-footer;
-  font-weight: 500;
-  font-size: 20px;
-  h4 {
-    font-family: "Montserrat", sans-serif;
-    font-weight: 600;
-    background: linear-gradient(
-      90deg,
-      #d5dadd -7.55%,
-      rgba(146, 166, 176, 0.76) 54.06%,
-      #d2dbdf 115.66%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
+.account-details {
+  footer {
+    color: $color-grey-footer;
+    font-weight: 500;
+    font-size: 20px;
+    h4 {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 600;
+      background: linear-gradient(
+        90deg,
+        #d5dadd -7.55%,
+        rgba(146, 166, 176, 0.76) 54.06%,
+        #d2dbdf 115.66%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+    }
   }
 }
 

@@ -9,60 +9,62 @@ $font-color-grey-v2: #ded3cf;
 $button-color-green: #219653;
 $button-color-green-v2: #022f15;
 
-.signup-form {
-  p {
-    color: $font-color-grey;
-    font-family: $font-name-poppins;
-  }
-  input:focus {
-    outline: none;
-  }
-  h2 {
-    font-family: $font-name-poppins;
-    background: linear-gradient(268.24deg, #d25e46 19.54%, #8c2009 110.31%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+.landing-page {
+  .signup-form {
+    p {
+      color: $font-color-grey;
+      font-family: $font-name-poppins;
+    }
+    input:focus {
+      outline: none;
+    }
+    h2 {
+      font-family: $font-name-poppins;
+      background: linear-gradient(268.24deg, #d25e46 19.54%, #8c2009 110.31%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-  .input-fields {
-    background: rgba(255, 255, 255, 0.78);
-    border-radius: 21px;
-  }
+    .input-fields {
+      background: rgba(255, 255, 255, 0.78);
+      border-radius: 21px;
+    }
 
-  .grey-text {
-    color: $font-color-grey-v2;
-  }
-  .different-password {
-    color: red;
-    text-align: center;
-    font-size: 2rem;
-  }
-  .different-password-hidden {
-    display: none;
-  }
-  .different-password-block {
-    display: block;
-  }
-  .signup-details {
-    background: rgba(32, 13, 3, 0.39);
-    border: 1px solid rgba(255, 255, 255, 0.26);
-    box-shadow: 0px 115px 65px -40px rgba(0, 0, 0, 0.17);
-    backdrop-filter: blur(10px);
-    border-radius: 37px;
-  }
-  .continue-button {
-    background: $button-color-green;
-    border-radius: 22px;
-    color: white;
-  }
-  .continue-button:hover {
-    background: $button-color-green-v2;
-  }
-  .api-message {
-    margin-top: 3rem;
-    color: white;
-    text-align: center;
-    font-size: 2rem;
+    .grey-text {
+      color: $font-color-grey-v2;
+    }
+    .different-password {
+      color: red;
+      text-align: center;
+      font-size: 2rem;
+    }
+    .different-password-hidden {
+      display: none;
+    }
+    .different-password-block {
+      display: block;
+    }
+    .signup-details {
+      background: rgba(32, 13, 3, 0.39);
+      border: 1px solid rgba(255, 255, 255, 0.26);
+      box-shadow: 0px 115px 65px -40px rgba(0, 0, 0, 0.17);
+      backdrop-filter: blur(10px);
+      border-radius: 37px;
+    }
+    .continue-button {
+      background: $button-color-green;
+      border-radius: 22px;
+      color: white;
+    }
+    .continue-button:hover {
+      background: $button-color-green-v2;
+    }
+    .api-message {
+      margin-top: 3rem;
+      color: white;
+      text-align: center;
+      font-size: 2rem;
+    }
   }
 }

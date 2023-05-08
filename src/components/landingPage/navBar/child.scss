@@ -5,21 +5,23 @@ $font-name-montserrat: "Montserrat", sans-serif;
 $font-name-roboto: "Roboto", sans-serif;
 $font-color-grey: #727a86;
 
-.trouvaille-heading {
-  font-family: $font-name-montserrat;
-  font-weight: 600;
-  background: linear-gradient(
-    90deg,
-    #051a25 -7.55%,
-    rgba(5, 26, 37, 0.47) 54.06%,
-    #051a25 115.66%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-fill-color: transparent;
-}
-.trouvaille-text {
-  color: $font-color-grey;
-  font-family: $font-name-roboto;
+.landing-page {
+  .trouvaille-heading {
+    font-family: $font-name-montserrat;
+    font-weight: 600;
+    background: linear-gradient(
+      90deg,
+      #051a25 -7.55%,
+      rgba(5, 26, 37, 0.47) 54.06%,
+      #051a25 115.66%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+  }
+  .trouvaille-text {
+    color: $font-color-grey;
+    font-family: $font-name-roboto;
+  }
 }

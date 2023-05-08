@@ -6,11 +6,11 @@ import Header from "../../components/accountDetails/profileSettings/Child";
 
 const editAccDetails = () => {
   return (
-    <>
+    <section className="account-details">
       <Navbar />
       <Header />
       <Footer />
-    </>
+    </section>
   );
 };
 

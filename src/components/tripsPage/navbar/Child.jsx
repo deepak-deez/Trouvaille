@@ -55,7 +55,11 @@ export default function Navbar() {
             alt="document-icon"
           />
           <Link to="/accountDetails">
-            <img src={profileIcon} alt="profile-icon" />
+            <img
+              className="w-[100%] h-[100%]"
+              src={profileIcon}
+              alt="profile-icon"
+            />
           </Link>
         </div>
       </div>

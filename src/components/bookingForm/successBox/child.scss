@@ -6,35 +6,37 @@ $font-color-grey: #46485c;
 $button-color-green: #219653;
 $button-color-green-v2: #022f15;
 
-.success-section {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.362);
-  backdrop-filter: blur(20px);
-  z-index: 3000;
-}
-.success-box {
-  box-shadow: 0px 104px 51px -62px rgba(3, 10, 19, 0.56);
-  border-radius: 18px;
-
-  h2 {
-    font-family: $font-name-poppins;
-    font-weight: 500;
+.details-page {
+  .success-section {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.362);
+    backdrop-filter: blur(20px);
+    z-index: 3000;
   }
+  .success-box {
+    box-shadow: 0px 104px 51px -62px rgba(3, 10, 19, 0.56);
+    border-radius: 18px;
 
-  p {
-    color: $font-color-grey;
-  }
+    h2 {
+      font-family: $font-name-poppins;
+      font-weight: 500;
+    }
 
-  .back-button {
-    background: $button-color-green;
-    border-radius: 22px;
-    color: white;
-  }
+    p {
+      color: $font-color-grey;
+    }
 
-  .back-button:hover {
-    background-color: $button-color-green-v2;
+    .back-button {
+      background: $button-color-green;
+      border-radius: 22px;
+      color: white;
+    }
+
+    .back-button:hover {
+      background-color: $button-color-green-v2;
+    }
   }
 }

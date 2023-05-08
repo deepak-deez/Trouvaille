@@ -1,17 +1,19 @@
 $font-color-grey: #444a61;
 
-header {
-  .grey-text {
-    color: $font-color-grey;
-  }
-  .login-details {
-    background: #ffffff8b;
-    p {
-      background-color: rgba(255, 255, 255, 0.588);
-      padding: 14px 25px;
-      border-radius: 0.6rem;
+.account-details {
+  header {
+    .grey-text {
+      color: $font-color-grey;
     }
-    @media screen and (min-width: 1280px) {
+    .login-details {
+      background: #ffffff8b;
+      p {
+        background-color: rgba(255, 255, 255, 0.588);
+        padding: 14px 25px;
+        border-radius: 0.6rem;
+      }
+      @media screen and (min-width: 1280px) {
+      }
     }
   }
 }
