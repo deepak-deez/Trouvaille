@@ -1,6 +1,6 @@
 .trips {
   header {
-    margin-top: 8.5rem;
+    padding-top: 8.5rem;
     h4 {
       font-weight: 700;
     }
@@ -33,7 +33,7 @@
 
   @media screen and (min-width: 1024px) {
     header {
-      margin-top: 10rem;
+      padding-top: 10rem;
     }
   }
 }

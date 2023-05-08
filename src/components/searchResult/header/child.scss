@@ -1,6 +1,6 @@
 .search-result {
   header {
-    margin-top: 10.5rem;
+    padding-top: 10.5rem;
     h1 {
       font-size: 50px;
       text-shadow: 0.1rem 0.1rem 0.3rem black;
@@ -23,7 +23,7 @@
 
   @media screen and (min-width: 1024px) {
     header {
-      margin-top: 20.5rem;
+      padding-top: 20.5rem;
     }
   }
 }
