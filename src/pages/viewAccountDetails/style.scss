@@ -1,4 +1,6 @@
-account-details {
+.account-details {
   background-image: url("../../assets/images/accountDetails/profileSettings/profileSettings.png");
   background-size: cover;
+  height: 100vh;
+  overflow-y: scroll;
 }

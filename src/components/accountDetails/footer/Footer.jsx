@@ -11,7 +11,7 @@ import pinterestIcon from "../../../assets/images/accountDetails/footer/pinteres
 
 export default function Child() {
   return (
-    <footer className="my-[5rem] flex flex-col gap-5 lg:gap-10 xl:gap-0 lg:mx-[2rem] 2xl:mx-[10rem]">
+    <footer className="mt-[5rem] pb-[5rem] flex flex-col gap-5 lg:gap-10 xl:gap-0 lg:mx-[2rem] 2xl:mx-[10rem]">
       <p className="text-center xl:mb-[2rem] text-[#B4BBC1] text-[22px]">
         Get Social with us
       </p>
