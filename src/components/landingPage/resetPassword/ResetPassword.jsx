@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import "./child.scss";
+import "./style.scss";
 
 const Header = () => {
   const passwordRef = useRef();

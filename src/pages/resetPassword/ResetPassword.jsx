@@ -1,8 +1,8 @@
 import React from "react";
-import "./child.scss";
-import NavBar from "../../components/landingPage/navBar/Child.jsx";
-import ResetPassword from "../../components/landingPage/resetPassword/Child.jsx";
-import Footer from "../../components/landingPage/footer/Child.jsx";
+import "./style.scss";
+import NavBar from "../../components/landingPage/navBar/Navbar.jsx";
+import ResetPassword from "../../components/landingPage/resetPassword/ResetPassword.jsx";
+import Footer from "../../components/landingPage/footer/Footer.jsx";
 
 const resetPassword = () => {
   return (

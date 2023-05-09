@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./child.scss";
+import "./style.scss";
 import { Link } from "react-router-dom";
 import logo from "../../../assets/images/tripsDetailsPage/header/logo.svg";
 import searchIcon from "../../../assets/images/tripsDetailsPage/header/search-icon.svg";

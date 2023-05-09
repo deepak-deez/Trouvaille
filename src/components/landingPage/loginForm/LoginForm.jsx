@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import "./child.scss";
+import "./style.scss";
 import { Outlet, Link, Await, useNavigate } from "react-router-dom";
 import axios from "axios";
 import eye from "../../../assets/images/landingPage/loginForm/eye.svg";
@@ -87,7 +87,7 @@ const Header = () => {
               console.log(response);
 
               const token = response.data.data.token;
-              Cookies.set('TOKEN', token, { expires: 7 });  
+              Cookies.set("TOKEN", token, { expires: 7 });
               setApiMessage(response.data.message);
 
               if (response.data.message === "Login Sucessfull!" && token) {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./child.scss";
+import "./style.scss";
 import divingIcon from "../../../assets/images/tripsDetailsPage/journeyPlanning/diving-icon.svg";
 import waveIcon from "../../../assets/images/tripsDetailsPage/journeyPlanning/wave-icon.svg";
 import warningIcon from "../../../assets/images/tripsDetailsPage/journeyPlanning/warning-icon.svg";

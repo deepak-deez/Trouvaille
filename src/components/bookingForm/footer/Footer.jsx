@@ -1,13 +1,13 @@
 import React from "react";
-import "./child.scss";
-import logo from "../../../assets/images/landingPage/navBar/logo.svg";
-import facebook from "../../../assets/images/landingPage/footerIcons/facebook.svg";
-import twitter from "../../../assets/images/landingPage/footerIcons/twitter.svg";
-import instagram from "../../../assets/images/landingPage/footerIcons/instagram.svg";
-import linkedin from "../../../assets/images/landingPage/footerIcons/linkedin.svg";
-import youtube from "../../../assets/images/landingPage/footerIcons/youtube.svg";
-import apple from "../../../assets/images/landingPage/footerIcons/apple.svg";
-import pinterest from "../../../assets/images/landingPage/footerIcons/pinterest.svg";
+import "./style.scss";
+import logo from "../../../assets/images/bookingForm/navBar/logo.svg";
+import facebook from "../../../assets/images/bookingForm/footerIcons/facebook.svg";
+import twitter from "../../../assets/images/bookingForm/footerIcons/twitter.svg";
+import instagram from "../../../assets/images/bookingForm/footerIcons/instagram.svg";
+import linkedin from "../../../assets/images/bookingForm/footerIcons/linkedin.svg";
+import youtube from "../../../assets/images/bookingForm/footerIcons/youtube.svg";
+import apple from "../../../assets/images/bookingForm/footerIcons/apple.svg";
+import pinterest from "../../../assets/images/bookingForm/footerIcons/pinterest.svg";
 
 export default function Footer() {
   return (

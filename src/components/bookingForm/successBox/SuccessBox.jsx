@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./child.scss";
+import "./style.scss";
 import successImg from "../../../assets/images/bookingForm/success/success.svg";
 
 const Header = () => {

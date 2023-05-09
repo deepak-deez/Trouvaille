@@ -1,4 +1,4 @@
-import "./child.scss";
+import "./style.scss";
 import React from "react";
 
 import logo from "../../../assets/images/searchResult/header/logo.svg";

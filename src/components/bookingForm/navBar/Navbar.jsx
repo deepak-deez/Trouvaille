@@ -1,6 +1,6 @@
 import React from "react";
-import logo from "../../../assets/images/landingPage/navBar/logo.svg";
-import "./child.scss";
+import logo from "../../../assets/images/bookingForm/navBar/logo.svg";
+import "./style.scss";
 
 const Header = () => {
   return (

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import "./child.scss";
+import "./style.scss";
 import { Link } from "react-router-dom";
 import arrow from "../../../assets/images/bookingForm/loginForm/arrow.svg";
-import Success from "../successBox/Child";
+import Success from "../successBox/SuccessBox";
 
 const Header = () => {
   const [sucessModal, setsucessModal] = useState(false);
