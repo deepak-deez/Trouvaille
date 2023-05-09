@@ -8,6 +8,31 @@ import {
 
 const BASE_URL = process.env.REACT_APP_apiHost;
 
-const logInUser = (email, password , type ) =>{
+export const logInUser = (email, password) => async(dispatch) =>
+{
+   try{
+    dispatch({
+        type: SIGN_IN_USER_REQUEST
+       });
 
+    const config = {"Content-Type":"application/json"};
+    const body = {
+        email,
+        password,
+        type : "Frontend-user" 
+    };
+
+    const {data} = await axios.post(`${BASE_URL}login/Frontend-user`  ,body, config);
+    dispatch({
+        type: SIGN_IN_USER_SUCCESS,
+        payload: data
+    })
+    localStorage.setItem("UserDetails",JSON.stringify(data));
+   }
+   catch(error){
+    dispatch({
+        type: SIGN_IN_USER_FAILED,
+        payload: error
+    })
+   }
 }
