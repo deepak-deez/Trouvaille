@@ -4,6 +4,7 @@ import { Outlet, Link, Await, useNavigate } from "react-router-dom";
 import axios from "axios";
 import eye from "../../../assets/images/landingPage/loginForm/eye.svg";
 import Cookies from "js-cookie";
+import Handle from "rc-slider/lib/Handles/Handle";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -13,6 +14,14 @@ const Header = () => {
   const accDetails = {};
   const [apiMessage, setApiMessage] = useState("");
   const [empyFieldsMessage, setEmptyFieldsMessage] = useState(false);
+  const [remember, setRemember] = useState(false);
+  const checkbox = useRef(false);
+
+  const handleClick = () => {
+    checkbox.current = !checkbox.current;
+    if (checkbox.current == false) setRemember(true);
+    else if (checkbox.current == true) setRemember(false);
+  };
 
   return (
     <header className="flex flex-col login-form justify-center items-center my-auto">
@@ -28,6 +37,9 @@ const Header = () => {
           type="text"
           placeholder="Enter Email ID"
           ref={emailRef}
+          defaultValue={
+            localStorage.getItem("email") ? localStorage.getItem("email") : ""
+          }
         />
         <div className=" input-fields lg:px-[39px]  px-[15px]  lg:mt-[60px] mt-[30px] flex flex-row items-center justify-between">
           <input
@@ -35,6 +47,11 @@ const Header = () => {
             type={showPassword ? "text" : "password"}
             placeholder="Password"
             ref={passwordRef}
+            defaultValue={
+              localStorage.getItem("password")
+                ? localStorage.getItem("password")
+                : ""
+            }
           />
           <button
             type="button"
@@ -46,7 +63,13 @@ const Header = () => {
           </button>
         </div>
         <div className="flex flex-row mt-[20px] lg:mt-[26px] text-[14px] gap-[11px]">
-          <input type="checkbox" name="remember-me" value="yes" />
+          <input
+            type="checkbox"
+            name="remember-me"
+            value="yes"
+            ref={checkbox}
+            onClick={handleClick}
+          />
           <p className="text-[20px] grey-text">Remember Me</p>
         </div>
         <p className={" api-message " + (!!apiMessage.length ? "my-10" : "")}>
@@ -86,13 +109,35 @@ const Header = () => {
 
               console.log(response);
 
-              const token = response.data.data.token;
-              Cookies.set("TOKEN", token, { expires: 7 });
-              setApiMessage(response.data.message);
+              if (response.data.success) {
+                const token = response.data.data.token;
+                const id = response.data.data.userDetails._id;
+                const userType = response.data.data.userDetails.userType;
 
-              if (response.data.message === "Login Sucessfull!" && token) {
+                if (remember) {
+                  localStorage.setItem("email", emailRef.current.value);
+                  localStorage.setItem("password", passwordRef.current.value);
+                  localStorage.setItem("token", token);
+                  localStorage.setItem("id", id);
+                  localStorage.setItem("usertype", userType);
+                  localStorage.setItem("rememberMe", remember);
+                } else {
+                  localStorage.removeItem("email", emailRef.current.value);
+                  localStorage.removeItem(
+                    "password",
+                    passwordRef.current.value
+                  );
+                  localStorage.removeItem("token", token);
+                  localStorage.removeItem("id", id);
+                  localStorage.removeItem("usertype", userType);
+                  localStorage.setItem("rememberMe", remember);
+                }
+
+                // logInUser()
+                Cookies.set("TOKEN", token, { expires: 7 });
                 navigate("/searchResult");
               }
+              setApiMessage(response.data.message);
 
               console.log(response.data.message);
             } else {
