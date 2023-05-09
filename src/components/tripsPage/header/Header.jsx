@@ -1,5 +1,5 @@
 import React from "react";
-import "./child.scss";
+import "./style.scss";
 import dateSearchIcon from "../../../assets/images/tripsPage/header/date-search-icon.svg";
 
 export default function Header() {

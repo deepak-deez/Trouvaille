@@ -4,14 +4,14 @@ import Signin from "./pages/signIn/SignIn.jsx";
 import SetPassword from "./pages/setPassword/SetPassword.jsx";
 import ResetPassword from "./pages/resetPassword/ResetPassword.jsx";
 import Signup from "./pages/signUp/SignUp.jsx";
-import SearchResult from "./pages/searchResult/Child.jsx";
-import TripsPage from "./pages/trips/Child.jsx";
+import SearchResult from "./pages/searchResult/SearchResult.jsx";
+import TripsPage from "./pages/trips/Trips.jsx";
 import TripDetails from "./pages/tripDetails/TripDetails.jsx";
 import BookingForm from "./pages/bookingForm/BookingForm.jsx";
-import AccountDetails from "./pages/viewAccountDetails/Child.jsx";
-import EditAccountDetails from "./pages/editAccountDetails/Child.jsx";
-import Profile from "./pages/profileSettings/Child.jsx";
-import EditProfile from "./pages/editProfile/Child.jsx";
+import AccountDetails from "./pages/viewAccountDetails/ViewAccountDetails.jsx";
+import EditAccountDetails from "./pages/editAccountDetails/EditAccountDetails.jsx";
+import Profile from "./pages/profileSettings/ProfileSettings.jsx";
+import EditProfile from "./pages/editProfile/EditProfile.jsx";
 
 const Router = () => {
   return (

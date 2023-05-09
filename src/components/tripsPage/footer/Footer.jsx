@@ -1,6 +1,5 @@
-import "./child.scss";
+import "./style.scss";
 import React from "react";
-
 import logo from "../../../assets/images/searchResult/header/logo.svg";
 import facebookIcon from "../../../assets/images/searchResult/footer/faceboox-icon.svg";
 import twitterIcon from "../../../assets/images/searchResult/footer/twitter-icon.svg";

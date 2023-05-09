@@ -1,18 +1,17 @@
-import "./child.scss";
+import "./style.scss";
 import React from "react";
-
-import logo from "../../../assets/images/searchResult/header/logo.svg";
-import facebookIcon from "../../../assets/images/searchResult/footer/faceboox-icon.svg";
-import twitterIcon from "../../../assets/images/searchResult/footer/twitter-icon.svg";
-import instagramIcon from "../../../assets/images/searchResult/footer/instagram-icon.svg";
-import linkedinIcon from "../../../assets/images/searchResult/footer/linked-in-icon.svg";
-import youtubeIcon from "../../../assets/images/searchResult/footer/youtube-icon.svg";
-import appleIcon from "../../../assets/images/searchResult/footer/apple-icon.svg";
-import pinterestIcon from "../../../assets/images/searchResult/footer/pinterest-icon.svg";
+import logo from "../../../assets/images/accountDetails/header/logo.svg";
+import facebookIcon from "../../../assets/images/accountDetails/footer/faceboox-icon.svg";
+import twitterIcon from "../../../assets/images/accountDetails/footer/twitter-icon.svg";
+import instagramIcon from "../../../assets/images/accountDetails/footer/instagram-icon.svg";
+import linkedinIcon from "../../../assets/images/accountDetails/footer/linked-in-icon.svg";
+import youtubeIcon from "../../../assets/images/accountDetails/footer/youtube-icon.svg";
+import appleIcon from "../../../assets/images/accountDetails/footer/apple-icon.svg";
+import pinterestIcon from "../../../assets/images/accountDetails/footer/pinterest-icon.svg";
 
 export default function Child() {
   return (
-    <footer className="flex flex-col gap-5 lg:gap-10 xl:gap-0 my-[4rem] lg:mt-[11rem] lg:mx-[2rem] 2xl:mx-[10rem]">
+    <footer className="my-[5rem] flex flex-col gap-5 lg:gap-10 xl:gap-0 lg:mx-[2rem] 2xl:mx-[10rem]">
       <p className="text-center xl:mb-[2rem] text-[#B4BBC1] text-[22px]">
         Get Social with us
       </p>

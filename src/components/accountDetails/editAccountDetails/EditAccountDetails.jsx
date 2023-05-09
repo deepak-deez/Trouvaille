@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./child.scss";
+import "./style.scss";
 
 export default function Child() {
   return (

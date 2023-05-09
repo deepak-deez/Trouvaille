@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./child.scss";
+import "./style.scss";
 import profileImg from "../../../assets/images/accountDetails/profileSettings/profile-img.png";
 import editIcon from "../../../assets/images/accountDetails/profileSettings/edit.svg";
 

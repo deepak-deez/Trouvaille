@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./child.scss";
-import logo from "../../../assets/images/tripsPage/header/logo.svg";
-import searchIcon from "../../../assets/images/tripsPage/header/search-icon.svg";
-import notificationIcon from "../../../assets/images/tripsPage/header/notification-icon.svg";
-import documentIcon from "../../../assets/images/tripsPage/header/document-icon.svg";
-import profileIcon from "../../../assets/images/tripsPage/header/user-profile-icon.svg";
-import menuHamburger from "../../../assets/images/tripsPage/header/menu-hamburger.svg";
+import "./style.scss";
+import logo from "../../../assets/images/searchResult/header/logo.svg";
+import searchIcon from "../../../assets/images/searchResult/header/search-icon.svg";
+import notificationIcon from "../../../assets/images/searchResult/header/notification-icon.svg";
+import documentIcon from "../../../assets/images/searchResult/header/document-icon.svg";
+import profileIcon from "../../../assets/images/searchResult/header/user-profile-icon.svg";
+import menuHamburger from "../../../assets/images/searchResult/header/menu-hamburger.svg";
 
 export default function Navbar() {
   const [navCollapse, setnavColapse] = useState(true);
@@ -37,11 +37,13 @@ export default function Navbar() {
         </ul>
         <div className="flex gap-10 2xl:gap-[4.1rem]">
           <div className="nav-serach-area hidden xl:flex">
-            <input
-              type="text"
-              className="nav-search-input"
-              placeholder="Search"
-            />
+            <Link to="/trips">
+              <input
+                type="text"
+                className="nav-search-input"
+                placeholder="Search"
+              />
+            </Link>
             <img src={searchIcon} alt="search-icon" />
           </div>
           <img
@@ -84,12 +86,13 @@ export default function Navbar() {
             <li>Contacts</li>
           </ul>
           <div className="flex nav-serach-area justify-between">
-            <input
-              type="text"
-              className="nav-search-input"
-              placeholder="Search"
-            />
-
+            <Link to="/trips">
+              <input
+                type="text"
+                className="nav-search-input"
+                placeholder="Search"
+              />
+            </Link>
             <img src={searchIcon} alt="search-icon" />
           </div>
         </div>
