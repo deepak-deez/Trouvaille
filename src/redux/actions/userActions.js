@@ -23,11 +23,20 @@ export const logInUser = (email, password) => async(dispatch) =>
     };
 
     const {data} = await axios.post(`${BASE_URL}login/Frontend-user`  ,body, config);
+    if(data.status == 200){
     dispatch({
         type: SIGN_IN_USER_SUCCESS,
         payload: data
     })
-    localStorage.setItem("UserDetails",JSON.stringify(data));
+    // localStorage.setItem("UserDetails" , JSON.stringify(data));
+    console.log(data);
+}
+else if(data.status == 500){
+    dispatch({
+        type: SIGN_IN_USER_FAILED,
+        payload: data
+    })
+}
    }
    catch(error){
     dispatch({

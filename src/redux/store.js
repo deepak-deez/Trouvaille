@@ -5,9 +5,9 @@ import thunk from 'redux-thunk'
 import rootReducer from './reducers'
 
 const initialState = {
-    logInReducer: {
-        userInfo:
-            JSON.parse(localStorage.getItem('userInfo'))
+    logInUser: {
+        userDetails:
+            JSON.parse(localStorage.getItem('userDetails'))
     }
 }
 

@@ -34,6 +34,6 @@ export const logInReducer = (state=logInInitialState, action) =>{
                 error: action.payload
             };
         default:
-            return false;
+            return state;
     }
 }
