@@ -10,7 +10,7 @@ import youtubeIcon from "../../../assets/images/searchResult/footer/youtube-icon
 import appleIcon from "../../../assets/images/searchResult/footer/apple-icon.svg";
 import pinterestIcon from "../../../assets/images/searchResult/footer/pinterest-icon.svg";
 
-export default function Child() {
+export default function Footer() {
   return (
     <footer className="flex flex-col gap-5 lg:gap-10 xl:gap-0 mt-[4rem] pb-[4rem] lg:mt-[11rem] lg:mx-[2rem] 2xl:mx-[10rem]">
       <p className="text-center xl:mb-[2rem] text-[#B4BBC1] text-[22px]">

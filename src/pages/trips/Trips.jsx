@@ -5,7 +5,7 @@ import Header from "../../components/tripsPage/header/Header";
 import TripCategory from "../../components/tripsPage/tripCategory/TripCategory";
 import Footer from "../../components/tripsPage/footer/Footer";
 
-export default function Child() {
+export default function Trips() {
   return (
     <section className="trips">
       <Navbar />

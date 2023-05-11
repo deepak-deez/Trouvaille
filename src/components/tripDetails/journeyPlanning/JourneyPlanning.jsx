@@ -21,7 +21,7 @@ import telivisionIcon from "../../../assets/images/tripsDetailsPage/journeyPlann
 import sunFacingIcon from "../../../assets/images/tripsDetailsPage/journeyPlanning/sunIcon.svg";
 import dropdownIcon from "../../../assets/images/tripsDetailsPage/journeyPlanning/dropdownIcon.svg";
 
-export default function Child() {
+export default function JourneyPlanning() {
   const [profilePicFaqs, setprofilePicFaqs] = useState(true);
   const [gmailFaqs, setgmailFaqs] = useState(true);
   const [passwordFaqs, setpasswordFaqs] = useState(true);

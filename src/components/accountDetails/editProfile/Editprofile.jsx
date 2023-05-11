@@ -5,7 +5,7 @@ import profileImg from "../../../assets/images/accountDetails/profileSettings/pr
 import editIcon from "../../../assets/images/accountDetails/profileSettings/edit.svg";
 import accountSettingsImgChange from "../../../assets/images/accountDetails/profileSettings/edit-img.svg";
 
-export default function Child() {
+export default function EditProfile() {
   return (
     <header className="pt-[5rem] sm:pt-[9rem] lg:pt-[10rem] sm:mx-20 2xl:mx-[18.75rem]">
       <div className="flex justify-between lg:text-[22px]">

@@ -4,7 +4,7 @@ import "./style.scss";
 import profileImg from "../../../assets/images/accountDetails/profileSettings/profile-img.png";
 import editIcon from "../../../assets/images/accountDetails/profileSettings/edit.svg";
 
-export default function Child() {
+export default function ProfileSettings() {
   return (
     <header className="pt-[5rem] sm:pt-[9rem] lg:pt-[10rem] sm:mx-20 2xl:mx-[18.75rem]">
       <div className="flex justify-between lg:text-[22px]">
