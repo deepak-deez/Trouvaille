@@ -1,11 +1,13 @@
 import React, { useRef, useState } from "react";
 import "./style.scss";
+import axios from "axios";
 
 const Header = () => {
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
   const [differentPassword, setDifferentPassword] = useState(false);
-
+  const [emptyFieldMessage, setEmptyFieldsMessage] = useState(false);
+  const resetPasswordData = {};
   return (
     <header className="flex flex-col reset-password justify-center items-center mt-[100px] my-auto">
       <h2 className="md:text-[64px] text-center mt-[10px] lg:mt-[30px] text-[50px]">
@@ -41,6 +43,19 @@ const Header = () => {
               passwordRef.current.value === confirmPasswordRef.current.value
             ) {
               setDifferentPassword(false);
+            } else {
+              setDifferentPassword(true);
+            }
+
+            resetPasswordData["newPassword"] = passwordRef.current.value;
+            console.log(resetPasswordData);
+            if (passwordRef.current.value.length) {
+              setEmptyFieldsMessage(false);
+
+              const response = await axios.post(
+                `${process.env.REACT_APP_apiHost}/reset-password/Frontend-user/:id/:token`,
+                resetPasswordData
+              );
             } else {
               setDifferentPassword(true);
             }
