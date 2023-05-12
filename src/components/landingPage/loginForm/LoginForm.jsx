@@ -5,7 +5,7 @@ import eye from "../../../assets/images/landingPage/loginForm/eye.svg";
 import Cookies from "js-cookie";
 import { logInUser } from "../../../redux/actions/userActions";
 import { useSelector, useDispatch } from "react-redux";
-import swal from "sweetalert";
+import swal from "sweetalert2";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -31,10 +31,11 @@ const Header = () => {
     if (error) {
       setApiMessage(error.message);
       console.log(apiMessage);
-      swal({
-        title: "Error",
-        text: error.message,
+      swal.fire({
         icon: "error",
+        title: "Oops...",
+        text: error.message,
+        timer: "2500",
         buttons: true,
       });
     }
@@ -72,10 +73,11 @@ const Header = () => {
       dispatch(logInUser(emailRef.current.value, passwordRef.current.value));
       console.log("userdetails", userDetails);
     } else {
-      swal({
+      swal.fire({
+        icon: "warning",
         title: "Warning",
         text: "Fields cannot be Empty",
-        icon: "warning",
+        timer: "2500",
         buttons: true,
       });
       setEmptyFieldsMessage(true);
@@ -129,7 +131,7 @@ const Header = () => {
             defaultChecked={checked}
             onChange={() => setChecked(!checked)}
           />
-          s<p className="text-[20px] grey-text">Remember Me</p>
+          <p className="text-[20px] grey-text">Remember Me</p>
         </div>
         <button
           className="lg:mt-[27px] mt-[20px] px-[15px] py-[20px] lg:py-[24px] text-center continue-button"

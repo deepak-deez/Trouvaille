@@ -1,12 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./style.scss";
-import { Link } from "react-router-dom";
+import PassengerDetails from "../passengerDetails/PassengerDetails";
 import arrow from "../../../assets/images/bookingForm/loginForm/arrow.svg";
 import Success from "../successBox/SuccessBox";
 
 const Header = () => {
   const [sucessModal, setsucessModal] = useState(false);
   const [passenger, setpassenger] = useState(false);
+  const [passengerCount, setPassengerCount] = useState(0);
+  let passengerCounter = 0;
+  let passengerHeadCount = [];
+  const [passengerCountArray, setPassengerCountArray] = useState([]);
+
+  useEffect(() => {
+    handlePassengerHeadCount();
+  }, [passengerCount]);
+
+  function handlePassengerHeadCount() {
+    for (let i = 1; i <= passengerCount; i++) {
+      passengerHeadCount.push(i);
+    }
+  }
+
   return (
     <>
       <section className="flex flex-col details-form justify-center items-center">
@@ -29,10 +44,15 @@ const Header = () => {
               className=" w-[100%] lg:py-[32px] py-[20px] bg-transparent text-[20px] other-passenger"
               type="text"
               placeholder="Other Passenger (number)"
+              value={passengerCount}
+              onChange={(e) => {
+                setPassengerCount(e.target.value);
+              }}
             />
             <button
               onClick={() => {
                 setpassenger(!passenger);
+                setPassengerCountArray(passengerHeadCount);
               }}
             >
               <img
@@ -42,46 +62,19 @@ const Header = () => {
               />
             </button>
           </div>
-          {/* Passenger Starts */}
-          <input
-            className={
-              " input-fields lg:px-[39px] text-[20px] w-[100%] lg:py-[32px] px-[15px] py-[20px] lg:mt-[60px] mt-[30px] " +
-              (passenger ? "" : "hidden")
-            }
-            type="text"
-            placeholder="First Name"
-          />
 
-          <input
-            className={
-              " input-fields lg:px-[39px] text-[20px] w-[100%] lg:py-[32px] px-[15px] py-[20px] lg:mt-[60px] mt-[30px] " +
-              (passenger ? "" : "hidden")
-            }
-            type="text"
-            placeholder="Last Name"
-          />
-          <input
-            className={
-              " input-fields lg:px-[39px] text-[20px] w-[100%] lg:py-[32px] px-[15px] py-[20px] lg:mt-[60px] mt-[30px] " +
-              (passenger ? "" : "hidden")
-            }
-            type="text"
-            placeholder="Gender"
-          />
-          <input
-            className={
-              " input-fields lg:px-[39px] text-[20px] w-[100%] lg:py-[32px] px-[15px] py-[20px] lg:mt-[60px] mt-[30px] " +
-              (passenger ? "" : "hidden")
-            }
-            type="text"
-            placeholder="Age"
-          />
-          {/* Passenger Ends */}
+          {passengerCountArray.length > 0
+            ? passengerCountArray.map((data, index) => {
+                return <PassengerDetails key={index} count={data} />;
+              })
+            : ""}
+
           <input
             className=" input-fields text-[20px] w-[100%] lg:px-[39px] lg:py-[32px] px-[15px] py-[20px] lg:mt-[60px] mt-[30px] "
             type="text"
             placeholder="Address"
           />
+
           <p className="grey-text lg:mt-[60px] mt-[30px]">
             Remember to always be cautious when making payments online and to
             only provide your payment details to reputable and trusted travel
