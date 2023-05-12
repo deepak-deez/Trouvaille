@@ -1,0 +1,20 @@
+.trip-details {
+  $color-grey-v1: #b4bbc1;
+  $color-orange: #bc4e37;
+  $bg-orange-gradient: linear-gradient(
+    241.6deg,
+    #e6664c -19.43%,
+    #8c2009 109.14%
+  );
+
+  .ammenities-container {
+    img {
+      background: #adaebb3b;
+      border-radius: 2rem;
+    }
+    h2 {
+      font-size: 4rem;
+      color: $color-orange;
+    }
+  }
+}

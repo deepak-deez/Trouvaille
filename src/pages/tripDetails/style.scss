@@ -2,4 +2,27 @@
   background-image: url("../../assets/images/tripsDetailsPage/body/body-bg.png");
   background-size: cover;
   background-repeat: repeat;
+  .trip-fetched-details {
+    color: white;
+
+    $color-grey-v1: #b4bbc1;
+    $color-orange: #bc4e37;
+    $bg-orange-gradient: linear-gradient(
+      241.6deg,
+      #e6664c -19.43%,
+      #8c2009 109.14%
+    );
+    h1 {
+      font-size: 50px;
+      background: linear-gradient(266.53deg, #d25e46 -18.39%, #8c2009 146.29%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    h2 {
+      color: $color-orange;
+      font-size: 30px;
+      font-weight: 600;
+    }
+  }
 }
