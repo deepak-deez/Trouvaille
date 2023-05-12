@@ -1,5 +1,6 @@
 import React from "react";
 import honeymoonIcon from "../../../assets/images/tripsDetailsPage/journeyPlanning/bedIcon.svg";
+import "./style.scss";
 
 export default function Ocassions(props) {
   return (

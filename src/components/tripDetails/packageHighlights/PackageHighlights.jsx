@@ -1,5 +1,6 @@
 import React from "react";
 import divingIcon from "../../../assets/images/tripsDetailsPage/journeyPlanning/diving-icon.svg";
+import "./style.scss";
 
 export default function PackageHighlights(props) {
   return (
