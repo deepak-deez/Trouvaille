@@ -16,7 +16,10 @@ const Header = () => {
         <p className="lg:mt-[38px]  text-center lg:text-[22px]">
           Your booking is is <br /> successfully reserved.
         </p>
-        <Link className="lg:mt-[50px] mt-[20px] px-[45px] py-[20px] lg:py-[24px] text-center lg:text-[22px] back-button">
+        <Link
+          to="/trips"
+          className="lg:mt-[50px] mt-[20px] px-[45px] py-[20px] lg:py-[24px] text-center lg:text-[22px] back-button"
+        >
           BACK TO HOME
         </Link>
       </div>
