@@ -12,6 +12,7 @@ import AccountDetails from "./pages/viewAccountDetails/ViewAccountDetails.jsx";
 import EditAccountDetails from "./pages/editAccountDetails/EditAccountDetails.jsx";
 import Profile from "./pages/profileSettings/ProfileSettings.jsx";
 import EditProfile from "./pages/editProfile/EditProfile.jsx";
+import BookingDetails from "./pages/bookingDetails/BookingDetails.jsx";
 
 const Router = () => {
   return (
@@ -30,6 +31,7 @@ const Router = () => {
         <Route path="/editAccDetails" element={<EditAccountDetails />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/editProfile" element={<EditProfile />} />
+        <Route path="/bookingDetails" element={<BookingDetails />} />
       </Routes>
     </BrowserRouter>
   );
