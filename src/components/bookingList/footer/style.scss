@@ -1,0 +1,41 @@
+$font-color-grey: #b4bbc1;
+$font-color-grey-v2: #73797e;
+$icon-color-grey: #797e86;
+$font-name-lexend: "Lexend", sans-serif;
+$font-name-montserrat: "Montserrat", sans-serif;
+$font-name-roboto: "Roboto", sans-serif;
+$font-name-poppins: "Poppins", sans-serif;
+
+.trip-list-page {
+  .trouvaille-heading {
+    font-family: $font-name-montserrat;
+    font-weight: 600;
+    background: linear-gradient(
+      90deg,
+      #d5dadd -7.55%,
+      rgba(146, 166, 176, 0.76) 54.06%,
+      #d2dbdf 115.66%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+  }
+  .trouvaille-text {
+    color: $font-color-grey;
+    font-family: $font-name-roboto;
+  }
+  .social-media {
+    p {
+      color: $font-color-grey;
+      font-family: $font-name-poppins;
+    }
+  }
+  .footer-text-color {
+    color: $font-color-grey-v2;
+  }
+  footer {
+    width: 100%;
+    bottom: -10vh;
+  }
+}
