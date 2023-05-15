@@ -20,6 +20,7 @@ const Router = () => {
         <Route path="/" element={<Signin />} exact />
         <Route path="/setPassword" element={<SetPassword />} />
         <Route path="/resetPassword" element={<ResetPassword />} />
+        <Route path="/token-validation/Frontend-user/:id/:token" element={<ResetPassword />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/searchResult" element={<SearchResult />} />
         <Route path="/trips" element={<TripsPage />} />
