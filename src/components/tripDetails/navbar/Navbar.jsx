@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./style.scss";
 import { Link } from "react-router-dom";
 import logo from "../../../assets/images/tripsDetailsPage/header/logo.svg";
@@ -10,8 +10,28 @@ import menuHamburger from "../../../assets/images/tripsDetailsPage/header/menu-h
 
 export default function Navbar() {
   const [navCollapse, setnavColapse] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    function handleScroll() {
+      const scrollTop = window.scrollY;
+      const isTop = scrollTop < 100;
+      setIsScrolled(!isTop);
+      console.log("Called!");
+    }
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <nav className="p-2 sm:p-10 lg:px-[20] lg:py-10 2xl:px-[4rem] 2xl:py[2.6rem]">
+    <nav
+      className={
+        "p-2 sm:p-10 lg:px-[20] lg:py-10 2xl:px-[4rem] 2xl:py[2.6rem] transition-all duration-500 " +
+        (isScrolled ? "bg-white text-black bg-opacity-75" : "")
+      }
+    >
       <div className="flex justify-between flex-wrap">
         <button
           className="xl:hidden"
