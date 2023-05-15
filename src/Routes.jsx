@@ -12,6 +12,7 @@ import AccountDetails from "./pages/viewAccountDetails/ViewAccountDetails.jsx";
 import EditAccountDetails from "./pages/editAccountDetails/EditAccountDetails.jsx";
 import Profile from "./pages/profileSettings/ProfileSettings.jsx";
 import EditProfile from "./pages/editProfile/EditProfile.jsx";
+import BookingList from "./pages/bookingList/BookingList.jsx";
 import BookingDetails from "./pages/bookingDetails/BookingDetails.jsx";
 
 const Router = () => {
@@ -21,7 +22,10 @@ const Router = () => {
         <Route path="/" element={<Signin />} exact />
         <Route path="/setPassword" element={<SetPassword />} />
         <Route path="/resetPassword" element={<ResetPassword />} />
-        <Route path="/token-validation/Frontend-user/:id/:token" element={<ResetPassword />} />
+        <Route
+          path="/token-validation/Frontend-user/:id/:token"
+          element={<ResetPassword />}
+        />
         <Route path="/signup" element={<Signup />} />
         <Route path="/searchResult" element={<SearchResult />} />
         <Route path="/trips" element={<TripsPage />} />
@@ -31,6 +35,7 @@ const Router = () => {
         <Route path="/editAccDetails" element={<EditAccountDetails />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/editProfile" element={<EditProfile />} />
+        <Route path="/booking" element={<BookingList />} />
         <Route path="/bookingDetails" element={<BookingDetails />} />
       </Routes>
     </BrowserRouter>
