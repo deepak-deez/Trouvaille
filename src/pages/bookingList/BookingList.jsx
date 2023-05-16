@@ -1,16 +1,13 @@
 import React from "react";
 import "./style.scss";
-import NavBar from "../../components/bookingList/navBar/Navbar";
-import BookingList from "../../components/bookingList/tripList/TripList";
-import Footer from "../../components/bookingList/footer/Footer";
-const signin = () => {
+import BookingsList from "../../components/bookingList/tripList/TripList";
+
+const BookingList = () => {
   return (
-    <header className="trip-list-page">
-      <NavBar />
-      <BookingList />
-      <Footer />
+    <header className="trip-list-page pt-[10rem] pb-[35rem] sm:pb-[20rem]">
+      <BookingsList />
     </header>
   );
 };
 
-export default signin;
+export default BookingList;

@@ -14,10 +14,13 @@ import Profile from "./pages/profileSettings/ProfileSettings.jsx";
 import EditProfile from "./pages/editProfile/EditProfile.jsx";
 import BookingList from "./pages/bookingList/BookingList.jsx";
 import BookingDetails from "./pages/bookingDetails/BookingDetails.jsx";
+import Navbar from "./components/navbar/Navbar.jsx";
+import Footer from "./components/footer/Footer.jsx";
 
 const Router = () => {
   return (
     <BrowserRouter>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Signin />} exact />
         <Route path="/setPassword" element={<SetPassword />} />
@@ -38,6 +41,7 @@ const Router = () => {
         <Route path="/booking" element={<BookingList />} />
         <Route path="/bookingDetails" element={<BookingDetails />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 };

@@ -1,14 +1,11 @@
 import React from "react";
 import "./style.scss";
 import { goaData, basicInfo, passengerDetails } from "./data.js";
-import Navbar from "../../components/bookignDetails/navBar/Navbar";
-import Footer from "../../components/bookignDetails/footer/Footer";
 import PassengerDetails from "../../components/bookignDetails/passengerDetails/PassengerDetails";
 
-export default function bookingDetails() {
+export default function BookingDetails() {
   return (
-    <section className="booking-details">
-      <Navbar />
+    <section className="booking-details pb-[20rem] pt-[10rem]">
       <section className="md:mx-20 xl:mx-44 min-[1920px]:mx-[20rem]">
         <h1 className="text-center my-[75px]">Trip details</h1>
         <div className="details-container md:p-16 lg:p-20">
@@ -60,7 +57,6 @@ export default function bookingDetails() {
           </div>
         </div>
       </section>
-      <Footer />
     </section>
   );
 }

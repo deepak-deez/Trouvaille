@@ -7,7 +7,7 @@ import { logInUser } from "../../../redux/actions/userActions";
 import { useSelector, useDispatch } from "react-redux";
 import swal from "sweetalert2";
 
-const Header = () => {
+const LoginForm = () => {
   const navigate = useNavigate();
   const [showPassword, setshowPassword] = useState(false);
   const emailRef = useRef();
@@ -158,4 +158,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default LoginForm;

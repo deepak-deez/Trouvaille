@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./style.scss";
 import axios from "axios";
 
-const Header = () => {
+const SetPassword = () => {
   const emailref = useRef();
   const [apiMessage, setApiMessage] = useState("");
   const sendLink = async () => {
@@ -52,4 +52,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default SetPassword;

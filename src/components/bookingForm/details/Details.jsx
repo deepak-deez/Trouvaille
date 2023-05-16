@@ -4,11 +4,10 @@ import PassengerDetails from "../passengerDetails/PassengerDetails";
 import arrow from "../../../assets/images/bookingForm/loginForm/arrow.svg";
 import Success from "../successBox/SuccessBox";
 
-const Header = () => {
+const Details = () => {
   const [sucessModal, setsucessModal] = useState(false);
   const [passenger, setpassenger] = useState(false);
   const [passengerCount, setPassengerCount] = useState(0);
-  let passengerCounter = 0;
   let passengerHeadCount = [];
   const [passengerCountArray, setPassengerCountArray] = useState([]);
 
@@ -24,7 +23,7 @@ const Header = () => {
 
   return (
     <>
-      <section className="flex flex-col details-form justify-center items-center">
+      <section className="flex flex-col details-form justify-center items-center pb-[20rem]">
         <h2 className="md:text-[64px] text-center mt-[10px] lg:mt-[30px] text-[50px]">
           Details about you
         </h2>
@@ -95,4 +94,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Details;

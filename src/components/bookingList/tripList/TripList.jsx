@@ -4,7 +4,7 @@ import { tripNames } from "./data";
 import TripNames from "./tripNames/TripNames";
 export default function TripList() {
   return (
-    <section className="flex flex-col trip-list-container justify-center items-center">
+    <section className="flex flex-col trip-list-container justify-center items-center pb-[20rem]">
       <h2 className="md:text-[64px] text-center mt-[10px] lg:mt-[30px] text-[50px]">
         Trip List
       </h2>

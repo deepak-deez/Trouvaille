@@ -1,16 +1,12 @@
 import React from "react";
 import "./style.scss";
-import NavBar from "../../components/landingPage/navBar/Navbar.jsx";
-import Signin from "../../components/landingPage/loginForm/LoginForm.jsx";
-import Footer from "../../components/landingPage/footer/Footer.jsx";
-const signin = () => {
+import SignIn from "../../components/landingPage/loginForm/LoginForm.jsx";
+const Signin = () => {
   return (
-    <header className="landing-page sign-in-page flex flex-col">
-      <NavBar />
-      <Signin />
-      <Footer />
+    <header className="landing-page sign-in-page flex flex-col pt-[10rem] pb-[35rem] sm:pb-[20rem]">
+      <SignIn />
     </header>
   );
 };
 
-export default signin;
+export default Signin;

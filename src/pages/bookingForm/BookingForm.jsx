@@ -1,16 +1,12 @@
 import React from "react";
 import "./style.scss";
-import NavBar from "../../components/bookingForm/navBar/Navbar";
 import Details from "../../components/bookingForm/details/Details";
-import Footer from "../../components/bookingForm/footer/Footer";
-const signin = () => {
+const BookingForm = () => {
   return (
-    <header className="details-page">
-      <NavBar />
+    <header className="booking-form">
       <Details />
-      <Footer />
     </header>
   );
 };
 
-export default signin;
+export default BookingForm;
