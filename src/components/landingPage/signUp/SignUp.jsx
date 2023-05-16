@@ -6,7 +6,7 @@ import axios from "axios";
 
 console.log(process.env.REACT_APP_apiHost);
 
-const Header = () => {
+const SignUp = () => {
   const navigate = useNavigate();
   const emailRef = useRef();
   const phoneNoRef = useRef();
@@ -123,4 +123,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default SignUp;

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./style.scss";
 import successImg from "../../../assets/images/bookingForm/success/success.svg";
 
-const Header = () => {
+const SuccessBox = () => {
   return (
     <section className="success-section flex flex-col justify-center items-center">
       <div className="success-box flex flex-col justify-center items-center  lg:pb-[30px] pb-[15px] px-[20px] lg:px-[110px] bg-white">
@@ -27,4 +27,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default SuccessBox;

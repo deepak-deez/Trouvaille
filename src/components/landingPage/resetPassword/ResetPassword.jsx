@@ -3,7 +3,7 @@ import "./style.scss";
 import axios from "axios";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
-const Header = () => {
+const ResetPassword = () => {
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
   const [differentPassword, setDifferentPassword] = useState(false);
@@ -79,4 +79,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default ResetPassword;

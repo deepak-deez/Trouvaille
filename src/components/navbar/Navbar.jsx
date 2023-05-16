@@ -42,15 +42,17 @@ export default function Navbar() {
         >
           <img src={menuHamburger} alt="menu-hamburger" />
         </button>
-        <div className="flex gap-2">
-          <img src={logo} className="" alt="logo" />
-          <div className="flex flex-col">
-            <h4 className="text-[30.68px]">trouvaille</h4>
-            <p className="text-[8.74px] tracking-[3px] mt-[-8.38px]">
-              Front-facing Website
-            </p>
+        <Link to="/searchResult">
+          <div className="flex gap-2">
+            <img src={logo} className="" alt="logo" />
+            <div className="flex flex-col">
+              <h4 className="text-[30.68px]">trouvaille</h4>
+              <p className="text-[8.74px] tracking-[3px] mt-[-8.38px]">
+                Front-facing Website
+              </p>
+            </div>
           </div>
-        </div>
+        </Link>
         <ul className="hidden xl:flex gap-10 2xl:gap-[88px] my-auto nav-lg-view">
           <li>Home</li>
           <li>Trips</li>

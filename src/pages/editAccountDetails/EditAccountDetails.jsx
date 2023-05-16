@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../../components/accountDetails/editAccountDetails/EditAccountDetails";
 
-const editAccDetails = () => {
+const EditAccDetails = () => {
   return (
     <section className="account-details pt-[10rem] pb-[35rem] sm:pb-[20rem]">
       <Header />
@@ -9,4 +9,4 @@ const editAccDetails = () => {
   );
 };
 
-export default editAccDetails;
+export default EditAccDetails;

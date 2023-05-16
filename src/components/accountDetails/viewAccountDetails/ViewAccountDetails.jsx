@@ -4,7 +4,7 @@ import "./style.scss";
 
 export default function ViewAccount() {
   return (
-    <header className="pt-[5rem] sm:pt-[9rem] lg:pt-[10rem] sm:mx-20 2xl:mx-[18.75rem]">
+    <header className="sm:mx-20 2xl:mx-[18.75rem]">
       <div className="flex justify-between lg:text-[22px]">
         <h2 className="font-[600]">
           Settings/<span className="font-[400]"> Accounts Page</span>

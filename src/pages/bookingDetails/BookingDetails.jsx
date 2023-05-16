@@ -3,7 +3,7 @@ import "./style.scss";
 import { goaData, basicInfo, passengerDetails } from "./data.js";
 import PassengerDetails from "../../components/bookignDetails/passengerDetails/PassengerDetails";
 
-export default function bookingDetails() {
+export default function BookingDetails() {
   return (
     <section className="booking-details pb-[20rem] pt-[10rem]">
       <section className="md:mx-20 xl:mx-44 min-[1920px]:mx-[20rem]">

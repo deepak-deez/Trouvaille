@@ -4,7 +4,7 @@ import PassengerDetails from "../passengerDetails/PassengerDetails";
 import arrow from "../../../assets/images/bookingForm/loginForm/arrow.svg";
 import Success from "../successBox/SuccessBox";
 
-const Header = () => {
+const Details = () => {
   const [sucessModal, setsucessModal] = useState(false);
   const [passenger, setpassenger] = useState(false);
   const [passengerCount, setPassengerCount] = useState(0);
@@ -94,4 +94,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Details;
