@@ -29,7 +29,7 @@ export default function TripCategory() {
     useState(false);
 
   return (
-    <section className="trip-category 2xl:mt-[20rem]">
+    <section className="trip-category 2xl:mt-[20rem] pb-[20rem]">
       <h1 className="bg-[#BC4E37]">Choose your exotic holidays</h1>
       <div className="flex justify-center 2xl:justify-between flex-wrap gap-10 lg:gap-12 trip-category-icons 2xl:mt-[6rem]">
         <img src={seaIcon} alt="sea-icon" />

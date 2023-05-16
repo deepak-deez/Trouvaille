@@ -1,8 +1,6 @@
 import React from "react";
 import "./style.scss";
-import Navbar from "../../components/tripDetails/navbar/Navbar";
 import Header from "../../components/tripDetails/header/Header";
-import Footer from "../../components/tripDetails/footer/Footer";
 import Dates from "../../components/tripDetails/dates/Dates";
 import TripHighlights from "../../components/tripDetails/packageHighlights/PackageHighlights";
 import Ocassions from "../../components/tripDetails/ocassions/Ocassions";
@@ -25,10 +23,9 @@ import Faqs from "../../components/tripDetails/faqs/Faqs";
 export default function TripDetails() {
   return (
     <section className="trip-details">
-      <Navbar />
       <Header />
-      <section className="md:mx-10 xl:mx-28 2xl:mx-44 min-[1920px]:mx-[20rem] trip-fetched-details">
-        <h1 className="mt-[5rem] text-center lg:text-start">Itinerary</h1>
+      <section className="md:mx-10 xl:mx-28 2xl:mx-44 min-[1920px]:mx-[20rem] trip-fetched-details pb-[20rem]">
+        <h1 className="pt-[5rem] text-center lg:text-start">Itinerary</h1>
         <ul className="flex flex-wrap justify-center lg:justify-start sm:flex-row gap-5 text-[#838597] my-[3rem] text-[22px]">
           <li>Maximum guests 12</li>
           <li>Explore 5 places</li>
@@ -109,8 +106,6 @@ export default function TripDetails() {
           </ul>
         </div>
       </section>
-
-      <Footer />
     </section>
   );
 }
