@@ -39,7 +39,7 @@ export default function EditProfile() {
     console.log(imgUrl);
 
     const userData = {
-      image: imgUrl,
+      image: "",
       name: nameRef.current.value,
       place: placeRef.current.value,
       DOB: DOBRef.current.value,
