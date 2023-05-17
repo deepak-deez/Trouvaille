@@ -69,7 +69,7 @@ nav {
     width: 100%;
     padding: 2rem;
     left: 0;
-    background-color: rgba(255, 255, 255, 0.48);
+    background-color: rgba(255, 255, 255, 0.828);
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
     li {
@@ -101,6 +101,9 @@ nav {
       transform: translateX(-100%);
     }
   }
+}
+.nav-box-shadow {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 6px 6px, rgba(0, 0, 0, 0.094) 0px 10px 26px;
 }
 
 /* Navbar Ends */

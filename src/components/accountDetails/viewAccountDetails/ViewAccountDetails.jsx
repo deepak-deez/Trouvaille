@@ -9,7 +9,7 @@ export default function ViewAccountDetails() {
   const userData = {
     email: userDetails.data.userDetails.email,
     phNumber: userDetails.data.userDetails.phone,
-    pasword: userDetails.data.userDetails.password,
+    password: userDetails.data.userDetails.password,
   };
 
   return (
@@ -45,7 +45,7 @@ export default function ViewAccountDetails() {
           <h4 className="mb-[1.5rem]">Password</h4>
           <input
             type="password"
-            defaultValue={userData.pasword}
+            defaultValue={userData.password.substring(0, 7)}
             disabled={true}
           />
           <Link
