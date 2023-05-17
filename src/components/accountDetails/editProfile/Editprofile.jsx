@@ -11,6 +11,7 @@ import axios from "axios";
 export default function EditProfile() {
   const [uploadImgBtnDisplay, setUploadImgBtnDisplay] = useState(false);
   const [profileImg, setProfileImg] = useState();
+  const [imageUrlState, setImageUrlState] = useState();
   const { userDetails } = useSelector((state) => state.logInUser);
   const nameRef = useRef();
   const DOBRef = useRef();
@@ -23,6 +24,7 @@ export default function EditProfile() {
   const uploadImgHandler = (e) => {
     console.log(e.target.files);
     try {
+      setImageUrlState(e.target.files[0]);
       setProfileImg(URL.createObjectURL(e.target.files[0]));
       setUploadImgBtnDisplay(!uploadImgBtnDisplay);
     } catch (err) {
@@ -31,15 +33,15 @@ export default function EditProfile() {
   };
 
   const updateDetailsHandler = async () => {
-    const imgUrl = await handleProfileImagetoUrl(profileImg).then((res) => {
+    const imgUrl = await handleProfileImagetoUrl(imageUrlState).then((res) => {
       return res;
     });
 
-    console.log(profileImg);
+    console.log(imageUrlState);
     console.log(imgUrl);
 
     const userData = {
-      image: "",
+      image: imgUrl,
       name: nameRef.current.value,
       place: placeRef.current.value,
       DOB: DOBRef.current.value,

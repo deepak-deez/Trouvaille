@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const cloudinaryApi = process.env.REACT_APP_CLOUDINARY_API;
-const couldinaryName = process.env.REACT_APP_CLOUDINARY_NAME;
+const cloudinaryName = process.env.REACT_APP_CLOUDINARY_NAME;
 
 // export const handleProfileImagetoUrl = async (image) => {
 //   let imageUrl = "";
@@ -27,9 +27,9 @@ export const handleProfileImagetoUrl = async (image) => {
   const formData = new FormData();
   formData.append("file", image);
   formData.append("upload_preset", "trouvaille");
-  formData.append("cloud_name", `${couldinaryName}`);
+  formData.append("cloud_name", `${cloudinaryName}`);
   console.log(formData);
-  await fetch(`${cloudinaryApi}/${couldinaryName}/image/upload`, {
+  await fetch(`${cloudinaryApi}/${cloudinaryName}/image/upload`, {
     method: "post",
     body: formData,
   })
