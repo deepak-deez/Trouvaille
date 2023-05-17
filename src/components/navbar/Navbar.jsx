@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { fullNavLocations, dashboardLocations } from "./locationData";
 import "./style.scss";
 import logo from "../../assets/images/navbar/logo.svg";
 import searchIcon from "../../assets/images/navbar/search-icon.svg";
@@ -10,8 +11,9 @@ import menuHamburger from "../../assets/images/navbar/menu-hamburger.svg";
 
 export default function Navbar() {
   const [navCollapse, setnavColapse] = useState(true);
-
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const currentPageLocation = useLocation().pathname;
 
   useEffect(() => {
     function handleScroll() {
@@ -29,19 +31,26 @@ export default function Navbar() {
   return (
     <nav
       className={
-        "p-2 sm:p-10 lg:px-[20] lg:py-10 2xl:px-[4rem] 2xl:py[2.6rem] transition-all duration-500 " +
+        "p-2 sm:p-10 lg:px-[10] lg:py-5 2xl:px-[4rem] 2xl:py-[2.6rem] transition-all duration-500 " +
         (isScrolled ? "bg-white text-black" : "")
       }
     >
       <div className="flex justify-between flex-wrap">
-        <button
-          className="xl:hidden"
-          onClick={() => {
-            navCollapse ? setnavColapse(false) : setnavColapse(true);
-          }}
-        >
-          <img src={menuHamburger} alt="menu-hamburger" />
-        </button>
+        {dashboardLocations.find(
+          (location) => location === currentPageLocation
+        ) ? (
+          <button
+            className="xl:hidden"
+            onClick={() => {
+              navCollapse ? setnavColapse(false) : setnavColapse(true);
+            }}
+          >
+            <img src={menuHamburger} alt="menu-hamburger" />
+          </button>
+        ) : (
+          ""
+        )}
+
         <Link to="/searchResult">
           <div className="flex gap-2">
             <img src={logo} className="" alt="logo" />
@@ -53,40 +62,54 @@ export default function Navbar() {
             </div>
           </div>
         </Link>
-        <ul className="hidden xl:flex gap-10 2xl:gap-[88px] my-auto nav-lg-view">
-          <li>Home</li>
-          <li>Trips</li>
-          <li>Contacts</li>
-        </ul>
-        <div className="flex gap-10 2xl:gap-[4.1rem]">
-          <div className="nav-serach-area hidden xl:flex">
-            <Link to="/trips">
-              <input
-                type="text"
-                className="nav-search-input"
-                placeholder="Search"
+
+        {fullNavLocations.find(
+          (location) => location === currentPageLocation
+        ) ? (
+          <ul className="hidden xl:flex gap-10 2xl:gap-[88px] my-auto nav-lg-view">
+            <li>Home</li>
+            <li>Trips</li>
+            <li>Contacts</li>
+          </ul>
+        ) : (
+          ""
+        )}
+
+        {dashboardLocations.find(
+          (location) => location === currentPageLocation
+        ) ? (
+          <div className="flex gap-10 2xl:gap-[4.1rem]">
+            <div className="nav-serach-area hidden xl:flex">
+              <Link to="/trips">
+                <input
+                  type="text"
+                  className="nav-search-input"
+                  placeholder="Search"
+                />
+              </Link>
+              <img src={searchIcon} alt="search-icon" />
+            </div>
+            <img
+              src={notificationIcon}
+              className="hidden xl:block w-8"
+              alt="notification-icon"
+            />
+            <img
+              src={documentIcon}
+              className="hidden xl:block w-8"
+              alt="document-icon"
+            />
+            <Link to="/accountDetails">
+              <img
+                className="h-[100%] w-10"
+                src={profileIcon}
+                alt="profile-icon"
               />
             </Link>
-            <img src={searchIcon} alt="search-icon" />
           </div>
-          <img
-            src={notificationIcon}
-            className="hidden xl:block"
-            alt="notification-icon"
-          />
-          <img
-            src={documentIcon}
-            className="hidden xl:block"
-            alt="document-icon"
-          />
-          <Link to="/accountDetails">
-            <img
-              className="w-[100%] h-[100%]"
-              src={profileIcon}
-              alt="profile-icon"
-            />
-          </Link>
-        </div>
+        ) : (
+          ""
+        )}
       </div>
       {navCollapse ? (
         ""
