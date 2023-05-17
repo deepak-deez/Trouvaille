@@ -1,8 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "./style.scss";
 
-export default function ViewAccount() {
+export default function ViewAccountDetails() {
+  const { userDetails } = useSelector((state) => state.logInUser);
+  console.log(userDetails);
+  const userData = {
+    email: userDetails.data.userDetails.email,
+    phNumber: userDetails.data.userDetails.phone,
+    pasword: userDetails.data.userDetails.password,
+  };
+
   return (
     <header className="sm:mx-20 2xl:mx-[18.75rem]">
       <div className="flex justify-between lg:text-[22px]">
@@ -30,11 +39,15 @@ export default function ViewAccount() {
             Manage your email address mobile number and password
           </h5>
           <h4 className="mb-[1.5rem]">Mobile Number</h4>
-          <p className="mb-[2.6rem] grey-text">+ 112 6578 8978</p>
+          <input type="text" defaultValue={userData.phNumber} disabled={true} />
           <h4 className="mb-[1.5rem]">Email ID</h4>
-          <p className="mb-[3.1rem] grey-text">suresh@sample.com</p>
+          <input type="text" defaultValue={userData.email} disabled={true} />
           <h4 className="mb-[1.5rem]">Password</h4>
-          <p className="grey-text">********</p>
+          <input
+            type="password"
+            defaultValue={userData.pasword}
+            disabled={true}
+          />
           <Link
             to="/editAccDetails"
             className="mt-[4rem] rounded-2xl text-white bg-[#219653] text-center py-4 xl:py-[1.5rem] xl:mx-[6rem]"

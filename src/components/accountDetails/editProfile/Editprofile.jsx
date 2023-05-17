@@ -58,7 +58,7 @@ export default function EditProfile() {
             <input
               className=" bg-transparent w-[100%] grey-text py-[1rem] "
               type="text"
-              value={"Suresh Ramesh"}
+              defaultValue={"Suresh Ramesh"}
             />
             <img src={editIcon} alt="edit-icon" />
           </div>
@@ -66,7 +66,7 @@ export default function EditProfile() {
           <input
             className="mb-[3.1rem] grey-text py-[1rem] px-[1.2rem] rounded-2xl"
             type="date"
-            value={"02/11/1972"}
+            defaultValue={"02/11/1972"}
           />
           <h4 className="mb-[1.5rem] grey-text">Gender</h4>
           <div className="bg-white mb-[3.1rem] px-[1.2rem] rounded-2xl">

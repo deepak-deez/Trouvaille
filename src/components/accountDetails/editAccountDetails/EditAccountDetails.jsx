@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "./style.scss";
 
 export default function EditAccountDetails() {
+  const { userDetails } = useSelector((state) => state.logInUser);
+  console.log(userDetails);
   return (
     <header className="sm:mx-20 2xl:mx-[18.75rem]">
       <div className="flex justify-between lg:text-[22px]">
@@ -32,19 +35,19 @@ export default function EditAccountDetails() {
           <input
             type="text"
             className="mb-[2.6rem] grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl"
-            value={"9064690593"}
+            defaultValue={userDetails.data.userDetails.phone}
           />
           <h4 className="mb-[1.5rem]">Email ID</h4>
           <input
             type="text"
             className="mb-[3.1rem] grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl"
-            value="suresh@sample.com"
+            defaultValue={userDetails.data.userDetails.email}
           />
           <h4 className="mb-[1.5rem]">Password</h4>
           <input
-            type="text"
+            type="password"
             className="mb-[3.1rem] grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl"
-            value="******"
+            defaultValue={userDetails.data.userDetails.password}
           />
           <h4 className="mb-[1.5rem]">Old Password</h4>
           <input

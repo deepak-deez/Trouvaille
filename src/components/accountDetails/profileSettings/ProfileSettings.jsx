@@ -1,10 +1,14 @@
 import React from "react";
+import store from "../../../redux/store";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./style.scss";
 import profileImg from "../../../assets/images/accountDetails/profileSettings/profile-img.png";
 import editIcon from "../../../assets/images/accountDetails/profileSettings/edit.svg";
 
 export default function ProfileSettings() {
+  const { userDetails } = useSelector((state) => state.logInUser);
+  console.log(userDetails);
   return (
     <header className=" sm:mx-20 2xl:mx-[18.75rem]">
       <div className="flex justify-between lg:text-[22px]">
@@ -22,11 +26,11 @@ export default function ProfileSettings() {
         </div>
         <div className="flex flex-col items-center sm:items-start gap-[1rem]">
           <h2 className="sm:text-[2.5rem] grey-text text-[1.5rem]">
-            Raja Kumari
+            {userDetails.data.userDetails.email}
           </h2>
           <div className="flex gap-[1rem] items-center">
             <span className="lg:text-[1.6rem] grey-text">Paris, Frace</span>
-            <i class="fa-solid fa-circle text-[0.8rem]"></i>
+            <i className="fa-solid fa-circle text-[0.8rem]"></i>
             <span className="lg:text-[1.6rem] grey-text">Joined in 2020</span>
           </div>
           <div className="flex gap-[1.3rem] items-center">
@@ -52,14 +56,34 @@ export default function ProfileSettings() {
           <h5 className="mb-[2rem] text-[1rem]">
             Basic info, for a faster booking experience
           </h5>
-          <h4 className="mb-[1.5rem] grey-text">Namer</h4>
-          <p className="mb-[2.6rem] grey-text">Suresh Ramesh</p>
+          <h4 className="mb-[1.5rem] grey-text">Name</h4>
+          <input
+            className="mb-[2.6rem] grey-text"
+            defaultValue={userDetails.data.userDetails.name}
+            placeholder="Your Name"
+            disabled={true}
+          />
           <h4 className="mb-[1.5rem] grey-text">Date</h4>
-          <p className="mb-[3.1rem] grey-text">02/11/1972</p>
+          <input
+            className="mb-[2.6rem] grey-text"
+            defaultValue={userDetails.data.userDetails.date}
+            placeholder="Your DOB"
+            disabled={true}
+          />
           <h4 className="mb-[1.5rem] grey-text">Gender</h4>
-          <p className="mb-[3.1rem] grey-text">Male</p>
+          <input
+            className="mb-[2.6rem] grey-text"
+            defaultValue={userDetails.data.userDetails.gender}
+            placeholder="Your Gender"
+            disabled={true}
+          />
           <h4 className="mb-[1.5rem] grey-text">Marital Status</h4>
-          <p className="mb-[3.1rem] grey-text">Single</p>
+          <input
+            className="mb-[2.6rem] grey-text"
+            defaultValue={userDetails.data.userDetails.martialStatus}
+            placeholder="Your Martial Status"
+            disabled={true}
+          />
         </div>
       </div>
     </header>
