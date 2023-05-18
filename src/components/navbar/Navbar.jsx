@@ -66,9 +66,15 @@ export default function Navbar() {
           (location) => location === currentPageLocation
         ) ? (
           <ul className="hidden xl:flex gap-10 2xl:gap-[88px] my-auto nav-lg-view">
-            <li>Home</li>
-            <li>Trips</li>
-            <li>Contacts</li>
+            <li>
+              <Link to="/searchResult">Home</Link>
+            </li>
+            <li>
+              <Link to="/trips">Trips</Link>
+            </li>
+            <li>
+              <Link to="/contacts">Contacts</Link>
+            </li>
           </ul>
         ) : (
           ""
