@@ -34,9 +34,9 @@ export default function PricingDetails(props) {
           </div>
           <h2 className="text-[#DAE0E5]">
             <span className="line-through font-[400]">
-              {props.originalPrice}
+              ₹{props.originalPrice}
             </span>
-            {props.discountedPrice}/night
+            ₹{props.discountedPrice}/night
           </h2>
           <Link to="/bookingForm">
             <button className="w-[100%]">Reserve</button>
