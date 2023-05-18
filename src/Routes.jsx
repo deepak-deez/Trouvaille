@@ -16,6 +16,7 @@ import BookingList from "./pages/bookingList/BookingList.jsx";
 import BookingDetails from "./pages/bookingDetails/BookingDetails.jsx";
 import Navbar from "./components/navbar/Navbar.jsx";
 import Footer from "./components/footer/Footer.jsx";
+import PageNotAvailable from "./components/pageNotAvailable/PageNotAvailable.jsx";
 
 const Router = () => {
   return (
@@ -40,6 +41,7 @@ const Router = () => {
         <Route path="/editProfile" element={<EditProfile />} />
         <Route path="/booking" element={<BookingList />} />
         <Route path="/bookingDetails" element={<BookingDetails />} />
+        <Route path="*" element={<PageNotAvailable />} />
       </Routes>
       <Footer />
     </BrowserRouter>

@@ -18,9 +18,8 @@ export default function Navbar() {
   useEffect(() => {
     function handleScroll() {
       const scrollTop = window.scrollY;
-      const isTop = scrollTop < 100;
+      const isTop = scrollTop < 20;
       setIsScrolled(!isTop);
-      console.log("Called!");
     }
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -31,8 +30,8 @@ export default function Navbar() {
   return (
     <nav
       className={
-        "p-2 sm:p-10 lg:px-[10] lg:py-5 2xl:px-[4rem] 2xl:py-[2.6rem] transition-all duration-500 " +
-        (isScrolled ? "bg-white text-black" : "")
+        "p-2 sm:p-5 lg:px-[10] lg:py-5 2xl:px-[4rem] 2xl:py-[2.6rem] transition-all duration-500 " +
+        (isScrolled ? "bg-white text-black nav-box-shadow " : "")
       }
     >
       <div className="flex justify-between flex-wrap">
@@ -67,9 +66,15 @@ export default function Navbar() {
           (location) => location === currentPageLocation
         ) ? (
           <ul className="hidden xl:flex gap-10 2xl:gap-[88px] my-auto nav-lg-view">
-            <li>Home</li>
-            <li>Trips</li>
-            <li>Contacts</li>
+            <li>
+              <Link to="/searchResult">Home</Link>
+            </li>
+            <li>
+              <Link to="/trips">Trips</Link>
+            </li>
+            <li>
+              <Link to="/contacts">Contacts</Link>
+            </li>
           </ul>
         ) : (
           ""
@@ -122,14 +127,18 @@ export default function Navbar() {
         >
           <ul className={"flex flex-col gap-10 2xl:gap-[88px] my-auto "}>
             <li className="flex justify-between">
-              <span>Home</span>{" "}
+              <Link to="/searchResult">Home</Link>
               <div className="flex gap-10">
                 <img src={notificationIcon} alt="notification-icon" />
                 <img src={documentIcon} alt="document-icon" />
               </div>
             </li>
-            <li>Trips</li>
-            <li>Contacts</li>
+            <li>
+              <Link to="/trips">Trips</Link>
+            </li>
+            <li>
+              <Link to="/">Contacts</Link>
+            </li>
           </ul>
           <div className="flex nav-serach-area justify-between">
             <Link to="/trips">
