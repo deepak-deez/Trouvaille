@@ -16,7 +16,6 @@ export default function ProfileSettings() {
     try {
       const getUpdatedData = await axios.get(dataBaseUrl);
       setResponseData(getUpdatedData);
-      console.log(responseData);
     } catch (err) {
       console.log(err);
     }

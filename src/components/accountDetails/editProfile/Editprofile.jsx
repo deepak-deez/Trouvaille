@@ -76,7 +76,7 @@ export default function EditProfile() {
     console.log(imgUrl);
 
     const userData = {
-      image: imgUrl ? imgUrl : "",
+      image: imgUrl ? imgUrl : responseData?.data.data[0].userDetails.image.url,
       name: nameRef.current.value,
       place: placeRef.current.value,
       DOB: DOBRef.current.value,
