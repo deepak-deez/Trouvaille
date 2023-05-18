@@ -27,6 +27,19 @@ export default function TripCategory() {
   const [travelFilterCollapse, settravelFilterCollapse] = useState(false);
   const [ammenitiesFilterCollapse, setammenitiesFilterCollapse] =
     useState(false);
+  const [value, setValue] = useState(5241);
+  // const onBeforeChangeTrigger = () => {
+  //   console.log("OnBeforeChange event triggered");
+  // }
+
+  // const onAfterChangeTrigger = (value) => {
+  //   console.log(`OnAfterChange event triggered at: ${value}`);
+  // }
+
+  const onChangeEventTriggered = (newValue) => {
+    console.log(`${newValue}`);
+    setValue(newValue);
+  };
 
   return (
     <section className="trip-category">
@@ -52,10 +65,17 @@ export default function TripCategory() {
         <div className="trip-category-filters flex flex-col lg:flex-row flex-wrap justify-between xl:justify-normal xl:flex-col gap-5 xl:gap-20 xl:w-[25%] p-10 lg:p-5 2xl:p-[2rem]">
           <div className="flex flex-col gap-5">
             <h4>Price</h4>
-            <Slider />
+            <Slider
+              value={value}
+              // defaultValue={0}
+              step={1}
+              min={0}
+              max={22500}
+              onChange={onChangeEventTriggered}
+            />
             <div className="flex justify-between">
-              <span>₹5,241</span>
-              <span>₹22,500</span>
+              <span>{value}</span>
+              <span>22500</span>
             </div>
           </div>
           <div className="lg:w-[12rem] xl:w-[auto]">
