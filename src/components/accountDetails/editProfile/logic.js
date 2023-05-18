@@ -8,11 +8,11 @@ const cloudinaryName = process.env.REACT_APP_CLOUDINARY_NAME;
 //   const formData = new FormData();
 //   formData.append("file", image);
 //   formData.append("upload_present", "trouvaille");
-//   formData.append("could_name", `${couldinaryName}`);
+//   formData.append("could_name", `${cloudinaryName}`);
 //   console.log(formData);
 
 //   const response = await axios.post(
-//     `${cloudinaryApi}/${couldinaryName}/image/upload`,
+//     `${cloudinaryApi}/${cloudinaryName}/image/upload`,
 //     formData
 //   );
 
@@ -24,20 +24,25 @@ const cloudinaryName = process.env.REACT_APP_CLOUDINARY_NAME;
 export const handleProfileImagetoUrl = async (image) => {
   console.log("Profile Image : ", image);
   let imageUrl = "";
-  const formData = new FormData();
-  formData.append("file", image);
-  formData.append("upload_preset", "trouvaille");
-  formData.append("cloud_name", `${cloudinaryName}`);
-  console.log(formData);
-  await fetch(`${cloudinaryApi}/${cloudinaryName}/image/upload`, {
-    method: "post",
-    body: formData,
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      imageUrl = data.secure_url;
+
+  if (image) {
+    const formData = new FormData();
+    formData.append("file", image);
+    formData.append("upload_preset", "trouvaille");
+    formData.append("cloud_name", `${cloudinaryName}`);
+    console.log(formData);
+    await fetch(`${cloudinaryApi}/${cloudinaryName}/image/upload`, {
+      method: "post",
+      body: formData,
     })
-    .catch((err) => console.log(err));
-  console.log(imageUrl);
-  return imageUrl;
+      .then((res) => res.json())
+      .then((data) => {
+        imageUrl = data.secure_url;
+      })
+      .catch((err) => {
+        return err;
+      });
+    console.log(imageUrl);
+    return imageUrl;
+  } else return "";
 };
