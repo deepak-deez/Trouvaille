@@ -27,9 +27,10 @@ export default function TripDetails() {
 
   const apiErrUrl = `${process.env.REACT_APP_apiHost}get-trip-details/trip-package/6465bc874e71527`;
   const apiUrl = `${process.env.REACT_APP_apiHost}get-trip-details/trip-package/6465bc874e715bba5c668827`;
+  const apiUrl2 = `${process.env.REACT_APP_apiHost}get-trip-details/trip-package/6465f547758b5f5c72e8ddd3`;
 
   const getTripDetails = async () => {
-    const res = await axios.get(apiUrl);
+    const res = await axios.get(apiUrl2);
     setResponse(res);
   };
 
@@ -48,6 +49,7 @@ export default function TripDetails() {
   const tripHighlightsData = allResponseData?.tripHighlights;
   const tripCost = allResponseData?.price;
   const locationName = allResponseData?.title;
+  const explorePlaces = allResponseData?.placeNumber;
 
   if (response?.data.success) {
     return (
@@ -57,7 +59,7 @@ export default function TripDetails() {
           <h1 className="pt-[5rem] text-center lg:text-start">Itinerary</h1>
           <ul className="flex flex-wrap justify-center lg:justify-start sm:flex-row gap-5 text-[#838597] my-[3rem] text-[22px]">
             <li>Maximum guests 12</li>
-            <li>Explore 5 places</li>
+            <li>Explore {explorePlaces} PLaces </li>
             <li>Available for 6 guests</li>
           </ul>
           <h4 className="mb-[2rem] text-2xl">Dates</h4>
@@ -113,7 +115,7 @@ export default function TripDetails() {
           </div>
           <div className="mt-20 lg:mt-[9rem] ammenities-container">
             <h2 className="font-[400] mt-20 lg:mt-40 mb-[3.5rem]">
-              Ammenities (<span>12</span>)
+              Ammenities (<span>{ammenitiesData.length}</span>)
             </h2>
             <div className="flex flex-wrap 2xl:justify-start gap-10  justify-center lg:justify-start ammenities-container">
               {ammenitiesData.map((data, index) => {
