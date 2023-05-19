@@ -30,15 +30,6 @@ export default function TripDetails(props) {
   const phNumber = userDetails?.data.userDetails.phone;
   const name = userDatabase?.data.data[0].userDetails.name;
 
-  const bookingFormData = {
-    email,
-    phNumber,
-    name,
-    currentTripId,
-    currentUserId,
-    tripImage,
-  };
-
   console.log("Main Img :", tripImage);
   console.log("User Id : ", currentUserId, "\nProfile ID : ", currentTripId);
   console.log("Trip Details : ", tripDetails);
@@ -55,16 +46,26 @@ export default function TripDetails(props) {
 
   console.log("User Database : ", userDatabase);
 
-  const allResponseData = tripDetails?.data.data[0];
+  const tripResponseData = tripDetails?.data.data[0];
 
-  const acitivitiesData = allResponseData?.activities;
-  const ammenitiesData = allResponseData?.amenities;
-  const ocassionData = allResponseData?.occasions;
-  const faqData = allResponseData?.faq;
-  const tripHighlightsData = allResponseData?.tripHighlights;
-  const tripCost = allResponseData?.price;
-  const locationName = allResponseData?.title;
-  const explorePlaces = allResponseData?.placeNumber;
+  const acitivitiesData = tripResponseData?.activities;
+  const ammenitiesData = tripResponseData?.amenities;
+  const ocassionData = tripResponseData?.occasions;
+  const faqData = tripResponseData?.faq;
+  const tripHighlightsData = tripResponseData?.tripHighlights;
+  const tripCost = tripResponseData?.price;
+  const locationName = tripResponseData?.title;
+  const explorePlaces = tripResponseData?.placeNumber;
+
+  const bookingFormData = {
+    email,
+    phNumber,
+    name,
+    locationName,
+    currentTripId,
+    currentUserId,
+    tripImage,
+  };
 
   if (tripDetails?.data.success) {
     return (
@@ -124,7 +125,7 @@ export default function TripDetails(props) {
 
             <PricingDetails
               bookingFormData={bookingFormData}
-              maxGuests={allResponseData.maximumGuests}
+              maxGuests={tripResponseData.maximumGuests}
               originalPrice={33000}
               discountedPrice={tripCost}
             />
