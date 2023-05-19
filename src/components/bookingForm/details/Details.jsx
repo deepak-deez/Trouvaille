@@ -6,9 +6,18 @@ import arrow from "../../../assets/images/bookingForm/loginForm/arrow.svg";
 import Success from "../successBox/SuccessBox";
 import { bookingFormDetails } from "./data";
 import axios from "axios";
-let c = 0;
 
 const Details = (props) => {
+  const submitBtnHandler = async () => {
+    const response = await axios.post(
+      `${process.env.REACT_APP_apiHost}trip-booking`,
+      bookingFormDetails
+    );
+
+    console.log(response);
+    setsucessModal(!sucessModal);
+  };
+
   const { userDetails } = useSelector((state) => state.logInUser);
   console.log(props.userData);
   const [sucessModal, setsucessModal] = useState(false);
@@ -104,13 +113,7 @@ const Details = (props) => {
             companies or service providers.
           </p>
           <button
-            onClick={async () => {
-              const response = await axios.post(
-                `${process.env.REACT_APP_apiHost}trip-booking`,
-                bookingFormDetails
-              );
-              setsucessModal(!sucessModal);
-            }}
+            onClick={submitBtnHandler}
             className="lg:mt-[60px] mt-[30px] px-[15px] py-[20px] lg:py-[24px] text-center continue-button"
           >
             SUBMIT
