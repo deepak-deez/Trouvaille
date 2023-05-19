@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 // import * as fs from "fs/promises";
 
-export default function TripDetails() {
+export default function TripDetails(props) {
   const [tripDetails, setTripDetails] = useState();
   const [ocassionImgData, setOcassionImgData] = useState();
   const [ammenityImgData, setAmmenityImgData] = useState();
@@ -26,16 +26,13 @@ export default function TripDetails() {
     .userDetails._id;
   const tripImage = tripDetails?.data.data[0].image.url;
 
-  const bookingFormProp = {
+  const bookingFormData = {
     currentTripId,
     currentUserId,
     tripImage,
   };
 
-  console.log("Booking Form Prop : ", bookingFormProp);
-
   console.log("Main Img :", tripImage);
-
   console.log("User Id : ", currentUserId, "\nProfile ID : ", currentTripId);
   console.log("Trip Details : ", tripDetails);
 
@@ -111,7 +108,7 @@ export default function TripDetails() {
             })}
 
             <PricingDetails
-              bookingFormProp={bookingFormProp}
+              bookingFormData={bookingFormData}
               maxGuests={allResponseData.maximumGuests}
               originalPrice={33000}
               discountedPrice={tripCost}
