@@ -4,43 +4,46 @@ import Header from "../../components/tripDetails/header/Header";
 import Dates from "../../components/tripDetails/dates/Dates";
 import TripHighlights from "../../components/tripDetails/packageHighlights/PackageHighlights";
 import Ocassions from "../../components/tripDetails/ocassions/Ocassions";
-import {
-  dates,
-  packageHighlights,
-  ocassionData,
-  traverTypeData,
-  hostingData,
-  pricingDetails,
-  ammenitiesData,
-  faqData,
-} from "./data";
+import { dates, traverTypeData, hostingData } from "./data";
 import TravelType from "../../components/tripDetails/travelType/TravelType";
 import HostingPartner from "../../components/tripDetails/hostingPartner/HostingPartner";
 import PricingDetails from "../../components/tripDetails/pricingDetails/PricingDetails";
 import Ammenities from "../../components/tripDetails/ammenities/Ammenities";
 import Faqs from "../../components/tripDetails/faqs/Faqs";
 import axios from "axios";
+import getApiDatas, { handleProfileImagetoUrl } from "./logic";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+// import * as fs from "fs/promises";
 
 export default function TripDetails() {
-  const [response, setResponse] = useState();
+  const [tripDetails, setTripDetails] = useState();
+  const [ocassionImgData, setOcassionImgData] = useState();
+  const [ammenityImgData, setAmmenityImgData] = useState();
 
-  const apiErrUrl = `${process.env.REACT_APP_apiHost}get-trip-details/trip-package/6465bc874e71527`;
-  const apiUrl = `${process.env.REACT_APP_apiHost}get-trip-details/trip-package/6465bc874e715bba5c668827`;
-  const apiUrl2 = `${process.env.REACT_APP_apiHost}get-trip-details/trip-package/6465f547758b5f5c72e8ddd3`;
+  const currentTripId = "6465f547758b5f5c72e8ddd3";
+  const currentUserId = useSelector((state) => state.logInUser).userDetails.data
+    .userDetails._id;
+  const tripImage = tripDetails?.data.data[0].image.url;
 
-  const getTripDetails = async () => {
-    const res = await axios.get(apiUrl2);
-    setResponse(res);
+  const bookingFormProp = {
+    currentTripId,
+    currentUserId,
+    tripImage,
   };
 
+  console.log("Booking Form Prop : ", bookingFormProp);
+
+  console.log("Main Img :", tripImage);
+
+  console.log("User Id : ", currentUserId, "\nProfile ID : ", currentTripId);
+  console.log("Trip Details : ", tripDetails);
+
   useEffect(() => {
-    getTripDetails();
+    getApiDatas(setTripDetails, setAmmenityImgData, setOcassionImgData);
   }, []);
 
-  console.log(response?.data.data[0]);
-
-  const allResponseData = response?.data.data[0];
+  const allResponseData = tripDetails?.data.data[0];
 
   const acitivitiesData = allResponseData?.activities;
   const ammenitiesData = allResponseData?.amenities;
@@ -51,7 +54,7 @@ export default function TripDetails() {
   const locationName = allResponseData?.title;
   const explorePlaces = allResponseData?.placeNumber;
 
-  if (response?.data.success) {
+  if (tripDetails?.data.success) {
     return (
       <section className="trip-details">
         <Header location={locationName} />
@@ -108,6 +111,7 @@ export default function TripDetails() {
             })}
 
             <PricingDetails
+              bookingFormProp={bookingFormProp}
               maxGuests={allResponseData.maximumGuests}
               originalPrice={33000}
               discountedPrice={tripCost}

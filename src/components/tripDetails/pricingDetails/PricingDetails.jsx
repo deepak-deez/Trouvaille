@@ -38,7 +38,7 @@ export default function PricingDetails(props) {
             </span>
             ₹{props.discountedPrice}/night
           </h2>
-          <Link to="/bookingForm">
+          <Link to="/bookingForm" tripInfoData={props.bookingFormProp}>
             <button className="w-[100%]">Reserve</button>
           </Link>
           <p className="text-center">You won't be charged yet</p>
