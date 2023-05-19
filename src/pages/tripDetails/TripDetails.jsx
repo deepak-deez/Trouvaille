@@ -14,19 +14,26 @@ import axios from "axios";
 import getApiDatas, { handleProfileImagetoUrl } from "./logic";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-// import * as fs from "fs/promises";
 
 export default function TripDetails(props) {
+  const { userDetails } = useSelector((state) => state.logInUser);
   const [tripDetails, setTripDetails] = useState();
   const [ocassionImgData, setOcassionImgData] = useState();
   const [ammenityImgData, setAmmenityImgData] = useState();
+  const [userDatabase, setUserdatabase] = useState();
 
   const currentTripId = "6465f547758b5f5c72e8ddd3";
   const currentUserId = useSelector((state) => state.logInUser).userDetails.data
     .userDetails._id;
   const tripImage = tripDetails?.data.data[0].image.url;
+  const email = userDetails?.data.userDetails.email;
+  const phNumber = userDetails?.data.userDetails.phone;
+  const name = userDatabase?.data.data[0].userDetails.name;
 
   const bookingFormData = {
+    email,
+    phNumber,
+    name,
     currentTripId,
     currentUserId,
     tripImage,
@@ -37,8 +44,16 @@ export default function TripDetails(props) {
   console.log("Trip Details : ", tripDetails);
 
   useEffect(() => {
-    getApiDatas(setTripDetails, setAmmenityImgData, setOcassionImgData);
+    getApiDatas(
+      setTripDetails,
+      setAmmenityImgData,
+      setOcassionImgData,
+      setUserdatabase,
+      currentUserId
+    );
   }, []);
+
+  console.log("User Database : ", userDatabase);
 
   const allResponseData = tripDetails?.data.data[0];
 

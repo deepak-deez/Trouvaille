@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./style.scss";
 
 export default function PricingDetails(props) {
   let maxArr = [];
+
+  let guestsSelected = useRef();
+
+  const handleGuestsChange = (e) => {
+    console.log("Called");
+    guestsSelected = e.target.value;
+    console.log("Guests Selected : ", guestsSelected);
+    props.bookingFormData["guestsSelected"] = guestsSelected;
+    console.log("Props Data on Pricing Page : ", props.bookingFormData);
+  };
 
   (async () => {
     for (let i = 1; i <= props.maxGuests; i++) {
@@ -20,8 +30,8 @@ export default function PricingDetails(props) {
             <h4 className="mb-5">Guests</h4>
             <select
               name="select-customer "
-              id=""
               className="w-full outline-none"
+              onChange={handleGuestsChange}
             >
               {maxArr.map((data, index) => {
                 return (
