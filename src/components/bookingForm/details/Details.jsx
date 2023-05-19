@@ -4,27 +4,72 @@ import { useSelector } from "react-redux";
 import PassengerDetails from "../passengerDetails/PassengerDetails";
 import arrow from "../../../assets/images/bookingForm/loginForm/arrow.svg";
 import Success from "../successBox/SuccessBox";
-import { bookingFormDetails } from "./data";
 import axios from "axios";
 
 const Details = (props) => {
+  const address = useRef();
+
+  const otherPassengerDetails = [];
+
+  const bookingFormDetails = {
+    tripId: props.bookingFormData.currentTripId,
+    userId: props.bookingFormData.currentUserId,
+    title: props.bookingFormData.locationName,
+    name: props.bookingFormData.name,
+    phone: props.bookingFormData.phNumber,
+    email: props.bookingFormData.email,
+    address: address.current.value,
+    image: props.bookingFormData.tripImage,
+  };
   const submitBtnHandler = async () => {
+    const otherPassengerSelector = document.querySelectorAll(
+      ".other-passenger-details"
+    );
+
+    for (let i = 0; i < otherPassengerSelector.length; i++) {
+      const firstName = document.querySelector(
+        `.other-passenger-details .first-name${i + 1}`
+      );
+      const lastName = document.querySelector(
+        `.other-passenger-details .last-name${i + 1}`
+      );
+      const gender = document.querySelector(
+        `.other-passenger-details .gender${i + 1}`
+      );
+      const age = document.querySelector(
+        `.other-passenger-details .age${i + 1}`
+      );
+
+      const tempObj = {
+        firstName: firstName.value,
+        lastName: lastName.value,
+        gender: gender.value,
+        age: age.value,
+      };
+
+      otherPassengerDetails.push(tempObj);
+    }
+
+    bookingFormDetails["otherPassenger"] = otherPassengerDetails;
+
+    console.log(bookingFormDetails);
+
     const response = await axios.post(
       `${process.env.REACT_APP_apiHost}trip-booking`,
       bookingFormDetails
     );
+
+    for (let i = 1; i < props.bookingFormData.guestsSelected; i++) {}
 
     console.log(response);
     setsucessModal(!sucessModal);
   };
 
   const { userDetails } = useSelector((state) => state.logInUser);
-  console.log(props.userData);
+
   const [sucessModal, setsucessModal] = useState(false);
   const [passenger, setpassenger] = useState(false);
-  const [passengerCount, setPassengerCount] = useState(
-    bookingFormDetails.otherPassenger.length
-  );
+  const [passengerCount, setPassengerCount] = useState(0);
   let passengerHeadCount = [];
   const [passengerCountArray, setPassengerCountArray] = useState([]);
 
@@ -70,7 +115,7 @@ const Details = (props) => {
               className=" w-[100%] lg:py-[32px] py-[20px] bg-transparent text-[20px] other-passenger"
               type="text"
               placeholder="Other Passenger (number)"
-              defaultValue={bookingFormDetails.otherPassenger.length}
+              defaultValue={props.bookingFormData.guestsSelected}
               disabled={true}
             />
             <button
@@ -78,7 +123,8 @@ const Details = (props) => {
                 setpassenger(!passenger);
                 setPassengerCountArray(passengerHeadCount);
                 if (passenger) {
-                  setPassengerCount(bookingFormDetails.otherPassenger.length);
+                  setPassengerCount(props.bookingFormData.guestsSelected);
+
                   handlePassengerHeadCount();
                 } else {
                   setPassengerCount(0);
@@ -95,7 +141,13 @@ const Details = (props) => {
 
           {passengerCountArray.length > 0
             ? passengerCountArray.map((data, index) => {
-                return <PassengerDetails key={index} count={data} />;
+                return (
+                  <PassengerDetails
+                    key={index}
+                    count={data}
+                    iterator={index + 1}
+                  />
+                );
               })
             : ""}
 
@@ -103,8 +155,7 @@ const Details = (props) => {
             className=" input-fields text-[20px] w-[100%] lg:px-[39px] lg:py-[32px] px-[15px] py-[20px] lg:mt-[60px] mt-[30px] "
             type="text"
             placeholder="Address"
-            defaultValue={bookingFormDetails.address}
-            disabled={true}
+            ref={address}
           />
 
           <p className="grey-text lg:mt-[60px] mt-[30px]">
