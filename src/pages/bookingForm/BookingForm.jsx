@@ -11,6 +11,7 @@ const BookingForm = (props) => {
   return (
     <header className="booking-form pt-[10rem] pb-[15rem] sm:pb-[10rem]">
       <Details bookingFormData={bookingFormData} />
+      {console.log(bookingFormData)}
     </header>
   );
 };
