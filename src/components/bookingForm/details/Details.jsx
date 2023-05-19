@@ -18,7 +18,6 @@ const Details = (props) => {
     name: props.bookingFormData.name,
     phone: props.bookingFormData.phNumber,
     email: props.bookingFormData.email,
-    address: address.current.value,
     image: props.bookingFormData.tripImage,
   };
   const submitBtnHandler = async () => {
@@ -51,6 +50,7 @@ const Details = (props) => {
     }
 
     bookingFormDetails["otherPassenger"] = otherPassengerDetails;
+    bookingFormDetails["address"] = address.current.value;
 
     console.log(bookingFormDetails);
 
