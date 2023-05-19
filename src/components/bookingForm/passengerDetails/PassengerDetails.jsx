@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.scss";
+import { bookingFormDetails } from "../details/data";
 
 export default function PassengerDetails(props) {
   return (
@@ -13,6 +14,8 @@ export default function PassengerDetails(props) {
         }
         type="text"
         placeholder="First Name"
+        defaultValue={bookingFormDetails.otherPassenger[0].firstName}
+        disabled={true}
       />
 
       <input
@@ -21,6 +24,8 @@ export default function PassengerDetails(props) {
         }
         type="text"
         placeholder="Last Name"
+        defaultValue={bookingFormDetails.otherPassenger[0].lastName}
+        disabled={true}
       />
       <input
         className={
@@ -28,6 +33,8 @@ export default function PassengerDetails(props) {
         }
         type="text"
         placeholder="Gender"
+        defaultValue={bookingFormDetails.otherPassenger[0].gender}
+        disabled={true}
       />
       <input
         className={
@@ -35,6 +42,8 @@ export default function PassengerDetails(props) {
         }
         type="text"
         placeholder="Age"
+        defaultValue={bookingFormDetails.otherPassenger[0].age}
+        disabled={true}
       />
     </>
   );

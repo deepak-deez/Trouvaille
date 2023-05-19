@@ -5,6 +5,8 @@ import "./style.scss";
 export default function PricingDetails(props) {
   let maxArr = [];
 
+  console.log(props.bookingFormProp);
+
   (async () => {
     for (let i = 1; i <= props.maxGuests; i++) {
       maxArr[i] = i;
@@ -38,7 +40,7 @@ export default function PricingDetails(props) {
             </span>
             ₹{props.discountedPrice}/night
           </h2>
-          <Link to="/bookingForm" tripInfoData={props.bookingFormProp}>
+          <Link to="/bookingForm" state={props.bookingFormProp}>
             <button className="w-[100%]">Reserve</button>
           </Link>
           <p className="text-center">You won't be charged yet</p>
