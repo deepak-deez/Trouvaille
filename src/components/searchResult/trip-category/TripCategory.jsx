@@ -53,7 +53,7 @@ export default function TripCategory() {
         <div
           className={
             "trip-category-filter-results grid grid-flow-col lg:grid-flow-dense overflow-scroll lg:grid-cols-3 gap-[2.2rem]  px-5" +
-            (showFilter ? " xl:w-[75%] " : "")
+            (showFilter ? " xl:w-[75%] lg:grid-cols-3 " : " lg:grid-cols-4 ")
           }
         >
           {allPackagesData?.map((data, index) => {
