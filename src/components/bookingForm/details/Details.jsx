@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import swal from "sweetalert2";
 import "./style.scss";
 import { useSelector } from "react-redux";
 import PassengerDetails from "../passengerDetails/PassengerDetails";
@@ -54,22 +55,29 @@ const Details = (props) => {
 
     console.log(bookingFormDetails);
 
-    const response = await axios.post(
-      `${process.env.REACT_APP_apiHost}trip-booking`,
-      bookingFormDetails
-    );
-
-    for (let i = 1; i < props.bookingFormData.guestsSelected; i++) {}
-
-    console.log(response);
-    setsucessModal(!sucessModal);
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_apiHost}trip-booking`,
+        bookingFormDetails
+      );
+      console.log(response);
+      setsucessModal(!sucessModal);
+    } catch (err) {
+      swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: err.message,
+        timer: "2500",
+        buttons: true,
+      });
+    }
   };
 
   const { userDetails } = useSelector((state) => state.logInUser);
 
   const [sucessModal, setsucessModal] = useState(false);
-  const [passenger, setpassenger] = useState(false);
-  const [passengerCount, setPassengerCount] = useState(0);
+  const [passenger, setpassenger] = useState(true);
+  let passengerCount = useRef(props.bookingFormData.guestsSelected);
   let passengerHeadCount = [];
   const [passengerCountArray, setPassengerCountArray] = useState([]);
 
@@ -123,17 +131,16 @@ const Details = (props) => {
                 setpassenger(!passenger);
                 setPassengerCountArray(passengerHeadCount);
                 if (passenger) {
-                  setPassengerCount(props.bookingFormData.guestsSelected);
-
+                  passengerCount = props.bookingFormData.guestsSelected;
                   handlePassengerHeadCount();
                 } else {
-                  setPassengerCount(0);
+                  passengerCount = 0;
                 }
               }}
             >
               <img
                 src={arrow}
-                className={"rotate-180" + (passenger ? "rotate-0" : "")}
+                className={" rotate-0 " + (passenger ? " rotate-180" : "")}
                 alt="arrow-img"
               />
             </button>
