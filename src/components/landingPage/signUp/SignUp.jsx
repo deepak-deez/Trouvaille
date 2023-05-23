@@ -19,6 +19,31 @@ const SignUp = () => {
 
   const newUserDetails = {};
 
+  const handleCreateNewAccount = async () => {
+    if (confirmPasswordRef.current.value === passowrdRef.current.value) {
+      setDifferentPassword(false);
+
+      newUserDetails["email"] = emailRef.current.value;
+      newUserDetails["phone"] = phoneNoRef.current.value;
+      newUserDetails["password"] = passowrdRef.current.value;
+
+      const response = await axios.post(
+        `${process.env.REACT_APP_apiHost}register/Frontend-user`,
+        newUserDetails
+      );
+
+      setApiMessage(response.data.message);
+
+      if (response.data.success) {
+        navigate("/");
+      }
+      console.log(apiMessage);
+      console.log(response.data.message);
+    } else {
+      setDifferentPassword(true);
+    }
+  };
+
   return (
     <header className="flex flex-col signup-form justify-center items-center">
       <p className="md:text-[34px]">Sign up</p>
@@ -72,49 +97,21 @@ const SignUp = () => {
         </div>
         <p
           className={
-            "text-3xl different-password mt-8 " +
+            "text-3xl different-password my-5 " +
             (differentPassword ? " block " : " hidden ")
           }
         >
           Password Doesn't Match
         </p>
-        <p className="api-message">{apiMessage}</p>
+        <p className={apiMessage ? " api-message my-5 " : ""}>{apiMessage}</p>
         <button
-          className="lg:mt-[60px] mt-[20px] px-[15px] py-[20px] lg:py-[26px] text-center continue-button"
-          onClick={async () => {
-            if (
-              confirmPasswordRef.current.value === passowrdRef.current.value
-            ) {
-              setDifferentPassword(false);
-
-              newUserDetails["email"] = emailRef.current.value;
-              newUserDetails["phone"] = phoneNoRef.current.value;
-              newUserDetails["password"] = passowrdRef.current.value;
-
-              const response = await axios
-                .post(
-                  `${process.env.REACT_APP_apiHost}register/Frontend-user`,
-                  newUserDetails
-                )
-                .then((response) => {
-                  return response;
-                })
-                .catch((error) => {
-                  console.log(error);
-                });
-
-              setApiMessage(response.data.message);
-
-              console.log("Its Here");
-              navigate("/searchResult");
-
-              console.log(apiMessage);
-
-              console.log(response.data.message);
-            } else {
-              setDifferentPassword(true);
-            }
-          }}
+          className={
+            "px-[15px] py-[20px] lg:py-[26px] text-center continue-button " +
+            (!differentPassword && !apiMessage.length
+              ? " lg:mt-[60px] mt-[20px] "
+              : "")
+          }
+          onClick={handleCreateNewAccount}
         >
           CONTINUE
         </button>
