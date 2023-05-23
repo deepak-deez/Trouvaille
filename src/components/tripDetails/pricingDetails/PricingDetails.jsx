@@ -1,13 +1,36 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useRef } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./style.scss";
 
 export default function PricingDetails(props) {
-  let maxArr = [];
+  let guestsArr = [];
+  const navigate = useNavigate();
+  let guestsSelected = useRef();
+  guestsSelected = "No Guests Selected!";
+  const [validGuestsSeleced, setValidGuestsSelected] = useState(true);
+  console.log("Guests Selected", guestsSelected);
+
+  const handleGuestsChange = (e) => {
+    console.log("Called", e);
+    guestsSelected = e.target.value;
+    console.log("Guests Selected : ", guestsSelected);
+    props.bookingFormData["guestsSelected"] = guestsSelected;
+    console.log("Props Data on Pricing Page : ", props.bookingFormData);
+  };
+
+  const checkPassengerCounts = () => {
+    if (isNaN(guestsSelected)) {
+      console.log("Not a Number");
+      setValidGuestsSelected(!validGuestsSeleced);
+    } else {
+      console.log(Number("Inside Try Block", guestsSelected));
+      navigate("/bookingForm", { state: props.bookingFormData });
+    }
+  };
 
   (async () => {
     for (let i = 1; i <= props.maxGuests; i++) {
-      maxArr[i] = i;
+      guestsArr[i] = i;
     }
   })();
 
@@ -20,10 +43,15 @@ export default function PricingDetails(props) {
             <h4 className="mb-5">Guests</h4>
             <select
               name="select-customer "
-              id=""
-              className="w-full outline-none"
+              className={
+                "w-full outline-none border[10px]" +
+                (!validGuestsSeleced ? " shake border border-red-900" : "")
+              }
+              defaultValue="Select an Option"
+              onChange={handleGuestsChange}
             >
-              {maxArr.map((data, index) => {
+              <option>Select an option</option>
+              {guestsArr.map((data, index) => {
                 return (
                   <option key={index} value={data}>
                     {data}
@@ -38,9 +66,9 @@ export default function PricingDetails(props) {
             </span>
             ₹{props.discountedPrice}/night
           </h2>
-          <Link to="/bookingForm">
-            <button className="w-[100%]">Reserve</button>
-          </Link>
+          <button onClick={checkPassengerCounts} className="w-[100%]">
+            Reserve
+          </button>
           <p className="text-center">You won't be charged yet</p>
         </div>
       </div>

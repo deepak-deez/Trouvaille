@@ -4,54 +4,70 @@ import Header from "../../components/tripDetails/header/Header";
 import Dates from "../../components/tripDetails/dates/Dates";
 import TripHighlights from "../../components/tripDetails/packageHighlights/PackageHighlights";
 import Ocassions from "../../components/tripDetails/ocassions/Ocassions";
-import {
-  dates,
-  packageHighlights,
-  ocassionData,
-  traverTypeData,
-  hostingData,
-  pricingDetails,
-  ammenitiesData,
-  faqData,
-} from "./data";
+import { dates, traverTypeData, hostingData } from "./data";
 import TravelType from "../../components/tripDetails/travelType/TravelType";
 import HostingPartner from "../../components/tripDetails/hostingPartner/HostingPartner";
 import PricingDetails from "../../components/tripDetails/pricingDetails/PricingDetails";
 import Ammenities from "../../components/tripDetails/ammenities/Ammenities";
 import Faqs from "../../components/tripDetails/faqs/Faqs";
 import axios from "axios";
+import getApiDatas, { handleProfileImagetoUrl } from "./logic";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-export default function TripDetails() {
-  const [response, setResponse] = useState();
+export default function TripDetails(props) {
+  const { userDetails } = useSelector((state) => state.logInUser);
+  const [tripDetails, setTripDetails] = useState();
+  const [ocassionImgData, setOcassionImgData] = useState();
+  const [ammenityImgData, setAmmenityImgData] = useState();
+  const [userDatabase, setUserdatabase] = useState();
 
-  const apiErrUrl = `${process.env.REACT_APP_apiHost}get-trip-details/trip-package/6465bc874e71527`;
-  const apiUrl = `${process.env.REACT_APP_apiHost}get-trip-details/trip-package/6465bc874e715bba5c668827`;
-  const apiUrl2 = `${process.env.REACT_APP_apiHost}get-trip-details/trip-package/6465f547758b5f5c72e8ddd3`;
+  const currentTripId = "6465f547758b5f5c72e8ddd3";
+  const currentUserId = useSelector((state) => state.logInUser).userDetails.data
+    .userDetails._id;
+  const tripImage = tripDetails?.data.data[0].image.url;
+  const email = userDetails?.data.userDetails.email;
+  const phNumber = userDetails?.data.userDetails.phone;
+  const name = userDatabase?.data.data[0].userDetails.name;
 
-  const getTripDetails = async () => {
-    const res = await axios.get(apiUrl2);
-    setResponse(res);
-  };
+  console.log("Main Img :", tripImage);
+  console.log("User Id : ", currentUserId, "\nProfile ID : ", currentTripId);
+  console.log("Trip Details : ", tripDetails);
 
   useEffect(() => {
-    getTripDetails();
+    getApiDatas(
+      setTripDetails,
+      setAmmenityImgData,
+      setOcassionImgData,
+      setUserdatabase,
+      currentUserId
+    );
   }, []);
 
-  console.log(response?.data.data[0]);
+  console.log("User Database : ", userDatabase);
 
-  const allResponseData = response?.data.data[0];
+  const tripResponseData = tripDetails?.data.data[0];
 
-  const acitivitiesData = allResponseData?.activities;
-  const ammenitiesData = allResponseData?.amenities;
-  const ocassionData = allResponseData?.occasions;
-  const faqData = allResponseData?.faq;
-  const tripHighlightsData = allResponseData?.tripHighlights;
-  const tripCost = allResponseData?.price;
-  const locationName = allResponseData?.title;
-  const explorePlaces = allResponseData?.placeNumber;
+  const acitivitiesData = tripResponseData?.activities;
+  const ammenitiesData = tripResponseData?.amenities;
+  const ocassionData = tripResponseData?.occasions;
+  const faqData = tripResponseData?.faq;
+  const tripHighlightsData = tripResponseData?.tripHighlights;
+  const tripCost = tripResponseData?.price;
+  const locationName = tripResponseData?.title;
+  const explorePlaces = tripResponseData?.placeNumber;
 
-  if (response?.data.success) {
+  const bookingFormData = {
+    email,
+    phNumber,
+    name,
+    locationName,
+    currentTripId,
+    currentUserId,
+    tripImage,
+  };
+
+  if (tripDetails?.data.success) {
     return (
       <section className="trip-details">
         <Header location={locationName} />
@@ -108,7 +124,8 @@ export default function TripDetails() {
             })}
 
             <PricingDetails
-              maxGuests={allResponseData.maximumGuests}
+              bookingFormData={bookingFormData}
+              maxGuests={tripResponseData.maximumGuests}
               originalPrice={33000}
               discountedPrice={tripCost}
             />
