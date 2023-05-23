@@ -12,7 +12,7 @@ const SetPassword = () => {
     };
 
     const response = await axios.post(
-      `${process.env.REACT_APP_apiHost}send-reset-mail/Frontend-user`,
+      `${process.env.REACT_APP_API_HOST}send-reset-mail/Frontend-user`,
       data
     );
 

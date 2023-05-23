@@ -1,11 +1,11 @@
 import React from "react";
 import "./style.scss";
 import Header from "../../components/tripsPage/header/Header";
-import TripCategory from "../../components/tripsPage/tripCategory/TripCategory";
+import TripCategory from "../../components/searchResult/trip-category/TripCategory";
 
 export default function Trips() {
   return (
-    <section className="trips pb-32 sm:pb-0">
+    <section className="trips pb-[35rem] sm:pb-[20rem]">
       <Header />
       <TripCategory />
     </section>
