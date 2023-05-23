@@ -5,7 +5,7 @@ import SetPassword from "./pages/setPassword/SetPassword.jsx";
 import ResetPassword from "./pages/resetPassword/ResetPassword.jsx";
 import Signup from "./pages/signUp/SignUp.jsx";
 import SearchResult from "./pages/searchResult/SearchResult.jsx";
-import TripsPage from "./pages/trips/Trips.jsx";
+import TripsPage from "./pages/tripsPage/Trips.jsx";
 import TripDetails from "./pages/tripDetails/TripDetails.jsx";
 import BookingForm from "./pages/bookingForm/BookingForm.jsx";
 import AccountDetails from "./pages/viewAccountDetails/ViewAccountDetails.jsx";

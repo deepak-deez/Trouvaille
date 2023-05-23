@@ -4,7 +4,7 @@ import "./style.scss";
 import eye from "../../../assets/images/landingPage/loginForm/eye.svg";
 import axios from "axios";
 
-console.log(process.env.REACT_APP_apiHost);
+console.log(process.env.REACT_APP_API_HOST);
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ const SignUp = () => {
       newUserDetails["password"] = passowrdRef.current.value;
 
       const response = await axios.post(
-        `${process.env.REACT_APP_apiHost}register/Frontend-user`,
+        `${process.env.REACT_APP_API_HOST}register/Frontend-user`,
         newUserDetails
       );
 

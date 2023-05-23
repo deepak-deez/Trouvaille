@@ -19,7 +19,7 @@ export default function EditProfile() {
   const placeRef = useRef();
   const genderRef = useRef();
   const martialStatusRef = useRef();
-  const dataBaseUrl = `${process.env.REACT_APP_apiHost}database/Frontend-user/${userDetails.data.userDetails._id}`;
+  const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/Frontend-user/${userDetails.data.userDetails._id}`;
 
   const [responseData, setResponseData] = useState();
   const [userFetchedData, setUserFetchedData] = useState();
@@ -86,7 +86,7 @@ export default function EditProfile() {
 
     console.log(userData);
 
-    const updateUrl = `${process.env.REACT_APP_apiHost}update/Frontend-user/${userDetails.data.userDetails._id}`;
+    const updateUrl = `${process.env.REACT_APP_API_HOST}update/Frontend-user/${userDetails.data.userDetails._id}`;
 
     console.log(updateUrl);
 

@@ -6,7 +6,7 @@ import {
   SIGN_IN_USER_FAILED,
 } from "../constants/loginUserConstants.js";
 
-const BASE_URL = process.env.REACT_APP_apiHost;
+const BASE_URL = process.env.REACT_APP_API_HOST;
 
 export const logInUser = (email, password) => async (dispatch) => {
   try {

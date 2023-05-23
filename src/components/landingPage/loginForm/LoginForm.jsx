@@ -69,7 +69,7 @@ const LoginForm = () => {
     console.log(accDetails);
     if (!!emailRef.current.value.length && !!passwordRef.current.value.length) {
       setEmptyFieldsMessage(false);
-      console.log(process.env.REACT_APP_apiHost);
+      console.log(process.env.REACT_APP_API_HOST);
       dispatch(logInUser(emailRef.current.value, passwordRef.current.value));
       console.log("userdetails", userDetails);
     } else {

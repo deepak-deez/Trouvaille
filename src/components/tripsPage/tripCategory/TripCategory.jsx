@@ -30,7 +30,7 @@ export default function TripCategory() {
 
   return (
     <section className="trip-category 2xl:mt-[20rem] pb-[20rem]">
-      <h1 className="bg-[#BC4E37]">Choose your exotic holidays</h1>
+      <h2 className="bg-[#BC4E37] heading-main">Choose your exotic holidays</h2>
       <div className="flex justify-center 2xl:justify-between flex-wrap gap-10 lg:gap-12 trip-category-icons 2xl:mt-[6rem]">
         <img src={seaIcon} alt="sea-icon" />
         <img src={hillsIcon} alt="hills-icon" />

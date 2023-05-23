@@ -57,7 +57,7 @@ const Details = (props) => {
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_apiHost}trip-booking`,
+        `${process.env.REACT_APP_API_HOST}trip-booking`,
         bookingFormDetails
       );
       console.log(response);

@@ -1,6 +1,5 @@
 import "./style.scss";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import seaIcon from "../../../assets/images/searchResult/tripCategory/sea-icon.svg";
 import hillsIcon from "../../../assets/images/searchResult/tripCategory/hills-icon.svg";
 import forestIcon from "../../../assets/images/searchResult/tripCategory/forest-icon.svg";
@@ -9,37 +8,19 @@ import desertIcon from "../../../assets/images/searchResult/tripCategory/desert-
 import riversideIcon from "../../../assets/images/searchResult/tripCategory/riverside-icon.svg";
 import sortIcon from "../../../assets/images/searchResult/tripCategory/sort-icon.svg";
 import filterIcon from "../../../assets/images/searchResult/tripCategory/filter-icon.svg";
-import dropdownIcon from "../../../assets/images/searchResult/tripCategory/drop-drown-icon.svg";
-import tripCategoryImg1 from "../../../assets/images/searchResult/tripCategory/trip-category-card-img-1.png";
-import tripCategoryImg2 from "../../../assets/images/searchResult/tripCategory/trip-category-card-img-2.png";
-import tripCategoryImg3 from "../../../assets/images/searchResult/tripCategory/trip-category-card-img-3.png";
-import tripCategoryImg4 from "../../../assets/images/searchResult/tripCategory/trip-category-card-img-4.png";
-import tripCategoryImg5 from "../../../assets/images/searchResult/tripCategory/trip-category-card-img-5.png";
-import tripCategoryImg6 from "../../../assets/images/searchResult/tripCategory/trip-category-card-img-6.png";
-import readMoreIcon from "../../../assets/images/searchResult/tripCategory/more-arrow.svg";
-import reviewStarIcon from "../../../assets/images/searchResult/tripCategory/review-star-icon.svg";
-import shareIcon from "../../../assets/images/searchResult/tripCategory/share-icon.svg";
-import Slider, { Range } from "rc-slider";
+import TripCard from "../tripCard/TripCard";
+import FilterCategories from "../filterCategories/FilterCategories";
+import getAllApiData from "./logic";
 import "rc-slider/assets/index.css";
 
 export default function TripCategory() {
-  const [ocassionFilterCollapse, setocassionFilterCollapse] = useState(false);
-  const [travelFilterCollapse, settravelFilterCollapse] = useState(false);
-  const [ammenitiesFilterCollapse, setammenitiesFilterCollapse] =
-    useState(false);
-  const [value, setValue] = useState(5241);
-  // const onBeforeChangeTrigger = () => {
-  //   console.log("OnBeforeChange event triggered");
-  // }
+  const [allPackagesData, setAllPackagesData] = useState();
+  const [showFilter, setShowFilter] = useState();
 
-  // const onAfterChangeTrigger = (value) => {
-  //   console.log(`OnAfterChange event triggered at: ${value}`);
-  // }
-
-  const onChangeEventTriggered = (newValue) => {
-    console.log(`${newValue}`);
-    setValue(newValue);
-  };
+  useEffect(() => {
+    getAllApiData(setAllPackagesData);
+    console.log("Logging From : ", allPackagesData);
+  }, []);
 
   return (
     <section className="trip-category">
@@ -57,277 +38,27 @@ export default function TripCategory() {
           <p className="">Sort</p>
         </div>
         <div className="flex gap-[1.5rem]">
-          <img src={filterIcon} alt="filter-icon" />
+          <button
+            onClick={() => {
+              setShowFilter(!showFilter);
+            }}
+          >
+            <img src={filterIcon} alt="filter-icon" />
+          </button>
           <p className="">Filter</p>
         </div>
       </div>
       <div className="flex flex-col xl:flex-row gap-[2rem]">
-        <div className="trip-category-filters flex flex-col lg:flex-row flex-wrap justify-between xl:justify-normal xl:flex-col gap-5 xl:gap-20 xl:w-[25%] p-10 lg:p-5 2xl:p-[2rem]">
-          <div className="flex flex-col gap-5">
-            <h4>Price</h4>
-            <Slider
-              value={value}
-              // defaultValue={0}
-              step={1}
-              min={0}
-              max={22500}
-              onChange={onChangeEventTriggered}
-            />
-            <div className="flex justify-between">
-              <span>{value}</span>
-              <span>22500</span>
-            </div>
-          </div>
-          <div className="lg:w-[12rem] xl:w-[auto]">
-            <div className="flex justify-between ">
-              <h4>Ocassion</h4>
-              <button>
-                <img
-                  src={dropdownIcon}
-                  onClick={() => {
-                    setocassionFilterCollapse(!ocassionFilterCollapse);
-                  }}
-                  alt="dropdownIcon"
-                />
-              </button>
-            </div>
-            {ocassionFilterCollapse && (
-              <ul className="flex flex-col gap-5 xl:gap-[1.8rem] xl:text-[20px] mt-[1rem]">
-                <li className="flex justify-between">
-                  <input type="checkbox" />
-                  <label htmlFor="">Family Vacation</label>
-                </li>
-                <li className="flex justify-between">
-                  <input type="checkbox" />
-                  <label htmlFor="">Romantic Gateway</label>
-                </li>
-                <li className="flex justify-between">
-                  <input type="checkbox" />
-                  <label htmlFor="">Adventure</label>
-                </li>
-                <li className="flex justify-between">
-                  <input type="checkbox" />
-                  <label htmlFor="">Business</label>
-                </li>
-                <li className="flex justify-between">
-                  <input type="checkbox" />
-                  <label htmlFor="">Relaxation</label>
-                </li>
-              </ul>
-            )}
-          </div>
-          <div className="lg:w-[12rem] xl:w-[auto]">
-            <div className="flex justify-between">
-              <h4>Travel Type</h4>
-              <button>
-                <img
-                  src={dropdownIcon}
-                  onClick={() => {
-                    settravelFilterCollapse(!travelFilterCollapse);
-                  }}
-                  alt="dropdownIcon"
-                />
-              </button>
-            </div>
-            {travelFilterCollapse && (
-              <ul className="flex flex-col gap-5 xl:gap-[1.8rem] xl:text-[20px] mt-[1rem]">
-                <li className="flex justify-between">
-                  <input type="checkbox" />
-                  <label htmlFor="">Independent Tour</label>
-                </li>
-                <li className="flex justify-between">
-                  <input type="checkbox" />
-                  <label htmlFor="">Escorted tour</label>
-                </li>
-              </ul>
-            )}
-          </div>
-          <div className="lg:w-[12rem] xl:w-[auto]">
-            <div className="flex justify-between">
-              <h4>Ammenities</h4>
-              <button>
-                <img
-                  src={dropdownIcon}
-                  onClick={() => {
-                    setammenitiesFilterCollapse(!ammenitiesFilterCollapse);
-                  }}
-                  alt="dropdownIcon"
-                />
-              </button>
-            </div>
-            {ammenitiesFilterCollapse && (
-              <ul className="flex flex-col gap-5 xl:gap-[1.8rem] xl:text-[20px] mt-[1rem]">
-                <li className="flex justify-between">
-                  <input type="checkbox" />
-                  <label htmlFor="">Some Option</label>
-                </li>
-                <li className="flex justify-between">
-                  <input type="checkbox" />
-                  <label htmlFor="">Some Option</label>
-                </li>
-              </ul>
-            )}
-          </div>
-        </div>
+        {showFilter && <FilterCategories />}
         <div
-          className="trip-category-filter-results grid grid-flow-col lg:grid-flow-dense
-            overflow-scroll lg:grid-cols-3 gap-[2.2rem] xl:w-[75%] px-5"
+          className={
+            "trip-category-filter-results grid grid-flow-col lg:grid-flow-dense overflow-scroll lg:grid-cols-3 gap-[2.2rem]  px-5" +
+            (showFilter ? " xl:w-[75%] lg:grid-cols-3 " : " lg:grid-cols-4 ")
+          }
         >
-          <div className="filter-results-cards">
-            <img className="share-icon" src={shareIcon} alt="share-icon" />
-            <img
-              className="filter-results-card-img"
-              src={tripCategoryImg1}
-              alt="trip-category-img"
-            />
-            <div className="flex gap-5 show-detail-text">
-              <Link to="/tripDetails">
-                <p>Show detail</p>
-              </Link>
-              <img src={readMoreIcon} alt="read-more-icon" />
-            </div>
-            <div className="flex gap-2 review-stars">
-              <img src={reviewStarIcon} alt="review-start-icon" />
-              <p>4.2</p>
-            </div>
-            <div className="result-card-details">
-              <p className="location">Kendhoo, Maldives</p>
-              <p className="trip-date">24 - 31 August 4 People</p>
-              <div className="flex gap-3">
-                <p className="trip-cost">26,978/-</p>
-                <p className="per-night">Night</p>
-              </div>
-            </div>
-          </div>
-          <div className="filter-results-cards">
-            <img className="share-icon" src={shareIcon} alt="share-icon" />
-            <img
-              className="filter-results-card-img"
-              src={tripCategoryImg2}
-              alt="trip-category-img"
-            />
-            <div className="flex gap-5 show-detail-text">
-              <Link to="/tripDetails">
-                <p>Show detail</p>
-              </Link>
-              <img src={readMoreIcon} alt="read-more-icon" />
-            </div>
-            <div className="flex gap-2 review-stars">
-              <img src={reviewStarIcon} alt="review-start-icon" />
-              <p>4.2</p>
-            </div>
-            <div className="result-card-details">
-              <p className="location">Kendhoo, Maldives</p>
-              <p className="trip-date">24 - 31 August 4 People</p>
-              <div className="flex gap-3">
-                <p className="trip-cost">26,978/-</p>
-                <p className="per-night">Night</p>
-              </div>
-            </div>
-          </div>
-          <div className="filter-results-cards">
-            <img className="share-icon" src={shareIcon} alt="share-icon" />
-            <img
-              className="filter-results-card-img"
-              src={tripCategoryImg3}
-              alt="trip-category-img"
-            />
-            <div className="flex gap-5 show-detail-text">
-              <Link to="/tripDetails">
-                <p>Show detail</p>
-              </Link>
-              <img src={readMoreIcon} alt="read-more-icon" />
-            </div>
-            <div className="flex gap-2 review-stars">
-              <img src={reviewStarIcon} alt="review-start-icon" />
-              <p>4.2</p>
-            </div>
-            <div className="result-card-details">
-              <p className="location">Kendhoo, Maldives</p>
-              <p className="trip-date">24 - 31 August 4 People</p>
-              <div className="flex gap-3">
-                <p className="trip-cost">26,978/-</p>
-                <p className="per-night">Night</p>
-              </div>
-            </div>
-          </div>
-          <div className="filter-results-cards">
-            <img
-              className="filter-results-card-img"
-              src={tripCategoryImg4}
-              alt="trip-category-img"
-            />
-            <div className="flex gap-5 show-detail-text">
-              <Link to="/tripDetails">
-                <p>Show detail</p>
-              </Link>
-              <img src={readMoreIcon} alt="read-more-icon" />
-            </div>
-            <div className="flex gap-2 review-stars">
-              <img src={reviewStarIcon} alt="review-start-icon" />
-              <p>4.2</p>
-            </div>
-            <div className="result-card-details">
-              <p className="location">Kendhoo, Maldives</p>
-              <p className="trip-date">24 - 31 August 4 People</p>
-              <div className="flex gap-3">
-                <p className="trip-cost">26,978/-</p>
-                <p className="per-night">Night</p>
-              </div>
-            </div>
-          </div>
-          <div className="filter-results-cards">
-            <img className="share-icon" src={shareIcon} alt="share-icon" />
-            <img
-              className="filter-results-card-img"
-              src={tripCategoryImg5}
-              alt="trip-category-img"
-            />
-            <div className="flex gap-5 show-detail-text">
-              <Link to="/tripDetails">
-                <p>Show detail</p>
-              </Link>
-              <img src={readMoreIcon} alt="read-more-icon" />
-            </div>
-            <div className="flex gap-2 review-stars">
-              <img src={reviewStarIcon} alt="review-start-icon" />
-              <p>4.2</p>
-            </div>
-            <div className="result-card-details">
-              <p className="location">Kendhoo, Maldives</p>
-              <p className="trip-date">24 - 31 August 4 People</p>
-              <div className="flex gap-3">
-                <p className="trip-cost">26,978/-</p>
-                <p className="per-night">Night</p>
-              </div>
-            </div>
-          </div>
-          <div className="filter-results-cards">
-            <img className="share-icon" src={shareIcon} alt="share-icon" />
-            <img
-              className="filter-results-card-img"
-              src={tripCategoryImg6}
-              alt="trip-category-img"
-            />
-            <div className="flex gap-5 show-detail-text">
-              <Link to="/tripDetails">
-                <p>Show detail</p>
-              </Link>
-              <img src={readMoreIcon} alt="read-more-icon" />
-            </div>
-            <div className="flex gap-2 review-stars">
-              <img src={reviewStarIcon} alt="review-start-icon" />
-              <p>4.2</p>
-            </div>
-            <div className="result-card-details">
-              <p className="location">Kendhoo, Maldives</p>
-              <p className="trip-date">24 - 31 August 4 People</p>
-              <div className="flex gap-3">
-                <p className="trip-cost">26,978/-</p>
-                <p className="per-night">Night</p>
-              </div>
-            </div>
-          </div>
+          {allPackagesData?.map((data, index) => {
+            return <TripCard data={data} key={index} />;
+          })}
         </div>
       </div>
       <div className="flex justify-end mt-[5rem]">

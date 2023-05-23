@@ -9,7 +9,7 @@ import axios from "axios";
 
 export default function ProfileSettings() {
   const { userDetails } = useSelector((state) => state.logInUser);
-  const dataBaseUrl = `${process.env.REACT_APP_apiHost}database/Frontend-user/${userDetails.data.userDetails._id}`;
+  const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/Frontend-user/${userDetails.data.userDetails._id}`;
   const [responseData, setResponseData] = useState();
 
   const updateDataHandler = async () => {
