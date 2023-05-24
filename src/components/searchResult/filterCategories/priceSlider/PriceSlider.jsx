@@ -54,7 +54,7 @@ export default function PriceSlider() {
         onChange={onChangeEventTriggered}
       />
       <div className="flex justify-between">
-        <span>{min}</span>
+        <span>{filterSliderValue}</span>
         <span>{max}</span>
       </div>
     </div>
