@@ -3,26 +3,34 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./style.scss";
 import { handleProfileImagetoUrl } from "./logic.js";
-import profileImage from "../../../assets/images/accountDetails/profileSettings/profile-img.png";
+import defaultProfileImage from "../../../assets/images/accountDetails/profileSettings/defaultProfileImage.png";
 import editIcon from "../../../assets/images/accountDetails/profileSettings/edit.svg";
 import accountSettingsImgChange from "../../../assets/images/accountDetails/profileSettings/edit-img.svg";
 import axios from "axios";
+import handleSignout from "../functions/handleSignout";
 
 export default function EditProfile() {
+  const [responseData, setResponseData] = useState();
+  const [userFetchedData, setUserFetchedData] = useState();
   const [uploadImgBtnDisplay, setUploadImgBtnDisplay] = useState(false);
   const [profileImg, setProfileImg] = useState();
   const [imageUrlState, setImageUrlState] = useState("");
+
   const { userDetails } = useSelector((state) => state.logInUser);
+  console.log("User Id ", userDetails.data.userDetails._id);
+
   const navigate = useNavigate();
   const nameRef = useRef();
   const DOBRef = useRef();
   const placeRef = useRef();
   const genderRef = useRef();
-  const martialStatusRef = useRef();
+  const maritalStatusRef = useRef();
   const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/Frontend-user/${userDetails.data.userDetails._id}`;
 
-  const [responseData, setResponseData] = useState();
-  const [userFetchedData, setUserFetchedData] = useState();
+  const userPLace = responseData?.data.data[0].userDetails?.place;
+  const userName = responseData?.data.data[0].userDetails?.name;
+  const userDOB = responseData?.data.data[0].userDetails?.DOB;
+  const userJoiningYear = responseData?.data.data[0]?.joiningYear;
 
   const updateDataHandler = async () => {
     try {
@@ -31,9 +39,7 @@ export default function EditProfile() {
       console.log("dwc", getUpdatedData?.data.data[0].userDetails.image);
       setProfileImg(getUpdatedData?.data.data[0].userDetails.image.url);
     } catch (error) {
-      setProfileImg(
-        "https://aciebd.org/wp-content/uploads/2021/12/424-4243685_dr-dummy-demo-cartoon-human-face-png-transparent.png"
-      );
+      setProfileImg(defaultProfileImage);
       console.log(error);
     }
   };
@@ -48,8 +54,6 @@ export default function EditProfile() {
     updateDataHandler();
     getUserData();
   }, []);
-
-  // setUserFetchedData(userFetchedData?.data.data[0].userDetails);
 
   console.log(
     "User  Feteched Data ",
@@ -81,7 +85,7 @@ export default function EditProfile() {
       place: placeRef.current.value,
       DOB: DOBRef.current.value,
       gender: genderRef.current.value,
-      martialStatus: martialStatusRef.current.value,
+      maritalStatus: maritalStatusRef.current.value,
     };
 
     console.log(userData);
@@ -108,7 +112,9 @@ export default function EditProfile() {
           <h2 className="font-[600]">
             Settings/<span className="font-[400] grey-text"> My profile</span>
           </h2>
-          <h2 className="underline font-[600]">Signout</h2>
+          <button className="underline font-[600]" onClick={handleSignout}>
+            Signout
+          </button>
         </div>
         <div className="flex flex-col sm:flex-row gap-[2rem] mt-[1.5rem] sm:mt-[2rem] profile-section">
           <div className="flex flex-col items-center">
@@ -164,11 +170,13 @@ export default function EditProfile() {
               <input
                 className="lg:text-[1.6rem] grey-text bg-transparent p-2"
                 placeholder="Your Location"
-                defaultValue={responseData?.data.data[0].userDetails.place}
+                defaultValue={userPLace ? userPLace : ""}
                 ref={placeRef}
               />
               <img src={editIcon} alt="edit-icon" />
-              <span className="lg:text-[1.6rem] grey-text">Joined in 2020</span>
+              <span className="lg:text-[1.6rem] grey-text">
+                Joined in {userJoiningYear}
+              </span>
             </div>
           </div>
         </div>
@@ -195,7 +203,7 @@ export default function EditProfile() {
                 className=" bg-transparent w-[100%] grey-text py-[1rem] "
                 type="text"
                 placeholder="Your Name"
-                defaultValue={responseData?.data.data[0].userDetails.name}
+                defaultValue={userName ? userName : ""}
                 ref={nameRef}
               />
               <img src={editIcon} alt="edit-icon" />
@@ -205,7 +213,7 @@ export default function EditProfile() {
               className="mb-[3.1rem] grey-text py-[1rem] px-[1.2rem] rounded-2xl"
               type="date"
               placeholder="D O B"
-              defaultValue={responseData?.data.data[0].userDetails.DOB}
+              defaultValue={userDOB ? userDOB : ""}
               ref={DOBRef}
             />
             <h4 className="mb-[1.5rem] grey-text">Gender</h4>
@@ -215,7 +223,7 @@ export default function EditProfile() {
                 name="gender"
                 id="gender"
                 ref={genderRef}
-                defaultValue={responseData?.data.data[0].userDetails.gender}
+                // defaultValue={userGender ? userGender : ""}
               >
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
@@ -228,7 +236,7 @@ export default function EditProfile() {
                 className="bg-transparent w-[100%] py-[1rem] outline-none"
                 name="Marital Status"
                 id="maritalStatus"
-                ref={martialStatusRef}
+                ref={maritalStatusRef}
               >
                 <option value="Single">Single</option>
                 <option value="Married">Married</option>

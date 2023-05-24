@@ -4,13 +4,27 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./style.scss";
 import profileImg from "../../../assets/images/accountDetails/profileSettings/profile-img.png";
+import defaultProfileImg from "../../../assets/images/accountDetails/profileSettings/defaultProfileImage.png";
 import editIcon from "../../../assets/images/accountDetails/profileSettings/edit.svg";
 import axios from "axios";
+import handleSignout from "../functions/handleSignout";
 
 export default function ProfileSettings() {
   const { userDetails } = useSelector((state) => state.logInUser);
   const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/Frontend-user/${userDetails.data.userDetails._id}`;
   const [responseData, setResponseData] = useState();
+
+  const profileImage = responseData?.data.data[0].userDetails?.image.url;
+  console.log("Profile Image", profileImage);
+  const userLcoation = responseData?.data.data[0].userDetails?.place;
+  const userName = responseData?.data.data[0].userDetails?.name;
+  const userDOB = responseData?.data.data[0].userDetails?.DOB;
+  const userGender = responseData?.data.data[0].userDetails?.gender;
+  const userMaritalStatus =
+    responseData?.data.data[0].userDetails?.maritalStatus;
+  const userJoiningYear = responseData?.data.data[0]?.joiningYear;
+
+  console.log("Uer Data", responseData);
 
   const updateDataHandler = async () => {
     try {
@@ -32,19 +46,30 @@ export default function ProfileSettings() {
           <h2 className="font-[600]">
             Settings/<span className="font-[400] grey-text"> My profile</span>
           </h2>
-          <h2 className="underline font-[600]">Signout</h2>
+          <button className="underline font-[600]" onClick={handleSignout}>
+            Signout
+          </button>
         </div>
         <div className="flex flex-col sm:flex-row gap-[2rem] mt-[1.5rem] sm:mt-[2rem] profile-section ">
           <div className="flex flex-col  h-[256px] w-[225px] overflow-hidden">
+            {profileImage && (
+              <img
+                className={
+                  "profile-img" + (responseData ? " block " : " hidden ")
+                }
+                src={
+                  responseData?.data.data[0].userDetails.image &&
+                  responseData?.data.data[0].userDetails.image.url
+                    ? responseData.data.data[0].userDetails.image.url
+                    : profileImg
+                }
+                alt="profile-img"
+              />
+            )}
             <img
-              className="profile-img"
-              src={
-                responseData?.data.data[0].userDetails.image &&
-                responseData?.data.data[0].userDetails.image.url
-                  ? responseData.data.data[0].userDetails.image.url
-                  : profileImg
-              }
-              alt="profile-img"
+              src={defaultProfileImg}
+              alt="defaultProfileImage"
+              className={profileImage ? " hidden " : " block profile-img "}
             />
             <h4 className="text-center grey-text grey-text underline mt-[0.8rem]">
               User Dashboard
@@ -56,10 +81,12 @@ export default function ProfileSettings() {
             </h2>
             <div className="flex gap-[1rem] items-center">
               <span className="lg:text-[1.6rem] grey-text">
-                {responseData?.data.data[0].userDetails.place}
+                {userLcoation ? userLcoation : "Location"}
               </span>
               <i className="fa-solid fa-circle text-[0.8rem]"></i>
-              <span className="lg:text-[1.6rem] grey-text">Joined in 2020</span>
+              <span className="lg:text-[1.6rem] grey-text">
+                Joined in {userJoiningYear}
+              </span>
             </div>
             <div className="flex gap-[1.3rem] items-center">
               <img src={editIcon} alt="edit-icon" />
@@ -87,28 +114,28 @@ export default function ProfileSettings() {
             <h4 className="mb-[1.5rem] grey-text">Name</h4>
             <input
               className="mb-[2.6rem] grey-text"
-              defaultValue={responseData?.data.data[0].userDetails.name}
+              defaultValue={userName ? userName : ""}
               placeholder="Your Name"
               disabled={true}
             />
             <h4 className="mb-[1.5rem] grey-text">Date</h4>
             <input
               className="mb-[2.6rem] grey-text"
-              defaultValue={responseData?.data.data[0].userDetails.DOB}
+              defaultValue={userDOB ? userDOB : ""}
               placeholder="Your DOB"
               disabled={true}
             />
             <h4 className="mb-[1.5rem] grey-text">Gender</h4>
             <input
               className="mb-[2.6rem] grey-text"
-              defaultValue={responseData?.data.data[0].userDetails.gender}
+              defaultValue={userGender ? userGender : ""}
               placeholder="Your Gender"
               disabled={true}
             />
             <h4 className="mb-[1.5rem] grey-text">Marital Status</h4>
             <input
               className="mb-[2.6rem] grey-text"
-              defaultValue={responseData?.data.data[0].userDetails.DOB}
+              defaultValue={userMaritalStatus ? userMaritalStatus : ""}
               placeholder="Your Martial Status"
               disabled={true}
             />
