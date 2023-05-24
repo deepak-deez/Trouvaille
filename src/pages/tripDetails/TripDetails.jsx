@@ -10,7 +10,6 @@ import HostingPartner from "../../components/tripDetails/hostingPartner/HostingP
 import PricingDetails from "../../components/tripDetails/pricingDetails/PricingDetails";
 import Ammenities from "../../components/tripDetails/ammenities/Ammenities";
 import Faqs from "../../components/tripDetails/faqs/Faqs";
-import axios from "axios";
 import getApiDatas, { handleProfileImagetoUrl } from "./logic";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
