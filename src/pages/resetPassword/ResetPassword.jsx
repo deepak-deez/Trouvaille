@@ -16,6 +16,7 @@ const ResetPasswordPage = () => {
   useEffect(() => {
     validation();
   }, []);
+
   return (
     <header className="landing-page reset-password-page flex flex-col">
       <ResetPassword />

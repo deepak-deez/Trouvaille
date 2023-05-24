@@ -1,10 +1,64 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./style.scss";
+import axios from "axios";
+import Swal from "sweetalert2";
+import handleSignout from "../functions/handleSignout";
 
 export default function EditAccountDetails() {
   const { userDetails } = useSelector((state) => state.logInUser);
+  const [checkPass, setCheckPass] = useState(true);
+  const [emptyFields, setEmptyFields] = useState();
+  const oldPassRef = useRef();
+  const newPassRef = useRef();
+  const confirmNewPassRef = useRef();
+  const emailId = userDetails.data.userDetails.email;
+
+  const updateDetailsHandler = async () => {
+    console.log("Updating Password!");
+    const verifyOldPassUrl = `${process.env.REACT_APP_API_HOST}login/Frontend-user`;
+    const updateUPassUrl = `${process.env.REACT_APP_API_HOST}set-password/Frontend-user`;
+    const checkOldPass = await axios.post(verifyOldPassUrl, {
+      email: emailId,
+      password: oldPassRef.current.value,
+    });
+
+    if (checkOldPass.data.success) {
+      console.log(
+        "Current Password Verified! and you have a token with id : ",
+        localStorage.getItem("id")
+      );
+      setCheckPass(true);
+      if (
+        newPassRef.current.value.length &&
+        confirmNewPassRef.current.value.length &&
+        newPassRef.current.value === confirmNewPassRef.current.value
+      ) {
+        setEmptyFields(false);
+        console.log(
+          "New Passwords are same with value : ",
+          newPassRef.current.value
+        );
+        const updatePassRes = await axios.post(updateUPassUrl, {
+          logInStatus: true,
+          id: localStorage.getItem("id"),
+          newPassword: newPassRef.current.value,
+        });
+        console.log(updatePassRes);
+        if (updatePassRes.data.success) {
+          Swal.fire("Success!", "Pasword Updated!", "success");
+          console.log("Password Updated!");
+        }
+      } else {
+        setEmptyFields(true);
+      }
+    } else {
+      console.log("Wrong Password!");
+      setCheckPass(false);
+    }
+  };
+
   console.log(userDetails);
   if (userDetails.success) {
     return (
@@ -14,7 +68,9 @@ export default function EditAccountDetails() {
             Settings/
             <span className="font-[400] grey-text"> Accounts Page</span>
           </h2>
-          <h2 className="underline font-[600]">Signout</h2>
+          <button className="underline font-[600]" onClick={handleSignout}>
+            Signout
+          </button>
         </div>
         <div className="mt-[5rem] xl:flex xl:justify-between xl:gap-14 lg:text-[20px]">
           <ul className="hidden xl:flex flex-col gap-10">
@@ -38,30 +94,52 @@ export default function EditAccountDetails() {
               type="text"
               className="mb-[2.6rem] grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl"
               defaultValue={userDetails.data.userDetails.phone}
+              disabled={true}
             />
             <h4 className="mb-[1.5rem]">Email ID</h4>
             <input
               type="text"
               className="mb-[3.1rem] grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl"
-              defaultValue={userDetails.data.userDetails.email}
+              defaultValue={emailId}
               disabled={true}
             />
-            <h4 className="mb-[1.5rem]">Old Password</h4>
+            <h4 className={"mb-[1.5rem]"}>Old Password</h4>
             <input
               type="password"
-              className="mb-[3.1rem] grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl"
+              className={
+                "mb-[3.1rem] grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl" +
+                (!checkPass
+                  ? " border border-red-500 outline outline-red-500 "
+                  : "")
+              }
+              ref={oldPassRef}
             />
-            <h4 className="mb-[1.5rem]">New Password</h4>
+            <h4 className={"mb-[1.5rem]"}>New Password</h4>
             <input
               type="text"
-              className="mb-[3.1rem] grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl"
+              className={
+                "mb-[3.1rem] grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl" +
+                (emptyFields
+                  ? " border border-red-500 outline outline-red-500 "
+                  : "")
+              }
+              ref={newPassRef}
             />
             <h4 className="mb-[1.5rem]">Confirm Password</h4>
             <input
               type="text"
-              className="mb-[3.1rem] grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl"
+              className={
+                "mb-[3.1rem] grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl" +
+                (emptyFields
+                  ? " border border-red-500 outline outline-red-500 "
+                  : "")
+              }
+              ref={confirmNewPassRef}
             />
-            <button className="mt-[4rem] rounded-2xl text-white bg-[#219653] text-center py-4 xl:py-[1.5rem] xl:mx-[6rem]">
+            <button
+              className="mt-[4rem] rounded-2xl text-white bg-[#219653] text-center py-4 xl:py-[1.5rem] xl:mx-[6rem]"
+              onClick={updateDetailsHandler}
+            >
               SUBMIT
             </button>
           </div>

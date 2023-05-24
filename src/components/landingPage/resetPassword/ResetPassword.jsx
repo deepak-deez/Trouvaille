@@ -8,10 +8,10 @@ const ResetPassword = () => {
   const confirmPasswordRef = useRef();
   const [differentPassword, setDifferentPassword] = useState(false);
   const [emptyFieldMessage, setEmptyFieldsMessage] = useState(false);
-  const url =useLocation();
+  const url = useLocation();
   const resetPasswordData = {};
-  const navigate = useNavigate()
-  const params =useParams();
+  const navigate = useNavigate();
+  const params = useParams();
   return (
     <header className="flex flex-col reset-password justify-center items-center mt-[100px] my-auto">
       <h2 className="md:text-[64px] text-center mt-[10px] lg:mt-[30px] text-[50px]">
@@ -62,11 +62,10 @@ const ResetPassword = () => {
                 resetPasswordData
               );
               console.log(response);
-              if(response?.data?.success){
+              if (response?.data?.success) {
                 console.log(response.data.message);
-                navigate("/")
+                navigate("/");
               }
-              
             } else {
               setDifferentPassword(true);
             }

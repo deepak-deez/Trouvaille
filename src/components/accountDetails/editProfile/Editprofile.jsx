@@ -7,6 +7,7 @@ import defaultProfileImage from "../../../assets/images/accountDetails/profileSe
 import editIcon from "../../../assets/images/accountDetails/profileSettings/edit.svg";
 import accountSettingsImgChange from "../../../assets/images/accountDetails/profileSettings/edit-img.svg";
 import axios from "axios";
+import handleSignout from "../functions/handleSignout";
 
 export default function EditProfile() {
   const [responseData, setResponseData] = useState();
@@ -111,7 +112,9 @@ export default function EditProfile() {
           <h2 className="font-[600]">
             Settings/<span className="font-[400] grey-text"> My profile</span>
           </h2>
-          <h2 className="underline font-[600]">Signout</h2>
+          <button className="underline font-[600]" onClick={handleSignout}>
+            Signout
+          </button>
         </div>
         <div className="flex flex-col sm:flex-row gap-[2rem] mt-[1.5rem] sm:mt-[2rem] profile-section">
           <div className="flex flex-col items-center">
