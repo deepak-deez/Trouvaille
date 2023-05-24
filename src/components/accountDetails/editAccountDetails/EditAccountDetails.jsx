@@ -44,19 +44,19 @@ export default function EditAccountDetails() {
               type="text"
               className="mb-[3.1rem] grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl"
               defaultValue={userDetails.data.userDetails.email}
+              disabled={true}
             />
-            <h4 className="mb-[1.5rem]">Password</h4>
+            <h4 className="mb-[1.5rem]">Old Password</h4>
             <input
               type="password"
               className="mb-[3.1rem] grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl"
-              defaultValue={userDetails.data.userDetails.password}
             />
-            <h4 className="mb-[1.5rem]">Old Password</h4>
+            <h4 className="mb-[1.5rem]">New Password</h4>
             <input
               type="text"
               className="mb-[3.1rem] grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl"
             />
-            <h4 className="mb-[1.5rem]">New Password</h4>
+            <h4 className="mb-[1.5rem]">Confirm Password</h4>
             <input
               type="text"
               className="mb-[3.1rem] grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl"
