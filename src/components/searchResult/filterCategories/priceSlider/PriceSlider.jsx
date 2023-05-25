@@ -22,19 +22,21 @@ export default function PriceSlider() {
       return res;
     });
 
-    allPackagesData?.map((data, index) => {
-      tripPrice.push(data.price);
+    allPackagesData.forEach((element) => {
+      tripPrice.push(element.price);
     });
     maxPrice = 0;
     minPrice = tripPrice[0];
-    tripPrice.map((data, index) => {
-      if (data > maxPrice) {
-        maxPrice = data;
+
+    tripPrice.forEach((element) => {
+      if (element > maxPrice) {
+        maxPrice = element;
       }
-      if (data < minPrice) {
-        minPrice = data;
+      if (element < minPrice) {
+        minPrice = element;
       }
     });
+
     setMax(maxPrice);
     setMin(minPrice);
   };
