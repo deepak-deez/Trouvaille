@@ -1,16 +1,18 @@
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import shareIcon from "../../../assets/images/searchResult/tripCard/share-icon.svg";
 import readMoreIcon from "../../../assets/images/searchResult/tripCard/more-arrow.svg";
 import reviewStarIcon from "../../../assets/images/searchResult/tripCard/review-star-icon.svg";
 import "./style.scss";
 
 export default function TripCard(props) {
-  const [tripIDRef, setTripIDRef] = useState();
+  let tripIDRef = useRef();
+  const navigate = useNavigate();
 
   const handleNavigate = (e) => {
-    setTripIDRef(e.target.getAttribute("data-trip-id"));
+    tripIDRef = e.target.getAttribute("data-trip-id");
     console.log(tripIDRef);
+    navigate("/tripDetails", { state: tripIDRef });
   };
 
   return (
@@ -25,7 +27,7 @@ export default function TripCard(props) {
 
       <div className="flex gap-5 show-detail-text">
         <button onClick={handleNavigate} data-trip-id={props.data._id}>
-          <p>Show detail</p>
+          Show detail
         </button>
         <img src={readMoreIcon} alt="read-more-icon" />
       </div>
