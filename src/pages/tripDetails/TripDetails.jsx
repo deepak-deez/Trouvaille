@@ -11,26 +11,29 @@ import PricingDetails from "../../components/tripDetails/pricingDetails/PricingD
 import Ammenities from "../../components/tripDetails/ammenities/Ammenities";
 import Faqs from "../../components/tripDetails/faqs/Faqs";
 import getApiDatas, { handleProfileImagetoUrl } from "./logic";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function TripDetails(props) {
+  const location = useLocation();
   const { userDetails } = useSelector((state) => state.logInUser);
   const [tripDetails, setTripDetails] = useState();
   const [ocassionImgData, setOcassionImgData] = useState();
   const [ammenityImgData, setAmmenityImgData] = useState();
   const [userDatabase, setUserdatabase] = useState();
 
-  const currentTripId = "6465f547758b5f5c72e8ddd3";
+  const currentTripId = location.state;
   const currentUserId = useSelector((state) => state.logInUser).userDetails.data
     .userDetails._id;
-  const tripImage = tripDetails?.data.data[0].image.url;
+  const tripImage = tripDetails?.data.data[0].image?.url;
   const email = userDetails?.data.userDetails.email;
   const phNumber = userDetails?.data.userDetails.phone;
   const name = userDatabase?.data.data[0].userDetails.name;
+  const backgroundImg = { backgroundImage: `url(${tripImage})` };
 
+  console.log("Background Image :", backgroundImg);
   console.log("Main Img :", tripImage);
-  console.log("User Id : ", currentUserId, "\nProfile ID : ", currentTripId);
+  console.log("User Id : ", currentUserId, "\nTrip ID : ", currentTripId);
   console.log("Trip Details : ", tripDetails);
 
   useEffect(() => {
@@ -39,7 +42,8 @@ export default function TripDetails(props) {
       setAmmenityImgData,
       setOcassionImgData,
       setUserdatabase,
-      currentUserId
+      currentUserId,
+      currentTripId
     );
   }, []);
 
@@ -66,9 +70,9 @@ export default function TripDetails(props) {
     tripImage,
   };
 
-  if (tripDetails?.data.success) {
+  if (tripDetails?.data?.success) {
     return (
-      <section className="trip-details">
+      <section className="trip-details" style={backgroundImg}>
         <Header location={locationName} />
         <section className="md:mx-10 xl:mx-28 2xl:mx-44 min-[1920px]:mx-[20rem] trip-fetched-details pb-[20rem]">
           <h1 className="pt-[5rem] text-center lg:text-start">Itinerary</h1>
@@ -80,7 +84,7 @@ export default function TripDetails(props) {
           <h4 className="mb-[2rem] text-2xl">Dates</h4>
           <ul className="flex flex-wrap justify-center gap-5 xl:justify-between available-dates overflow-x-scroll">
             {dates.map((data, index) => {
-              return <Dates day={data.day} month={data.month} key={index} />;
+              return <Dates day={data?.day} month={data?.month} key={index} />;
             })}
           </ul>
           <p className="my-[3rem] text-[#B4BBC1] text-[22px]">
@@ -90,11 +94,14 @@ export default function TripDetails(props) {
             <h2>Highlights of the package</h2>
             <div className="flex flex-wrap gap-10">
               {tripHighlightsData.map((data, index) => {
+                {
+                  console.log("Data Icon : ", data?.icon?.url);
+                }
                 return (
                   <TripHighlights
-                    title={data.title}
-                    content={data.name}
-                    imgSrc={data.icon.url}
+                    title={data?.title}
+                    content={data?.name}
+                    imgSrc={data?.icon?.url}
                     key={index}
                   />
                 );
@@ -113,13 +120,13 @@ export default function TripDetails(props) {
             <h2 className="mb-[3rem]">Travel Type</h2>
             <div className="flex gap-10 xl:gap-[5rem]">
               {traverTypeData.map((data, index) => {
-                return <TravelType title={data.title} key={index} />;
+                return <TravelType title={data?.title} key={index} />;
               })}
             </div>
           </div>
           <div className="mt-[5rem] payment-details-container flex flex-col lg:flex-row lg:gap-20">
             {hostingData.map((data, index) => {
-              return <HostingPartner key={index} content={data.content} />;
+              return <HostingPartner key={index} content={data?.content} />;
             })}
 
             <PricingDetails
@@ -131,7 +138,7 @@ export default function TripDetails(props) {
           </div>
           <div className="mt-20 lg:mt-[9rem] ammenities-container">
             <h2 className="font-[400] mt-20 lg:mt-40 mb-[3.5rem]">
-              Ammenities (<span>{ammenitiesData.length}</span>)
+              Ammenities (<span>{ammenitiesData?.length}</span>)
             </h2>
             <div className="flex flex-wrap 2xl:justify-start gap-10  justify-center lg:justify-start ammenities-container">
               {ammenitiesData.map((data, index) => {
@@ -146,8 +153,8 @@ export default function TripDetails(props) {
                 return (
                   <Faqs
                     key={index}
-                    question={data.question}
-                    answer={data.answer}
+                    question={data?.question}
+                    answer={data?.answer}
                   />
                 );
               })}

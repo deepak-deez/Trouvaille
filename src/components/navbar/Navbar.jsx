@@ -5,7 +5,7 @@ import "./style.scss";
 import logo from "../../assets/images/navbar/logo.svg";
 import searchIcon from "../../assets/images/navbar/search-icon.svg";
 import notificationIcon from "../../assets/images/navbar/notification-icon.svg";
-import documentIcon from "../../assets/images/navbar/document-icon.svg";
+import bookingsIcon from "../../assets/images/navbar/document-icon.svg";
 import profileIcon from "../../assets/images/navbar/user-profile-icon.svg";
 import menuHamburger from "../../assets/images/navbar/menu-hamburger.svg";
 
@@ -99,11 +99,13 @@ export default function Navbar() {
               className="hidden xl:block w-8"
               alt="notification-icon"
             />
-            <img
-              src={documentIcon}
-              className="hidden xl:block w-8"
-              alt="document-icon"
-            />
+            <Link to={"/booking"}>
+              <img
+                src={bookingsIcon}
+                className="hidden xl:block w-8 h-full"
+                alt="document-icon"
+              />
+            </Link>
             <Link to="/accountDetails">
               <img
                 className="h-[100%] w-10"
@@ -130,7 +132,7 @@ export default function Navbar() {
               <Link to="/searchResult">Home</Link>
               <div className="flex gap-10">
                 <img src={notificationIcon} alt="notification-icon" />
-                <img src={documentIcon} alt="document-icon" />
+                <img src={bookingsIcon} alt="document-icon" />
               </div>
             </li>
             <li>
