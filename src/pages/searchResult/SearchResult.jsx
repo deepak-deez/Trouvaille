@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.scss";
-import TripCategory from "../../components/searchResult/trip-category/TripCategory";
+import TripCategory from "../../components/searchResult/tripCategory/TripCategory";
 import Header from "../../components/searchResult/header/Header";
 
 export default function SearchResult() {
