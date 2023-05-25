@@ -10,25 +10,28 @@ export default function TripCard(props) {
   const navigate = useNavigate();
 
   const handleNavigate = (e) => {
+    console.log(e.target);
     tripIDRef = e.target.getAttribute("data-trip-id");
     console.log(tripIDRef);
     navigate("/tripDetails", { state: tripIDRef });
   };
 
   return (
-    <div className="filter-results-cards" data-trip-id={props.data._id}>
+    <div className="filter-results-cards">
       <img className="share-icon" src={shareIcon} alt="share-icon" />
 
       <img
-        className="filter-results-card-img"
+        className="filter-results-card-img cursor-pointer"
         src={props.data.image.url}
         alt="trip-category-img"
+        data-trip-id={props.data._id}
+        onClick={handleNavigate}
       />
 
-      <div className="flex gap-5 show-detail-text">
-        <button onClick={handleNavigate} data-trip-id={props.data._id}>
+      <div className="gap-5 hidden show-detail-text cursor-pointer">
+        <p data-trip-id={props.data._id} onClick={handleNavigate}>
           Show detail
-        </button>
+        </p>
         <img src={readMoreIcon} alt="read-more-icon" />
       </div>
       <div className="flex gap-2 review-stars">

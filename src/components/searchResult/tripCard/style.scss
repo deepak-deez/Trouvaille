@@ -46,6 +46,9 @@
       }
     }
   }
+  .filter-results-cards:hover .show-detail-text {
+    display: flex;
+  }
 }
 @media screen and (min-width: 0px) and (max-width: 1024px) {
   .filter-results-cards {
