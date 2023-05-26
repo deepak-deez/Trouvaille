@@ -1,0 +1,57 @@
+.trip-category-filter-results {
+  $color-primary-white: #d0d5d8;
+  $color-primary-orange: #bc4e37;
+  $color-primary-yellow: #f2994a;
+  $color-primary-blue: #1e242a;
+  $color-primary-grey: #b2b8bd;
+  $bg-color-blue: #212b33;
+
+  .filter-results-cards {
+    .filter-results-card-img {
+      width: 274px;
+      height: 345px;
+      object-fit: cover;
+    }
+
+    position: relative;
+    .share-icon {
+      position: absolute;
+      right: 23px;
+      top: 23px;
+    }
+    .show-detail-text {
+      position: absolute;
+      bottom: 8rem;
+      left: -1rem;
+    }
+    .review-stars {
+      position: absolute;
+      bottom: 5rem;
+      left: 1rem;
+    }
+    .result-card-details {
+      font-weight: 600;
+      .location {
+        color: $color-primary-grey;
+      }
+      .trip-date {
+        color: $color-primary-grey;
+        font-weight: 200;
+      }
+      .trip-cost {
+        color: $color-primary-orange;
+      }
+      .per-night {
+        color: $color-primary-grey;
+      }
+    }
+  }
+  .filter-results-cards:hover .show-detail-text {
+    display: flex;
+  }
+}
+@media screen and (min-width: 0px) and (max-width: 1024px) {
+  .filter-results-cards {
+    width: 17.188rem;
+  }
+}

@@ -1,0 +1,43 @@
+.trip-details {
+  $color-grey-v1: #b4bbc1;
+  $color-orange: #bc4e37;
+  $bg-orange-gradient: linear-gradient(
+    241.6deg,
+    #e6664c -19.43%,
+    #8c2009 109.14%
+  );
+  .available-dates {
+    li {
+      padding: 1rem 1.8rem;
+      background: rgba(224, 225, 232, 0.12);
+      backdrop-filter: blur(5px);
+      transition: all 0.5s;
+
+      border-radius: 32px;
+    }
+    li:hover {
+      background: $bg-orange-gradient;
+    }
+    h2 {
+      color: $color-grey-v1;
+      font-size: 40px;
+    }
+    p {
+      font-size: 22px;
+    }
+    @media screen and (min-width: 1024px) {
+      li {
+        padding: 1rem 2rem;
+      }
+      h4 {
+        font-size: 3rem;
+      }
+      p {
+        font-size: 20px;
+      }
+    }
+  }
+  p {
+    color: $color-grey-v1;
+  }
+}
