@@ -8,22 +8,16 @@ export default function PricingDetails(props) {
   let guestsSelected = useRef();
   guestsSelected = "No Guests Selected!";
   const [validGuestsSeleced, setValidGuestsSelected] = useState(true);
-  console.log("Guests Selected", guestsSelected);
 
   const handleGuestsChange = (e) => {
-    console.log("Called", e);
     guestsSelected = e.target.value;
-    console.log("Guests Selected : ", guestsSelected);
     props.bookingFormData["guestsSelected"] = guestsSelected;
-    console.log("Props Data on Pricing Page : ", props.bookingFormData);
   };
 
   const checkPassengerCounts = () => {
     if (isNaN(guestsSelected)) {
-      console.log("Not a Number");
       setValidGuestsSelected(!validGuestsSeleced);
     } else {
-      console.log(Number("Inside Try Block", guestsSelected));
       navigate("/bookingForm", { state: props.bookingFormData });
     }
   };

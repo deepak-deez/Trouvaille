@@ -7,8 +7,6 @@ import handleSignout from "../functions/handleSignout";
 export default function ViewAccountDetails() {
   const { userDetails } = useSelector((state) => state.logInUser);
 
-  console.log(userDetails);
-
   const userData = {
     email: userDetails.data.userDetails.email,
     phNumber: userDetails.data.userDetails.phone,

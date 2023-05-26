@@ -32,7 +32,6 @@ export const logInUser = (email, password) => async (dispatch) => {
         payload: data,
       });
       localStorage.setItem("userDetails", JSON.stringify(data));
-      console.log(data);
     } else if (data.status == 500) {
       dispatch({
         type: SIGN_IN_USER_FAILED,

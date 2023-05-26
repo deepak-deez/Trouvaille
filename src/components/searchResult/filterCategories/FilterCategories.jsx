@@ -2,8 +2,8 @@ import "./style.scss";
 import React, { useState, useEffect } from "react";
 import dropdownIcon from "../../../assets/images/searchResult/tripCategory/drop-drown-icon.svg";
 import PriceSlider from "./priceSlider/PriceSlider";
-import { filterData } from "../filterSubCategories/data.js";
-import FilterSubCategories from "../filterSubCategories/FilterSubCategories";
+import { filterData } from "./filterSubCategories/data.js";
+import FilterSubCategories from "./filterSubCategories/FilterSubCategories";
 
 export default function FilterCategories() {
   const [travelFilterCollapse, settravelFilterCollapse] = useState(false);

@@ -1,5 +1,30 @@
 .trips {
   header {
+    .heading-main {
+      margin-top: 5rem;
+      font-size: 50px;
+      text-align: center;
+      background: linear-gradient(
+        315deg,
+        #ffffff,
+        rgb(255, 255, 255) 50%,
+        #bc4e37 0%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-align: center;
+    }
+    @media screen and (min-width: 500px) {
+      .heading-main {
+        font-size: 90px;
+      }
+    }
+    @media screen and (min-width: 1500px) {
+      .heading-main {
+        font-size: 100px;
+      }
+    }
     padding-top: 8.5rem;
     h4 {
       font-weight: 700;

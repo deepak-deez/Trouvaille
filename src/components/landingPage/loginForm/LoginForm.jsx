@@ -30,7 +30,6 @@ const LoginForm = () => {
   useEffect(() => {
     if (error) {
       setApiMessage(error.message);
-      console.log(apiMessage);
       swal.fire({
         icon: "error",
         title: "Oops...",
@@ -66,12 +65,10 @@ const LoginForm = () => {
   const logInHandler = async () => {
     accDetails["email"] = emailRef.current.value;
     accDetails["password"] = passwordRef.current.value;
-    console.log(accDetails);
+
     if (!!emailRef.current.value.length && !!passwordRef.current.value.length) {
       setEmptyFieldsMessage(false);
-      console.log(process.env.REACT_APP_API_HOST);
       dispatch(logInUser(emailRef.current.value, passwordRef.current.value));
-      console.log("userdetails", userDetails);
     } else {
       swal.fire({
         icon: "warning",

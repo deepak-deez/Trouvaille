@@ -15,7 +15,6 @@ export default function ProfileSettings() {
   const [responseData, setResponseData] = useState();
 
   const profileImage = responseData?.data.data[0].userDetails?.image.url;
-  console.log("Profile Image", profileImage);
   const userLcoation = responseData?.data.data[0].userDetails?.place;
   const userName = responseData?.data.data[0].userDetails?.name;
   const userDOB = responseData?.data.data[0].userDetails?.DOB;
@@ -24,14 +23,12 @@ export default function ProfileSettings() {
     responseData?.data.data[0].userDetails?.maritalStatus;
   const userJoiningYear = responseData?.data.data[0]?.joiningYear;
 
-  console.log("Uer Data", responseData);
-
   const updateDataHandler = async () => {
     try {
       const getUpdatedData = await axios.get(dataBaseUrl);
       setResponseData(getUpdatedData);
     } catch (err) {
-      console.log(err);
+      return err;
     }
   };
 

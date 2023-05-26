@@ -24,9 +24,6 @@ const getApiDatas = async (
     `${getUserDatabaseUrl}/${currentUserId}`
   );
 
-  console.log("Ocassion Data : ", getOcassionData.data);
-  console.log("Ammenity Data : ", getAmmenityData.data);
-
   setTripDetails(getTripDetails);
   setAmmenityImgData(getAmmenityData);
   setOcassionImgData(getOcassionData);
@@ -34,7 +31,6 @@ const getApiDatas = async (
 };
 
 export const handleProfileImagetoUrl = async (image) => {
-  console.log("Profile Image : ", image);
   let imageUrl = "";
 
   if (image) {
@@ -42,7 +38,6 @@ export const handleProfileImagetoUrl = async (image) => {
     formData.append("file", image);
     formData.append("upload_preset", "trouvaille");
     formData.append("cloud_name", `${cloudinaryName}`);
-    console.log(formData);
     await fetch(`${cloudinaryApi}/${cloudinaryName}/image/upload`, {
       method: "post",
       body: formData,
@@ -54,7 +49,6 @@ export const handleProfileImagetoUrl = async (image) => {
       .catch((err) => {
         return err;
       });
-    console.log(imageUrl);
     return imageUrl;
   } else return "";
 };

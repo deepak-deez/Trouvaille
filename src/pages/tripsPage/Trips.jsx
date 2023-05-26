@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.scss";
 import Header from "../../components/tripsPage/header/Header";
-import TripCategory from "../../components/searchResult/trip-category/TripCategory";
+import TripCategory from "../../components/searchResult/tripCategory/TripCategory";
 
 export default function Trips() {
   return (

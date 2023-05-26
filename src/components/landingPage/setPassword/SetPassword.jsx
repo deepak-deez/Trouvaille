@@ -17,8 +17,6 @@ const SetPassword = () => {
     );
 
     setApiMessage(response.data.message);
-
-    console.log(response);
   };
   return (
     <header className="flex flex-col set-password justify-center items-center mt-[100px] my-auto">
