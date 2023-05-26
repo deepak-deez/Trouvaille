@@ -8,11 +8,11 @@ import notificationIcon from "../../assets/images/navbar/notification-icon.svg";
 import bookingsIcon from "../../assets/images/navbar/document-icon.svg";
 import profileIcon from "../../assets/images/navbar/user-profile-icon.svg";
 import menuHamburger from "../../assets/images/navbar/menu-hamburger.svg";
+import SearchBar from "./searchBar/SearchBar";
 
 export default function Navbar() {
   const [navCollapse, setnavColapse] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
-
   const currentPageLocation = useLocation().pathname;
 
   useEffect(() => {
@@ -84,16 +84,7 @@ export default function Navbar() {
           (location) => location === currentPageLocation
         ) ? (
           <div className="flex gap-10 2xl:gap-[4.1rem]">
-            <div className="nav-serach-area hidden xl:flex">
-              <Link to="/trips">
-                <input
-                  type="text"
-                  className="nav-search-input"
-                  placeholder="Search"
-                />
-              </Link>
-              <img src={searchIcon} alt="search-icon" />
-            </div>
+            <SearchBar />
             <img
               src={notificationIcon}
               className="hidden xl:block w-8"
