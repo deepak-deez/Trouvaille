@@ -4,13 +4,11 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import "./style.scss";
 import getAllApiData from "./logic";
-import { tripNames } from "./data";
 import TripNames from "./tripNames/TripNames";
 export default function TripList() {
   const { userDetails } = useSelector((state) => state.logInUser);
   const userId = userDetails.data.userDetails._id;
   const [userBookingDetails, setUserBookingDetails] = useState();
-  const [tripDetails, setTripDetails] = useState();
 
   useEffect(() => {
     getAllApiData(userId, setUserBookingDetails);
@@ -40,6 +38,7 @@ export default function TripList() {
                   passengers={data.otherPassenger.length}
                   tripId={data.tripId}
                   status={data.status}
+                  bookingId={data._id}
                 />
               );
             })}
