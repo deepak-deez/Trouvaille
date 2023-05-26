@@ -37,7 +37,7 @@ export default function TripList() {
                   title={data.title}
                   passengers={data.otherPassenger.length}
                   tripId={data.tripId}
-                  status={data.status}
+                  status={data.bookingStatus}
                   bookingId={data._id}
                 />
               );
