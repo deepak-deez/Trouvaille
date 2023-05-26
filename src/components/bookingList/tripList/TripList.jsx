@@ -14,26 +14,7 @@ export default function TripList() {
 
   useEffect(() => {
     getAllApiData(userId, setUserBookingDetails);
-    getTripDetails();
   }, []);
-  console.log("Logging From : ", userBookingDetails);
-
-  const getTripDetails = async () => {
-    console.log("hello");
-    // userBookingDetails.map((data, index) => {
-    //   console.log("data", data);
-    //   const tripId = data.tripId;
-    //   const tripNameDetails = `${process.env.REACT_APP_API_HOST}/get-trip-details/trip-package/${tripId}`;
-    //   const getTripDetails = axios.get(tripNameDetails);
-    //   console.log("Trip details here", getTripDetails);
-    // });
-
-    const tripId = userBookingDetails.tripId;
-    const tripNameDetails = `${process.env.REACT_APP_API_HOST}/get-trip-details/trip-package/${tripId}`;
-    console.log("route", tripNameDetails);
-    const getTripDetails = await axios.get(tripNameDetails);
-    console.log("trip here", getTripDetails);
-  };
 
   return (
     <section className="flex flex-col trip-list-container justify-center items-center pb-[20rem]">
@@ -51,14 +32,13 @@ export default function TripList() {
               <th>Status</th>
               <th>Action</th>
             </tr>
-            {tripNames.map((data, index) => {
+            {userBookingDetails?.map((data, index) => {
               return (
                 <TripNames
                   key={index}
                   title={data.title}
-                  duration={data.duration}
-                  passengers={data.otherPassenger}
-                  price={data.price}
+                  passengers={data.otherPassenger.length}
+                  tripId={data.tripId}
                   status={data.status}
                 />
               );
