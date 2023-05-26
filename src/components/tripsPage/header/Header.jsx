@@ -6,7 +6,8 @@ export default function Header() {
   return (
     <>
       <header>
-        <div className="flex flex-col lg:flex-row lg:justify-between gap-5 bg-white p-10 rounded-[3rem] lg:mx-[5rem] xl:mx-[10rem] min-[1920px]:mx-[32rem]">
+        <div className="flex flex-col lg:flex-row lg:justify-between gap-5 bg-white p-10 rounded-[3rem] lg:mx-[5rem] xl:mx-[10rem] min-[1920px]:mx-[32rem] hidden">
+          {/* Remove the classname hidden from the classlist */}
           <div className="flex flex-col gap-2">
             <h4>Where to</h4>
             <input
@@ -54,6 +55,9 @@ export default function Header() {
         <h1 className="mt-[5rem] 2xl:mt-[9rem]">
           Make your Trip as beautiful as you
         </h1>
+        <h2 className="bg-[#BC4E37] heading-main">
+          Choose your exotic holidays
+        </h2>
       </header>
     </>
   );

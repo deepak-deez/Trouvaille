@@ -53,14 +53,11 @@ const Details = (props) => {
     bookingFormDetails["otherPassenger"] = otherPassengerDetails;
     bookingFormDetails["address"] = address.current.value;
 
-    console.log(bookingFormDetails);
-
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API_HOST}trip-booking`,
         bookingFormDetails
       );
-      console.log(response);
       setsucessModal(!sucessModal);
     } catch (err) {
       swal.fire({

@@ -17,7 +17,6 @@ export default function EditProfile() {
   const [imageUrlState, setImageUrlState] = useState("");
 
   const { userDetails } = useSelector((state) => state.logInUser);
-  console.log("User Id ", userDetails.data.userDetails._id);
 
   const navigate = useNavigate();
   const nameRef = useRef();
@@ -27,20 +26,18 @@ export default function EditProfile() {
   const maritalStatusRef = useRef();
   const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/Frontend-user/${userDetails.data.userDetails._id}`;
 
-  const userPLace = responseData?.data.data[0].userDetails?.place;
-  const userName = responseData?.data.data[0].userDetails?.name;
-  const userDOB = responseData?.data.data[0].userDetails?.DOB;
+  const userPLace = responseData?.data?.data[0].userDetails?.place;
+  const userName = responseData?.data?.data[0].userDetails?.name;
+  const userDOB = responseData?.data?.data[0].userDetails?.DOB;
   const userJoiningYear = responseData?.data.data[0]?.joiningYear;
 
   const updateDataHandler = async () => {
     try {
       const getUpdatedData = await axios.get(dataBaseUrl);
       setResponseData(getUpdatedData);
-      console.log("dwc", getUpdatedData?.data.data[0].userDetails.image);
       setProfileImg(getUpdatedData?.data.data[0].userDetails.image.url);
     } catch (error) {
       setProfileImg(defaultProfileImage);
-      console.log(error);
     }
   };
 
@@ -55,13 +52,7 @@ export default function EditProfile() {
     getUserData();
   }, []);
 
-  console.log(
-    "User  Feteched Data ",
-    userFetchedData?.data.data[0].userDetails
-  );
-
   const uploadImgHandler = (e) => {
-    console.log(e.target.files);
     try {
       setImageUrlState(e.target.files[0]);
       setProfileImg(URL.createObjectURL(e.target.files[0]));
@@ -76,9 +67,6 @@ export default function EditProfile() {
       return res;
     });
 
-    console.log(imageUrlState);
-    console.log(imgUrl);
-
     const userData = {
       image: imgUrl ? imgUrl : responseData?.data.data[0].userDetails.image.url,
       name: nameRef.current.value,
@@ -88,21 +76,14 @@ export default function EditProfile() {
       maritalStatus: maritalStatusRef.current.value,
     };
 
-    console.log(userData);
-
     const updateUrl = `${process.env.REACT_APP_API_HOST}update/Frontend-user/${userDetails.data.userDetails._id}`;
-
-    console.log(updateUrl);
 
     try {
       const response = await axios.post(updateUrl, userData);
       if (response.data.success) {
         navigate("/profile");
       }
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   if (userDetails.success) {

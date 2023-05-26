@@ -4,8 +4,6 @@ import "./style.scss";
 import eye from "../../../assets/images/landingPage/loginForm/eye.svg";
 import axios from "axios";
 
-console.log(process.env.REACT_APP_API_HOST);
-
 const SignUp = () => {
   const navigate = useNavigate();
   const emailRef = useRef();
@@ -32,13 +30,11 @@ const SignUp = () => {
         newUserDetails
       );
 
-      setApiMessage(response.data.message);
+      setApiMessage(response?.data?.message);
 
-      if (response.data.success) {
+      if (response?.data?.success) {
         navigate("/");
       }
-      console.log(apiMessage);
-      console.log(response.data.message);
     } else {
       setDifferentPassword(true);
     }

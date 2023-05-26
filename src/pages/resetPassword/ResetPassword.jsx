@@ -6,11 +6,9 @@ import axios from "axios";
 
 const ResetPasswordPage = () => {
   const url = useLocation();
-  console.log(url.pathname);
 
   const validation = async () => {
     const response = await axios.get(`http://localhost:7000${url.pathname}`);
-    console.log(response);
   };
 
   useEffect(() => {

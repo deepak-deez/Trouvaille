@@ -16,7 +16,6 @@ export default function EditAccountDetails() {
   const emailId = userDetails.data.userDetails.email;
 
   const updateDetailsHandler = async () => {
-    console.log("Updating Password!");
     const verifyOldPassUrl = `${process.env.REACT_APP_API_HOST}login/Frontend-user`;
     const updateUPassUrl = `${process.env.REACT_APP_API_HOST}set-password/Frontend-user`;
     const checkOldPass = await axios.post(verifyOldPassUrl, {
@@ -25,10 +24,6 @@ export default function EditAccountDetails() {
     });
 
     if (checkOldPass.data.success) {
-      console.log(
-        "Current Password Verified! and you have a token with id : ",
-        localStorage.getItem("id")
-      );
       setCheckPass(true);
       if (
         newPassRef.current.value.length &&
@@ -36,30 +31,24 @@ export default function EditAccountDetails() {
         newPassRef.current.value === confirmNewPassRef.current.value
       ) {
         setEmptyFields(false);
-        console.log(
-          "New Passwords are same with value : ",
-          newPassRef.current.value
-        );
+
         const updatePassRes = await axios.post(updateUPassUrl, {
           logInStatus: true,
           id: localStorage.getItem("id"),
           newPassword: newPassRef.current.value,
         });
-        console.log(updatePassRes);
+
         if (updatePassRes.data.success) {
           Swal.fire("Success!", "Pasword Updated!", "success");
-          console.log("Password Updated!");
         }
       } else {
         setEmptyFields(true);
       }
     } else {
-      console.log("Wrong Password!");
       setCheckPass(false);
     }
   };
 
-  console.log(userDetails);
   if (userDetails.success) {
     return (
       <header className="sm:mx-20 2xl:mx-[18.75rem]">

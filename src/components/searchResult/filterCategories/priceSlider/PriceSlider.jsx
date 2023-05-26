@@ -42,7 +42,6 @@ export default function PriceSlider() {
   };
 
   const onChangeEventTriggered = (newValue) => {
-    console.log(`${newValue}`);
     setFilterSliderValue(newValue);
   };
   return (

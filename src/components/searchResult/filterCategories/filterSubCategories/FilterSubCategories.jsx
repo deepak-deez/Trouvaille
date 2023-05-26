@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import dropdownIcon from "../../../../assets/images/searchResult/tripCategory/drop-drown-icon.svg";
 
 export default function FilterSubCategories(props) {
-  console.log(props);
   const [filterToggle, setFilterToggle] = useState(false);
 
   return (

@@ -3,7 +3,6 @@ import divingIcon from "../../../assets/images/tripsDetailsPage/journeyPlanning/
 import "./style.scss";
 
 export default function PackageHighlights(props) {
-  console.log("Props Datta :", props);
   return (
     <div className="flex gap-7 w-[25rem]">
       <img src={props.imgSrc} alt="diving-icon" />

@@ -31,11 +31,6 @@ export default function TripDetails(props) {
   const name = userDatabase?.data.data[0].userDetails.name;
   const backgroundImg = { backgroundImage: `url(${tripImage})` };
 
-  console.log("Background Image :", backgroundImg);
-  console.log("Main Img :", tripImage);
-  console.log("User Id : ", currentUserId, "\nTrip ID : ", currentTripId);
-  console.log("Trip Details : ", tripDetails);
-
   useEffect(() => {
     getApiDatas(
       setTripDetails,
@@ -46,8 +41,6 @@ export default function TripDetails(props) {
       currentTripId
     );
   }, []);
-
-  console.log("User Database : ", userDatabase);
 
   const tripResponseData = tripDetails?.data.data[0];
 
@@ -94,9 +87,6 @@ export default function TripDetails(props) {
             <h2>Highlights of the package</h2>
             <div className="flex flex-wrap gap-10">
               {tripHighlightsData.map((data, index) => {
-                {
-                  console.log("Data Icon : ", data?.icon?.url);
-                }
                 return (
                   <TripHighlights
                     title={data?.title}

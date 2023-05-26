@@ -5,12 +5,12 @@ import searchIcon from "../../../assets/images/navbar/search-icon.svg";
 export default function SearchBar(props) {
   const searchRef = useRef();
   const handleSearch = () => {
-    console.log(searchRef.current.value);
     searchRef.current.value = "";
   };
 
   return (
-    <div className="nav-serach-area hidden xl:flex">
+    <div className="nav-serach-area hidden xl:hidden">
+      {/* //Change The className to xl:flex to display the Search Again */}
       <input
         type="text"
         ref={searchRef}

@@ -87,7 +87,8 @@ export default function Navbar() {
             <SearchBar />
             <img
               src={notificationIcon}
-              className="hidden xl:block w-8"
+              className=" xl:hidden w-8 hidden"
+              // Remove class name hidden
               alt="notification-icon"
             />
             <Link to={"/booking"}>
@@ -122,7 +123,12 @@ export default function Navbar() {
             <li className="flex justify-between">
               <Link to="/searchResult">Home</Link>
               <div className="flex gap-10">
-                <img src={notificationIcon} alt="notification-icon" />
+                <img
+                  src={notificationIcon}
+                  className="hidden"
+                  alt="notification-icon"
+                />
+                // Remove class name hidden
                 <img src={bookingsIcon} alt="document-icon" />
               </div>
             </li>
@@ -134,14 +140,7 @@ export default function Navbar() {
             </li>
           </ul>
           <div className="flex nav-serach-area justify-between">
-            <Link to="/trips">
-              <input
-                type="text"
-                className="nav-search-input"
-                placeholder="Search"
-              />
-            </Link>
-            <img src={searchIcon} alt="search-icon" />
+            <SearchBar />
           </div>
         </div>
       )}

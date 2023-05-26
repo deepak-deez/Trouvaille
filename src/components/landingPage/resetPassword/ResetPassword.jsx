@@ -61,9 +61,7 @@ const ResetPassword = () => {
                 `http://localhost:7000/set-password/Frontend-user`,
                 resetPasswordData
               );
-              console.log(response);
               if (response?.data?.success) {
-                console.log(response.data.message);
                 navigate("/");
               }
             } else {
