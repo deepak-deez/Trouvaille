@@ -99,21 +99,21 @@ const Details = (props) => {
             type="text"
             placeholder="Full Name"
             defaultValue={bookingFormDetails.name}
-            disabled={true}
+            // disabled={true}
           />
           <input
             className=" input-fields lg:px-[39px] lg:py-[32px] text-[20px] px-[15px] py-[20px] lg:mt-[60px] mt-[30px] w-[100%]"
             type="text"
             placeholder="Phone Number"
             defaultValue={bookingFormDetails.phone}
-            disabled={true}
+            // disabled={true}
           />
           <input
             className=" input-fields lg:px-[39px] lg:py-[32px] text-[20px] px-[15px] py-[20px] lg:mt-[60px] mt-[30px] w-[100%]"
             type="text"
             placeholder="Phone Number"
             defaultValue={bookingFormDetails.email}
-            disabled={true}
+            // disabled={true}
           />
           <div className="flex input-fields items-center justify-between lg:mt-[60px] lg:px-[39px] px-[15px] mt-[30px]">
             <input
@@ -121,7 +121,7 @@ const Details = (props) => {
               type="text"
               placeholder="Other Passenger (number)"
               defaultValue={props.bookingFormData.guestsSelected}
-              disabled={true}
+              // disabled={true}
             />
             <button
               onClick={() => {
