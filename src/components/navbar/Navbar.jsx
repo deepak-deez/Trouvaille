@@ -125,10 +125,10 @@ export default function Navbar() {
               <div className="flex gap-10">
                 <img
                   src={notificationIcon}
-                  className="hidden"
+                  className=""
                   alt="notification-icon"
                 />
-                // Remove class name hidden
+                {/* Remove class name hidden */}
                 <img src={bookingsIcon} alt="document-icon" />
               </div>
             </li>

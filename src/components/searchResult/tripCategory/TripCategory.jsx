@@ -42,8 +42,14 @@ export default function TripCategory(response) {
         {allTripCategory?.map((response, index) => {
           return (
             <div key={index} className="category">
-              <img src={response.icon.url} alt="category" className="category-icon" />
-              <p className="text-center text-2xl category-title">{response.title}</p>
+              <img
+                src={response.icon.url}
+                alt="category"
+                className="category-icon"
+              />
+              <p className="text-center text-2xl category-title">
+                {response.title}
+              </p>
             </div>
           );
         })}

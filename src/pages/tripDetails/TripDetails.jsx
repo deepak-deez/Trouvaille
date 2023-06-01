@@ -28,7 +28,7 @@ export default function TripDetails(props) {
   const tripImage = tripDetails?.data.data[0].image?.url;
   const email = userDetails?.data.userDetails.email;
   const phNumber = userDetails?.data.userDetails.phone;
-  const name = userDatabase?.data.data[0].userDetails.name;
+  const name = userDetails?.data.userDetails.name;
   const backgroundImg = { backgroundImage: `url(${tripImage})` };
 
   useEffect(() => {
