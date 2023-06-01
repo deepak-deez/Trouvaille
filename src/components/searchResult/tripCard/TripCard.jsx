@@ -16,7 +16,7 @@ export default function TripCard(props) {
 
   return (
     <div className="filter-results-cards">
-      <img className="share-icon hidden" src={shareIcon} alt="share-icon" />
+      <img className="share-icon" src={shareIcon} alt="share-icon" />
       {/* Remove the classname Hidden from the classlist */}
       <img
         className="filter-results-card-img cursor-pointer"
