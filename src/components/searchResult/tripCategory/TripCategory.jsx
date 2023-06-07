@@ -1,5 +1,5 @@
 import "./style.scss";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import seaIcon from "../../../assets/images/searchResult/tripCategory/sea-icon.svg";
 import hillsIcon from "../../../assets/images/searchResult/tripCategory/hills-icon.svg";
 import forestIcon from "../../../assets/images/searchResult/tripCategory/forest-icon.svg";
@@ -62,9 +62,13 @@ export default function TripCategory() {
             (showFilter ? " xl:w-[75%]" : "")
           }
         >
-          {allPackagesData?.map((data, index) => {
-            return <TripCard data={data} key={index} />;
-          })}
+          {showMore
+            ? allPackagesData?.slice(0, 8).map((data, index) => {
+                return <TripCard data={data} key={index} />;
+              })
+            : allPackagesData?.map((data, index) => {
+                return <TripCard data={data} key={index} />;
+              })}
         </div>
       </div>
       <div className="flex justify-end mt-[5rem] show-more">
