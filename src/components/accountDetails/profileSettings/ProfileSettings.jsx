@@ -7,7 +7,7 @@ import profileImg from "../../../assets/images/accountDetails/profileSettings/pr
 import defaultProfileImg from "../../../assets/images/accountDetails/profileSettings/defaultProfileImage.png";
 import editIcon from "../../../assets/images/accountDetails/profileSettings/edit.svg";
 import axios from "axios";
-import handleSignout from "../functions/handleSignout";
+import SignOut from "../../SignOut/SignOut";
 
 export default function ProfileSettings() {
   const { userDetails } = useSelector((state) => state.logInUser);
@@ -43,9 +43,7 @@ export default function ProfileSettings() {
           <h2 className="font-[600]">
             Settings/<span className="font-[400] grey-text"> My profile</span>
           </h2>
-          <button className="underline font-[600]" onClick={handleSignout}>
-            Signout
-          </button>
+          <SignOut />
         </div>
         <div className="flex flex-col sm:flex-row gap-[2rem] mt-[1.5rem] sm:mt-[2rem] profile-section ">
           <div className="flex flex-col  h-[256px] w-[225px] overflow-hidden">

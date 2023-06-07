@@ -4,7 +4,8 @@ import { useSelector } from "react-redux";
 import "./style.scss";
 import axios from "axios";
 import Swal from "sweetalert2";
-import handleSignout from "../functions/handleSignout";
+
+import SignOut from "../../SignOut/SignOut";
 
 export default function EditAccountDetails() {
   const { userDetails } = useSelector((state) => state.logInUser);
@@ -57,9 +58,7 @@ export default function EditAccountDetails() {
             Settings/
             <span className="font-[400] grey-text"> Accounts Page</span>
           </h2>
-          <button className="underline font-[600]" onClick={handleSignout}>
-            Signout
-          </button>
+          <SignOut />
         </div>
         <div className="mt-[5rem] xl:flex xl:justify-between xl:gap-14 lg:text-[20px]">
           <ul className="hidden xl:flex flex-col gap-10">

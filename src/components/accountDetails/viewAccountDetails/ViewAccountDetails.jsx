@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./style.scss";
-import handleSignout from "../functions/handleSignout";
+
+import SignOut from "../../SignOut/SignOut";
 
 export default function ViewAccountDetails() {
   const { userDetails } = useSelector((state) => state.logInUser);
@@ -19,12 +20,7 @@ export default function ViewAccountDetails() {
           <h2 className="font-[600]">
             Settings/<span className="font-[400]"> Accounts Page</span>
           </h2>
-          <button
-            className="underline font-[600] grey-text"
-            onClick={handleSignout}
-          >
-            Signout
-          </button>
+          <SignOut />
         </div>
         <div className="mt-[5rem] xl:flex xl:justify-between xl:gap-14 lg:text-[20px]">
           <ul className="hidden xl:flex flex-col gap-10">
