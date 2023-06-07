@@ -18,7 +18,7 @@ export default function TripCategory(response) {
   const [allPackagesData, setAllPackagesData] = useState();
   const [allTripCategory, setAllTripCategory] = useState();
   const [showFilter, setShowFilter] = useState();
-  const [showMore, setShowMore] = useState(false);
+  const [showMore, setShowMore] = useState(true);
 
   useEffect(() => {
     getAllApiData(setAllPackagesData);
