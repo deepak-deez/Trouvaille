@@ -16,7 +16,7 @@ import "rc-slider/assets/index.css";
 export default function TripCategory() {
   const [allPackagesData, setAllPackagesData] = useState();
   const [showFilter, setShowFilter] = useState();
-  const [showMore, setShowMore] = useState(false);
+  const [showMore, setShowMore] = useState(true);
 
   useEffect(() => {
     getAllApiData(setAllPackagesData);
