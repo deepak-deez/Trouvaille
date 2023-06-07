@@ -80,8 +80,8 @@ export default function TripCategory(response) {
         {showFilter && <FilterCategories />}
         <div
           className={
-            "trip-category-filter-results grid justify-center grid-flow-col lg:grid-flow-dense overflow-scroll lg:grid-cols-3 gap-[2.2rem]  px-5" +
-            (showFilter ? " xl:w-[75%] lg:grid-cols-3 " : " lg:grid-cols-4 ")
+            "trip-category-filter-results all-trip-list grid justify-center grid-flow-col overflow-scroll gap-[2.2rem]  px-5" +
+            (showFilter ? " xl:w-[75%]" : "")
           }
         >
           {allPackagesData?.map((data, index) => {

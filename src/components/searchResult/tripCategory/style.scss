@@ -10,6 +10,16 @@ $bg-color-blue: #212b33;
 .trip-category {
   margin-top: 5rem;
   color: $color-primary-white;
+  @media screen and (min-width: 1024px) {
+    .all-trip-list {
+      overflow-x: hidden;
+      grid-auto-flow: unset;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(274px, 274px));
+    }
+  }
+
   .trip-category-icons {
     img {
       width: 4rem;
@@ -45,6 +55,12 @@ $bg-color-blue: #212b33;
   .trip-category {
     margin-left: 6rem;
     margin-right: 6rem;
+  }
+}
+@media screen and (min-width: 1400px) {
+  .trip-category {
+    margin-left: 15rem;
+    margin-right: 15rem;
   }
 }
 @media screen and (min-width: 1920px) {
