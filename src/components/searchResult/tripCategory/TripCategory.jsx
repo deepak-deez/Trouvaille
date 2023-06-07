@@ -16,10 +16,15 @@ import "rc-slider/assets/index.css";
 export default function TripCategory() {
   const [allPackagesData, setAllPackagesData] = useState();
   const [showFilter, setShowFilter] = useState();
+  const [showMore, setShowMore] = useState(false);
 
   useEffect(() => {
     getAllApiData(setAllPackagesData);
   }, []);
+
+  const showMoreToggler = () => {
+    setShowMore(!showMore);
+  };
 
   return (
     <section className="trip-category">
@@ -62,8 +67,13 @@ export default function TripCategory() {
           })}
         </div>
       </div>
-      <div className="flex justify-end mt-[5rem]">
-        <p>See More</p>
+      <div className="flex justify-end mt-[5rem] show-more">
+        <p onClick={showMoreToggler} className={showMore ? "" : " hidden "}>
+          See More
+        </p>
+        <p onClick={showMoreToggler} className={showMore ? " hidden " : ""}>
+          See Less
+        </p>
       </div>
     </section>
   );
