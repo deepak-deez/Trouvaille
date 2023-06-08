@@ -11,7 +11,7 @@ export default function FilterCategories() {
     useState(false);
 
   return (
-    <div className="trip-category-filters flex flex-col lg:flex-row flex-wrap justify-between xl:justify-normal xl:flex-col gap-5 xl:gap-20 xl:w-[25%] p-10 lg:p-10 2xl:p-[2rem] bg-[#212b33] rounded-[2rem]">
+    <div className="trip-category-filters flex flex-col lg:flex-row justify-between xl:justify-normal xl:flex-col gap-5 xl:gap-20 xl:w-[25%] p-10 lg:p-10 2xl:p-[2rem] xl:pb-10 xl:h-[55rem] overflow-y-scroll bg-[#212b33] rounded-[2rem]">
       <PriceSlider />
       {filterData.map((data, index) => {
         return <FilterSubCategories data={data} key={index} />;
