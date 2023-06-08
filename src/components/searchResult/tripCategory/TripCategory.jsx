@@ -59,7 +59,7 @@ export default function TripCategory(response) {
           );
         })}
       </div>
-      <div className="my-[3.75rem] flex justify-end text-[26px] gap-[4.75rem]">
+      <div className="my-[3.75rem] flex justify-start text-[26px] gap-[4.75rem] ">
         {/* //Remove className hidden from the classlist */}
         <div className="flex gap-[1.5rem]">
           <img src={sortIcon} alt="sort-icon" />
