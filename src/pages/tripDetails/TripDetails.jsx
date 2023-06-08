@@ -11,7 +11,7 @@ import PricingDetails from "../../components/tripDetails/pricingDetails/PricingD
 import Ammenities from "../../components/tripDetails/ammenities/Ammenities";
 import Faqs from "../../components/tripDetails/faqs/Faqs";
 import getApiDatas, { handleProfileImagetoUrl } from "./logic";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function TripDetails(props) {
@@ -21,8 +21,7 @@ export default function TripDetails(props) {
   const [ocassionImgData, setOcassionImgData] = useState();
   const [ammenityImgData, setAmmenityImgData] = useState();
   const [userDatabase, setUserdatabase] = useState();
-
-  const currentTripId = location.state;
+  const currentTripId = useParams();
   const currentUserId = useSelector((state) => state.logInUser).userDetails.data
     .userDetails._id;
   const tripImage = tripDetails?.data.data[0].image?.url;
@@ -38,7 +37,7 @@ export default function TripDetails(props) {
       setOcassionImgData,
       setUserdatabase,
       currentUserId,
-      currentTripId
+      currentTripId.id
     );
   }, []);
 
