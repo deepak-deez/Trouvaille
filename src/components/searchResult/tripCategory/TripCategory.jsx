@@ -1,5 +1,5 @@
 import "./style.scss";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import seaIcon from "../../../assets/images/searchResult/tripCategory/sea-icon.svg";
 import hillsIcon from "../../../assets/images/searchResult/tripCategory/hills-icon.svg";
 import forestIcon from "../../../assets/images/searchResult/tripCategory/forest-icon.svg";
@@ -16,10 +16,15 @@ import "rc-slider/assets/index.css";
 export default function TripCategory() {
   const [allPackagesData, setAllPackagesData] = useState();
   const [showFilter, setShowFilter] = useState();
+  const [showMore, setShowMore] = useState(true);
 
   useEffect(() => {
     getAllApiData(setAllPackagesData);
   }, []);
+
+  const showMoreToggler = () => {
+    setShowMore(!showMore);
+  };
 
   return (
     <section className="trip-category">
@@ -32,7 +37,7 @@ export default function TripCategory() {
         <img src={desertIcon} alt="desert-icon" />
         <img src={riversideIcon} alt="riverside-icon" />
       </div>
-      <div className="my-[3.75rem] flex justify-end text-[26px] gap-[4.75rem] ">
+      <div className="my-[3.75rem] flex justify-start text-[26px] gap-[4.75rem] ">
         {/* //Remove className hidden from the classlist */}
         <div className="flex gap-[1.5rem]">
           <img src={sortIcon} alt="sort-icon" />
@@ -53,17 +58,26 @@ export default function TripCategory() {
         {showFilter && <FilterCategories />}
         <div
           className={
-            "trip-category-filter-results grid justify-center grid-flow-col lg:grid-flow-dense overflow-scroll lg:grid-cols-3 gap-[2.2rem]  px-5" +
-            (showFilter ? " xl:w-[75%] lg:grid-cols-3 " : " lg:grid-cols-4 ")
+            "trip-category-filter-results all-trip-list grid justify-center grid-flow-col overflow-scroll gap-[2.2rem]  px-5" +
+            (showFilter ? " xl:w-[75%]" : "")
           }
         >
-          {allPackagesData?.map((data, index) => {
-            return <TripCard data={data} key={index} />;
-          })}
+          {showMore
+            ? allPackagesData?.slice(0, 8).map((data, index) => {
+                return <TripCard data={data} key={index} />;
+              })
+            : allPackagesData?.map((data, index) => {
+                return <TripCard data={data} key={index} />;
+              })}
         </div>
       </div>
-      <div className="flex justify-end mt-[5rem]">
-        <p>See More</p>
+      <div className="flex justify-end mt-[5rem] show-more">
+        <p onClick={showMoreToggler} className={showMore ? "" : " hidden "}>
+          See More
+        </p>
+        <p onClick={showMoreToggler} className={showMore ? " hidden " : ""}>
+          See Less
+        </p>
       </div>
     </section>
   );
