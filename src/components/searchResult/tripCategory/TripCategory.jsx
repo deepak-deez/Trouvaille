@@ -12,25 +12,40 @@ import TripCard from "../tripCard/TripCard";
 import FilterCategories from "../filterCategories/FilterCategories";
 import getAllApiData from "./logic";
 import "rc-slider/assets/index.css";
+import axios from "axios";
 
-export default function TripCategory() {
+export default function TripCategory(response) {
   const [allPackagesData, setAllPackagesData] = useState();
+  const [allTripCategory, setAllTripCategory] = useState();
   const [showFilter, setShowFilter] = useState();
 
   useEffect(() => {
     getAllApiData(setAllPackagesData);
   }, []);
 
+  const getTripCategory = async () => {
+    const response = await axios.get(`${process.env.REACT_APP_API_HOST}get-feature/category`);
+    setAllTripCategory(response.data.data);
+    console.log(response.data.data[0].icon);
+  }
+
+  useEffect(() => {
+    getTripCategory(setAllTripCategory);
+  }, []);
+
   return (
     <section className="trip-category">
-      <div className="flex justify-center 2xl:justify-between flex-wrap gap-10 lg:gap-12 trip-category-icons hidden">
+      <div className="flex justify-center 2xl:justify-between flex-wrap gap-10 lg:gap-12 trip-category-icons">
         {/* //Remove className "Details from the classlist" */}
-        <img src={seaIcon} alt="sea-icon" />
+        {/* <img src={seaIcon} alt="sea-icon" />
         <img src={hillsIcon} alt="hills-icon" />
         <img src={forestIcon} alt="forest-icon" />
         <img src={tropicalFallsIcon} alt="tropicalfalls-icon" />
-        <img src={desertIcon} alt="desert-icon" />
-        <img src={riversideIcon} alt="riverside-icon" />
+        <img src={desertIcon} alt="desert-icon" /> */}
+        {/* <img src={riversideIcon} alt="riverside-icon" /> */}
+        {allTripCategory?.map ((response,index) => {
+          return <img src={response.icon.url} alt="category"/>
+        })}
       </div>
       <div className="my-[3.75rem] flex justify-end text-[26px] gap-[4.75rem] hidden">
         {/* //Remove className hidden from the classlist */}
