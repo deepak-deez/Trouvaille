@@ -14,11 +14,17 @@ $bg-color-blue: #212b33;
     img {
       width: 4rem;
     }
+
     //media queries
     @media only screen and (min-width: 1024px) {
       img {
         width: 140px;
       }
+    }
+  }
+  .show-more {
+    p {
+      cursor: pointer;
     }
   }
 }

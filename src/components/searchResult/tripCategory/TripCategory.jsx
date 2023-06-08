@@ -18,10 +18,15 @@ export default function TripCategory(response) {
   const [allPackagesData, setAllPackagesData] = useState();
   const [allTripCategory, setAllTripCategory] = useState();
   const [showFilter, setShowFilter] = useState();
+  const [showMore, setShowMore] = useState(false);
 
   useEffect(() => {
     getAllApiData(setAllPackagesData);
   }, []);
+
+  const showMoreToggler = () => {
+    setShowMore(!showMore);
+  };
 
   const getTripCategory = async () => {
     const response = await axios.get(
@@ -84,8 +89,13 @@ export default function TripCategory(response) {
           })}
         </div>
       </div>
-      <div className="flex justify-end mt-[5rem]">
-        <p>See More</p>
+      <div className="flex justify-end mt-[5rem] show-more">
+        <p onClick={showMoreToggler} className={showMore ? "" : " hidden "}>
+          See More
+        </p>
+        <p onClick={showMoreToggler} className={showMore ? " hidden " : ""}>
+          See Less
+        </p>
       </div>
     </section>
   );
