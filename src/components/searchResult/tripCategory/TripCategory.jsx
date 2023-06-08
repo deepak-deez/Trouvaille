@@ -35,6 +35,10 @@ export default function TripCategory(response) {
     console.log(response.data.data[0].title);
   };
 
+  useEffect(() => {
+    getTripCategory();
+  }, []);
+
   return (
     <section className="trip-category">
       <div className="flex justify-center 2xl:justify-between flex-wrap gap-10 lg:gap-12 trip-category-icons">
