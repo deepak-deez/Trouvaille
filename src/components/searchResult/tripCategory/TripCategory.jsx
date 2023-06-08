@@ -54,11 +54,11 @@ export default function TripCategory() {
           <p className="">Filter</p>
         </div>
       </div>
-      <div className="flex flex-col xl:flex-row gap-[2rem]">
+      <div className="flex flex-col xl:flex-row gap-[2rem] ">
         {showFilter && <FilterCategories />}
         <div
           className={
-            "trip-category-filter-results all-trip-list grid justify-center grid-flow-col overflow-scroll gap-[2.2rem]  px-5" +
+            "trip-category-filter-results all-trip-list grid justify-center grid-flow-col overflow-scroll gap-[2.2rem] md:h-[55rem] overflow-y-scroll px-5" +
             (showFilter ? " xl:w-[75%]" : "")
           }
         >
