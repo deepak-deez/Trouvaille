@@ -22,7 +22,7 @@ export default function FilterSubCategories(props) {
         <ul className="flex flex-col gap-5 xl:gap-[1.8rem] xl:text-[20px] mt-[1rem]">
           {props.data.subCategories.map((data, index) => {
             return (
-              <li className="flex justify-between">
+              <li className="flex justify-between" key={index}>
                 <input type="checkbox" />
                 <label htmlFor="">{data}</label>
               </li>
