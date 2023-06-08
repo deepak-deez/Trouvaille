@@ -14,16 +14,59 @@ import getAllApiData from "./logic";
 import "rc-slider/assets/index.css";
 
 export default function TripCategory() {
-  const [allPackagesData, setAllPackagesData] = useState();
+  let [allPackagesData, setAllPackagesData] = useState();
   const [showFilter, setShowFilter] = useState();
   const [showMore, setShowMore] = useState(true);
-
+  const [sortClicked, setSortClicked] = useState(false);
+  const refOne = useRef(null);
+  let sortCriteria = [];
   useEffect(() => {
     getAllApiData(setAllPackagesData);
+
+    document.addEventListener("click", hideOnClickOutside, true);
   }, []);
+
+  const hideOnClickOutside = (e) => {
+    if (refOne.current && !refOne.current.contains(e.target)) {
+      setSortClicked(false);
+    }
+  };
+
+  const sortFunction = (sortProp, sortOrder) => {
+    allPackagesData?.map((data) => {
+      data.title = data.title.charAt(0).toUpperCase() + data.title.slice(1);
+    });
+    if (sortProp === "Price" && sortOrder === "Ascending") {
+      setAllPackagesData(
+        [...allPackagesData].sort((a, b) => a.price - b.price)
+      );
+    } else if (sortProp === "Price" && sortOrder === "Descending") {
+      setAllPackagesData(
+        [...allPackagesData].sort((a, b) => b.price - a.price)
+      );
+    } else if (sortProp === "Name" && sortOrder === "Ascending") {
+      setAllPackagesData(
+        [...allPackagesData].sort((a, b) => (a.title > b.title ? 1 : -1))
+      );
+    } else if (sortProp === "Name" && sortOrder === "Descending") {
+      setAllPackagesData(
+        [...allPackagesData].sort((a, b) => (a.title > b.title ? -1 : 1))
+      );
+    }
+  };
+
+  const handleSelect = (e) => {
+    sortCriteria = e.target.textContent.split(" ");
+    sortFunction(sortCriteria[1], sortCriteria[3]);
+    setSortClicked(false);
+  };
 
   const showMoreToggler = () => {
     setShowMore(!showMore);
+  };
+
+  const sortTrips = () => {
+    setSortClicked(!sortClicked);
   };
 
   return (
@@ -37,11 +80,27 @@ export default function TripCategory() {
         <img src={desertIcon} alt="desert-icon" />
         <img src={riversideIcon} alt="riverside-icon" />
       </div>
-      <div className="my-[3.75rem] flex justify-start text-[26px] gap-[4.75rem] ">
+      <div className="my-[3.75rem] flex justify-start relative items-start text-[26px] gap-[4.75rem] ">
         {/* //Remove className hidden from the classlist */}
-        <div className="flex gap-[1.5rem]">
-          <img src={sortIcon} alt="sort-icon" />
-          <p className="">Sort</p>
+        <div className="flex flex-col gap-[1.5rem] ">
+          <button onClick={sortTrips}>
+            <div className="flex justify-center relative gap-[1.5rem]">
+              <img src={sortIcon} alt="sort-icon" />
+              <p className="">Sort</p>
+            </div>
+          </button>
+          <ul
+            ref={refOne}
+            className={
+              "bg-transparent flex flex-col gap-[1rem] sort-list absolute z-50 top-[3rem] p-10 outline-none " +
+              (sortClicked ? "flex" : "hidden")
+            }
+          >
+            <li onClick={handleSelect}>By Price - Ascending</li>
+            <li onClick={handleSelect}>By Price - Descending</li>
+            <li onClick={handleSelect}>By Name - Ascending</li>
+            <li onClick={handleSelect}>By Name - Descending</li>
+          </ul>
         </div>
         <div className="flex gap-[1.5rem]">
           <button
@@ -58,7 +117,7 @@ export default function TripCategory() {
         {showFilter && <FilterCategories />}
         <div
           className={
-            "trip-category-filter-results all-trip-list grid justify-center grid-flow-col overflow-scroll gap-[2.2rem] md:h-[55rem] overflow-y-scroll px-5" +
+            "trip-category-filter-results all-trip-list grid justify-center grid-flow-col overflow-scroll gap-[2.2rem] md:h-[56rem] overflow-y-scroll px-5" +
             (showFilter ? " xl:w-[75%]" : "")
           }
         >
