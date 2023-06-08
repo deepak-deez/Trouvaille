@@ -12,7 +12,7 @@ export default function TripCard(props) {
   // console.log(props.data.image.url);
   const handleNavigate = (e) => {
     tripIDRef = e.target.getAttribute("data-trip-id");
-    navigate("/tripDetails", { state: tripIDRef });
+    navigate("/tripDetails/" + props.data._id);
   };
 
   // console.log(props);
@@ -28,9 +28,7 @@ export default function TripCard(props) {
         onClick={handleNavigate}
       />
       <div className="gap-5 hidden show-detail-text cursor-pointer">
-        <p data-trip-id={props.data._id} onClick={handleNavigate}>
-          Show detail
-        </p>
+        <Link to={"/tripDetails/" + props.data._id}>Show detail</Link>
         <img src={readMoreIcon} alt="read-more-icon" />
       </div>
       <div className="flex gap-2 review-stars">
