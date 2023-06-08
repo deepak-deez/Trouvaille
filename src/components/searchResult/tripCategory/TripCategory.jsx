@@ -24,10 +24,12 @@ export default function TripCategory(response) {
   }, []);
 
   const getTripCategory = async () => {
-    const response = await axios.get(`${process.env.REACT_APP_API_HOST}get-feature/category`);
+    const response = await axios.get(
+      `${process.env.REACT_APP_API_HOST}get-feature/category`
+    );
     setAllTripCategory(response.data.data);
-    console.log(response.data.data[0].icon);
-  }
+    console.log(response.data.data[0].title);
+  };
 
   useEffect(() => {
     getTripCategory(setAllTripCategory);
@@ -37,17 +39,16 @@ export default function TripCategory(response) {
     <section className="trip-category">
       <div className="flex justify-center 2xl:justify-between flex-wrap gap-10 lg:gap-12 trip-category-icons">
         {/* //Remove className "Details from the classlist" */}
-        {/* <img src={seaIcon} alt="sea-icon" />
-        <img src={hillsIcon} alt="hills-icon" />
-        <img src={forestIcon} alt="forest-icon" />
-        <img src={tropicalFallsIcon} alt="tropicalfalls-icon" />
-        <img src={desertIcon} alt="desert-icon" /> */}
-        {/* <img src={riversideIcon} alt="riverside-icon" /> */}
-        {allTripCategory?.map ((response,index) => {
-          return <img src={response.icon.url} alt="category"/>
+        {allTripCategory?.map((response, index) => {
+          return (
+            <div key={index} className="category">
+              <img src={response.icon.url} alt="category" className="category-icon" />
+              <p className="text-center text-2xl category-title">{response.title}</p>
+            </div>
+          );
         })}
       </div>
-      <div className="my-[3.75rem] flex justify-end text-[26px] gap-[4.75rem] hidden">
+      <div className="my-[3.75rem] flex justify-end text-[26px] gap-[4.75rem]">
         {/* //Remove className hidden from the classlist */}
         <div className="flex gap-[1.5rem]">
           <img src={sortIcon} alt="sort-icon" />
