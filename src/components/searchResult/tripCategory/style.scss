@@ -10,6 +10,11 @@ $bg-color-blue: #212b33;
 .trip-category {
   margin-top: 5rem;
   color: $color-primary-white;
+  .all-trip-list {
+    box-shadow: inset 0rem -10rem 5rem -10rem rgb(0, 0, 0);
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+  }
   @media screen and (min-width: 1024px) {
     .all-trip-list {
       overflow-x: hidden;
