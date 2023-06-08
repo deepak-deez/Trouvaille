@@ -49,6 +49,7 @@ export default function TripDetails(props) {
   const faqData = tripResponseData?.faq;
   const tripHighlightsData = tripResponseData?.tripHighlights;
   const tripCost = tripResponseData?.price;
+  const discountedPrice = tripResponseData?.discountedPrice;
   const locationName = tripResponseData?.title;
   const explorePlaces = tripResponseData?.placeNumber;
 
@@ -61,6 +62,8 @@ export default function TripDetails(props) {
     currentUserId,
     tripImage,
   };
+
+  console.log(tripResponseData);
 
   if (tripDetails?.data?.success) {
     return (
@@ -121,7 +124,7 @@ export default function TripDetails(props) {
             <PricingDetails
               bookingFormData={bookingFormData}
               maxGuests={tripResponseData.maximumGuests}
-              originalPrice={33000}
+              originalPrice={discountedPrice}
               discountedPrice={tripCost}
             />
           </div>
