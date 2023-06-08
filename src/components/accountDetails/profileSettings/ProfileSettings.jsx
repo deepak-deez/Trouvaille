@@ -39,14 +39,14 @@ export default function ProfileSettings() {
   if (userDetails.success) {
     return (
       <header className=" sm:mx-20 2xl:mx-[18.75rem]">
-        <div className="flex justify-between lg:text-[22px]">
+        <div className="flex justify-between px-10 xl:px-0 lg:text-[22px]">
           <h2 className="font-[600]">
             Settings/<span className="font-[400] grey-text"> My profile</span>
           </h2>
           <SignOut />
         </div>
-        <div className="flex flex-col sm:flex-row gap-[2rem] mt-[1.5rem] sm:mt-[2rem] profile-section ">
-          <div className="flex flex-col  h-[256px] w-[225px] overflow-hidden">
+        <div className="flex flex-col sm:flex-row gap-[2rem] items-center xl:items-start mt-[1.5rem] sm:mt-[2rem] profile-section ">
+          <div className="flex flex-col h-[256px] w-[225px] overflow-hidden">
             {profileImage && (
               <img
                 className={
@@ -91,8 +91,8 @@ export default function ProfileSettings() {
             </div>
           </div>
         </div>
-        <div className="mt-[5rem] xl:flex xl:justify-between xl:gap-14 lg:text-[20px]">
-          <ul className="hidden xl:flex flex-col gap-10">
+        <div className="xl:mt-[5rem] mt-[2rem] flex flex-col xl:flex-row xl:justify-between gap-8 xl:gap-14 lg:text-[20px]">
+          <ul className="flex xl:flex-col flex-row justify-center xl:justify-start gap-10 ">
             <li className="grey-text font-bold">Profile</li>
             <li className="grey-text">
               <Link to="/accountDetails">Account Details</Link>
