@@ -7,10 +7,11 @@ import defaultProfileImage from "../../../assets/images/accountDetails/profileSe
 import editIcon from "../../../assets/images/accountDetails/profileSettings/edit.svg";
 import accountSettingsImgChange from "../../../assets/images/accountDetails/profileSettings/edit-img.svg";
 import axios from "axios";
+import ProfileSideBar from "../profileSideBar/ProfileSideBar";
 
 import SignOut from "../../SignOut/SignOut";
 
-export default function EditProfile() {
+export default function EditProfile({ setActive }) {
   const [responseData, setResponseData] = useState();
   const [userFetchedData, setUserFetchedData] = useState();
   const [uploadImgBtnDisplay, setUploadImgBtnDisplay] = useState(false);
@@ -161,17 +162,7 @@ export default function EditProfile() {
           </div>
         </div>
         <div className="xl:mt-[5rem] mt-[2rem] flex flex-col xl:flex-row xl:justify-between gap-8 xl:gap-14 lg:text-[20px]">
-          <ul className="flex xl:flex-col flex-row justify-center xl:justify-start gap-10 ">
-            <li className="grey-text font-bold">
-              <Link to="/profile">Profile</Link>
-            </li>
-            <li className="grey-text">
-              <Link to="/accountDetails">Account Details</Link>
-            </li>
-            <li className="grey-text">
-              <Link to="/booking">My Booking</Link>
-            </li>
-          </ul>
+          <ProfileSideBar activePage={"profile"} setActive={setActive} />
           <div className="profile-details flex flex-col lg:text-[22px]  p-5 lg:p-10 2xl:p-[2.2rem] rounded-2xl xl:w-[80%] backdrop-blur-sm">
             <h2 className="font-[600]">Profile</h2>
             <h5 className="mb-[2rem] text-[1rem]">

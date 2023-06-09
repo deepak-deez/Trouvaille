@@ -4,10 +4,10 @@ import { useSelector } from "react-redux";
 import "./style.scss";
 import axios from "axios";
 import Swal from "sweetalert2";
-
+import ProfileSideBar from "../profileSideBar/ProfileSideBar";
 import SignOut from "../../SignOut/SignOut";
 
-export default function EditAccountDetails() {
+export default function EditAccountDetails({ setActive }) {
   const { userDetails } = useSelector((state) => state.logInUser);
   const [checkPass, setCheckPass] = useState(true);
   const [emptyFields, setEmptyFields] = useState();
@@ -61,17 +61,7 @@ export default function EditAccountDetails() {
           <SignOut />
         </div>
         <div className="mt-[3rem] xl:mt-[5rem] flex flex-col xl:flex-row xl:justify-between gap-8 xl:gap-14 lg:text-[20px] xl:flex ">
-          <ul className="flex xl:flex-col flex-row justify-center xl:justify-start gap-10 xl:flex ">
-            <li className="grey-text">
-              <Link to="/profile">Profile</Link>
-            </li>
-            <li className="grey-text font-bold">
-              <Link to="/accountDetails">Account Details</Link>
-            </li>
-            <li className="grey-text">
-              <Link to="/booking">My Booking</Link>
-            </li>
-          </ul>
+          <ProfileSideBar activePage={"accounts"} setActive={setActive} />
           <div className="edit-details flex flex-col lg:text-[22px]  p-5 lg:p-10 2xl:p-[2.2rem] rounded-2xl xl:w-[80%] backdrop-blur-sm">
             <h2 className="font-[600]">Login Details</h2>
             <h5 className="mb-[2rem] text-[1rem] grey-text">

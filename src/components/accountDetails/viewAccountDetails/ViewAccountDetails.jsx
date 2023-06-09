@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./style.scss";
-
+import ProfileSideBar from "../profileSideBar/ProfileSideBar";
 import SignOut from "../../SignOut/SignOut";
 
-export default function ViewAccountDetails() {
+export default function ViewAccountDetails({ setActive }) {
   const { userDetails } = useSelector((state) => state.logInUser);
 
   const userData = {
@@ -24,18 +24,7 @@ export default function ViewAccountDetails() {
           <SignOut />
         </div>
         <div className="mt-[3rem] xl:mt-[5rem] flex flex-col xl:flex-row xl:justify-between gap-8 xl:gap-14 lg:text-[20px]">
-          <ul className="flex xl:flex-col flex-row justify-center xl:justify-start gap-10">
-            <li className=" grey-text">
-              {" "}
-              <Link to="/profile">Profile</Link>
-            </li>
-            <li className=" grey-text font-bold">
-              <Link to="/accountDetails">Account Details</Link>
-            </li>
-            <li className=" grey-text">
-              <Link to="/booking">My Booking</Link>
-            </li>
-          </ul>
+          <ProfileSideBar activePage={"accounts"} setActive={setActive} />
           <div className="login-details flex flex-col lg:text-[22px]  p-5 lg:p-10 2xl:p-[2.2rem] rounded-2xl xl:w-[80%] backdrop-blur-sm">
             <h2 className="font-[600]">Login Details</h2>
             <h5 className="mb-[2rem] grey-text text-[1rem]">
@@ -55,12 +44,14 @@ export default function ViewAccountDetails() {
               defaultValue={userData.password.substring(0, 7)}
               disabled={true}
             />
-            <Link
-              to="/editAccDetails"
+            <button
+              onClick={() => {
+                setActive("edit-account");
+              }}
               className="mt-[4rem] rounded-2xl text-white bg-[#219653] text-center py-4 xl:py-[1.5rem] xl:mx-[6rem]"
             >
               EDIT ACCOUNT DETAILS
-            </Link>
+            </button>
           </div>
         </div>
       </header>

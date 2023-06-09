@@ -8,8 +8,9 @@ import defaultProfileImg from "../../../assets/images/accountDetails/profileSett
 import editIcon from "../../../assets/images/accountDetails/profileSettings/edit.svg";
 import axios from "axios";
 import SignOut from "../../SignOut/SignOut";
+import ProfileSideBar from "../profileSideBar/ProfileSideBar";
 
-export default function ProfileSettings() {
+export default function ProfileSettings({ setActive }) {
   const { userDetails } = useSelector((state) => state.logInUser);
   const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/Frontend-user/${userDetails.data.userDetails._id}`;
   const [responseData, setResponseData] = useState();
@@ -86,21 +87,19 @@ export default function ProfileSettings() {
             <div className="flex gap-[1.3rem] items-center">
               <img src={editIcon} alt="edit-icon" />
               <p className="lg:text-[1.6rem] underline grey-text">
-                <Link to="/editProfile">Edit Profile</Link>
+                <button
+                  onClick={() => {
+                    setActive("edit-profile");
+                  }}
+                >
+                  Edit Profile
+                </button>
               </p>
             </div>
           </div>
         </div>
         <div className="xl:mt-[5rem] mt-[2rem] flex flex-col xl:flex-row xl:justify-between gap-8 xl:gap-14 lg:text-[20px]">
-          <ul className="flex xl:flex-col flex-row justify-center xl:justify-start gap-10 ">
-            <li className="grey-text font-bold">Profile</li>
-            <li className="grey-text">
-              <Link to="/accountDetails">Account Details</Link>
-            </li>
-            <li className="grey-text">
-              <Link to="/booking">My Booking</Link>
-            </li>
-          </ul>
+          <ProfileSideBar activePage={"profile"} setActive={setActive} />
           <div className="profile-details flex flex-col lg:text-[22px]  p-5 lg:p-10 2xl:p-[2.2rem] rounded-2xl xl:w-[80%] backdrop-blur-sm">
             <h2 className="font-[600]">Profile</h2>
             <h5 className="mb-[2rem] text-[1rem]">
