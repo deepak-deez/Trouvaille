@@ -5,16 +5,15 @@ export default function FilterSubCategories({
   title,
   data,
   setFilterRequirements,
+  filterRequirements,
 }) {
   const [filterToggle, setFilterToggle] = useState(false);
 
   const handleCheckboxChange = (e) => {
     const checkbox = e.target.getAttribute("data-filter-name");
     const { checked, value } = e.target;
-    // console.log(value, " is ", checked);
     if (checked) {
-      // console.log(checkbox);
-      setFilterRequirements("It is Checked : " + checkbox);
+      setFilterRequirements("This is  " + checkbox);
     }
   };
 

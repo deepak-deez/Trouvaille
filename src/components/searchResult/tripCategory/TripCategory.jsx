@@ -8,23 +8,33 @@ import getAllApiData from "./logic";
 import "rc-slider/assets/index.css";
 import axios from "axios";
 
-export default function TripCategory(response) {
+export default function TripCategory() {
   let [allPackagesData, setAllPackagesData] = useState();
   const [allTripCategory, setAllTripCategory] = useState();
   const [showFilter, setShowFilter] = useState();
   const [showMore, setShowMore] = useState(true);
   const [sortClicked, setSortClicked] = useState(false);
-  const [filterRequierments, setFilterRequirements] = useState();
+  const [filterRequirements, setFilterRequirements] = useState();
   const refOne = useRef(null);
   let sortCriteria = [];
 
   useEffect(() => {
-    console.log(filterRequierments);
-  }, [filterRequierments]);
+    console.log(filterRequirements);
+  }, [filterRequirements]);
 
   useEffect(() => {
     getAllApiData(setAllPackagesData);
-
+    setFilterRequirements({
+      title: [],
+      maximumGuests: [],
+      travelType: [],
+      tripCategory: [],
+      ocassions: [],
+      amenities: [],
+      discountedPrice: [],
+      checkIn: [],
+      checkOut: [],
+    });
     document.addEventListener("click", hideOnClickOutside, true);
   }, []);
 
@@ -103,7 +113,6 @@ export default function TripCategory(response) {
         })}
       </div>
       <div className="my-[3.75rem] flex justify-start relative items-start text-[26px] gap-[4.75rem] ">
-        {/* //Remove className hidden from the classlist */}
         <div className="flex flex-col gap-[1.5rem] ">
           <button onClick={sortTrips}>
             <div className="flex justify-center relative gap-[1.5rem]">
@@ -137,7 +146,10 @@ export default function TripCategory(response) {
       </div>
       <div className="flex flex-col xl:flex-row gap-[2rem] ">
         {showFilter && (
-          <FilterCategories setFilterRequirements={setFilterRequirements} />
+          <FilterCategories
+            filterRequirements={filterRequirements}
+            setFilterRequirements={setFilterRequirements}
+          />
         )}
         <div
           className={
@@ -155,12 +167,7 @@ export default function TripCategory(response) {
         </div>
       </div>
       <div className="flex justify-end mt-[5rem] show-more">
-        <p onClick={showMoreToggler} className={showMore ? "" : " hidden "}>
-          See More
-        </p>
-        <p onClick={showMoreToggler} className={showMore ? " hidden " : ""}>
-          See Less
-        </p>
+        <p onClick={showMoreToggler}>{showMore ? "See More" : "See Less"}</p>
       </div>
     </section>
   );
