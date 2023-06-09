@@ -13,6 +13,7 @@ import Faqs from "../../components/tripDetails/faqs/Faqs";
 import getApiDatas, { handleProfileImagetoUrl } from "./logic";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import format from "date-fns/format";
 
 export default function TripDetails(props) {
   const location = useLocation();
@@ -44,6 +45,7 @@ export default function TripDetails(props) {
   const tripResponseData = tripDetails?.data.data[0];
 
   const acitivitiesData = tripResponseData?.activities;
+  const durationData = tripResponseData?.duration;
   const ammenitiesData = tripResponseData?.amenities;
   const ocassionData = tripResponseData?.occasions;
   const faqData = tripResponseData?.faq;
@@ -64,6 +66,38 @@ export default function TripDetails(props) {
   };
 
   console.log(tripResponseData);
+  console.log(durationData);
+
+  const duration = durationData && durationData?.split("-");
+  console.log(duration);
+  let firstDate = "";
+  let lastDate = "";
+  if (duration) {
+    console.log(duration[0]);
+    firstDate = new Date(duration[0]);
+    lastDate = new Date(duration[1]);
+    console.log(firstDate);
+    console.log(lastDate);
+  }
+
+  function getDatesInRange(startDate, endDate, steps = 1) {
+    const currentDate = new Date(startDate);
+    // console.log("date mine",date);
+    const dates = [];
+
+    while (currentDate <= new Date(endDate)) {
+      dates.push(format(new Date(startDate), "dd LLLL"));
+
+      currentDate.setUTCDate(startDate.getUTCDate() + steps);
+    }
+
+    return dates;
+  }
+  const durationRange = getDatesInRange(firstDate, lastDate);
+  console.log(durationRange);
+  const difference = Math.abs(lastDate - firstDate);
+  const d = difference / (1000 * 3600 * 24);
+  console.log(d);
 
   if (tripDetails?.data?.success) {
     return (
@@ -78,8 +112,17 @@ export default function TripDetails(props) {
           </ul>
           <h4 className="mb-[2rem] text-2xl">Dates</h4>
           <ul className="flex flex-wrap justify-center gap-5 xl:justify-between available-dates overflow-x-scroll">
-            {dates.map((data, index) => {
-              return <Dates day={data?.day} month={data?.month} key={index} />;
+            {durationRange.map((data, index) => {
+              {
+                console.log(data);
+              }
+              {
+                console.log(typeof data);
+              }
+              {
+                // console.log(data.split(''));
+              }
+              // return <Dates day={data[0]} key={index} />;
             })}
           </ul>
           <p className="my-[3rem] text-[#B4BBC1] text-[22px]">
