@@ -9,25 +9,34 @@ export default function FilterCategories() {
     process.env.REACT_APP_API_HOST +
     "get-options/category/occasion/amenity/travel";
 
-  const [filterData, setFilterData] = useState();
+  const [filterResponse, setFilterResponse] = useState();
   const [ocassionData, setOcassionData] = useState();
   const [ammenityData, setAmmenityData] = useState();
   const [travelTypeData, setTravelTypeData] = useState();
 
   useEffect(() => {
     getFilterData();
-    setFilterDatas();
   }, []);
+
+  useEffect(() => {
+    setFilterDatas();
+  }, [filterResponse]);
 
   const getFilterData = async () => {
     const response = await axios.get(filterApiUrl);
-    setFilterData(response?.data?.data);
+    setFilterResponse(response?.data?.data);
   };
 
   const setFilterDatas = () => {
-    setOcassionData(filterData?.filter((data) => data?.purpose === "occasion"));
-    setTravelTypeData(filterData?.filter((data) => data?.purpose === "travel"));
-    setAmmenityData(filterData?.filter((data) => data?.purpose === "amenity"));
+    setOcassionData(
+      filterResponse?.filter((data) => data?.purpose === "occasion")
+    );
+    setTravelTypeData(
+      filterResponse?.filter((data) => data?.purpose === "travel")
+    );
+    setAmmenityData(
+      filterResponse?.filter((data) => data?.purpose === "amenity")
+    );
   };
 
   return (
