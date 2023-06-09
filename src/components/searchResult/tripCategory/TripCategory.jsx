@@ -15,8 +15,13 @@ export default function TripCategory(response) {
   const [showMore, setShowMore] = useState(true);
   const [sortActive, setSortActive] = useState(false);
   const [sortClicked, setSortClicked] = useState(false);
+  const [filterRequierments, setFilterRequirements] = useState();
   const refOne = useRef(null);
   let sortCriteria = [];
+
+  useEffect(() => {
+    console.log(filterRequierments);
+  }, [filterRequierments]);
 
   useEffect(() => {
     getAllApiData(setAllPackagesData);
@@ -129,7 +134,9 @@ export default function TripCategory(response) {
         </div>
       </div>
       <div className="flex flex-col xl:flex-row gap-[2rem] ">
-        {showFilter && <FilterCategories />}
+        {showFilter && (
+          <FilterCategories setFilterRequirements={setFilterRequirements} />
+        )}
         <div
           className={
             "trip-category-filter-results all-trip-list grid justify-center grid-flow-col overflow-scroll gap-[2.2rem] md:h-[56rem] overflow-y-scroll px-5" +
