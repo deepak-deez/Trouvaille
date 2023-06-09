@@ -4,7 +4,10 @@ import PriceSlider from "./priceSlider/PriceSlider";
 import FilterSubCategories from "./filterSubCategories/FilterSubCategories";
 import axios from "axios";
 
-export default function FilterCategories({ setFilterRequirements }) {
+export default function FilterCategories({
+  setFilterRequirements,
+  filterRequirements,
+}) {
   const filterApiUrl =
     process.env.REACT_APP_API_HOST +
     "get-options/category/occasion/amenity/travel";
@@ -46,16 +49,19 @@ export default function FilterCategories({ setFilterRequirements }) {
         title={"Ocassion"}
         data={ocassionData}
         setFilterRequirements={setFilterRequirements}
+        filterRequirements={filterRequirements}
       />
       <FilterSubCategories
         title={"Amenity"}
         data={ammenityData}
         setFilterRequirements={setFilterRequirements}
+        filterRequirements={filterRequirements}
       />
       <FilterSubCategories
         title={"Travel Type"}
         data={travelTypeData}
         setFilterRequirements={setFilterRequirements}
+        filterRequirements={filterRequirements}
       />
     </div>
   );
