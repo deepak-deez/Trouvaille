@@ -23,7 +23,7 @@ export default function FilterSubCategories({
     }
     if (!checked) {
       const setFilterRequirementsCopy = { ...filterRequirements }; //Spreading the state object
-      currentSelections = setFilterRequirementsCopy[title]; //Getting the array of the current filter category
+      currentSelections = setFilterRequirementsCopy[title]; //Getting the array of the current filter category`
       console.log(currentSelections); //Logging the array
       const index = currentSelections.indexOf(checkboxValue); //Getting the index of the checkbox value
       if (index > -1) {
