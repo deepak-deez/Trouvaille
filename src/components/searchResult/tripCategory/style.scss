@@ -61,19 +61,22 @@ $bg-color-blue: #212b33;
       cursor: pointer;
     }
   }
+  .category {
+    .category-icon {
+      border: solid 5px rgba(255, 166, 0, 0);
+      border-radius: 30%;
+    }
+  }
+  .category:hover {
+    .category-title {
+      color: orange;
+    }
+    .category-icon {
+      border: solid 5px orange;
+      border-radius: 30%;
+    }
+  }
 }
-
-.category:hover {
- .category-title {
-  color: orange;
- }
- .category-icon {
-  // border-color: orange;
-  border: solid 2px orange;
-  border-radius: 30%;
- }
-}
-
 
 @media screen and (min-width: 1024px) {
   .trip-category {
