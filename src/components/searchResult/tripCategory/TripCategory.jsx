@@ -4,8 +4,9 @@ import sortIcon from "../../../assets/images/searchResult/tripCategory/sort-icon
 import filterIcon from "../../../assets/images/searchResult/tripCategory/filter-icon.svg";
 import TripCard from "../tripCard/TripCard";
 import FilterCategories from "../filterCategories/FilterCategories";
-import getAllApiData from "./logic";
+import { getAllApiData, getFilteredData } from "./logic";
 import "rc-slider/assets/index.css";
+import defaultCategoryImg from "../../../assets/images/searchResult/tripCategory/hills-icon.svg";
 import axios from "axios";
 
 export default function TripCategory() {
@@ -16,26 +17,23 @@ export default function TripCategory() {
   const [sortActive, setSortActive] = useState(false);
   const [sortClicked, setSortClicked] = useState(false);
   const [filterRequirements, setFilterRequirements] = useState({
-    title: [],
-    maximumGuests: [],
+    title: "",
+    maximumGuests: "",
     travelType: [],
     tripCategory: [],
-    ocassions: [],
+    occasions: [],
     amenities: [],
-    discountedPrice: [],
-    checkIn: [],
-    checkOut: [],
+    price: "",
+    // checkIn: [],
+    // checkOut: [],
   });
   const refOne = useRef(null);
   let sortCriteria = [];
 
   useEffect(() => {
     console.log(filterRequirements);
-    const filterPackagesURl =
-      process.env.REACT_APP_API_HOST + "get-filtered-feature/trip-package";
     try {
-      const response = axios.post(filterPackagesURl, filterRequirements);
-      console.log(response);
+      getFilteredData(filterRequirements, setAllPackagesData);
     } catch (error) {
       console.log(error);
     }
@@ -104,11 +102,16 @@ export default function TripCategory() {
       <div className="flex justify-center 2xl:justify-between flex-wrap gap-10 lg:gap-12 trip-category-icons">
         {/* //Remove className "Details from the classlist" */}
         {allTripCategory?.map((response, index) => {
+          console.log(response.icon.url);
+          let imgSrc;
+          response.icon.url
+            ? (imgSrc = response.icon.url)
+            : (imgSrc = defaultCategoryImg);
           return (
             <div key={index} className="category">
               <img
-                // src={response.icon.url}
-                alt="category"
+                src={imgSrc}
+                alt={response.title}
                 className="category-icon"
               />
               <p className="text-center text-2xl category-title">
