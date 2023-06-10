@@ -46,19 +46,19 @@ export default function FilterCategories({
     <div className="trip-category-filters flex flex-col lg:flex-row justify-between xl:justify-normal xl:flex-col gap-5 xl:gap-20 xl:w-[25%] p-10 lg:p-10 2xl:p-[2rem] xl:pb-10 xl:h-[56rem] overflow-y-scroll bg-[#212b33] rounded-[2rem]">
       <PriceSlider />
       <FilterSubCategories
-        title={"Ocassion"}
+        title={"ocassions"}
         data={ocassionData}
         setFilterRequirements={setFilterRequirements}
         filterRequirements={filterRequirements}
       />
       <FilterSubCategories
-        title={"Amenity"}
+        title={"amenities"}
         data={ammenityData}
         setFilterRequirements={setFilterRequirements}
         filterRequirements={filterRequirements}
       />
       <FilterSubCategories
-        title={"Travel Type"}
+        title={"travelType"}
         data={travelTypeData}
         setFilterRequirements={setFilterRequirements}
         filterRequirements={filterRequirements}

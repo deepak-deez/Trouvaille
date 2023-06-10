@@ -14,27 +14,34 @@ export default function TripCategory() {
   const [showFilter, setShowFilter] = useState();
   const [showMore, setShowMore] = useState(true);
   const [sortClicked, setSortClicked] = useState(false);
-  const [filterRequirements, setFilterRequirements] = useState();
+  const [filterRequirements, setFilterRequirements] = useState({
+    title: [],
+    maximumGuests: [],
+    travelType: [],
+    tripCategory: [],
+    ocassions: [],
+    amenities: [],
+    discountedPrice: [],
+    checkIn: [],
+    checkOut: [],
+  });
   const refOne = useRef(null);
   let sortCriteria = [];
 
   useEffect(() => {
     console.log(filterRequirements);
+    const filterPackagesURl =
+      process.env.REACT_APP_API_HOST + "get-filtered-feature/trip-package";
+    try {
+      const response = axios.post(filterPackagesURl, filterRequirements);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   }, [filterRequirements]);
 
   useEffect(() => {
     getAllApiData(setAllPackagesData);
-    setFilterRequirements({
-      title: [],
-      maximumGuests: [],
-      travelType: [],
-      tripCategory: [],
-      ocassions: [],
-      amenities: [],
-      discountedPrice: [],
-      checkIn: [],
-      checkOut: [],
-    });
     document.addEventListener("click", hideOnClickOutside, true);
   }, []);
 
@@ -86,7 +93,6 @@ export default function TripCategory() {
       `${process.env.REACT_APP_API_HOST}get-feature/category`
     );
     setAllTripCategory(response.data.data);
-    console.log(response.data.data[0].title);
   };
 
   useEffect(() => {
