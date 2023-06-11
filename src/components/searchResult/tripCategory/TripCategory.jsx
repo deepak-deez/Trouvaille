@@ -12,7 +12,7 @@ import axios from "axios";
 export default function TripCategory() {
   let [allPackagesData, setAllPackagesData] = useState();
   const [allTripCategory, setAllTripCategory] = useState();
-  const [showFilter, setShowFilter] = useState();
+  const [showFilter, setShowFilter] = useState(false);
   const [showMore, setShowMore] = useState(true);
   const [sortActive, setSortActive] = useState(false);
   const [sortClicked, setSortClicked] = useState(false);
@@ -152,13 +152,19 @@ export default function TripCategory() {
           <p className="">Filter</p>
         </div>
       </div>
-      <div className="flex flex-col xl:flex-row gap-[2rem] ">
-        {showFilter && (
+      <div className={"flex flex-col xl:flex-row gap-[2rem] "}>
+        <div
+          className={
+            "trip-category-filters flex flex-col lg:flex-row justify-between xl:justify-normal xl:flex-col gap-5 xl:gap-20 xl:w-[25%] p-10 lg:p-10 2xl:p-[2rem] xl:pb-10 xl:h-[56rem] overflow-y-scroll bg-[#212b33] rounded-[2rem] " +
+            (showFilter ? "" : "hidden")
+          }
+        >
           <FilterCategories
             filterRequirements={filterRequirements}
             setFilterRequirements={setFilterRequirements}
           />
-        )}
+        </div>
+
         <div
           className={
             "trip-category-filter-results all-trip-list grid justify-center grid-flow-col overflow-scroll gap-[2.2rem] md:h-[56rem] overflow-y-scroll px-5" +

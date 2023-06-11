@@ -6,6 +6,7 @@ import "./style.scss";
 export default function FilterSubCategories({
   title,
   data,
+  name,
   setFilterRequirements,
   filterRequirements,
 }) {
@@ -13,9 +14,10 @@ export default function FilterSubCategories({
 
   const handleCheckboxChange = (e) => {
     let currentSelections;
-    const checkboxValue = e.target.getAttribute("data-filter-name");
+    const checkboxValue = e.target.name;
     const { checked, value } = e.target; //destructuring the event target
     if (checked) {
+      console.log(checkboxValue);
       const setFilterRequirementsCopy = { ...filterRequirements }; //Spreading the state object
       currentSelections = setFilterRequirementsCopy[title]; //Getting the array of the current filter category
       console.log(currentSelections); //Logging the array
@@ -40,7 +42,7 @@ export default function FilterSubCategories({
   return (
     <div className="lg:w-[12rem] xl:w-[auto]">
       <div className="flex justify-between ">
-        <h4>{title}</h4>
+        <h4>{name}</h4>
         <button
           className={filterToggle ? " rotate-180 " : ""}
           onClick={() => {
@@ -64,8 +66,8 @@ export default function FilterSubCategories({
                 type="checkbox"
                 className="filter-checkboxes bg-transparent border border-white text-white"
                 id={"filter_" + data.title}
-                data-filter-name={data.title}
                 onChange={handleCheckboxChange}
+                name={data.title}
               />
               <label className="my-auto" htmlFor={"filter_" + data.title}>
                 {data.title}
