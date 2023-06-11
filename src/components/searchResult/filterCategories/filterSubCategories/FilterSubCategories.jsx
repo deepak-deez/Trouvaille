@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import dropdownIcon from "../../../../assets/images/searchResult/tripCategory/drop-drown-icon.svg";
 import Checkbox from "@mui/material/Checkbox";
 import "./style.scss";
+import { set } from "date-fns";
 
 export default function FilterSubCategories({
   title,
@@ -11,6 +12,19 @@ export default function FilterSubCategories({
   filterRequirements,
 }) {
   const [filterToggle, setFilterToggle] = useState(false);
+  const [closingAnimation, setClosingAnimation] = useState(false);
+
+  const handleStateChange = () => {
+    if (filterToggle) {
+      setClosingAnimation(true);
+      setTimeout(() => {
+        setFilterToggle(!filterToggle);
+      }, 500);
+    } else {
+      setFilterToggle(!filterToggle);
+      setClosingAnimation(false);
+    }
+  };
 
   const handleCheckboxChange = (e) => {
     let currentSelections;
@@ -45,9 +59,7 @@ export default function FilterSubCategories({
         <h4>{name}</h4>
         <button
           className={filterToggle ? " rotate-180 " : ""}
-          onClick={() => {
-            setFilterToggle(!filterToggle);
-          }}
+          onClick={handleStateChange}
         >
           <img src={dropdownIcon} alt="dropdownIcon" />
         </button>
@@ -55,8 +67,9 @@ export default function FilterSubCategories({
 
       <ul
         className={
-          "flex flex-col gap-5 xl:gap-[1.8rem] xl:text-[20px] mt-[1rem] " +
-          (!filterToggle ? "hidden" : "")
+          "flex flex-col gap-5 xl:gap-[1.8rem] xl:text-[20px] mt-[1rem] simple-openning-animation-y " +
+          (!filterToggle ? " hidden " : "") +
+          (closingAnimation ? " simple-closing-animation-y" : "")
         }
       >
         {data?.map((data, index) => {
