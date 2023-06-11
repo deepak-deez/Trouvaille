@@ -13,6 +13,7 @@ export default function TripCategory() {
   let [allPackagesData, setAllPackagesData] = useState();
   const [allTripCategory, setAllTripCategory] = useState();
   const [showFilter, setShowFilter] = useState(false);
+  const [closingAnimation, setClosingAnimation] = useState(false);
   const [showMore, setShowMore] = useState(true);
   const [sortActive, setSortActive] = useState(false);
   const [sortClicked, setSortClicked] = useState(false);
@@ -70,6 +71,18 @@ export default function TripCategory() {
       setAllPackagesData(
         [...allPackagesData].sort((a, b) => (a.title > b.title ? -1 : 1))
       );
+    }
+  };
+
+  const handleFilterStateChange = () => {
+    if (showFilter) {
+      setClosingAnimation(true);
+      setTimeout(() => {
+        setShowFilter(false);
+        setClosingAnimation(false);
+      }, 500);
+    } else {
+      setShowFilter(true);
     }
   };
 
@@ -142,11 +155,7 @@ export default function TripCategory() {
           </ul>
         </div>
         <div className="flex gap-[1.5rem]">
-          <button
-            onClick={() => {
-              setShowFilter(!showFilter);
-            }}
-          >
+          <button onClick={handleFilterStateChange}>
             <img src={filterIcon} alt="filter-icon" />
           </button>
           <p className="">Filter</p>
@@ -155,8 +164,9 @@ export default function TripCategory() {
       <div className={"flex flex-col xl:flex-row gap-[2rem] "}>
         <div
           className={
-            "trip-category-filters flex flex-col lg:flex-row justify-between xl:justify-normal xl:flex-col gap-5 xl:gap-20 xl:w-[25%] p-10 lg:p-10 2xl:p-[2rem] xl:pb-10 xl:h-[56rem] overflow-y-scroll bg-[#212b33] rounded-[2rem] " +
-            (showFilter ? "" : "hidden")
+            "trip-category-filters flex flex-col lg:flex-row justify-between xl:justify-normal xl:flex-col gap-5 xl:gap-20 xl:w-[25%] p-10 lg:p-10 2xl:p-[2rem] xl:pb-10 xl:h-[56rem] overflow-y-scroll bg-[#212b33] rounded-[2rem]  openning-animation-y " +
+            (showFilter ? "" : "hidden") +
+            (closingAnimation ? " closing-animation-y " : "")
           }
         >
           <FilterCategories
@@ -167,7 +177,7 @@ export default function TripCategory() {
 
         <div
           className={
-            "trip-category-filter-results all-trip-list grid justify-center grid-flow-col overflow-scroll gap-[2.2rem] md:h-[56rem] overflow-y-scroll px-5" +
+            "trip-category-filter-results all-trip-list grid justify-center grid-flow-col overflow-scroll gap-[2.2rem] md:h-[56rem] overflow-y-scroll px-5 transition-all duration-300" +
             (showFilter ? " xl:w-[75%]" : "")
           }
         >
