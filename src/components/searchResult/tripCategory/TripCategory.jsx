@@ -102,7 +102,6 @@ export default function TripCategory() {
       <div className="flex justify-center 2xl:justify-between flex-wrap gap-10 lg:gap-12 trip-category-icons">
         {/* //Remove className "Details from the classlist" */}
         {allTripCategory?.map((response, index) => {
-          console.log(response.icon.url);
           let imgSrc;
           response.icon.url
             ? (imgSrc = response.icon.url)
