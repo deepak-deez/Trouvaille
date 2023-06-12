@@ -14,7 +14,6 @@ export default function TripCard(props) {
     tripIDRef = e.target.getAttribute("data-trip-id");
     navigate("/tripDetails/" + props.data._id);
   };
-
   // console.log(props);
   return (
     <div className="filter-results-cards">
@@ -22,7 +21,7 @@ export default function TripCard(props) {
       {/* Remove the classname Hidden from the classlist */}
       <img
         className="filter-results-card-img cursor-pointer"
-        // src={props.data.image.url}
+        src={props.data.image}
         alt="trip-category-img"
         data-trip-id={props.data._id}
         onClick={handleNavigate}

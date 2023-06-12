@@ -13,7 +13,7 @@ const Details = (props) => {
   const otherPassengerDetails = [];
   const bookingFormDetails = {
     tripId: props.bookingFormData.currentTripId.id,
-    userId: props.bookingFormData.currentUserId.id,
+    userId: props.bookingFormData.currentUserId,
     title: props.bookingFormData.locationName,
     phone: props.bookingFormData.phNumber,
     email: props.bookingFormData.email,
@@ -63,7 +63,6 @@ const Details = (props) => {
         `${process.env.REACT_APP_API_HOST}trip-booking`,
         bookingFormDetails
       );
-      console.log("My res", response);
       setsucessModal(!sucessModal);
     } catch (err) {
       swal.fire({
