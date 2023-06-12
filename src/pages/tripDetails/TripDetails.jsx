@@ -63,8 +63,6 @@ export default function TripDetails(props) {
     tripImage,
   };
 
-  console.log(tripResponseData?.image);
-
   if (tripDetails?.data?.success) {
     return (
       <section className="trip-details" style={backgroundImg}>

@@ -9,12 +9,11 @@ export default function TripCard(props) {
   let tripIDRef = useRef();
   const navigate = useNavigate();
 
-  // console.log(props.data.image.url);
   const handleNavigate = (e) => {
     tripIDRef = e.target.getAttribute("data-trip-id");
     navigate("/tripDetails/" + props.data._id);
   };
-  // console.log(props);
+
   return (
     <div className="filter-results-cards">
       <img className="share-icon" src={shareIcon} alt="share-icon" />

@@ -12,7 +12,6 @@ export default function TripList() {
   useEffect(() => {
     getAllApiData(userId, setUserBookingDetails);
   }, []);
-  console.log(userBookingDetails?.data?.data[1]._id);
   if (userBookingDetails?.data?.success) {
     return (
       <section className="flex flex-col trip-list-container justify-center items-center pb-[20rem]">
