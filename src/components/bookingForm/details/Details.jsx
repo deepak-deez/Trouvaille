@@ -9,19 +9,23 @@ import axios from "axios";
 
 const Details = (props) => {
   const address = useRef();
-
+  const userName = useRef();
   const otherPassengerDetails = [];
-
   const bookingFormDetails = {
-    tripId: props.bookingFormData.currentTripId,
+    tripId: props.bookingFormData.currentTripId.id,
     userId: props.bookingFormData.currentUserId,
     title: props.bookingFormData.locationName,
-    name: props.bookingFormData.name,
     phone: props.bookingFormData.phNumber,
     email: props.bookingFormData.email,
-    image: props.bookingFormData.tripImage,
+    bookingStatus: "pending",
+    deleteReason: "",
+    deleteStatus: false,
+    cancellationStatus: false,
   };
+
   const submitBtnHandler = async () => {
+    console.log(bookingFormDetails);
+
     const otherPassengerSelector = document.querySelectorAll(
       ".other-passenger-details"
     );
@@ -52,6 +56,7 @@ const Details = (props) => {
 
     bookingFormDetails["otherPassenger"] = otherPassengerDetails;
     bookingFormDetails["address"] = address.current.value;
+    bookingFormDetails["name"] = userName.current.value;
 
     try {
       const response = await axios.post(
@@ -100,8 +105,7 @@ const Details = (props) => {
             className="input-fields lg:px-[39px] px-[15px] py-[20px] text-[20px] lg:py-[32px] mt-[9px]"
             type="text"
             placeholder="Full Name"
-            defaultValue={bookingFormDetails.name}
-            disabled={true}
+            ref={userName}
           />
           <input
             className=" input-fields lg:px-[39px] lg:py-[32px] text-[20px] px-[15px] py-[20px] lg:mt-[60px] mt-[30px] w-[100%]"
@@ -128,13 +132,10 @@ const Details = (props) => {
             <button
               onClick={() => {
                 setpassenger(!passenger);
-                console.log(passenger);
                 if (passenger) {
-                  console.log("true");
                   passengerCount = props.bookingFormData.guestsSelected;
                   handlePassengerHeadCount();
                 } else {
-                  console.log("false");
                   passengerCount = 0;
                   handlePassengerHeadCount();
                 }

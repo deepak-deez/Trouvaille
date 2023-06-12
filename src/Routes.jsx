@@ -40,7 +40,10 @@ const Router = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/editProfile" element={<EditProfile />} />
         <Route path="/booking" element={<BookingList />} />
-        <Route path="/bookingDetails" element={<BookingDetails />} />
+        <Route
+          path="/bookingDetails/:userId/:bookingId"
+          element={<BookingDetails />}
+        />
         <Route path="*" element={<PageNotAvailable />} />
       </Routes>
       <Footer />

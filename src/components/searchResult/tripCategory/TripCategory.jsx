@@ -32,7 +32,6 @@ export default function TripCategory(response) {
       `${process.env.REACT_APP_API_HOST}get-feature/category`
     );
     setAllTripCategory(response.data.data);
-    console.log(response.data.data[0].title);
   };
 
   useEffect(() => {
@@ -47,7 +46,7 @@ export default function TripCategory(response) {
           return (
             <div key={index} className="category">
               <img
-                src={response.icon.url}
+                // src={response.icon.url}
                 alt="category"
                 className="category-icon"
               />

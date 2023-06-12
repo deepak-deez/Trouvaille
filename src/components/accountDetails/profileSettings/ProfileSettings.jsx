@@ -15,15 +15,6 @@ export default function ProfileSettings({ setActive }) {
   const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/Frontend-user/${userDetails.data.userDetails._id}`;
   const [responseData, setResponseData] = useState();
 
-  const profileImage = responseData?.data.data[0].userDetails?.image.url;
-  const userLcoation = responseData?.data.data[0].userDetails?.place;
-  const userName = responseData?.data.data[0].userDetails?.name;
-  const userDOB = responseData?.data.data[0].userDetails?.DOB;
-  const userGender = responseData?.data.data[0].userDetails?.gender;
-  const userMaritalStatus =
-    responseData?.data.data[0].userDetails?.maritalStatus;
-  const userJoiningYear = responseData?.data.data[0]?.joiningYear;
-
   const updateDataHandler = async () => {
     try {
       const getUpdatedData = await axios.get(dataBaseUrl);
@@ -32,10 +23,17 @@ export default function ProfileSettings({ setActive }) {
       return err;
     }
   };
-
   useEffect(() => {
     updateDataHandler();
   }, []);
+  const profileImage = responseData?.data.data[0].userDetails?.image.url;
+  const userLcoation = responseData?.data.data[0].userDetails?.place;
+  const userName = responseData?.data.data[0].userDetails?.name;
+  const userDOB = responseData?.data.data[0].userDetails?.DOB;
+  const userGender = responseData?.data.data[0].userDetails?.gender;
+  const userMaritalStatus =
+    responseData?.data.data[0].userDetails?.maritalStatus;
+  const userJoiningYear = responseData?.data.data[0]?.joiningYear;
 
   if (userDetails.success) {
     return (

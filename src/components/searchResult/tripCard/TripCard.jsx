@@ -9,20 +9,18 @@ export default function TripCard(props) {
   let tripIDRef = useRef();
   const navigate = useNavigate();
 
-  // console.log(props.data.image.url);
   const handleNavigate = (e) => {
     tripIDRef = e.target.getAttribute("data-trip-id");
     navigate("/tripDetails/" + props.data._id);
   };
 
-  // console.log(props);
   return (
     <div className="filter-results-cards">
       <img className="share-icon" src={shareIcon} alt="share-icon" />
       {/* Remove the classname Hidden from the classlist */}
       <img
         className="filter-results-card-img cursor-pointer"
-        src={props.data.image.url}
+        src={props.data.image}
         alt="trip-category-img"
         data-trip-id={props.data._id}
         onClick={handleNavigate}

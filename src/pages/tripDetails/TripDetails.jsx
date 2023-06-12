@@ -26,7 +26,7 @@ export default function TripDetails(props) {
   const currentTripId = useParams();
   const currentUserId = useSelector((state) => state.logInUser).userDetails.data
     .userDetails._id;
-  const tripImage = tripDetails?.data.data[0].image?.url;
+  const tripImage = tripDetails?.image;
   const email = userDetails?.data.userDetails.email;
   const phNumber = userDetails?.data.userDetails.phone;
   const name = userDetails?.data.userDetails.name;

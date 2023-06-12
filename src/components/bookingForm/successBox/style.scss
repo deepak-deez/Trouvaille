@@ -9,8 +9,8 @@ $button-color-green-v2: #022f15;
 .booking-form {
   .success-section {
     position: fixed;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     top: 0;
     background-color: rgba(0, 0, 0, 0.362);
     backdrop-filter: blur(20px);
