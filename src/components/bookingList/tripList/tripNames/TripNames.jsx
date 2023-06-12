@@ -10,7 +10,10 @@ export default function TripNames(props) {
       bookingId: e.target.getAttribute("data-booking-id"),
       userId: props.userId,
     };
-    navigate("/bookingDetails", { state: userDetails });
+    navigate(
+      "/bookingDetails/" + userDetails.userId + "/" + userDetails.bookingId,
+      { state: userDetails }
+    );
   };
 
   return (
