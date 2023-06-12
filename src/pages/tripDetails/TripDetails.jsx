@@ -13,6 +13,7 @@ import Faqs from "../../components/tripDetails/faqs/Faqs";
 import getApiDatas, { handleProfileImagetoUrl } from "./logic";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import format from "date-fns/format";
 
 export default function TripDetails(props) {
   const location = useLocation();
@@ -21,6 +22,7 @@ export default function TripDetails(props) {
   const [ocassionImgData, setOcassionImgData] = useState();
   const [ammenityImgData, setAmmenityImgData] = useState();
   const [userDatabase, setUserdatabase] = useState();
+  // const [toShow, setToShow] = useState(false);
   const currentTripId = useParams();
   const currentUserId = useSelector((state) => state.logInUser).userDetails.data
     .userDetails._id;
@@ -44,6 +46,7 @@ export default function TripDetails(props) {
   const tripResponseData = tripDetails?.data.data[0];
 
   const acitivitiesData = tripResponseData?.activities;
+  const durationData = tripResponseData?.duration;
   const ammenitiesData = tripResponseData?.amenities;
   const ocassionData = tripResponseData?.occasions;
   const faqData = tripResponseData?.faq;
@@ -64,6 +67,7 @@ export default function TripDetails(props) {
   };
 
   console.log(tripResponseData);
+  console.log(acitivitiesData);
 
   if (tripDetails?.data?.success) {
     return (
@@ -78,10 +82,19 @@ export default function TripDetails(props) {
           </ul>
           <h4 className="mb-[2rem] text-2xl">Dates</h4>
           <ul className="flex flex-wrap justify-center gap-5 xl:justify-between available-dates overflow-x-scroll">
-            {dates.map((data, index) => {
-              return <Dates day={data?.day} month={data?.month} key={index} />;
+            {acitivitiesData.map((data, index) => {
+              {
+                console.log(data.date);
+                console.log(data.details);
+              }
+              return (
+                <>
+                  <Dates day={data.date} key={index} detail={data.details} />
+                </>
+              );
             })}
           </ul>
+
           <p className="my-[3rem] text-[#B4BBC1] text-[22px]">
             Till now 4 suits empty for this day, hurry up!
           </p>
