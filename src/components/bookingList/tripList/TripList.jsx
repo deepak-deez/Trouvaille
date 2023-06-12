@@ -13,7 +13,7 @@ export default function TripList() {
   useEffect(() => {
     getAllApiData(userId, setUserBookingDetails);
   }, []);
-
+  console.log(userBookingDetails);
   return (
     <section className="flex flex-col trip-list-container justify-center items-center pb-[20rem]">
       <h2 className="md:text-[64px] text-center mt-[10px] lg:mt-[30px] text-[50px]">

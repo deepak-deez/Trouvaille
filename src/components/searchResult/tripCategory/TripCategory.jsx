@@ -91,7 +91,7 @@ export default function TripCategory(response) {
           return (
             <div key={index} className="category">
               <img
-                src={response.icon.url}
+                // src={response.icon.url}
                 alt="category"
                 className="category-icon"
               />

@@ -22,7 +22,7 @@ export default function TripCard(props) {
       {/* Remove the classname Hidden from the classlist */}
       <img
         className="filter-results-card-img cursor-pointer"
-        src={props.data.image.url}
+        // src={props.data.image.url}
         alt="trip-category-img"
         data-trip-id={props.data._id}
         onClick={handleNavigate}
