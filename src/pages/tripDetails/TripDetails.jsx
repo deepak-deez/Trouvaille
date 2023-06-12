@@ -22,6 +22,7 @@ export default function TripDetails(props) {
   const [ocassionImgData, setOcassionImgData] = useState();
   const [ammenityImgData, setAmmenityImgData] = useState();
   const [userDatabase, setUserdatabase] = useState();
+  // const [toShow, setToShow] = useState(false);
   const currentTripId = useParams();
   const currentUserId = useSelector((state) => state.logInUser).userDetails.data
     .userDetails._id;
@@ -66,38 +67,7 @@ export default function TripDetails(props) {
   };
 
   console.log(tripResponseData);
-  console.log(durationData);
-
-  const duration = durationData && durationData?.split("-");
-  console.log(duration);
-  let firstDate = "";
-  let lastDate = "";
-  if (duration) {
-    console.log(duration[0]);
-    firstDate = new Date(duration[0]);
-    lastDate = new Date(duration[1]);
-    console.log(firstDate);
-    console.log(lastDate);
-  }
-
-  function getDatesInRange(startDate, endDate, steps = 1) {
-    const currentDate = new Date(startDate);
-    // console.log("date mine",date);
-    const dates = [];
-
-    while (currentDate <= new Date(endDate)) {
-      dates.push(format(new Date(startDate), "dd LLLL"));
-
-      currentDate.setUTCDate(startDate.getUTCDate() + steps);
-    }
-
-    return dates;
-  }
-  const durationRange = getDatesInRange(firstDate, lastDate);
-  console.log(durationRange);
-  const difference = Math.abs(lastDate - firstDate);
-  const d = difference / (1000 * 3600 * 24);
-  console.log(d);
+  console.log(acitivitiesData);
 
   if (tripDetails?.data?.success) {
     return (
@@ -112,19 +82,19 @@ export default function TripDetails(props) {
           </ul>
           <h4 className="mb-[2rem] text-2xl">Dates</h4>
           <ul className="flex flex-wrap justify-center gap-5 xl:justify-between available-dates overflow-x-scroll">
-            {durationRange.map((data, index) => {
+            {acitivitiesData.map((data, index) => {
               {
-                console.log(data);
+                console.log(data.date);
+                console.log(data.details);
               }
-              {
-                console.log(typeof data);
-              }
-              {
-                // console.log(data.split(''));
-              }
-              // return <Dates day={data[0]} key={index} />;
+              return (
+                <>
+                  <Dates day={data.date} key={index} detail={data.details} />
+                </>
+              );
             })}
           </ul>
+
           <p className="my-[3rem] text-[#B4BBC1] text-[22px]">
             Till now 4 suits empty for this day, hurry up!
           </p>
