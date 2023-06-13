@@ -6,18 +6,30 @@
     #e6664c -19.43%,
     #8c2009 109.14%
   );
+  $bg-orange-gradient-active: linear-gradient(
+    241.6deg,
+    #943320 -19.43%,
+    #5b1805 109.14%
+  );
+
+  .dates-active {
+    background: $bg-orange-gradient-active;
+  }
+  .dates {
+    background: rgba(224, 225, 232, 0.12);
+  }
+
   .available-dates {
-    li {
+    div.date {
       padding: 1rem 1.8rem;
-      background: rgba(224, 225, 232, 0.12);
       backdrop-filter: blur(5px);
       transition: all 0.5s;
-
       border-radius: 32px;
     }
-    li:hover {
+    div.date:hover {
       background: $bg-orange-gradient;
     }
+
     h2 {
       color: $color-grey-v1;
       font-size: 40px;
@@ -26,7 +38,7 @@
       font-size: 22px;
     }
     @media screen and (min-width: 1024px) {
-      li {
+      div.date {
         padding: 1rem 2rem;
       }
       h4 {
