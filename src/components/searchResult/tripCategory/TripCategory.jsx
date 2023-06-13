@@ -9,26 +9,53 @@ import "rc-slider/assets/index.css";
 import defaultCategoryImg from "../../../assets/images/searchResult/tripCategory/hills-icon.svg";
 import axios from "axios";
 
-export default function TripCategory() {
+export default function TripCategory({ checkinDate, checkOutDate }) {
   let [allPackagesData, setAllPackagesData] = useState();
   const [allTripCategory, setAllTripCategory] = useState();
   const [showFilter, setShowFilter] = useState(false);
   const [closingAnimation, setClosingAnimation] = useState(false);
   const [showMore, setShowMore] = useState(true);
   const [sortClicked, setSortClicked] = useState(false);
+  const [checkIn, setCheckIn] = useState();
+  const [checkOut, setCheckOut] = useState();
   const [filterRequirements, setFilterRequirements] = useState({
-    title: "",
+    title: [],
     maximumGuests: "",
     travelType: [],
     tripCategory: [],
     occasions: [],
     amenities: [],
     price: "",
-    // checkIn: [],
-    // checkOut: [],
+    checkIn: "",
+    checkOut: "",
   });
+
   const refOne = useRef(null);
   let sortCriteria = [];
+  console.log(checkinDate);
+  const handleDatesToFilter = () => {
+    console.log("called", checkinDate);
+    if (checkinDate === undefined) {
+      console.log("hi");
+      setCheckIn("");
+    } else {
+      console.log("hi define");
+
+      const inDate = `${checkinDate.split("/")[2]}-${
+        checkinDate.split("/")[1]
+      }-${checkinDate.split("/")[0]}`;
+      setCheckIn(inDate);
+    }
+    if (checkOutDate === undefined) {
+      setCheckOut("");
+    } else {
+      const outDate = `${checkOutDate.split("/")[2]}-${
+        checkOutDate.split("/")[1]
+      }-${checkOutDate.split("/")[0]}`;
+      setCheckOut(outDate);
+    }
+  };
+  console.log(checkIn, "in", checkOut, "out");
 
   useEffect(() => {
     console.log(filterRequirements);
@@ -37,6 +64,7 @@ export default function TripCategory() {
     } catch (error) {
       console.log(error);
     }
+    handleDatesToFilter();
   }, [filterRequirements]);
 
   useEffect(() => {
@@ -170,6 +198,8 @@ export default function TripCategory() {
           }
         >
           <FilterCategories
+            checkIn={checkIn}
+            checkOut={checkOut}
             filterRequirements={filterRequirements}
             setFilterRequirements={setFilterRequirements}
           />

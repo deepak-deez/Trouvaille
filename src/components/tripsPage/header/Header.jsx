@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./style.scss";
 import dateSearchIcon from "../../../assets/images/tripsPage/header/date-search-icon.svg";
 import DatePicker from "./datePicker/DatePicker.jsx";
 
-export default function Header() {
+export default function Header({
+  setCheckInDate,
+  setCheckOutDate,
+  setCheckinDateUnfined,
+  setCheckoutDateUnfined,
+}) {
   return (
     <>
       <header>
@@ -17,8 +22,16 @@ export default function Header() {
               className="bg-transparent"
             />
           </div>
-          <DatePicker type={"Check In"} />
-          <DatePicker type={"Check Out"} />
+          <DatePicker
+            setDateUnfined={false}
+            setDateData={setCheckInDate}
+            type={"Check In"}
+          />
+          <DatePicker
+            setDateUnfined={false}
+            setDateData={setCheckOutDate}
+            type={"Check Out"}
+          />
           <div className="flex flex-col gap-2 lg:border-l-[2px] border-black lg:pl-5">
             <h4>Person</h4>
             <select name="no-of-persons" id="">
