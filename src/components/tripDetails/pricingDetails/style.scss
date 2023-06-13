@@ -6,6 +6,11 @@
     #e6664c -19.43%,
     #8c2009 109.14%
   );
+  $bg-orange-gradient-hover: linear-gradient(
+    241.6deg,
+    #bb4c36 -19.43%,
+    #5e1909 109.14%
+  );
   .payment-details-container {
     select {
       background-color: transparent;
@@ -14,6 +19,9 @@
       background: $bg-orange-gradient;
       padding: 1rem 2rem;
       border-radius: 1rem;
+    }
+    button:hover {
+      background: $bg-orange-gradient-hover;
     }
     .shake {
       animation: shake-box 0.1s 5;

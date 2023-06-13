@@ -1,7 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./style.scss";
-import SelectBox from "./selectBox/SelectBox";
+import arrow from "../../../assets/images/tripsDetailsPage/priceDetails/arrow.svg";
 
 export default function PricingDetails(props) {
   console.log(props.bookingFormData);
@@ -9,9 +9,27 @@ export default function PricingDetails(props) {
   const navigate = useNavigate();
   const [guestsSelected, setGuestsSelected] = useState("No Guests Selected!");
   const [validGuestsSeleced, setValidGuestsSelected] = useState(true);
+  const [showGuestDropwdown, setShowGuestDropwdown] = useState(false);
+
+  const refOne = useRef(null);
+
+  useEffect(() => {
+    document.addEventListener("click", hideOnClickOutside, true);
+  }, []);
 
   const handleGuestsChange = (e) => {
-    setGuestsSelected(e.target.value);
+    setGuestsSelected(e.target.textContent);
+    setShowGuestDropwdown(false);
+  };
+
+  const guestSelectHandle = () => {
+    setShowGuestDropwdown(!showGuestDropwdown);
+  };
+
+  const hideOnClickOutside = (e) => {
+    if (refOne.current && !refOne.current.contains(e.target)) {
+      setShowGuestDropwdown(false);
+    }
   };
 
   const checkPassengerCounts = () => {
@@ -36,30 +54,35 @@ export default function PricingDetails(props) {
         <div className="bg-[#ffffff0d] p-10 lg:p-[3.7rem] backdrop-blur-3xl border border-gray-700 flex flex-col gap-10">
           <div className="bg-slate-600 p-10 rounded-2xl">
             <h4 className="mb-5">Guests</h4>
-            {/* <select
-              name="select-customer "
-              className={
-                "w-full outline-none border[10px] select-guests-number " +
-                (!validGuestsSeleced ? " shake border border-red-900" : "")
-              }
-              defaultValue="Select an Option"
-              onChange={handleGuestsChange}
-            >
-              <option>Select an option</option>
-              {guestsArr.map((data, index) => {
-                return (
-                  <option className="p-5 text-black" key={index} value={data}>
-                    {data}
-                  </option>
-                );
-              })}
-            </select> */}
-            <SelectBox
-              guestsData={guestsArr}
-              setGuestsSelected={setGuestsSelected}
-              bookingFormData={props.bookingFormData}
-            />
-            {console.log(guestsSelected)}
+            <div ref={refOne} className="flex flex-col relative">
+              <div
+                className="flex justify-between  "
+                onClick={guestSelectHandle}
+              >
+                <p className="text-white">{guestsSelected}</p>
+                <img src={arrow} alt="dropdown-arrow" />
+              </div>
+              <ul
+                className={
+                  "flex flex-col absolute h-[280px] rounded-2xl md:h-[320px] w-full top-[2rem] overflow-y-scroll bg-slate-600 " +
+                  (showGuestDropwdown ? " flex " : " hidden ")
+                }
+              >
+                {guestsArr.map((data, index) => {
+                  return (
+                    <li
+                      className="px-8 py-5 active:bg-slate-900 hover:bg-slate-700 text-start text-white"
+                      key={index}
+                      onClick={handleGuestsChange}
+                    >
+                      {data}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+
+            {console.log(guestsArr)}
           </div>
           <h2 className="text-[#DAE0E5]">
             <span className="line-through font-[400]">
