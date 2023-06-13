@@ -13,27 +13,45 @@ const LoginForm = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const accDetails = {};
-  const [apiMessage, setApiMessage] = useState("");
+  // const [apiMessage, setApiMessage] = useState("");
   const [empyFieldsMessage, setEmptyFieldsMessage] = useState(false);
   const dispatch = useDispatch();
-  const { userDetails, error } = useSelector((state) => state.logInUser);
+  const { userDetails, error,loading } = useSelector((state) => state.logInUser);
   const [checked, setChecked] = useState(
     localStorage.getItem("rememberMe") === "true" ? true : false
   );
   useEffect(() => {
-    if (userDetails) {
+    console.log("User details : ",userDetails);
+    if (userDetails?.success) {
       handleRemember(userDetails);
       navigate("/searchResult");
     }
+    // else if(userDetails?.success === false){
+    //   // console.log(userDetails);
+    //   swal.fire({
+    //     position: "center",
+    //     width: "40vh",
+    //     icon: "error",
+    //     title: "failed",
+    //     text:userDetails.message,
+    //     showConfirmButton: false,
+    //     toast: false,
+    //     timer: 2000,
+    //     timerProgressBar: true,
+    //   });
+    // }
   }, [userDetails]);
 
   useEffect(() => {
+    console.log("ERROR : ",error, ", User Details : ",userDetails);
     if (error) {
-      setApiMessage(error.message);
+      // setApiMessage(error.response.data.message);
       swal.fire({
+        position: "center",
+        width: "40vh",
         icon: "error",
-        title: "Oops...",
-        text: error.message,
+        title: "failed",
+        text: error.response.data.message,
         timer: "2500",
         buttons: true,
       });
