@@ -4,7 +4,7 @@ import seaIcon from "../../../assets/images/searchResult/tripCategory/sea-icon.s
 import hillsIcon from "../../../assets/images/searchResult/tripCategory/hills-icon.svg";
 import forestIcon from "../../../assets/images/searchResult/tripCategory/forest-icon.svg";
 import tropicalFallsIcon from "../../../assets/images/searchResult/tripCategory/tropical-falls.svg";
-import desertIcon from "../../../assets/images/searchResult/tripCategory/desert-icon.svg";
+// import desertIcon from "../../../assets/images/searchResult/tripCategory/desert-icon.svg";
 import riversideIcon from "../../../assets/images/searchResult/tripCategory/riverside-icon.svg";
 import sortIcon from "../../../assets/images/searchResult/tripCategory/sort-icon.svg";
 import filterIcon from "../../../assets/images/searchResult/tripCategory/filter-icon.svg";
