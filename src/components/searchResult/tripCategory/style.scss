@@ -61,18 +61,13 @@ $bg-color-blue: #212b33;
       cursor: pointer;
     }
   }
-  .category {
-    .category-icon {
-      border: solid 5px rgba(255, 166, 0, 0);
-      border-radius: 30%;
-    }
-  }
+
   .category:hover {
     .category-title {
-      color: orange;
+      color: rgb(246, 205, 149);
     }
     .category-icon {
-      border: solid 5px orange;
+      border: solid 5px rgb(246, 205, 149);
       border-radius: 30%;
     }
   }

@@ -23,6 +23,8 @@ export default function TripCategory({
   const [showMore, setShowMore] = useState(true);
   const [sortActive, setSortActive] = useState(false);
   const [sortClicked, setSortClicked] = useState(false);
+  const [categoryFilter, setCategoryFilter] = useState([]);
+
   const [filterRequirements, setFilterRequirements] = useState({
     title: [],
     maximumGuests: "",
@@ -34,14 +36,12 @@ export default function TripCategory({
     checkIn: "",
     checkOut: "",
   });
-  console.log(filterRequirements.title);
+
   useEffect(() => {
     if (filterPerson !== "") handleFilterRequirements();
   }, [filterPerson]);
 
   useEffect(() => {
-    console.log(filterDestination);
-
     handleFilterRequirements();
   }, [filterDestination]);
 
@@ -57,6 +57,7 @@ export default function TripCategory({
     setFilterRequirementsCopy.checkOut = checkOutDate;
     setFilterRequirementsCopy.title = filterDestination;
     setFilterRequirementsCopy.maximumGuests = filterPerson;
+    setFilterRequirementsCopy.tripCategory = categoryFilter;
     setFilterRequirements(setFilterRequirementsCopy);
   };
 
@@ -142,6 +143,29 @@ export default function TripCategory({
     getTripCategory();
   }, []);
 
+  const handleClickedCategory = (e) => {
+    const targetSelected = e.target.parentElement.getAttribute(
+      "data-category-selected"
+    );
+    let categoryFilterCopy = [...categoryFilter];
+    if (categoryFilterCopy.includes(targetSelected)) {
+      const categoryIndex = categoryFilterCopy.indexOf(targetSelected);
+      categoryFilterCopy.splice(categoryIndex, 1);
+      setCategoryFilter(categoryFilterCopy);
+      console.log(categoryFilterCopy);
+    }
+    console.log(categoryFilter);
+    e.target.classList.toggle("border-transparent");
+    e.target.classList.toggle("border-amber-400");
+    e.target.parentElement.lastChild.classList.toggle("text-[orange]");
+
+    setCategoryFilter([
+      ...categoryFilter,
+      e.target.parentElement.lastChild.textContent,
+    ]);
+
+    handleFilterRequirements();
+  };
   return (
     <section className="trip-category">
       <div className="flex justify-center 2xl:justify-between flex-wrap gap-10 lg:gap-12 trip-category-icons">
@@ -152,11 +176,16 @@ export default function TripCategory({
             ? (imgSrc = response.icon.url)
             : (imgSrc = defaultCategoryImg);
           return (
-            <div key={index} className="category">
+            <div
+              onClick={handleClickedCategory}
+              className="category"
+              key={index}
+              data-category-selected={response.title}
+            >
               <img
                 src={imgSrc}
                 alt={response.title}
-                className="category-icon"
+                className="category-icon border-[5px] rounded-[30%] border-transparent"
               />
               <p className="text-center text-2xl category-title">
                 {response.title}
