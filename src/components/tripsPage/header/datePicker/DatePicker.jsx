@@ -6,12 +6,7 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import "./style.scss";
 
-export default function DatePicker({
-  type,
-  setDateData,
-  setDateUnfined,
-  dateUndefined,
-}) {
+export default function DatePicker({ type, setDateData }) {
   const [date, setDate] = useState();
   const [showDatePicker, setShowDatePicker] = useState(false);
 
@@ -20,8 +15,6 @@ export default function DatePicker({
 
     setDate(format(date, "yyyy-MM-dd"));
     setDateData(dateValue);
-
-    setDateUnfined(dateUndefined + 1);
     setShowDatePicker(false);
   };
 
