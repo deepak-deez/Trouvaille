@@ -12,8 +12,7 @@ import axios from "axios";
 export default function TripCategory({
   checkinDate,
   checkOutDate,
-  dateCheckinUndefined,
-  dateCheckoutUndefined,
+  tripFilterClicked,
 }) {
   let [allPackagesData, setAllPackagesData] = useState();
   const [allTripCategory, setAllTripCategory] = useState();
@@ -35,16 +34,10 @@ export default function TripCategory({
   });
 
   useEffect(() => {
-    if (dateCheckinUndefined > 0) {
+    if (tripFilterClicked > 0) {
       handleFilterRequirements();
     }
-  }, [dateCheckinUndefined]);
-
-  useEffect(() => {
-    if (dateCheckoutUndefined > 0) {
-      handleFilterRequirements();
-    }
-  }, [dateCheckoutUndefined]);
+  }, [tripFilterClicked]);
 
   const handleFilterRequirements = () => {
     const setFilterRequirementsCopy = { ...filterRequirements };

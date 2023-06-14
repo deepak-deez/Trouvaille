@@ -6,10 +6,6 @@ import DatePicker from "./datePicker/DatePicker.jsx";
 export default function Header({
   setCheckInDate,
   setCheckOutDate,
-  setCheckinDateUnfined,
-  setCheckoutDateUnfined,
-  dateCheckinUndefined,
-  dateCheckoutUndefined,
   tripFilterClicked,
   setTripFilterClicked,
 }) {
@@ -26,18 +22,8 @@ export default function Header({
               className="bg-transparent"
             />
           </div>
-          <DatePicker
-            dateUndefined={dateCheckinUndefined}
-            setDateUnfined={setCheckinDateUnfined}
-            setDateData={setCheckInDate}
-            type={"Check In"}
-          />
-          <DatePicker
-            dateUndefined={dateCheckoutUndefined}
-            setDateUnfined={setCheckoutDateUnfined}
-            setDateData={setCheckOutDate}
-            type={"Check Out"}
-          />
+          <DatePicker setDateData={setCheckInDate} type={"Check In"} />
+          <DatePicker setDateData={setCheckOutDate} type={"Check Out"} />
           <div className="flex flex-col gap-2 lg:border-l-[2px] border-black lg:pl-5">
             <h4>Person</h4>
             <select name="no-of-persons" id="">
@@ -49,12 +35,24 @@ export default function Header({
               <option value="1">Others</option>
             </select>
           </div>
-          <img
-            src={dateSearchIcon}
-            className="hidden xl:block"
-            alt="date-search-icon"
-          />
-          <button className="bg-[#E5664C] py-3 lg:hidden rounded-[3rem] hover:bg-[#c34a32] hover:text-white transition-colors duration-200">
+          <button
+            className="hover:saturate-[75%] hover:scale-125 hover:contrast-150 w-20 h-20 transition-all duration-300"
+            onClick={() => {
+              setTripFilterClicked(tripFilterClicked + 1);
+            }}
+          >
+            <img
+              src={dateSearchIcon}
+              className="hidden xl:block"
+              alt="date-search-icon"
+            />
+          </button>
+          <button
+            onClick={() => {
+              setTripFilterClicked(tripFilterClicked + 1);
+            }}
+            className="bg-[#E5664C] py-3 lg:hidden rounded-[3rem] hover:bg-[#c34a32] hover:text-white transition-colors duration-200"
+          >
             Search
           </button>
         </div>
