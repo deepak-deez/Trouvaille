@@ -68,7 +68,7 @@ export default function Header({
               }
               setFilterPerson(noOfPersons.current.value);
             }}
-            className="bg-[#E5664C] py-3 lg:hidden rounded-[3rem] hover:bg-[#c34a32] hover:text-white transition-colors duration-200"
+            className="bg-[#E5664C] py-3 xl:hidden rounded-[3rem] hover:bg-[#c34a32] hover:text-white transition-colors duration-200"
           >
             Search
           </button>
