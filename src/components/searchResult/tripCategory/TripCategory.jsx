@@ -14,6 +14,7 @@ export default function TripCategory({
   checkOutDate,
   tripFilterClicked,
   filterDestination,
+  filterPerson,
 }) {
   let [allPackagesData, setAllPackagesData] = useState();
   const [allTripCategory, setAllTripCategory] = useState();
@@ -32,9 +33,15 @@ export default function TripCategory({
     checkIn: "",
     checkOut: "",
   });
+  console.log(filterRequirements.title);
+  useEffect(() => {
+    if (filterPerson !== "") handleFilterRequirements();
+  }, [filterPerson]);
 
   useEffect(() => {
-    if (filterDestination !== "") handleFilterRequirements();
+    console.log(filterDestination);
+
+    handleFilterRequirements();
   }, [filterDestination]);
 
   useEffect(() => {
@@ -47,8 +54,8 @@ export default function TripCategory({
     const setFilterRequirementsCopy = { ...filterRequirements };
     setFilterRequirementsCopy.checkIn = checkinDate;
     setFilterRequirementsCopy.checkOut = checkOutDate;
-    setFilterRequirements(setFilterRequirementsCopy);
-    setFilterRequirementsCopy.title[0] = filterDestination;
+    setFilterRequirementsCopy.title = filterDestination;
+    setFilterRequirementsCopy.maximumGuests = filterPerson;
     setFilterRequirements(setFilterRequirementsCopy);
   };
 

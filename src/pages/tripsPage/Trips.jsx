@@ -8,11 +8,13 @@ export default function Trips() {
   const [checkinDate, setCheckinDate] = useState("");
   const [checkoutDate, setCheckoutDate] = useState("");
   const [tripFilterClicked, setTripFilterClicked] = useState(0);
-  const [filterDestination, setFilterDestination] = useState("");
+  const [filterDestination, setFilterDestination] = useState([]);
+  const [filterPerson, setFilterPerson] = useState("");
 
   return (
     <section className="trips pb-[35rem] sm:pb-[20rem]">
       <Header
+        setFilterPerson={setFilterPerson}
         setFilterDestination={setFilterDestination}
         tripFilterClicked={tripFilterClicked}
         setTripFilterClicked={setTripFilterClicked}
@@ -20,6 +22,7 @@ export default function Trips() {
         setCheckOutDate={setCheckoutDate}
       />
       <TripCategory
+        filterPerson={filterPerson}
         filterDestination={filterDestination}
         tripFilterClicked={tripFilterClicked}
         checkinDate={checkinDate}

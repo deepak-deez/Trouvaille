@@ -9,9 +9,10 @@ export default function Header({
   tripFilterClicked,
   setTripFilterClicked,
   setFilterDestination,
+  setFilterPerson,
 }) {
-  const [filterTitle, setFilterTitle] = useState(0);
   let destination = useRef();
+  let noOfPersons = useRef();
 
   return (
     <>
@@ -31,21 +32,24 @@ export default function Header({
           <DatePicker setDateData={setCheckOutDate} type={"Check Out"} />
           <div className="flex flex-col gap-2 lg:border-l-[2px] border-black lg:pl-5">
             <h4>Person</h4>
-            <select name="no-of-persons" id="">
-              <option value="1">1</option>
-              <option value="1">2</option>
-              <option value="1">3</option>
-              <option value="1">4</option>
-              <option value="1">5</option>
-              <option value="1">Others</option>
-            </select>
+            <input
+              ref={noOfPersons}
+              type="text"
+              placeholder="No of Persons"
+              className="bg-transparent"
+            />
           </div>
           <button
             className="hover:saturate-[75%] hover:scale-125 hover:contrast-150 w-20 h-20 transition-all duration-300"
             onClick={() => {
               setTripFilterClicked(tripFilterClicked + 1);
-              setFilterDestination(destination.current.value);
-              setFilterTitle(filterTitle + 1);
+              if (destination.current.value) {
+                setFilterDestination(
+                  (prev) => (prev[0] = destination.current.value)
+                );
+              }
+
+              setFilterPerson(noOfPersons.current.value);
             }}
           >
             <img
@@ -57,8 +61,12 @@ export default function Header({
           <button
             onClick={() => {
               setTripFilterClicked(tripFilterClicked + 1);
-              setFilterDestination(destination.current.value);
-              setFilterTitle(filterTitle + 1);
+              if (destination.current.value) {
+                setFilterDestination(
+                  (prev) => (prev[0] = destination.current.value)
+                );
+              }
+              setFilterPerson(noOfPersons.current.value);
             }}
             className="bg-[#E5664C] py-3 lg:hidden rounded-[3rem] hover:bg-[#c34a32] hover:text-white transition-colors duration-200"
           >
