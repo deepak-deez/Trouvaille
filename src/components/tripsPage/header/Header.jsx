@@ -8,6 +8,10 @@ export default function Header({
   setCheckOutDate,
   setCheckinDateUnfined,
   setCheckoutDateUnfined,
+  dateCheckinUndefined,
+  dateCheckoutUndefined,
+  tripFilterClicked,
+  setTripFilterClicked,
 }) {
   return (
     <>
@@ -23,12 +27,14 @@ export default function Header({
             />
           </div>
           <DatePicker
-            setDateUnfined={false}
+            dateUndefined={dateCheckinUndefined}
+            setDateUnfined={setCheckinDateUnfined}
             setDateData={setCheckInDate}
             type={"Check In"}
           />
           <DatePicker
-            setDateUnfined={false}
+            dateUndefined={dateCheckoutUndefined}
+            setDateUnfined={setCheckoutDateUnfined}
             setDateData={setCheckOutDate}
             type={"Check Out"}
           />
