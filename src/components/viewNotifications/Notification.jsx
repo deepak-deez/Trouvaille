@@ -20,12 +20,18 @@ export default function Notification() {
       <h2 className="md:text-[54px] text-center mt-[10px] lg:mt-[30px] text-[50px] font-[300]">
         Notifications
       </h2>
-      {/* {console.log(notifications)} */}
+
       <div className="notification-container overflow-x-scroll w-[70%] pt-20">
         <ul className="flex flex-col h-[30rem] overflow-y-scroll text-[30px]">
           {notifications?.map((data, index) => {
             return (
-              <TripNotifications time ={data.date} title={data.title} notification ={data.message} key={index} bookingId={index} />
+              <TripNotifications
+                time={data.date}
+                title={data.title}
+                notification={data.message}
+                key={index}
+                bookingId={index}
+              />
             );
           })}
         </ul>
