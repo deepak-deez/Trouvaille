@@ -5,8 +5,6 @@ import FilterSubCategories from "./filterSubCategories/FilterSubCategories";
 import axios from "axios";
 
 export default function FilterCategories({
-  checkIn,
-  checkOut,
   setFilterRequirements,
   filterRequirements,
 }) {
