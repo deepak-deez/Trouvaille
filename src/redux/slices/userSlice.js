@@ -5,29 +5,34 @@ const API = process.env.REACT_APP_API_HOST;
 
 const nameSpace = "user";
 
+const initialState = {
+  userDetails: [],
+  loading: false,
+  error: null,
+};
+
 export const signUp = createAsyncThunk(
-  `${nameSpace}/signIn`,
+  `${nameSpace}/signUp`,
   async (userData, thunkAPI) => {
-    console.log("User Data : ", userData);
-    const result = await axios.post(`${API}register/Frontend-user`, userData);
-    console.log("Result : ", result);
-    return result.data;
+    try {
+      console.log("User Data : ", userData);
+      const result = await axios.post(`${API}register/Frontend-user`, userData);
+      console.log("Result : ", result);
+      return result.data;
+    } catch (err) {
+      return err.message;
+    }
   }
 );
 
 export const signIn = createAsyncThunk(
-  `${nameSpace}/signUp`,
+  `${nameSpace}/signIn`,
   async (userData, thunkAPI) => {
     const result = await axios.post(`${API}login/Frontend-user`, userData);
     return result.data;
   }
 );
 
-const initialState = {
-  userDetails: {},
-  loading: null,
-  error: null,
-};
 // const header = {
 //   "Content-Type": "application/json",
 // };
@@ -58,10 +63,22 @@ const userSlice = createSlice({
   //   },
   // },
   extraReducers(builder) {
-    builder.addCase(signIn.fulfilled, (state, action) => {
-      state.userDetails = action;
+    console.log("Builder : ", builder);
+    builder.addCase(signUp.pending, (state, action) => {
+      state.userDetails = null;
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(signUp.fulfilled, (state, action) => {
+      console.log("State : ", state, "Action:", action);
+      state.userDetails = action.payload;
       state.loading = false;
       state.error = null;
+    });
+    builder.addCase(signUp.rejected, (state, action) => {
+      state.userDetails = null;
+      state.loading = false;
+      state.error = action.error;
     });
   },
   // extraReducers: {
@@ -98,5 +115,8 @@ const userSlice = createSlice({
   // },
 });
 
+export const userDetailsState = (state) => state.user.userDetails;
+export const loadingState = (state) => state.user.loading;
+export const errorState = (state) => state.user.error;
 export default userSlice.reducer;
 // export const { signUp } = userSlice.actions;
