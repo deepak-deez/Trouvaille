@@ -51,6 +51,10 @@ export default function TripCategory({
     }
   }, [tripFilterClicked]);
 
+  useEffect(() => {
+    console.log(allPackagesData);
+  }, [allPackagesData]);
+
   const handleFilterRequirements = () => {
     const setFilterRequirementsCopy = { ...filterRequirements };
     setFilterRequirementsCopy.checkIn = checkinDate;
@@ -62,6 +66,10 @@ export default function TripCategory({
   };
 
   const refOne = useRef(null);
+
+  useEffect(() => {
+    getTripCategory();
+  }, []);
 
   useEffect(() => {
     console.log(filterRequirements);
@@ -86,6 +94,7 @@ export default function TripCategory({
   const handleFilterStateChange = () => {
     if (showFilter) {
       setClosingAnimation(true);
+
       setTimeout(() => {
         setShowFilter(false);
         setClosingAnimation(false);
@@ -105,6 +114,7 @@ export default function TripCategory({
   const showMoreToggler = () => {
     setShowMore(!showMore);
   };
+
   const sortTrips = () => {
     sortClicked ? setSortClicked(false) : setSortClicked(true);
   };
@@ -113,53 +123,58 @@ export default function TripCategory({
     const response = await axios.get(
       `${process.env.REACT_APP_API_HOST}get-feature/category`
     );
+
     setAllTripCategory(response.data.data);
   };
-
-  useEffect(() => {
-    getTripCategory();
-  }, []);
 
   const handleClickedCategory = (e) => {
     const targetSelected = e.target.parentElement.getAttribute(
       "data-category-selected"
     );
 
+    const parentElement = e.target.parentElement;
+    const grandParentElement = parentElement.parentElement;
+
     if (categoryFilter.includes(targetSelected)) {
       const categoryIndex = categoryFilter.indexOf(targetSelected);
       categoryFilter.splice(categoryIndex, 1);
     } else {
-      categoryFilter.push(e.target.parentElement.lastChild.textContent);
+      categoryFilter.push(grandParentElement.lastChild.textContent);
     }
+
     setCategoryFilter(categoryFilter);
-    e.target.classList.toggle("border-transparent");
-    e.target.classList.toggle("border-amber-400");
-    e.target.parentElement.lastChild.classList.toggle("text-[orange]");
+
+    parentElement.classList.toggle("border-transparent");
+    parentElement.classList.toggle("border-amber-500");
+    grandParentElement.lastChild.classList.toggle("text-[orange]");
+
     handleFilterRequirements();
   };
 
   return (
     <section className="trip-category">
-      <div className="flex justify-center 2xl:justify-between flex-wrap gap-10 lg:gap-12 trip-category-icons">
-        {/* //Remove className "Details from the classlist" */}
+      <div className="flex justify-center 2xl:justify-between flex-wrap gap-10 lg:gap-12 trip-category-icons ">
         {allTripCategory?.map((response, index) => {
-          let imgSrc;
-          console.log("Icon : ", response.icon);
-          response.icon
-            ? (imgSrc = response.icon)
-            : (imgSrc = defaultCategoryImg);
           return (
             <div
               onClick={handleClickedCategory}
-              className="category"
+              className=" p-3 flex flex-col justify-end  "
               key={index}
-              data-category-selected={response.title}
             >
-              <img
-                // src={imgSrc}
-                alt={response.title}
-                className="category-icon border-[5px] rounded-[30%] border-transparent"
-              />
+              <div
+                className="category border-[5px] rounded-[2.5rem] transition-all duration-500 w-40 h-40 flex justify-center"
+                data-category-selected={response.title}
+              >
+                <img
+                  src={response.icon}
+                  alt={response.title}
+                  onError={({ currentTarget }) => {
+                    currentTarget.onerror = null; // prevents looping
+                    currentTarget.src = defaultCategoryImg;
+                  }}
+                  className="category-icon saturate-0 m-8 lg:m-0 lg:p-8"
+                />
+              </div>
               <p className="text-center text-2xl category-title">
                 {response.title}
               </p>

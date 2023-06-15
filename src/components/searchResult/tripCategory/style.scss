@@ -63,12 +63,10 @@ $bg-color-blue: #212b33;
   }
 
   .category:hover {
+    border: solid 5px rgb(246, 205, 149);
+    border-radius: 3rem;
     .category-title {
       color: rgb(246, 205, 149);
-    }
-    .category-icon {
-      border: solid 5px rgb(246, 205, 149);
-      border-radius: 30%;
     }
   }
 }
