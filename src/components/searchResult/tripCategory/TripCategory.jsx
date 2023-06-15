@@ -24,7 +24,7 @@ export default function TripCategory({
   const [sortActive, setSortActive] = useState(false);
   const [sortClicked, setSortClicked] = useState(false);
   const [categoryFilter, setCategoryFilter] = useState([]);
-
+  const refFilter = useRef(null);
   const [filterRequirements, setFilterRequirements] = useState({
     title: [],
     maximumGuests: "",
@@ -51,6 +51,12 @@ export default function TripCategory({
     }
   }, [tripFilterClicked]);
 
+  const hideOnClickOutsideforFilter = (e) => {
+    if (refFilter.current && !refFilter.current.contains(e.target)) {
+      setShowFilter(false);
+    }
+  };
+
   const handleFilterRequirements = () => {
     const setFilterRequirementsCopy = { ...filterRequirements };
     setFilterRequirementsCopy.checkIn = checkinDate;
@@ -76,6 +82,7 @@ export default function TripCategory({
   useEffect(() => {
     getAllApiData(setAllPackagesData);
     document.addEventListener("click", hideOnClickOutside, true);
+    document.addEventListener("click", hideOnClickOutsideforFilter, true);
   }, []);
 
   const hideOnClickOutside = (e) => {
@@ -147,22 +154,23 @@ export default function TripCategory({
     const targetSelected = e.target.parentElement.getAttribute(
       "data-category-selected"
     );
-    let categoryFilterCopy = [...categoryFilter];
-    if (categoryFilterCopy.includes(targetSelected)) {
-      const categoryIndex = categoryFilterCopy.indexOf(targetSelected);
-      categoryFilterCopy.splice(categoryIndex, 1);
-      setCategoryFilter(categoryFilterCopy);
-      console.log(categoryFilterCopy);
+
+    if (categoryFilter.includes(targetSelected)) {
+      const categoryIndex = categoryFilter.indexOf(targetSelected);
+      categoryFilter.splice(categoryIndex, 1);
+    } else {
+      categoryFilter.push(e.target.parentElement.lastChild.textContent);
+
+      // setCategoryFilter([
+      //   ...categoryFilter,
+      //   e.target.parentElement.lastChild.textContent,
+      // ]);
     }
-    console.log(categoryFilter);
+    setCategoryFilter(categoryFilter);
+
     e.target.classList.toggle("border-transparent");
     e.target.classList.toggle("border-amber-400");
     e.target.parentElement.lastChild.classList.toggle("text-[orange]");
-
-    setCategoryFilter([
-      ...categoryFilter,
-      e.target.parentElement.lastChild.textContent,
-    ]);
 
     handleFilterRequirements();
   };
@@ -215,7 +223,7 @@ export default function TripCategory({
             <li onClick={handleSelect}>By Name - Z - A</li>
           </ul>
         </div>
-        <div className="flex gap-[1.5rem]">
+        <div className="flex gap-[1.5rem]" ref={refFilter}>
           <button onClick={handleFilterStateChange}>
             <img src={filterIcon} alt="filter-icon" />
           </button>
