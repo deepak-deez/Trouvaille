@@ -4,7 +4,6 @@ import "./style.scss";
 import arrow from "../../../assets/images/tripsDetailsPage/priceDetails/arrow.svg";
 
 export default function PricingDetails(props) {
-  console.log(props.bookingFormData);
   let guestsArr = [];
   const navigate = useNavigate();
   const [guestsSelected, setGuestsSelected] = useState("No Guests Selected!");

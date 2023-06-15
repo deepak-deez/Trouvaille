@@ -10,10 +10,12 @@ import HostingPartner from "../../components/tripDetails/hostingPartner/HostingP
 import PricingDetails from "../../components/tripDetails/pricingDetails/PricingDetails";
 import Ammenities from "../../components/tripDetails/ammenities/Ammenities";
 import Faqs from "../../components/tripDetails/faqs/Faqs";
-import getApiDatas, { handleProfileImagetoUrl } from "./logic";
+import getApiDatas, {
+  handleProfileImagetoUrl,
+  extractColorScheme,
+} from "./logic";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import format from "date-fns/format";
 
 export default function TripDetails(props) {
   const location = useLocation();
@@ -45,6 +47,12 @@ export default function TripDetails(props) {
     );
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      extractColorScheme(tripImage);
+    }, 100);
+  }, []);
+
   const tripResponseData = tripDetails?.data.data[0];
 
   const acitivitiesData = tripResponseData?.activities;
@@ -68,9 +76,6 @@ export default function TripDetails(props) {
     tripImage,
   };
 
-  console.log(tripResponseData);
-  console.log(acitivitiesData);
-
   if (tripDetails?.data?.success) {
     return (
       <section className="trip-details" style={backgroundImg}>
@@ -85,10 +90,6 @@ export default function TripDetails(props) {
           <h4 className="mb-[2rem] text-2xl">Dates</h4>
           <div className="flex flex-wrap justify-center  gap-5 xl:justify-between  available-dates overflow-x-scroll">
             {acitivitiesData.map((data, index) => {
-              {
-                console.log(data.date);
-                console.log(data.details);
-              }
               return (
                 <>
                   <Dates
@@ -103,11 +104,6 @@ export default function TripDetails(props) {
               );
             })}
           </div>
-          {/* {details && (
-            <div className="text-[2rem] activities font-bold p-5 rounded-2xl">
-              {toShowDetails}
-            </div>
-          )} */}
 
           <p className="my-[3rem] text-[#B4BBC1] text-[22px]">
             Till now 4 suits empty for this day, hurry up!

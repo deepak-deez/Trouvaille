@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import getColors from "get-image-colors";
 const cloudinaryApi = process.env.REACT_APP_CLOUDINARY_API;
 const cloudinaryName = process.env.REACT_APP_CLOUDINARY_NAME;
 const getErrTripDetails = `${process.env.REACT_APP_API_HOST}get-trip-details/trip-package/6465bc874e71527`;
@@ -51,6 +51,16 @@ export const handleProfileImagetoUrl = async (image) => {
       });
     return imageUrl;
   } else return "";
+};
+
+export const extractColorScheme = async (backgroundImg) => {
+  const colors = getColors(backgroundImg, "image/png").then((colors) => {
+    // `colors` is an array of color objects
+    console.log(colors);
+    return colors;
+  });
+
+  console.log(colors);
 };
 
 export default getApiDatas;
