@@ -81,8 +81,6 @@ export default function PricingDetails(props) {
                 })}
               </ul>
             </div>
-
-            {console.log(guestsArr)}
           </div>
           <h2 className="text-[#DAE0E5]">
             <span className="line-through font-[400]">

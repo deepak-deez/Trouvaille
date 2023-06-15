@@ -22,7 +22,9 @@ export default function TripDetails(props) {
   const [ocassionImgData, setOcassionImgData] = useState();
   const [ammenityImgData, setAmmenityImgData] = useState();
   const [userDatabase, setUserdatabase] = useState();
-  // const [toShow, setToShow] = useState(false);
+  const [toShowDetails, setToShowDetails] = useState(false);
+  const [details, setDetails] = useState(false);
+
   const currentTripId = useParams();
   const currentUserId = useSelector((state) => state.logInUser).userDetails.data
     .userDetails._id;
@@ -81,7 +83,7 @@ export default function TripDetails(props) {
             <li>Available for 6 guests</li>
           </ul>
           <h4 className="mb-[2rem] text-2xl">Dates</h4>
-          <ul className="flex flex-wrap justify-center gap-5 xl:justify-between available-dates overflow-x-scroll">
+          <div className="flex flex-wrap justify-center  gap-5 xl:justify-between  available-dates overflow-x-scroll">
             {acitivitiesData.map((data, index) => {
               {
                 console.log(data.date);
@@ -89,11 +91,23 @@ export default function TripDetails(props) {
               }
               return (
                 <>
-                  <Dates day={data.date} key={index} detail={data.details} />
+                  <Dates
+                    day={data.date}
+                    details={details}
+                    setDetails={setDetails}
+                    setToShowDetails={setToShowDetails}
+                    key={index}
+                    detail={data.details}
+                  />
                 </>
               );
             })}
-          </ul>
+          </div>
+          {/* {details && (
+            <div className="text-[2rem] activities font-bold p-5 rounded-2xl">
+              {toShowDetails}
+            </div>
+          )} */}
 
           <p className="my-[3rem] text-[#B4BBC1] text-[22px]">
             Till now 4 suits empty for this day, hurry up!
