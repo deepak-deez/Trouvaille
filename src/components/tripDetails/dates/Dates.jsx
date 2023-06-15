@@ -37,11 +37,13 @@ export default function Dates(props) {
         <h2 className="">{date[0]}</h2>
         <p className="">{date[1]}</p>
       </div>
-      {/* {toShow && (
-        <span className=" activities text-[1rem] md:text-[2rem] mt-[2rem] ml-[-4rem] font-extrabold  p-5 absolute rounded-2xl">
-          {props.detail}
-        </span>
-      )} */}
+      {toShow && (
+        <div className="  bg-slate-100 mt-[2rem] z-[2] p-5 absolute rounded-2xl">
+          <h3 className=" activities text-[1rem]  font-extrabold ">
+            {props.detail}
+          </h3>
+        </div>
+      )}
     </div>
   );
 }

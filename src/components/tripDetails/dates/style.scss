@@ -11,7 +11,10 @@
     #943320 -19.43%,
     #5b1805 109.14%
   );
-
+  .activities {
+    color: rgb(198, 102, 68);
+    font-weight: 900;
+  }
   .dates-active {
     background: $bg-orange-gradient-active;
   }

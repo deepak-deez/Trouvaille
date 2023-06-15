@@ -103,11 +103,11 @@ export default function TripDetails(props) {
               );
             })}
           </div>
-          {details && (
+          {/* {details && (
             <div className="text-[2rem] activities font-bold p-5 rounded-2xl">
               {toShowDetails}
             </div>
-          )}
+          )} */}
 
           <p className="my-[3rem] text-[#B4BBC1] text-[22px]">
             Till now 4 suits empty for this day, hurry up!
