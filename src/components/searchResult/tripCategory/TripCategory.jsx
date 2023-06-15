@@ -10,6 +10,7 @@ import { getAllApiData, getFilteredData, sortData } from "./logic";
 import "rc-slider/assets/index.css";
 import defaultCategoryImg from "../../../assets/images/searchResult/tripCategory/hills-icon.svg";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 export default function TripCategory({
   checkinDate,
@@ -36,6 +37,7 @@ export default function TripCategory({
     checkIn: "",
     checkOut: "",
   });
+  const location = useLocation();
 
   useEffect(() => {
     if (filterPerson !== "") handleFilterRequirements();
@@ -57,14 +59,18 @@ export default function TripCategory({
 
   const handleFilterRequirements = () => {
     const setFilterRequirementsCopy = { ...filterRequirements };
-    setFilterRequirementsCopy.checkIn = checkinDate;
-    setFilterRequirementsCopy.checkOut = checkOutDate;
-    setFilterRequirementsCopy.title = filterDestination;
-    setFilterRequirementsCopy.maximumGuests = filterPerson;
+
+    if (location.pathname === "/trips") {
+      console.log("Trips!");
+      setFilterRequirementsCopy.checkIn = checkinDate;
+      setFilterRequirementsCopy.checkOut = checkOutDate;
+      setFilterRequirementsCopy.title = filterDestination;
+      setFilterRequirementsCopy.maximumGuests = filterPerson;
+    }
+
     setFilterRequirementsCopy.tripCategory = categoryFilter;
     setFilterRequirements(setFilterRequirementsCopy);
   };
-
   const refOne = useRef(null);
 
   useEffect(() => {

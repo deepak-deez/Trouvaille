@@ -44,9 +44,7 @@ export default function Header({
             onClick={() => {
               setTripFilterClicked(tripFilterClicked + 1);
               if (destination.current.value) {
-                setFilterDestination(
-                  (prev) => (prev[0] = destination.current.value)
-                );
+                setFilterDestination([destination.current.value]);
               }
 
               setFilterPerson(noOfPersons.current.value);
@@ -62,9 +60,7 @@ export default function Header({
             onClick={() => {
               setTripFilterClicked(tripFilterClicked + 1);
               if (destination.current.value) {
-                setFilterDestination(
-                  (prev) => (prev[0] = destination.current.value)
-                );
+                setFilterDestination([destination.current.value]);
               }
               setFilterPerson(noOfPersons.current.value);
             }}
