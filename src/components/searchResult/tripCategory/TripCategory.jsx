@@ -1,10 +1,11 @@
 import "./style.scss";
+import "../../../style/animations.scss";
 import React, { useEffect, useState, useRef } from "react";
 import sortIcon from "../../../assets/images/searchResult/tripCategory/sort-icon.svg";
 import filterIcon from "../../../assets/images/searchResult/tripCategory/filter-icon.svg";
 import TripCard from "../tripCard/TripCard";
 import FilterCategories from "../filterCategories/FilterCategories";
-import { getAllApiData, getFilteredData } from "./logic";
+import { getAllApiData, getFilteredData, sortData } from "./logic";
 import "rc-slider/assets/index.css";
 import defaultCategoryImg from "../../../assets/images/searchResult/tripCategory/hills-icon.svg";
 import axios from "axios";
@@ -21,10 +22,8 @@ export default function TripCategory({
   const [showFilter, setShowFilter] = useState(false);
   const [closingAnimation, setClosingAnimation] = useState(false);
   const [showMore, setShowMore] = useState(true);
-  const [sortActive, setSortActive] = useState(false);
   const [sortClicked, setSortClicked] = useState(false);
   const [categoryFilter, setCategoryFilter] = useState([]);
-  const refFilter = useRef(null);
   const [filterRequirements, setFilterRequirements] = useState({
     title: [],
     maximumGuests: "",
@@ -51,12 +50,6 @@ export default function TripCategory({
     }
   }, [tripFilterClicked]);
 
-  const hideOnClickOutsideforFilter = (e) => {
-    if (refFilter.current && !refFilter.current.contains(e.target)) {
-      setShowFilter(false);
-    }
-  };
-
   const handleFilterRequirements = () => {
     const setFilterRequirementsCopy = { ...filterRequirements };
     setFilterRequirementsCopy.checkIn = checkinDate;
@@ -68,7 +61,6 @@ export default function TripCategory({
   };
 
   const refOne = useRef(null);
-  let sortCriteria = [];
 
   useEffect(() => {
     console.log(filterRequirements);
@@ -82,35 +74,11 @@ export default function TripCategory({
   useEffect(() => {
     getAllApiData(setAllPackagesData);
     document.addEventListener("click", hideOnClickOutside, true);
-    document.addEventListener("click", hideOnClickOutsideforFilter, true);
   }, []);
 
   const hideOnClickOutside = (e) => {
     if (refOne.current && !refOne.current.contains(e.target)) {
       setSortClicked(false);
-    }
-  };
-
-  const sortFunction = (sortProp, sortOrder) => {
-    allPackagesData?.map((data) => {
-      data.title = data.title.charAt(0).toUpperCase() + data.title.slice(1);
-    });
-    if (sortProp === "Price" && sortOrder === "Ascending") {
-      setAllPackagesData(
-        [...allPackagesData].sort((a, b) => a.price - b.price)
-      );
-    } else if (sortProp === "Price" && sortOrder === "Descending") {
-      setAllPackagesData(
-        [...allPackagesData].sort((a, b) => b.price - a.price)
-      );
-    } else if (sortProp === "Name" && sortOrder === "Ascending") {
-      setAllPackagesData(
-        [...allPackagesData].sort((a, b) => (a.title > b.title ? 1 : -1))
-      );
-    } else if (sortProp === "Name" && sortOrder === "Descending") {
-      setAllPackagesData(
-        [...allPackagesData].sort((a, b) => (a.title > b.title ? -1 : 1))
-      );
     }
   };
 
@@ -126,9 +94,10 @@ export default function TripCategory({
     }
   };
 
-  const handleSelect = (e) => {
-    sortCriteria = e.target.textContent.split(" ");
-    sortFunction(sortCriteria[1], sortCriteria[3]);
+  const handleSortSelection = (e) => {
+    const sortOrder = e.target.getAttribute("data-sort-order");
+    const sortCriteria = e.target.getAttribute("data-sort-category");
+    sortData(allPackagesData, setAllPackagesData, sortCriteria, sortOrder);
     setSortClicked(false);
   };
 
@@ -160,28 +129,23 @@ export default function TripCategory({
       categoryFilter.splice(categoryIndex, 1);
     } else {
       categoryFilter.push(e.target.parentElement.lastChild.textContent);
-
-      // setCategoryFilter([
-      //   ...categoryFilter,
-      //   e.target.parentElement.lastChild.textContent,
-      // ]);
     }
     setCategoryFilter(categoryFilter);
-
     e.target.classList.toggle("border-transparent");
     e.target.classList.toggle("border-amber-400");
     e.target.parentElement.lastChild.classList.toggle("text-[orange]");
-
     handleFilterRequirements();
   };
+
   return (
     <section className="trip-category">
       <div className="flex justify-center 2xl:justify-between flex-wrap gap-10 lg:gap-12 trip-category-icons">
         {/* //Remove className "Details from the classlist" */}
         {allTripCategory?.map((response, index) => {
           let imgSrc;
-          response.icon.url
-            ? (imgSrc = response.icon.url)
+          console.log("Icon : ", response.icon);
+          response.icon
+            ? (imgSrc = response.icon)
             : (imgSrc = defaultCategoryImg);
           return (
             <div
@@ -216,14 +180,38 @@ export default function TripCategory({
               (sortClicked ? "flex" : "hidden")
             }
           >
-            <li onClick={handleSelect}>By Price - Low to High</li>
-            <li onClick={handleSelect}>By Price - High to Low</li>
-            <li onClick={handleSelect}>By Name - A - Z</li>
-            <li onClick={handleSelect}>By Name - Z - A</li>
+            <li
+              data-sort-category={"price"}
+              data-sort-order={"ascending"}
+              onClick={handleSortSelection}
+            >
+              By Price - Low to High
+            </li>
+            <li
+              data-sort-category={"price"}
+              data-sort-order={"descending"}
+              onClick={handleSortSelection}
+            >
+              By Price - High to Low
+            </li>
+            <li
+              data-sort-category={"name"}
+              data-sort-order={"ascending"}
+              onClick={handleSortSelection}
+            >
+              By Name - A - Z
+            </li>
+            <li
+              data-sort-category={"name"}
+              data-sort-order={"descending"}
+              onClick={handleSortSelection}
+            >
+              By Name - Z - A
+            </li>
           </ul>
         </div>
         <button onClick={handleFilterStateChange}>
-          <div className="flex gap-[1.5rem]" ref={refFilter}>
+          <div className="flex gap-[1.5rem]">
             <img src={filterIcon} alt="filter-icon" />
             <p className="">Filter</p>
           </div>
