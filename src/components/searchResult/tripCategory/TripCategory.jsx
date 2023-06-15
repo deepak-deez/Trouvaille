@@ -204,14 +204,13 @@ export default function TripCategory({
       </div>
       <div className="my-[3.75rem] flex justify-start relative items-start text-[26px] gap-[4.75rem] ">
         <div className="flex flex-col gap-[1.5rem] ">
-          <button onClick={sortTrips}>
+          <button onClick={sortTrips} ref={refOne}>
             <div className="flex justify-center relative gap-[1.5rem]">
               <img src={sortIcon} alt="sort-icon" />
               <p className="">Sort</p>
             </div>
           </button>
           <ul
-            ref={refOne}
             className={
               "bg-transparent flex flex-col gap-[1rem] sort-list absolute z-50 top-[3rem] p-10 outline-none " +
               (sortClicked ? "flex" : "hidden")
@@ -223,12 +222,12 @@ export default function TripCategory({
             <li onClick={handleSelect}>By Name - Z - A</li>
           </ul>
         </div>
-        <div className="flex gap-[1.5rem]" ref={refFilter}>
-          <button onClick={handleFilterStateChange}>
+        <button onClick={handleFilterStateChange}>
+          <div className="flex gap-[1.5rem]" ref={refFilter}>
             <img src={filterIcon} alt="filter-icon" />
-          </button>
-          <p className="">Filter</p>
-        </div>
+            <p className="">Filter</p>
+          </div>
+        </button>
       </div>
       <div className={"flex flex-col xl:flex-row gap-[2rem] "}>
         <div
