@@ -155,7 +155,7 @@ export default function TripCategory({
               data-category-selected={response.title}
             >
               <img
-                // src={imgSrc}
+                src={imgSrc}
                 alt={response.title}
                 className="category-icon border-[5px] rounded-[30%] border-transparent"
               />
