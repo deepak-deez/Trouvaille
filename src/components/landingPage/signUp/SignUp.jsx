@@ -3,6 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import "./style.scss";
 import eye from "../../../assets/images/landingPage/loginForm/eye.svg";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { signUp } from "../../../redux/slices/userSlice";
+import { useSlider } from "@mui/base";
+
+
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -15,6 +20,9 @@ const SignUp = () => {
   const [differentPassword, setDifferentPassword] = useState(false);
   let [apiMessage, setApiMessage] = useState("");
 
+  const {userDetails,loading,error}=useSelector(state=>state.user);
+  const dispatch =useDispatch();
+
   const newUserDetails = {};
 
   const handleCreateNewAccount = async () => {
@@ -25,16 +33,21 @@ const SignUp = () => {
       newUserDetails["phone"] = phoneNoRef.current.value;
       newUserDetails["password"] = passowrdRef.current.value;
 
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_HOST}register/Frontend-user`,
-        newUserDetails
-      );
-
-      setApiMessage(response?.data?.message);
-
-      if (response?.data?.success) {
-        navigate("/");
+      if(newUserDetails){
+        dispatch(signUp(newUserDetails))
       }
+
+      console.log("DATA : ",userDetails,"ERROR: ",error,"Loading: ",loading);
+      // const response = await axios.post(
+      //   `${process.env.REACT_APP_API_HOST}register/Frontend-user`,
+      //   newUserDetails
+      // );
+
+      // setApiMessage(response?.data?.message);
+
+      // if (response?.data?.success) {
+      //   navigate("/");
+      // }
     } else {
       setDifferentPassword(true);
     }

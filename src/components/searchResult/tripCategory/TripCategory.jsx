@@ -142,11 +142,11 @@ export default function TripCategory({
       <div className="flex justify-center 2xl:justify-between flex-wrap gap-10 lg:gap-12 trip-category-icons">
         {/* //Remove className "Details from the classlist" */}
         {allTripCategory?.map((response, index) => {
-          let imgSrc;
-          console.log("Icon : ", response.icon);
-          response.icon
-            ? (imgSrc = response.icon)
-            : (imgSrc = defaultCategoryImg);
+          // let imgSrc;
+          // console.log("Icon : ", response.icon);
+          // response.icon
+          //   ? (imgSrc = response.icon)
+          //   : (imgSrc = defaultCategoryImg);
           return (
             <div
               onClick={handleClickedCategory}
@@ -155,7 +155,7 @@ export default function TripCategory({
               data-category-selected={response.title}
             >
               <img
-                // src={imgSrc}
+                src={response.icon}
                 alt={response.title}
                 className="category-icon border-[5px] rounded-[30%] border-transparent"
               />

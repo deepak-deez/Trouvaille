@@ -3,7 +3,8 @@ import "./style.scss";
 import { Link, useNavigate } from "react-router-dom";
 import eye from "../../../assets/images/landingPage/loginForm/eye.svg";
 import Cookies from "js-cookie";
-import { logInUser } from "../../../redux/actions/userActions";
+// import { logInUser } from "../../../redux/actions/userActions";
+import { signIn } from "../../../redux/slices/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import swal from "sweetalert2";
 
@@ -16,7 +17,7 @@ const LoginForm = () => {
   // const [apiMessage, setApiMessage] = useState("");
   const [empyFieldsMessage, setEmptyFieldsMessage] = useState(false);
   const dispatch = useDispatch();
-  const { userDetails, error,loading } = useSelector((state) => state.logInUser);
+  const { userDetails, error,loading } = useSelector((state) => state.user);
   const [checked, setChecked] = useState(
     localStorage.getItem("rememberMe") === "true" ? true : false
   );
@@ -86,7 +87,7 @@ const LoginForm = () => {
 
     if (!!emailRef.current.value.length && !!passwordRef.current.value.length) {
       setEmptyFieldsMessage(false);
-      dispatch(logInUser(emailRef.current.value, passwordRef.current.value));
+      dispatch(signIn(emailRef.current.value, passwordRef.current.value));
     } else {
       swal.fire({
         icon: "warning",

@@ -11,9 +11,8 @@ const root = createRoot(rootElement);
 
 root.render(
   <Provider store={store}>
-  <StrictMode>
-    <App />
-  </StrictMode>
+    <StrictMode>
+      <App />
+    </StrictMode>
   </Provider>
-  
 );
