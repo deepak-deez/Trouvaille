@@ -85,12 +85,15 @@ export default function Navbar() {
         ) ? (
           <div className="flex gap-10 2xl:gap-[4.1rem]">
             <SearchBar />
-            <img
-              src={notificationIcon}
-              className=" xl:hidden w-8 hidden"
-              // Remove class name hidden
-              alt="notification-icon"
-            />
+          <Link to={"/notifications"}>
+              <img
+                src={notificationIcon}
+                className="w-8 hidden xl:block h-full"
+                // Remove class name hidden
+                alt="notification-icon"
+              />
+            </Link>
+
             <Link to={"/booking"}>
               <img
                 src={bookingsIcon}
@@ -123,11 +126,18 @@ export default function Navbar() {
             <li className="flex justify-between">
               <Link to="/searchResult">Home</Link>
               <div className="flex gap-10">
-                <img
+                <Link to={"/notifications"}>
+                  <img
+                    src={notificationIcon}
+                    className="h-full" 
+                    alt="notification-icon"
+                  />
+                </Link>
+                {/* <img
                   src={notificationIcon}
                   className=""
                   alt="notification-icon"
-                />
+                /> */}
                 {/* Remove class name hidden */}
                 <img src={bookingsIcon} alt="document-icon" />
               </div>

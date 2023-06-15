@@ -1,5 +1,6 @@
 import "./style.scss";
 import "../../../style/animations.scss";
+import "../../../style/animations.scss";
 import React, { useEffect, useState, useRef } from "react";
 import sortIcon from "../../../assets/images/searchResult/tripCategory/sort-icon.svg";
 import filterIcon from "../../../assets/images/searchResult/tripCategory/filter-icon.svg";

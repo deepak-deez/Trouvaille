@@ -26,18 +26,18 @@ export const logInUser = (email, password) => async (dispatch) => {
       body,
       config
     );
-
-    dispatch({
-      type: SIGN_IN_USER_SUCCESS,
-      payload: data,
-    });
-    if (data?.success)
+    if (data.status === 200) {
+      dispatch({
+        type: SIGN_IN_USER_SUCCESS,
+        payload: data,
+      });
       localStorage.setItem("userDetails", JSON.stringify(data));
-
-    // dispatch({
-    //   type: SIGN_IN_USER_FAILED,
-    //   payload: data,
-    // });
+    } else if (data.status === 500) {
+      dispatch({
+        type: SIGN_IN_USER_FAILED,
+        payload: data,
+      });
+    }
   } catch (error) {
     dispatch({
       type: SIGN_IN_USER_FAILED,
