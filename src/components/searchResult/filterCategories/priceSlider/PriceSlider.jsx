@@ -3,7 +3,10 @@ import { useState, useEffect, useRef } from "react";
 import Slider from "rc-slider";
 import getAllApiData from "./logic";
 
-export default function PriceSlider() {
+export default function PriceSlider({
+  setFilterRequirements,
+  filterRequirements,
+}) {
   const [filterSliderValue, setFilterSliderValue] = useState(0);
   let allPackagesData = useRef();
   let maxPrice = useRef();
@@ -43,6 +46,10 @@ export default function PriceSlider() {
 
   const onChangeEventTriggered = (newValue) => {
     setFilterSliderValue(newValue);
+    const filterRequirementsCopy = { ...filterRequirements };
+    filterRequirementsCopy.price = filterSliderValue;
+    setFilterRequirements(filterRequirementsCopy);
+    console.log(filterRequirements);
   };
   return (
     <div className="flex flex-col gap-5 lg:w-1/4 xl:w-full">
