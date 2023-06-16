@@ -52,14 +52,4 @@ export const handleProfileImagetoUrl = async (image) => {
   } else return "";
 };
 
-// export const extractColorScheme = async (backgroundImg) => {
-//   const colors = getColors(backgroundImg, "image/png").then((colors) => {
-//     // `colors` is an array of color objects
-//     console.log(colors);
-//     return colors;
-//   });
-
-//   console.log(colors);
-// };
-
 export default getApiDatas;

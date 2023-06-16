@@ -80,7 +80,7 @@ export default function Navbar() {
           ""
         )}
 
-        {dashboardLocations.includes(
+        {dashboardLocations.find(
           (location) => location === currentPageLocation
         ) ? (
           <div className="flex gap-10 2xl:gap-[4.1rem]">
