@@ -5,12 +5,14 @@ import eye from "../../../assets/images/landingPage/loginForm/eye.svg";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { signUp } from "../../../redux/slices/userSlice";
-import {
-  userDetailsState,
-  loadingState,
-  errorState,
-} from "../../../redux/slices/userSlice";
+// import {
+//   userDetailsState,
+//   loadingState,
+//   errorState,
+// } from "../../../redux/slices/userSlice";
+import swal from "sweetalert2";
 import { useSlider } from "@mui/base";
+
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -26,13 +28,13 @@ const SignUp = () => {
   const newUserDetails = {};
   const dispatch = useDispatch();
 
-  const userDetails = useSelector(userDetailsState);
-  const loading = useSelector(loadingState);
-  const error = useSelector(errorState);
-
-  useEffect(() => {
-    if (userDetails !== null) dispatch(signUp(newUserDetails));
-  }, [userDetails, dispatch]);
+  const {userDetails,error,loading ,success} = useSelector((state) => state.user);
+  // const userDetails = useSelector(userDetailsState);
+  // const loading = useSelector(loadingState);
+  // const error = useSelector(errorState);
+  // useEffect(() => {
+  //   if (userDetails !== null) dispatch(signUp(newUserDetails));
+  // }, [userDetails, dispatch]);
 
   const handleCreateNewAccount = async () => {
     if (confirmPasswordRef.current.value === passowrdRef.current.value) {
@@ -42,15 +44,8 @@ const SignUp = () => {
       newUserDetails["phone"] = phoneNoRef.current.value;
       newUserDetails["password"] = passowrdRef.current.value;
 
-      // dispatch(signUp(newUserDetails));
-      console.log(
-        "DATA : ",
-        userDetails,
-        "ERROR: ",
-        error,
-        "Loading: ",
-        loading
-      );
+      dispatch(signUp(newUserDetails));
+   
 
       // const response = await axios.post(
       //   `${process.env.REACT_APP_API_HOST}register/Frontend-user`,
@@ -67,6 +62,49 @@ const SignUp = () => {
     }
   };
 
+  // navigate('/')
+
+  useEffect(() => {
+    if (success) {
+      swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Success",
+        text: userDetails,
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+      });
+      navigate("/");
+    }
+  }, [success]);
+
+
+  useEffect(() => {
+    if (error) {
+      setApiMessage(error);
+      swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error,
+        timer: "2500",
+        buttons: true,
+      });
+    }
+  }, [error]);
+
+
+  // console.log(
+  //   "UserDetails:",userDetails,
+  //   "Success : ",
+  //   success,
+  //   "ERROR: ",
+  //   error,
+  //   "Loading: ",
+  //   loading
+  // );
+
+  
   return (
     <header className="flex flex-col signup-form justify-center items-center">
       <p className="md:text-[34px]">Sign up</p>

@@ -22,6 +22,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userSlice from "./slices/userSlice";
 
+// const middleware = () => {
+//   thunk: true;
+//   immutableCheck: true;
+//   serializableCheck: true;
+// };
 const store = configureStore({
   reducer: { user: userSlice },
 });
