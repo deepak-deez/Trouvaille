@@ -1,15 +1,24 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import getAllApiData from "./logic";
 import "./style.scss";
 import PassengerDetails from "../../components/bookignDetails/passengerDetails/PassengerDetails";
+import { useSelector } from "react-redux";
 export default function BookingDetails(props) {
   const location = useLocation();
   const userDetails = location.state;
   const [userBookingDetails, setUserBookingDetails] = useState();
   const [success, setSuccess] = useState();
+
+  const { data} = useSelector((state) => state.user);
+  const navigate = useNavigate()
+  useEffect(()=>{
+    if(!data)
+    navigate("/")
+  })
+
   useEffect(() => {
     getAllApiData(
       userDetails.bookingId,

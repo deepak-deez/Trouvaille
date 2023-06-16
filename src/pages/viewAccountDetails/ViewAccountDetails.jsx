@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./style.scss";
 import ViewAccountDetails from "../../components/accountDetails/viewAccountDetails/ViewAccountDetails";
 import EditAccountDetails from "../../components/accountDetails/editAccountDetails/EditAccountDetails";
 import ProfileSettings from "../../components/accountDetails/profileSettings/ProfileSettings";
 import Editprofile from "../../components/accountDetails/editProfile/Editprofile";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const ViewAccDetails = () => {
   const [active, setActive] = useState("view-account");
+  const { userDetails} = useSelector((state) => state.user);
+  const navigate = useNavigate()
+  useEffect(()=>{
+    if(!userDetails)
+    navigate("/")
+  })
 
   return (
     <section className="account-details pt-[10rem] pb-[35rem] sm:pb-[20rem]">

@@ -71,6 +71,7 @@ console.log(userDetails);
     console.log("User details : ",userDetails);
     if (userDetails?.success) {
       handleRemember(userDetails);
+      console.log("5");
       navigate("/searchResult");
     }
     // else if(userDetails?.success === false){

@@ -11,7 +11,7 @@ import PricingDetails from "../../components/tripDetails/pricingDetails/PricingD
 import Ammenities from "../../components/tripDetails/ammenities/Ammenities";
 import Faqs from "../../components/tripDetails/faqs/Faqs";
 import getApiDatas, { handleProfileImagetoUrl } from "./logic";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import loader from "../../../src/assets/loaders/airplaneLoading.gif";
 import { faL } from "@fortawesome/free-solid-svg-icons";
@@ -35,6 +35,12 @@ export default function TripDetails(props) {
   const phNumber = userDetails?.data.userDetails.phone;
   const name = userDetails?.data.userDetails.name;
   const backgroundImg = { backgroundImage: `url(${tripImage})` };
+
+  const navigate = useNavigate()
+  useEffect(()=>{
+    if(!userDetails)
+    navigate("/")
+  })
 
   useEffect(() => {
     getApiDatas(
