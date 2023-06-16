@@ -6,14 +6,16 @@ import ProfileSideBar from "../profileSideBar/ProfileSideBar";
 import SignOut from "../../SignOut/SignOut";
 
 export default function ViewAccountDetails({ setActive }) {
-  const { userDetails } = useSelector((state) => state.logInUser);
+  const { userDetails } = useSelector((state) => state.user);
+
+  console.log(userDetails,"Sc",userDetails.success);
 
   const userData = {
-    email: userDetails.data.userDetails.email,
-    phNumber: userDetails.data.userDetails.phone,
-    password: userDetails.data.userDetails.password,
+    email: userDetails?.data?.data?.userDetails?.email,
+    phNumber: userDetails?.data?.data?.userDetails?.phone,
+    password: userDetails?.data?.data?.userDetails?.password,
   };
-  if (userDetails.success) {
+  if (userDetails) {
     return (
       <header className="sm:mx-20 2xl:mx-[18.75rem]">
         <div className="flex justify-between px-10 xl:px-0 lg:text-[22px]">
@@ -61,7 +63,7 @@ export default function ViewAccountDetails({ setActive }) {
       <div className="text-center  py-[30rem] md:py-[20rem]">
         <h1 className="text-5xl leading-[5rem]">
           <span className="text-red-700">Oops</span> Something's Wrong, <br />{" "}
-          With Status Code : {userDetails.status}
+          With Message : {userDetails.data.data.message}
         </h1>
         <Link
           to="/searchResult"

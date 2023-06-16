@@ -75,7 +75,7 @@ const Details = (props) => {
     }
   };
 
-  const { userDetails } = useSelector((state) => state.logInUser);
+  const { userDetails } = useSelector((state) => state.user);
 
   const [sucessModal, setsucessModal] = useState(false);
   const [passenger, setpassenger] = useState(false);

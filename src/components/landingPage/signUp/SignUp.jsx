@@ -4,7 +4,7 @@ import "./style.scss";
 import eye from "../../../assets/images/landingPage/loginForm/eye.svg";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { signUp } from "../../../redux/slices/userSlice";
+import { signUp,resetState } from "../../../redux/slices/userSlice";
 // import {
 //   userDetailsState,
 //   loadingState,
@@ -75,7 +75,11 @@ const SignUp = () => {
         timer: 2000,
         timerProgressBar: true,
       });
-      navigate("/");
+      dispatch(resetState({success:false}))
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+      
     }
   }, [success]);
 

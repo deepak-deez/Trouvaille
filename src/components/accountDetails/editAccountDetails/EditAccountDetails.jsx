@@ -8,13 +8,13 @@ import ProfileSideBar from "../profileSideBar/ProfileSideBar";
 import SignOut from "../../SignOut/SignOut";
 
 export default function EditAccountDetails({ setActive }) {
-  const { userDetails } = useSelector((state) => state.logInUser);
+  const { userDetails } = useSelector((state) => state.user);
   const [checkPass, setCheckPass] = useState(true);
   const [emptyFields, setEmptyFields] = useState();
   const oldPassRef = useRef();
   const newPassRef = useRef();
   const confirmNewPassRef = useRef();
-  const emailId = userDetails.data.userDetails.email;
+  const emailId = userDetails.data.data.userDetails.email;
 
   const updateDetailsHandler = async () => {
     const verifyOldPassUrl = `${process.env.REACT_APP_API_HOST}login/Frontend-user`;
@@ -50,7 +50,7 @@ export default function EditAccountDetails({ setActive }) {
     }
   };
 
-  if (userDetails.success) {
+  if (userDetails) {
     return (
       <header className="sm:mx-20 2xl:mx-[18.75rem]">
         <div className=" flex justify-between px-10 xl:px-0 lg:text-[22px]">
@@ -71,7 +71,7 @@ export default function EditAccountDetails({ setActive }) {
             <input
               type="text"
               className="mb-[2.6rem] grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl"
-              defaultValue={userDetails.data.userDetails.phone}
+              defaultValue={userDetails.data.data.userDetails.phone}
               disabled={true}
             />
             <h4 className="mb-[1.5rem]">Email ID</h4>

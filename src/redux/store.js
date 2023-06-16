@@ -27,6 +27,7 @@ import userSlice from "./slices/userSlice";
 //   immutableCheck: true;
 //   serializableCheck: true;
 // };
+
 const store = configureStore({
   reducer: { user: userSlice },
 });

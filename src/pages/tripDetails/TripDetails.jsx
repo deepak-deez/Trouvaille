@@ -19,7 +19,7 @@ import NoResponse from "../../components/noResponse/NoResponse";
 
 export default function TripDetails(props) {
   const location = useLocation();
-  const { userDetails } = useSelector((state) => state.logInUser);
+  const { userDetails } = useSelector((state) => state.user);
   const [tripDetails, setTripDetails] = useState();
   const [ocassionImgData, setOcassionImgData] = useState();
   const [ammenityImgData, setAmmenityImgData] = useState();
@@ -28,12 +28,12 @@ export default function TripDetails(props) {
   const [details, setDetails] = useState(false);
 
   const currentTripId = useParams();
-  const currentUserId = useSelector((state) => state.logInUser).userDetails.data
-    .userDetails._id;
-  const tripImage = tripDetails?.data?.data[0].image;
-  const email = userDetails?.data.userDetails.email;
-  const phNumber = userDetails?.data.userDetails.phone;
-  const name = userDetails?.data.userDetails.name;
+  const currentUserId = useSelector((state) => state.user)?.userDetails?.data?.data?.userDetails?._id
+  console.log(currentUserId);
+  const tripImage = tripDetails?.data?.data[0]?.image;
+  const email = userDetails?.data?.data?.userDetails?.email;
+  const phNumber = userDetails?.data?.data?.userDetails?.phone;
+  const name = userDetails?.data?.data?.userDetails?.name;
   const backgroundImg = { backgroundImage: `url(${tripImage})` };
 
   const navigate = useNavigate()
@@ -53,7 +53,7 @@ export default function TripDetails(props) {
     );
   }, []);
 
-  const tripResponseData = tripDetails?.data.data[0];
+  const tripResponseData = tripDetails?.data?.data[0];
 
   const acitivitiesData = tripResponseData?.activities;
   const durationData = tripResponseData?.duration;
@@ -76,7 +76,7 @@ export default function TripDetails(props) {
     tripImage,
   };
 
-  if (tripDetails?.data?.success) {
+  if (tripDetails?.data?.data[0]) {
     return (
       <section className="trip-details" style={backgroundImg}>
         <Header location={locationName} />
