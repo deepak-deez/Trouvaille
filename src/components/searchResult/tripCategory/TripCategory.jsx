@@ -53,9 +53,6 @@ export default function TripCategory({
     }
   }, [tripFilterClicked]);
 
-  useEffect(() => {
-    console.log(allPackagesData);
-  }, [allPackagesData]);
 
   const handleFilterRequirements = () => {
     const setFilterRequirementsCopy = { ...filterRequirements };

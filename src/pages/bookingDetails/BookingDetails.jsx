@@ -8,21 +8,21 @@ import PassengerDetails from "../../components/bookignDetails/passengerDetails/P
 import { useSelector } from "react-redux";
 export default function BookingDetails(props) {
   const location = useLocation();
-  const userDetails = location.state;
+  const userDetail = location.state;
   const [userBookingDetails, setUserBookingDetails] = useState();
   const [success, setSuccess] = useState();
 
-  const { data} = useSelector((state) => state.user);
+  const { userDetails} = useSelector((state) => state.user);
   const navigate = useNavigate()
   useEffect(()=>{
-    if(!data)
+    if(!userDetails)
     navigate("/")
   })
 
   useEffect(() => {
     getAllApiData(
-      userDetails.bookingId,
-      userDetails.userId,
+      userDetail.bookingId,
+      userDetail.userId,
       setUserBookingDetails,
       setSuccess
     );

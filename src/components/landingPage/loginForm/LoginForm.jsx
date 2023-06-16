@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import eye from "../../../assets/images/landingPage/loginForm/eye.svg";
 import Cookies from "js-cookie";
 // import { logInUser } from "../../../redux/actions/userActions";
-import { signIn } from "../../../redux/slices/userSlice";
+import { signIn,resetState } from "../../../redux/slices/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import swal from "sweetalert2";
 import LoadingScreen from "../../loading/loadingScreen";
@@ -18,7 +18,7 @@ const LoginForm = () => {
   // const [apiMessage, setApiMessage] = useState("");
   const [empyFieldsMessage, setEmptyFieldsMessage] = useState(false);
   const dispatch = useDispatch();
-  const { userDetails, error,loading } = useSelector((state) => state.user);
+  const { userDetails, error,loading,success } = useSelector((state) => state.user);
   const [checked, setChecked] = useState(
     localStorage.getItem("rememberMe") === "true" ? true : false
   );
@@ -69,9 +69,9 @@ console.log(userDetails);
 
   useEffect(() => {
     console.log("User details : ",userDetails);
-    if (userDetails?.success) {
+    if (success) {
       handleRemember(userDetails);
-      console.log("5");
+      dispatch(resetState({success:false}))
       navigate("/searchResult");
     }
     // else if(userDetails?.success === false){
@@ -88,7 +88,7 @@ console.log(userDetails);
     //     timerProgressBar: true,
     //   });
     // }
-  }, [userDetails]);
+  }, [success]);
 
   useEffect(() => {
     console.log("ERROR : ",error, ", User Details : ",userDetails,"Loading",loading);

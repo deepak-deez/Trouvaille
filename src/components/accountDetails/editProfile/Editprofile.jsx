@@ -18,7 +18,7 @@ export default function EditProfile({ setActive }) {
   const [profileImg, setProfileImg] = useState();
   const [imageUrlState, setImageUrlState] = useState("");
 
-  const { userDetails } = useSelector((state) => state.logInUser);
+  const { userDetails } = useSelector((state) => state.user);
 
   const navigate = useNavigate();
   const nameRef = useRef();
@@ -26,7 +26,7 @@ export default function EditProfile({ setActive }) {
   const placeRef = useRef();
   const genderRef = useRef();
   const maritalStatusRef = useRef();
-  const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/Frontend-user/${userDetails.data.userDetails._id}`;
+  const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/Frontend-user/${userDetails.data.data.userDetails._id}`;
 
   const userPLace = responseData?.data?.data[0].userDetails?.place;
   const userName = responseData?.data?.data[0].userDetails?.name;
@@ -78,7 +78,7 @@ export default function EditProfile({ setActive }) {
       maritalStatus: maritalStatusRef.current.value,
     };
 
-    const updateUrl = `${process.env.REACT_APP_API_HOST}update/Frontend-user/${userDetails.data.userDetails._id}`;
+    const updateUrl = `${process.env.REACT_APP_API_HOST}update/Frontend-user/${userDetails.data.data.userDetails._id}`;
 
     try {
       const response = await axios.post(updateUrl, userData);
@@ -88,7 +88,7 @@ export default function EditProfile({ setActive }) {
     } catch (error) {}
   };
 
-  if (userDetails.success) {
+  if (userDetails.data.data.success) {
     return (
       <header className="sm:mx-20 2xl:mx-[18.75rem]">
         <div className="flex justify-between px-10 xl:px-0 lg:text-[22px]">
@@ -144,7 +144,7 @@ export default function EditProfile({ setActive }) {
           <div className="flex flex-col items-center sm:items-start gap-[1rem]">
             <input
               className="sm:text-[2.5rem] grey-text text-[1.5rem] bg-transparent"
-              defaultValue={userDetails.data.userDetails.email}
+              defaultValue={userDetails.data.data.userDetails.email}
               disabled={true}
             />
             <div className="flex gap-[1rem] items-center">

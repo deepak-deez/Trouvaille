@@ -10,7 +10,9 @@ const API = process.env.REACT_APP_API_HOST;
 const nameSpace = "user";
 
 const initialState = {
-  userDetails: null,
+  userDetails: localStorage.getItem("userDetails")
+    ? JSON.parse(localStorage.getItem("userDetails"))
+    : null,
   loading: false,
   error: null,
   success: false,
@@ -34,7 +36,7 @@ export const signIn = createAsyncThunk(
     try {
       const results = await axios.post(`${API}login/Frontend-user`, userData);
       if (results) {
-        localStorage.setItem("userDetails", results);
+        localStorage.setItem("userDetails", JSON.stringify(results));
         return results;
       }
     } catch (err) {
@@ -46,7 +48,11 @@ export const signIn = createAsyncThunk(
 const userSlice = createSlice({
   name: nameSpace,
   initialState,
-  reducers: {},
+  reducers: {
+    resetState: (state, action) => {
+      state.success = action.payload.success;
+    },
+  },
 
   extraReducers(builder) {
     builder.addCase(signUp.pending, (state, action) => {
@@ -93,4 +99,4 @@ const userSlice = createSlice({
 // export const loadingState = (state) => state.user.loading;
 // export const errorState = (state) => state.user.error;
 export default userSlice.reducer;
-// export const { signUp } = userSlice.actions;
+export const { resetState } = userSlice.actions;

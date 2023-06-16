@@ -11,8 +11,8 @@ import SignOut from "../../SignOut/SignOut";
 import ProfileSideBar from "../profileSideBar/ProfileSideBar";
 
 export default function ProfileSettings({ setActive }) {
-  const { userDetails } = useSelector((state) => state.logInUser);
-  const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/Frontend-user/${userDetails.data.userDetails._id}`;
+  const { userDetails } = useSelector((state) => state.user);
+  const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/Frontend-user/${userDetails.data.data.userDetails._id}`;
   const [responseData, setResponseData] = useState();
 
   const updateDataHandler = async () => {
@@ -26,7 +26,7 @@ export default function ProfileSettings({ setActive }) {
   useEffect(() => {
     updateDataHandler();
   }, []);
-  const profileImage = responseData?.data.data[0].userDetails?.image.url;
+  const profileImage = responseData?.data.data[0].userDetails?.image;
   const userLcoation = responseData?.data.data[0].userDetails?.place;
   const userName = responseData?.data.data[0].userDetails?.name;
   const userDOB = responseData?.data.data[0].userDetails?.DOB;
@@ -35,7 +35,7 @@ export default function ProfileSettings({ setActive }) {
     responseData?.data.data[0].userDetails?.maritalStatus;
   const userJoiningYear = responseData?.data.data[0]?.joiningYear;
 
-  if (userDetails.success) {
+  if (userDetails) {
     return (
       <header className=" sm:mx-20 2xl:mx-[18.75rem]">
         <div className="flex justify-between px-10 xl:px-0 lg:text-[22px]">
@@ -71,7 +71,7 @@ export default function ProfileSettings({ setActive }) {
           </div>
           <div className="flex flex-col items-center sm:items-start gap-[1rem]">
             <h2 className="sm:text-[2.5rem] grey-text text-[1.5rem]">
-              {userDetails.data.userDetails.email}
+              {userDetails.data.data.userDetails.email}
             </h2>
             <div className="flex gap-[1rem] items-center">
               <span className="lg:text-[1.6rem] grey-text">
