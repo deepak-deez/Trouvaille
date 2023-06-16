@@ -1,0 +1,13 @@
+/* Body */
+body {
+  zoom: 0.75;
+  section {
+    background-attachment: fixed;
+    padding: 15px;
+  }
+  @media screen and (min-width: 1024px) {
+    section {
+      padding: 0;
+    }
+  }
+}

@@ -1,8 +1,6 @@
 import axios from "axios";
-import getColors from "get-image-colors";
 const cloudinaryApi = process.env.REACT_APP_CLOUDINARY_API;
 const cloudinaryName = process.env.REACT_APP_CLOUDINARY_NAME;
-const getErrTripDetails = `${process.env.REACT_APP_API_HOST}get-trip-details/trip-package/6465bc874e71527`;
 
 const getApiDatas = async (
   setTripDetails,
@@ -12,6 +10,7 @@ const getApiDatas = async (
   currentUserId,
   currentTripId
 ) => {
+  const getErrTripDetails = `${process.env.REACT_APP_API_HOST}get-trip-details/trip-package/6465bc874e71527`;
   const getTripDetailsUrl = `${process.env.REACT_APP_API_HOST}get-trip-details/trip-package/${currentTripId}`;
   const getAmmenityDataUrl = `${process.env.REACT_APP_API_HOST}get-feature/amenity`;
   const getOcassionDataUrl = `${process.env.REACT_APP_API_HOST}get-feature/occasion`;
@@ -53,14 +52,14 @@ export const handleProfileImagetoUrl = async (image) => {
   } else return "";
 };
 
-export const extractColorScheme = async (backgroundImg) => {
-  const colors = getColors(backgroundImg, "image/png").then((colors) => {
-    // `colors` is an array of color objects
-    console.log(colors);
-    return colors;
-  });
+// export const extractColorScheme = async (backgroundImg) => {
+//   const colors = getColors(backgroundImg, "image/png").then((colors) => {
+//     // `colors` is an array of color objects
+//     console.log(colors);
+//     return colors;
+//   });
 
-  console.log(colors);
-};
+//   console.log(colors);
+// };
 
 export default getApiDatas;

@@ -11,7 +11,7 @@ $bg-color-blue: #212b33;
   margin-top: 5rem;
   color: $color-primary-white;
   .all-trip-list {
-    box-shadow: inset 0rem -10rem 5rem -10rem rgb(0, 0, 0);
+    // box-shadow: inset 0rem -10rem 5rem -10rem rgb(0, 0, 0);
     border-bottom-left-radius: 2rem;
     border-bottom-right-radius: 2rem;
   }
@@ -73,19 +73,19 @@ $bg-color-blue: #212b33;
 
 @media screen and (min-width: 1024px) {
   .trip-category {
-    margin-left: 6rem;
-    margin-right: 6rem;
+    padding-left: 6rem;
+    padding-right: 6rem;
   }
 }
 @media screen and (min-width: 1400px) {
   .trip-category {
-    margin-left: 15rem;
-    margin-right: 15rem;
+    padding-left: 15rem;
+    padding-right: 15rem;
   }
 }
 @media screen and (min-width: 1920px) {
   .trip-category {
-    margin-left: 24rem;
-    margin-right: 24rem;
+    padding-left: 24rem;
+    padding-right: 24rem;
   }
 }

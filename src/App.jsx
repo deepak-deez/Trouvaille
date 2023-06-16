@@ -1,4 +1,5 @@
 import React from "react";
+import "./style/style.scss";
 
 import Router from "./Routes";
 

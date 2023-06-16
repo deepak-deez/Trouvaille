@@ -150,7 +150,6 @@ export default function TripCategory({
 
     setCategoryFilter(categoryFilter);
 
-    parentElement.classList.toggle("border-transparent");
     parentElement.classList.toggle("border-amber-500");
     grandParentElement.lastChild.classList.toggle("text-[orange]");
 
