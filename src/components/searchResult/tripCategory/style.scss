@@ -10,10 +10,45 @@ $bg-color-blue: #212b33;
 .trip-category {
   margin-top: 5rem;
   color: $color-primary-white;
+  .all-trip-list {
+    // box-shadow: inset 0rem -10rem 5rem -10rem rgb(0, 0, 0);
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+  }
+  .sort-list {
+    background-color: rgb(213, 213, 213);
+    color: #1e242a;
+    border-radius: 30px;
+    padding: 1rem 1rem;
+    li {
+      cursor: pointer;
+      padding: 1rem;
+      border-radius: 1rem;
+    }
+    li:hover {
+      background: rgb(66, 66, 66);
+      color: white;
+    }
+    li:active {
+      background: rgb(21, 21, 21);
+      color: white;
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    .all-trip-list {
+      overflow-x: hidden;
+      grid-auto-flow: unset;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(274px, 274px));
+    }
+  }
+
   .trip-category-icons {
     img {
       width: 4rem;
     }
+
     //media queries
     @media only screen and (min-width: 1024px) {
       img {
@@ -21,16 +56,36 @@ $bg-color-blue: #212b33;
       }
     }
   }
+  .show-more {
+    p {
+      cursor: pointer;
+    }
+  }
+
+  .category:hover {
+    border: solid 5px rgb(246, 205, 149);
+    border-radius: 3rem;
+    .category-title {
+      color: rgb(246, 205, 149);
+    }
+  }
 }
+
 @media screen and (min-width: 1024px) {
   .trip-category {
-    margin-left: 6rem;
-    margin-right: 6rem;
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
+}
+@media screen and (min-width: 1400px) {
+  .trip-category {
+    padding-left: 15rem;
+    padding-right: 15rem;
   }
 }
 @media screen and (min-width: 1920px) {
   .trip-category {
-    margin-left: 24rem;
-    margin-right: 24rem;
+    padding-left: 24rem;
+    padding-right: 24rem;
   }
 }

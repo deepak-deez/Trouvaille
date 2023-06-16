@@ -15,6 +15,7 @@ import EditProfile from "./pages/editProfile/EditProfile.jsx";
 import BookingList from "./pages/bookingList/BookingList.jsx";
 import BookingDetails from "./pages/bookingDetails/BookingDetails.jsx";
 import Navbar from "./components/navbar/Navbar.jsx";
+import ViewNotification from "./pages/viewNotifications/ViewNotifications.jsx";
 import Footer from "./components/footer/Footer.jsx";
 import PageNotAvailable from "./components/pageNotAvailable/PageNotAvailable.jsx";
 
@@ -32,15 +33,19 @@ const Router = () => {
         />
         <Route path="/signup" element={<Signup />} />
         <Route path="/searchResult" element={<SearchResult />} />
+        <Route path="/notifications" element={<ViewNotification />} />
         <Route path="/trips" element={<TripsPage />} />
-        <Route path="/tripDetails" element={<TripDetails />} />
+        <Route path="/tripDetails/:id" element={<TripDetails />} />
         <Route path="/bookingForm" element={<BookingForm />} />
         <Route path="/accountDetails" element={<AccountDetails />} />
         <Route path="/editAccDetails" element={<EditAccountDetails />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/editProfile" element={<EditProfile />} />
         <Route path="/booking" element={<BookingList />} />
-        <Route path="/bookingDetails" element={<BookingDetails />} />
+        <Route
+          path="/bookingDetails/:userId/:bookingId"
+          element={<BookingDetails />}
+        />
         <Route path="*" element={<PageNotAvailable />} />
       </Routes>
       <Footer />

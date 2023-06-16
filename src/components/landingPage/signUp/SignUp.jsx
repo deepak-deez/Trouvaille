@@ -1,8 +1,18 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./style.scss";
 import eye from "../../../assets/images/landingPage/loginForm/eye.svg";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { signUp,resetState } from "../../../redux/slices/userSlice";
+// import {
+//   userDetailsState,
+//   loadingState,
+//   errorState,
+// } from "../../../redux/slices/userSlice";
+import swal from "sweetalert2";
+import { useSlider } from "@mui/base";
+
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -16,6 +26,15 @@ const SignUp = () => {
   let [apiMessage, setApiMessage] = useState("");
 
   const newUserDetails = {};
+  const dispatch = useDispatch();
+
+  const {userDetails,error,loading ,success} = useSelector((state) => state.user);
+  // const userDetails = useSelector(userDetailsState);
+  // const loading = useSelector(loadingState);
+  // const error = useSelector(errorState);
+  // useEffect(() => {
+  //   if (userDetails !== null) dispatch(signUp(newUserDetails));
+  // }, [userDetails, dispatch]);
 
   const handleCreateNewAccount = async () => {
     if (confirmPasswordRef.current.value === passowrdRef.current.value) {
@@ -25,21 +44,71 @@ const SignUp = () => {
       newUserDetails["phone"] = phoneNoRef.current.value;
       newUserDetails["password"] = passowrdRef.current.value;
 
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_HOST}register/Frontend-user`,
-        newUserDetails
-      );
+      dispatch(signUp(newUserDetails));
+   
 
-      setApiMessage(response?.data?.message);
+      // const response = await axios.post(
+      //   `${process.env.REACT_APP_API_HOST}register/Frontend-user`,
+      //   newUserDetails
+      // );
 
-      if (response?.data?.success) {
-        navigate("/");
-      }
+      // setApiMessage(response?.data?.message);
+
+      // if (response?.data?.success) {
+      //   navigate("/");
+      // }
     } else {
       setDifferentPassword(true);
     }
   };
 
+  // navigate('/')
+
+  useEffect(() => {
+    if (success) {
+      swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Success",
+        text: userDetails,
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+      });
+      dispatch(resetState({success:false}))
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+      
+    }
+  }, [success]);
+
+
+  useEffect(() => {
+    if (error) {
+      setApiMessage(error);
+      swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error,
+        timer: "2500",
+        buttons: true,
+      });
+    }
+  }, [error]);
+
+
+  // console.log(
+  //   "UserDetails:",userDetails,
+  //   "Success : ",
+  //   success,
+  //   "ERROR: ",
+  //   error,
+  //   "Loading: ",
+  //   loading
+  // );
+
+  
   return (
     <header className="flex flex-col signup-form justify-center items-center">
       <p className="md:text-[34px]">Sign up</p>

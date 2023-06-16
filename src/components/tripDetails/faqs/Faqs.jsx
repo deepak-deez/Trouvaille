@@ -6,9 +6,14 @@ export default function Faqs(props) {
   const [dropdown, setDropdown] = useState(true);
 
   return (
-    <li className="flex flex-col gap-5">
+    <li
+      className="flex flex-col gap-5 cursor-pointer"
+      onClick={() => {
+        setDropdown(!dropdown);
+      }}
+    >
       <div className="flex justify-between faqs-heading">
-        <div className="flex gap-2">
+        <div className="flex gap-2 ">
           <i className="fa fa-circle my-auto text-[6px]"></i>
           <h4>{props.question}</h4>
         </div>

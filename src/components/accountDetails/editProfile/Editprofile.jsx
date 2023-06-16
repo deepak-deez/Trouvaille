@@ -7,16 +7,18 @@ import defaultProfileImage from "../../../assets/images/accountDetails/profileSe
 import editIcon from "../../../assets/images/accountDetails/profileSettings/edit.svg";
 import accountSettingsImgChange from "../../../assets/images/accountDetails/profileSettings/edit-img.svg";
 import axios from "axios";
-import handleSignout from "../functions/handleSignout";
+import ProfileSideBar from "../profileSideBar/ProfileSideBar";
 
-export default function EditProfile() {
+import SignOut from "../../SignOut/SignOut";
+
+export default function EditProfile({ setActive }) {
   const [responseData, setResponseData] = useState();
   const [userFetchedData, setUserFetchedData] = useState();
   const [uploadImgBtnDisplay, setUploadImgBtnDisplay] = useState(false);
   const [profileImg, setProfileImg] = useState();
   const [imageUrlState, setImageUrlState] = useState("");
 
-  const { userDetails } = useSelector((state) => state.logInUser);
+  const { userDetails } = useSelector((state) => state.user);
 
   const navigate = useNavigate();
   const nameRef = useRef();
@@ -24,7 +26,7 @@ export default function EditProfile() {
   const placeRef = useRef();
   const genderRef = useRef();
   const maritalStatusRef = useRef();
-  const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/Frontend-user/${userDetails.data.userDetails._id}`;
+  const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/Frontend-user/${userDetails.data.data.userDetails._id}`;
 
   const userPLace = responseData?.data?.data[0].userDetails?.place;
   const userName = responseData?.data?.data[0].userDetails?.name;
@@ -76,7 +78,7 @@ export default function EditProfile() {
       maritalStatus: maritalStatusRef.current.value,
     };
 
-    const updateUrl = `${process.env.REACT_APP_API_HOST}update/Frontend-user/${userDetails.data.userDetails._id}`;
+    const updateUrl = `${process.env.REACT_APP_API_HOST}update/Frontend-user/${userDetails.data.data.userDetails._id}`;
 
     try {
       const response = await axios.post(updateUrl, userData);
@@ -86,16 +88,14 @@ export default function EditProfile() {
     } catch (error) {}
   };
 
-  if (userDetails.success) {
+  if (userDetails.data.data.success) {
     return (
       <header className="sm:mx-20 2xl:mx-[18.75rem]">
-        <div className="flex justify-between lg:text-[22px]">
+        <div className="flex justify-between px-10 xl:px-0 lg:text-[22px]">
           <h2 className="font-[600]">
             Settings/<span className="font-[400] grey-text"> My profile</span>
           </h2>
-          <button className="underline font-[600]" onClick={handleSignout}>
-            Signout
-          </button>
+          <SignOut />
         </div>
         <div className="flex flex-col sm:flex-row gap-[2rem] mt-[1.5rem] sm:mt-[2rem] profile-section">
           <div className="flex flex-col items-center">
@@ -144,7 +144,7 @@ export default function EditProfile() {
           <div className="flex flex-col items-center sm:items-start gap-[1rem]">
             <input
               className="sm:text-[2.5rem] grey-text text-[1.5rem] bg-transparent"
-              defaultValue={userDetails.data.userDetails.email}
+              defaultValue={userDetails.data.data.userDetails.email}
               disabled={true}
             />
             <div className="flex gap-[1rem] items-center">
@@ -161,18 +161,8 @@ export default function EditProfile() {
             </div>
           </div>
         </div>
-        <div className="mt-[5rem] xl:flex xl:justify-between xl:gap-14 lg:text-[20px]">
-          <ul className="hidden xl:flex flex-col gap-10">
-            <li className="grey-text font-bold">
-              <Link to="/profile">Profile</Link>
-            </li>
-            <li className="grey-text">
-              <Link to="/accountDetails">Account Details</Link>
-            </li>
-            <li className="grey-text">
-              <Link to="/booking">My Booking</Link>
-            </li>
-          </ul>
+        <div className="xl:mt-[5rem] mt-[2rem] flex flex-col xl:flex-row xl:justify-between gap-8 xl:gap-14 lg:text-[20px]">
+          <ProfileSideBar activePage={"profile"} setActive={setActive} />
           <div className="profile-details flex flex-col lg:text-[22px]  p-5 lg:p-10 2xl:p-[2.2rem] rounded-2xl xl:w-[80%] backdrop-blur-sm">
             <h2 className="font-[600]">Profile</h2>
             <h5 className="mb-[2rem] text-[1rem]">

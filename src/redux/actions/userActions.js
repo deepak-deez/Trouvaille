@@ -26,13 +26,13 @@ export const logInUser = (email, password) => async (dispatch) => {
       body,
       config
     );
-    if (data.status == 200) {
+    if (data.status === 200) {
       dispatch({
         type: SIGN_IN_USER_SUCCESS,
         payload: data,
       });
       localStorage.setItem("userDetails", JSON.stringify(data));
-    } else if (data.status == 500) {
+    } else if (data.status === 500) {
       dispatch({
         type: SIGN_IN_USER_FAILED,
         payload: data,

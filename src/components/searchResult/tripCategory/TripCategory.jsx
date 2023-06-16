@@ -1,69 +1,272 @@
 import "./style.scss";
-import React, { useEffect, useState } from "react";
-import seaIcon from "../../../assets/images/searchResult/tripCategory/sea-icon.svg";
-import hillsIcon from "../../../assets/images/searchResult/tripCategory/hills-icon.svg";
-import forestIcon from "../../../assets/images/searchResult/tripCategory/forest-icon.svg";
-import tropicalFallsIcon from "../../../assets/images/searchResult/tripCategory/tropical-falls.svg";
-import desertIcon from "../../../assets/images/searchResult/tripCategory/desert-icon.svg";
-import riversideIcon from "../../../assets/images/searchResult/tripCategory/riverside-icon.svg";
+import "../../../style/animations.scss";
+import "../../../style/animations.scss";
+import React, { useEffect, useState, useRef } from "react";
 import sortIcon from "../../../assets/images/searchResult/tripCategory/sort-icon.svg";
 import filterIcon from "../../../assets/images/searchResult/tripCategory/filter-icon.svg";
 import TripCard from "../tripCard/TripCard";
 import FilterCategories from "../filterCategories/FilterCategories";
-import getAllApiData from "./logic";
+import { getAllApiData, getFilteredData, sortData } from "./logic";
 import "rc-slider/assets/index.css";
+import defaultCategoryImg from "../../../assets/images/searchResult/tripCategory/hills-icon.svg";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
 
-export default function TripCategory() {
+export default function TripCategory({
+  checkinDate,
+  checkOutDate,
+  tripFilterClicked,
+  filterDestination,
+  filterPerson,
+}) {
   const [allPackagesData, setAllPackagesData] = useState();
-  const [showFilter, setShowFilter] = useState();
+  const [allTripCategory, setAllTripCategory] = useState();
+  const [showFilter, setShowFilter] = useState(false);
+  const [closingAnimation, setClosingAnimation] = useState(false);
+  const [showMore, setShowMore] = useState(true);
+  const [sortClicked, setSortClicked] = useState(false);
+  const [categoryFilter, setCategoryFilter] = useState([]);
+  const [filterRequirements, setFilterRequirements] = useState({
+    title: [],
+    maximumGuests: "",
+    travelType: [],
+    tripCategory: [],
+    occasions: [],
+    amenities: [],
+    price: "",
+    checkIn: "",
+    checkOut: "",
+  });
+  const location = useLocation();
+
+  useEffect(() => {
+    if (filterPerson !== "") handleFilterRequirements();
+  }, [filterPerson]);
+
+  useEffect(() => {
+    handleFilterRequirements();
+  }, [filterDestination]);
+
+  useEffect(() => {
+    if (tripFilterClicked > 0) {
+      handleFilterRequirements();
+    }
+  }, [tripFilterClicked]);
+
+  useEffect(() => {}, [allPackagesData]);
+
+  const handleFilterRequirements = () => {
+    const setFilterRequirementsCopy = { ...filterRequirements };
+
+    if (location.pathname === "/trips") {
+      console.log("Trips!");
+      setFilterRequirementsCopy.checkIn = checkinDate;
+      setFilterRequirementsCopy.checkOut = checkOutDate;
+      setFilterRequirementsCopy.title = filterDestination;
+      setFilterRequirementsCopy.maximumGuests = filterPerson;
+    }
+
+    setFilterRequirementsCopy.tripCategory = categoryFilter;
+    setFilterRequirements(setFilterRequirementsCopy);
+  };
+  const refOne = useRef(null);
+
+  useEffect(() => {
+    getTripCategory();
+  }, []);
+
+  useEffect(() => {
+    console.log(filterRequirements);
+    try {
+      getFilteredData(filterRequirements, setAllPackagesData);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [filterRequirements]);
 
   useEffect(() => {
     getAllApiData(setAllPackagesData);
+    document.addEventListener("click", hideOnClickOutside, true);
   }, []);
+
+  const hideOnClickOutside = (e) => {
+    if (refOne.current && !refOne.current.contains(e.target)) {
+      setSortClicked(false);
+    }
+  };
+
+  const handleFilterStateChange = () => {
+    if (showFilter) {
+      setClosingAnimation(true);
+
+      setTimeout(() => {
+        setShowFilter(false);
+        setClosingAnimation(false);
+      }, 500);
+    } else {
+      setShowFilter(true);
+    }
+  };
+
+  const handleSortSelection = (e) => {
+    const sortOrder = e.target.getAttribute("data-sort-order");
+    const sortCriteria = e.target.getAttribute("data-sort-category");
+    sortData(allPackagesData, setAllPackagesData, sortCriteria, sortOrder);
+    setSortClicked(false);
+  };
+
+  const showMoreToggler = () => {
+    setShowMore(!showMore);
+  };
+
+  const sortTrips = () => {
+    sortClicked ? setSortClicked(false) : setSortClicked(true);
+  };
+
+  const getTripCategory = async () => {
+    const response = await axios.get(
+      `${process.env.REACT_APP_API_HOST}get-feature/category`
+    );
+
+    setAllTripCategory(response.data.data);
+  };
+
+  const handleClickedCategory = (e) => {
+    const targetSelected = e.target.parentElement.getAttribute(
+      "data-category-selected"
+    );
+
+    const parentElement = e.target.parentElement;
+    const grandParentElement = parentElement.parentElement;
+
+    if (categoryFilter.includes(targetSelected)) {
+      const categoryIndex = categoryFilter.indexOf(targetSelected);
+      categoryFilter.splice(categoryIndex, 1);
+    } else {
+      categoryFilter.push(grandParentElement.lastChild.textContent);
+    }
+
+    setCategoryFilter(categoryFilter);
+
+    parentElement.classList.toggle("border-amber-500");
+    grandParentElement.lastChild.classList.toggle("text-[orange]");
+
+    handleFilterRequirements();
+  };
 
   return (
     <section className="trip-category">
-      <div className="flex justify-center 2xl:justify-between flex-wrap gap-10 lg:gap-12 trip-category-icons hidden">
-        {/* //Remove className "Details from the classlist" */}
-        <img src={seaIcon} alt="sea-icon" />
-        <img src={hillsIcon} alt="hills-icon" />
-        <img src={forestIcon} alt="forest-icon" />
-        <img src={tropicalFallsIcon} alt="tropicalfalls-icon" />
-        <img src={desertIcon} alt="desert-icon" />
-        <img src={riversideIcon} alt="riverside-icon" />
+      <div className="flex justify-center 2xl:justify-between flex-wrap gap-10 lg:gap-12 trip-category-icons ">
+        {allTripCategory?.map((response, index) => {
+          return (
+            <div
+              onClick={handleClickedCategory}
+              className=" p-3 flex flex-col justify-end  "
+              key={index}
+            >
+              <div
+                className="category border-[5px] rounded-[2.5rem] transition-all duration-500 w-40 h-40 flex justify-center"
+                data-category-selected={response.title}
+              >
+                <img
+                  src={response.icon}
+                  alt={response.title}
+                  onError={({ currentTarget }) => {
+                    currentTarget.onerror = null; // prevents looping
+                    currentTarget.src = defaultCategoryImg;
+                  }}
+                  className="category-icon saturate-0 m-8 lg:m-0 lg:p-8"
+                />
+              </div>
+              <p className="text-center text-2xl category-title">
+                {response.title}
+              </p>
+            </div>
+          );
+        })}
       </div>
-      <div className="my-[3.75rem] flex justify-end text-[26px] gap-[4.75rem] hidden">
-        {/* //Remove className hidden from the classlist */}
-        <div className="flex gap-[1.5rem]">
-          <img src={sortIcon} alt="sort-icon" />
-          <p className="">Sort</p>
-        </div>
-        <div className="flex gap-[1.5rem]">
-          <button
-            onClick={() => {
-              setShowFilter(!showFilter);
-            }}
-          >
-            <img src={filterIcon} alt="filter-icon" />
+      <div className="my-[3.75rem] flex justify-start relative items-start text-[26px] gap-[4.75rem] ">
+        <div className="flex flex-col gap-[1.5rem] ">
+          <button onClick={sortTrips} ref={refOne}>
+            <div className="flex justify-center relative gap-[1.5rem]">
+              <img src={sortIcon} alt="sort-icon" />
+              <p className="">Sort</p>
+            </div>
           </button>
-          <p className="">Filter</p>
+          <ul
+            className={
+              "bg-transparent flex flex-col gap-[1rem] sort-list absolute z-50 top-[3rem] p-10 outline-none " +
+              (sortClicked ? "flex" : "hidden")
+            }
+          >
+            <li
+              data-sort-category={"price"}
+              data-sort-order={"ascending"}
+              onClick={handleSortSelection}
+            >
+              By Price - Low to High
+            </li>
+            <li
+              data-sort-category={"price"}
+              data-sort-order={"descending"}
+              onClick={handleSortSelection}
+            >
+              By Price - High to Low
+            </li>
+            <li
+              data-sort-category={"name"}
+              data-sort-order={"ascending"}
+              onClick={handleSortSelection}
+            >
+              By Name - A - Z
+            </li>
+            <li
+              data-sort-category={"name"}
+              data-sort-order={"descending"}
+              onClick={handleSortSelection}
+            >
+              By Name - Z - A
+            </li>
+          </ul>
         </div>
+        <button onClick={handleFilterStateChange}>
+          <div className="flex gap-[1.5rem]">
+            <img src={filterIcon} alt="filter-icon" />
+            <p className="">Filter</p>
+          </div>
+        </button>
       </div>
-      <div className="flex flex-col xl:flex-row gap-[2rem]">
-        {showFilter && <FilterCategories />}
+      <div className={"flex flex-col xl:flex-row gap-[2rem] "}>
         <div
           className={
-            "trip-category-filter-results grid justify-center grid-flow-col lg:grid-flow-dense overflow-scroll lg:grid-cols-3 gap-[2.2rem]  px-5" +
-            (showFilter ? " xl:w-[75%] lg:grid-cols-3 " : " lg:grid-cols-4 ")
+            "trip-category-filters flex flex-col lg:flex-row justify-between xl:justify-normal xl:flex-col gap-5 xl:gap-20 xl:w-[25%] p-10 lg:p-10 2xl:p-[2rem] xl:pb-10 xl:h-[56rem] overflow-y-scroll bg-[#212b33] rounded-[2rem]  openning-animation-y " +
+            (showFilter ? "" : "hidden") +
+            (closingAnimation ? " closing-animation-y " : "")
           }
         >
-          {allPackagesData?.map((data, index) => {
-            return <TripCard data={data} key={index} />;
-          })}
+          <FilterCategories
+            filterRequirements={filterRequirements}
+            setFilterRequirements={setFilterRequirements}
+          />
+        </div>
+
+        <div
+          className={
+            "trip-category-filter-results all-trip-list grid justify-center grid-flow-col overflow-scroll gap-[2.2rem] md:h-[56rem] overflow-y-scroll px-5 transition-all duration-300" +
+            (showFilter ? " xl:w-[75%]" : "")
+          }
+        >
+          {showMore
+            ? allPackagesData?.slice(0, 8).map((data, index) => {
+                return <TripCard data={data} key={index} />;
+              })
+            : allPackagesData?.map((data, index) => {
+                return <TripCard data={data} key={index} />;
+              })}
         </div>
       </div>
-      <div className="flex justify-end mt-[5rem]">
-        <p>See More</p>
+      <div className="flex justify-end mt-[5rem] show-more">
+        <p onClick={showMoreToggler}>{showMore ? "See More" : "See Less"}</p>
       </div>
     </section>
   );

@@ -1,21 +1,75 @@
 import "./style.scss";
 import React, { useState, useEffect } from "react";
-import dropdownIcon from "../../../assets/images/searchResult/tripCategory/drop-drown-icon.svg";
 import PriceSlider from "./priceSlider/PriceSlider";
-import { filterData } from "./filterSubCategories/data.js";
 import FilterSubCategories from "./filterSubCategories/FilterSubCategories";
+import axios from "axios";
 
-export default function FilterCategories() {
-  const [travelFilterCollapse, settravelFilterCollapse] = useState(false);
-  const [ammenitiesFilterCollapse, setammenitiesFilterCollapse] =
-    useState(false);
+export default function FilterCategories({
+  setFilterRequirements,
+  filterRequirements,
+}) {
+  const filterApiUrl =
+    process.env.REACT_APP_API_HOST +
+    "get-options/category/occasion/amenity/travel";
+
+  const [filterResponse, setFilterResponse] = useState();
+  const [ocassionData, setOcassionData] = useState();
+  const [ammenityData, setAmmenityData] = useState();
+  const [travelTypeData, setTravelTypeData] = useState();
+
+  useEffect(() => {
+    getFilterData();
+  }, []);
+
+  const setFilterDatas = () => {
+    setOcassionData(
+      filterResponse?.filter((data) => data?.purpose === "occasion")
+    );
+    setTravelTypeData(
+      filterResponse?.filter((data) => data?.purpose === "travel")
+    );
+    setAmmenityData(
+      filterResponse?.filter((data) => data?.purpose === "amenity")
+    );
+  };
+
+  useEffect(() => {
+    setFilterDatas();
+    console.log(ocassionData);
+  }, [filterResponse]);
+
+  const getFilterData = async () => {
+    const response = await axios.get(filterApiUrl);
+    setFilterResponse(response?.data?.data);
+  };
 
   return (
-    <div className="trip-category-filters flex flex-col lg:flex-row flex-wrap justify-between xl:justify-normal xl:flex-col gap-5 xl:gap-20 xl:w-[25%] p-10 lg:p-10 2xl:p-[2rem] bg-[#212b33] rounded-[2rem]">
-      <PriceSlider />
-      {filterData.map((data, index) => {
-        return <FilterSubCategories data={data} key={index} />;
-      })}
-    </div>
+    <>
+      <PriceSlider
+        setFilterRequirements={setFilterRequirements}
+        filterRequirements={filterRequirements}
+      />
+      <FilterSubCategories
+        title={"occasions"}
+        data={ocassionData}
+        name={"Occassion"}
+        setFilterRequirements={setFilterRequirements}
+        filterRequirements={filterRequirements}
+      />
+      <FilterSubCategories
+        title={"amenities"}
+        data={ammenityData}
+        name={"Ammenities"}
+        setFilterRequirements={setFilterRequirements}
+        filterRequirements={filterRequirements}
+      />
+      <FilterSubCategories
+        title={"travelType"}
+        data={travelTypeData}
+        name={"Travel Type"}
+        setFilterRequirements={setFilterRequirements}
+        filterRequirements={filterRequirements}
+      />
+    </>
   );
 }

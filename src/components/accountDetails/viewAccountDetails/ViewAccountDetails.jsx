@@ -2,43 +2,31 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./style.scss";
-import handleSignout from "../functions/handleSignout";
+import ProfileSideBar from "../profileSideBar/ProfileSideBar";
+import SignOut from "../../SignOut/SignOut";
 
-export default function ViewAccountDetails() {
-  const { userDetails } = useSelector((state) => state.logInUser);
+export default function ViewAccountDetails({ setActive }) {
+  const { userDetails } = useSelector((state) => state.user);
+
+  console.log(userDetails,"Sc",userDetails.success);
 
   const userData = {
-    email: userDetails.data.userDetails.email,
-    phNumber: userDetails.data.userDetails.phone,
-    password: userDetails.data.userDetails.password,
+    email: userDetails?.data?.data?.userDetails?.email,
+    phNumber: userDetails?.data?.data?.userDetails?.phone,
+    password: userDetails?.data?.data?.userDetails?.password,
   };
-  if (userDetails.success) {
+  if (userDetails) {
     return (
       <header className="sm:mx-20 2xl:mx-[18.75rem]">
-        <div className="flex justify-between lg:text-[22px]">
+        <div className="flex justify-between px-10 xl:px-0 lg:text-[22px]">
           <h2 className="font-[600]">
-            Settings/<span className="font-[400]"> Accounts Page</span>
+            Settings/
+            <span className="font-[400] grey-text"> Accounts Page</span>
           </h2>
-          <button
-            className="underline font-[600] grey-text"
-            onClick={handleSignout}
-          >
-            Signout
-          </button>
+          <SignOut />
         </div>
-        <div className="mt-[5rem] xl:flex xl:justify-between xl:gap-14 lg:text-[20px]">
-          <ul className="hidden xl:flex flex-col gap-10">
-            <li className=" grey-text">
-              {" "}
-              <Link to="/profile">Profile</Link>
-            </li>
-            <li className=" grey-text font-bold">
-              <Link to="/accountDetails">Account Details</Link>
-            </li>
-            <li className=" grey-text">
-              <Link to="/booking">My Booking</Link>
-            </li>
-          </ul>
+        <div className="mt-[3rem] xl:mt-[5rem] flex flex-col xl:flex-row xl:justify-between gap-8 xl:gap-14 lg:text-[20px]">
+          <ProfileSideBar activePage={"accounts"} setActive={setActive} />
           <div className="login-details flex flex-col lg:text-[22px]  p-5 lg:p-10 2xl:p-[2.2rem] rounded-2xl xl:w-[80%] backdrop-blur-sm">
             <h2 className="font-[600]">Login Details</h2>
             <h5 className="mb-[2rem] grey-text text-[1rem]">
@@ -58,12 +46,14 @@ export default function ViewAccountDetails() {
               defaultValue={userData.password.substring(0, 7)}
               disabled={true}
             />
-            <Link
-              to="/editAccDetails"
+            <button
+              onClick={() => {
+                setActive("edit-account");
+              }}
               className="mt-[4rem] rounded-2xl text-white bg-[#219653] text-center py-4 xl:py-[1.5rem] xl:mx-[6rem]"
             >
               EDIT ACCOUNT DETAILS
-            </Link>
+            </button>
           </div>
         </div>
       </header>
@@ -73,7 +63,7 @@ export default function ViewAccountDetails() {
       <div className="text-center  py-[30rem] md:py-[20rem]">
         <h1 className="text-5xl leading-[5rem]">
           <span className="text-red-700">Oops</span> Something's Wrong, <br />{" "}
-          With Status Code : {userDetails.status}
+          With Message : {userDetails.data.data.message}
         </h1>
         <Link
           to="/searchResult"

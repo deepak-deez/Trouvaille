@@ -4,16 +4,17 @@ import { useSelector } from "react-redux";
 import "./style.scss";
 import axios from "axios";
 import Swal from "sweetalert2";
-import handleSignout from "../functions/handleSignout";
+import ProfileSideBar from "../profileSideBar/ProfileSideBar";
+import SignOut from "../../SignOut/SignOut";
 
-export default function EditAccountDetails() {
-  const { userDetails } = useSelector((state) => state.logInUser);
+export default function EditAccountDetails({ setActive }) {
+  const { userDetails } = useSelector((state) => state.user);
   const [checkPass, setCheckPass] = useState(true);
   const [emptyFields, setEmptyFields] = useState();
   const oldPassRef = useRef();
   const newPassRef = useRef();
   const confirmNewPassRef = useRef();
-  const emailId = userDetails.data.userDetails.email;
+  const emailId = userDetails.data.data.userDetails.email;
 
   const updateDetailsHandler = async () => {
     const verifyOldPassUrl = `${process.env.REACT_APP_API_HOST}login/Frontend-user`;
@@ -49,30 +50,18 @@ export default function EditAccountDetails() {
     }
   };
 
-  if (userDetails.success) {
+  if (userDetails) {
     return (
       <header className="sm:mx-20 2xl:mx-[18.75rem]">
-        <div className="flex justify-between lg:text-[22px]">
+        <div className=" flex justify-between px-10 xl:px-0 lg:text-[22px]">
           <h2 className="font-[600]">
             Settings/
             <span className="font-[400] grey-text"> Accounts Page</span>
           </h2>
-          <button className="underline font-[600]" onClick={handleSignout}>
-            Signout
-          </button>
+          <SignOut />
         </div>
-        <div className="mt-[5rem] xl:flex xl:justify-between xl:gap-14 lg:text-[20px]">
-          <ul className="hidden xl:flex flex-col gap-10">
-            <li className="grey-text">
-              <Link to="/profile">Profile</Link>
-            </li>
-            <li className="grey-text font-bold">
-              <Link to="/accountDetails">Account Details</Link>
-            </li>
-            <li className="grey-text">
-              <Link to="/booking">My Booking</Link>
-            </li>
-          </ul>
+        <div className="mt-[3rem] xl:mt-[5rem] flex flex-col xl:flex-row xl:justify-between gap-8 xl:gap-14 lg:text-[20px] xl:flex ">
+          <ProfileSideBar activePage={"accounts"} setActive={setActive} />
           <div className="edit-details flex flex-col lg:text-[22px]  p-5 lg:p-10 2xl:p-[2.2rem] rounded-2xl xl:w-[80%] backdrop-blur-sm">
             <h2 className="font-[600]">Login Details</h2>
             <h5 className="mb-[2rem] text-[1rem] grey-text">
@@ -82,7 +71,7 @@ export default function EditAccountDetails() {
             <input
               type="text"
               className="mb-[2.6rem] grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl"
-              defaultValue={userDetails.data.userDetails.phone}
+              defaultValue={userDetails.data.data.userDetails.phone}
               disabled={true}
             />
             <h4 className="mb-[1.5rem]">Email ID</h4>

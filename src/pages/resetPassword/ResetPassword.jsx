@@ -20,6 +20,6 @@ const ResetPasswordPage = () => {
       <ResetPassword />
     </header>
   );
-};
+}; 
 
 export default ResetPasswordPage;

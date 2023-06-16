@@ -1,0 +1,27 @@
+.date-container {
+  position: relative;
+  .date {
+    position: absolute;
+    width: 100%;
+    top: 2rem;
+    left: -2rem;
+    background: rgba(255, 255, 255, 0.647);
+    backdrop-filter: blur(15px);
+    padding: 1rem;
+    border-radius: 2rem;
+    z-index: 60;
+    color: white;
+    .rdrMonths {
+      margin: auto;
+    }
+    .rdrDayNumber {
+      background: #bed1ff60;
+      backdrop-filter: blur(15px);
+      border-radius: 2rem;
+      padding: 0.2rem;
+    }
+    .rdrSelected {
+      color: white;
+    }
+  }
+}
