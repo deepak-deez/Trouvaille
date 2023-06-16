@@ -12,8 +12,8 @@
       height: 345px;
       object-fit: cover;
     }
-
     position: relative;
+
     .share-icon {
       position: absolute;
       right: 23px;
@@ -21,12 +21,12 @@
     }
     .show-detail-text {
       position: absolute;
-      bottom: 8rem;
+      top: 15rem;
       left: -1rem;
     }
     .review-stars {
       position: absolute;
-      bottom: 5rem;
+      top: 19rem;
       left: 1rem;
     }
     .result-card-details {
