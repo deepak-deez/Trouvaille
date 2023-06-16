@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./style.scss";
-import swal from "sweetalert2";
 
 export default function Dates(props) {
   const date = props.day.split(" ");
@@ -35,7 +34,7 @@ export default function Dates(props) {
         onClick={detailsClickHandler}
       >
         <h2 className="">{date[0]}</h2>
-        <p className="">{date[1]}</p>
+        <p className="">{date[1].substring(0, 3)}</p>
       </div>
       {toShow && (
         <div className="  bg-slate-100 mt-[2rem] z-[2] p-5 absolute rounded-2xl">

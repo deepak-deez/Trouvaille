@@ -80,12 +80,12 @@ export default function Navbar() {
           ""
         )}
 
-        {dashboardLocations.find(
+        {dashboardLocations.includes(
           (location) => location === currentPageLocation
         ) ? (
           <div className="flex gap-10 2xl:gap-[4.1rem]">
             <SearchBar />
-          <Link to={"/notifications"}>
+            <Link to={"/notifications"}>
               <img
                 src={notificationIcon}
                 className="w-8 hidden xl:block h-full"
@@ -129,7 +129,7 @@ export default function Navbar() {
                 <Link to={"/notifications"}>
                   <img
                     src={notificationIcon}
-                    className="h-full" 
+                    className="h-full"
                     alt="notification-icon"
                   />
                 </Link>

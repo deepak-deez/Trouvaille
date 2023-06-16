@@ -1,7 +1,7 @@
 .trip-details {
-  background-image: url("../../assets/images/tripsDetailsPage/body/body-bg.png");
+  padding: -15px;
   background-size: cover;
-  background-repeat: repeat;
+  background-repeat: no-repeat;
   .trip-fetched-details {
     color: white;
 
@@ -25,5 +25,14 @@
       font-size: 30px;
       font-weight: 600;
     }
+  }
+  .dark-gradient {
+    // mix-blend-mode: ;
+    background: linear-gradient(
+      180deg,
+      rgba(18, 18, 18, 0) 0%,
+      rgba(18, 18, 18, 0.78) 51.04%,
+      #121212 100%
+    );
   }
 }

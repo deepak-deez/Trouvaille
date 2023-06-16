@@ -11,6 +11,7 @@
     #943320 -19.43%,
     #5b1805 109.14%
   );
+  $bg-grey-translucent: rgba(101, 101, 101, 0.276);
   .activities {
     color: rgb(198, 102, 68);
     font-weight: 900;
@@ -19,7 +20,7 @@
     background: $bg-orange-gradient-active;
   }
   .dates {
-    background: rgba(224, 225, 232, 0.12);
+    background: $bg-grey-translucent;
   }
 
   .available-dates {
