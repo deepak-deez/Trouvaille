@@ -21,15 +21,6 @@ export default function FilterCategories({
     getFilterData();
   }, []);
 
-  useEffect(() => {
-    setFilterDatas();
-  }, [filterResponse]);
-
-  const getFilterData = async () => {
-    const response = await axios.get(filterApiUrl);
-    setFilterResponse(response?.data?.data);
-  };
-
   const setFilterDatas = () => {
     setOcassionData(
       filterResponse?.filter((data) => data?.purpose === "occasion")
@@ -40,6 +31,16 @@ export default function FilterCategories({
     setAmmenityData(
       filterResponse?.filter((data) => data?.purpose === "amenity")
     );
+  };
+
+  useEffect(() => {
+    setFilterDatas();
+    console.log(ocassionData);
+  }, [filterResponse]);
+
+  const getFilterData = async () => {
+    const response = await axios.get(filterApiUrl);
+    setFilterResponse(response?.data?.data);
   };
 
   return (

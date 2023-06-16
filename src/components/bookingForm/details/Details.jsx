@@ -97,7 +97,6 @@ const Details = (props) => {
 
   useEffect(() => {
     fetchBookingNotes();
-    console.log(bookingNotes);
   }, []);
 
   useEffect(() => {

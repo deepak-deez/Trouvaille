@@ -45,9 +45,10 @@ export default function TripDetails(props) {
       currentUserId,
       currentTripId.id
     );
+    setFeaturesData();
   }, []);
 
-  const tripResponseData = tripDetails?.data.data[0];
+  const tripResponseData = tripDetails?.data?.data[0];
 
   const acitivitiesData = tripResponseData?.activities;
   const durationData = tripResponseData?.duration;
@@ -59,6 +60,9 @@ export default function TripDetails(props) {
   const discountedPrice = tripResponseData?.discountedPrice;
   const locationName = tripResponseData?.title;
   const explorePlaces = tripResponseData?.placeNumber;
+  const [occasions, setOccassions] = useState();
+  const [travelType, setTravelType] = useState();
+  const [amenities, setAmenities] = useState();
 
   const bookingFormData = {
     email,
@@ -68,6 +72,18 @@ export default function TripDetails(props) {
     currentTripId,
     currentUserId,
     tripImage,
+  };
+
+  const setFeaturesData = () => {
+    setOccassions(
+      tripResponseData?.features?.filter((data) => data.purpose === "occasion")
+    );
+    setTravelType(
+      tripResponseData?.features?.filter((data) => data.purpose === "travel")
+    );
+    setAmenities(
+      tripResponseData?.features?.filter((data) => data.purpose === "amenity")
+    );
   };
 
   if (tripDetails?.data?.success) {
@@ -118,16 +134,28 @@ export default function TripDetails(props) {
           <div className="mt-[5rem]">
             <h2 className="mb-[3rem]">Occassions Related</h2>
             <div className="flex flex-wrap justify-center lg:justify-start gap-10 xl:gap-[4rem] occassions-cards">
-              {ocassionData?.map((data, index) => {
-                return <Ocassions type={data} key={index} />;
+              {occasions?.map((data, index) => {
+                return (
+                  <Ocassions
+                    image={data?.icon}
+                    type={data?.title}
+                    key={index}
+                  />
+                );
               })}
             </div>
           </div>
           <div className="mt-[5rem]">
             <h2 className="mb-[3rem]">Travel Type</h2>
             <div className="flex gap-10 xl:gap-[5rem]">
-              {traverTypeData?.map((data, index) => {
-                return <TravelType title={data?.title} key={index} />;
+              {travelType?.map((data, index) => {
+                return (
+                  <TravelType
+                    title={data?.title}
+                    image={data?.icon}
+                    key={index}
+                  />
+                );
               })}
             </div>
           </div>
@@ -148,8 +176,14 @@ export default function TripDetails(props) {
               Ammenities (<span>{ammenitiesData?.length}</span>)
             </h2>
             <div className="flex flex-wrap 2xl:justify-start gap-10  justify-center lg:justify-start ammenities-container">
-              {ammenitiesData?.map((data, index) => {
-                return <Ammenities key={index} title={data} />;
+              {amenities?.map((data, index) => {
+                return (
+                  <Ammenities
+                    image={data?.icon}
+                    key={index}
+                    title={data?.title}
+                  />
+                );
               })}
             </div>
           </div>
