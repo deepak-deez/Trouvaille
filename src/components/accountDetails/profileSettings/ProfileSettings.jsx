@@ -11,6 +11,7 @@ import SignOut from "../../SignOut/SignOut";
 import ProfileSideBar from "../profileSideBar/ProfileSideBar";
 
 export default function ProfileSettings({ setActive }) {
+
   const { userDetails } = useSelector((state) => state.user);
 
   console.log("Profile:", userDetails);

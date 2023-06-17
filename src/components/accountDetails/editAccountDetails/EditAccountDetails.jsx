@@ -8,6 +8,7 @@ import ProfileSideBar from "../profileSideBar/ProfileSideBar";
 import SignOut from "../../SignOut/SignOut";
 
 export default function EditAccountDetails({ setActive }) {
+
   const { userDetails } = useSelector((state) => state.user);
   const [checkPass, setCheckPass] = useState(true);
   const [emptyFields, setEmptyFields] = useState();
@@ -42,6 +43,7 @@ export default function EditAccountDetails({ setActive }) {
 
         if (updatePassRes.data.success) {
           Swal.fire("Success!", "Pasword Updated!", "success");
+          setActive("view-account")
         }
       } else {
         setEmptyFields(true);
@@ -95,7 +97,7 @@ export default function EditAccountDetails({ setActive }) {
             />
             <h4 className={"mb-[1.5rem]"}>New Password</h4>
             <input
-              type="text"
+              type="password"
               className={
                 "mb-[3.1rem] grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl" +
                 (emptyFields
@@ -106,7 +108,7 @@ export default function EditAccountDetails({ setActive }) {
             />
             <h4 className="mb-[1.5rem]">Confirm Password</h4>
             <input
-              type="text"
+              type="password"
               className={
                 "mb-[3.1rem] grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl" +
                 (emptyFields

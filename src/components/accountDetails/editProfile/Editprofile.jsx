@@ -12,6 +12,7 @@ import { updateUserDetails } from "../../../redux/slices/userSlice";
 import SignOut from "../../SignOut/SignOut";
 
 export default function EditProfile({ setActive }) {
+
   const [responseData, setResponseData] = useState();
   const [userFetchedData, setUserFetchedData] = useState();
   const [uploadImgBtnDisplay, setUploadImgBtnDisplay] = useState(false);
@@ -101,7 +102,7 @@ export default function EditProfile({ setActive }) {
       const response = await axios.post(updateUrl, formData);
       if (response.data.success) {
         // updateDataHandler({ userDetails: response.data });
-        navigate("/profile");
+        setActive("profile")
       }
     } catch (error) {}
   };

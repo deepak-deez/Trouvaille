@@ -6,9 +6,9 @@ import ProfileSideBar from "../profileSideBar/ProfileSideBar";
 import SignOut from "../../SignOut/SignOut";
 
 export default function ViewAccountDetails({ setActive }) {
+
   const { userDetails } = useSelector((state) => state.user);
 
-  console.log(userDetails, "Sc", userDetails.success);
   let userData;
   if (userDetails.success) {
     console.log(userDetails);
@@ -18,7 +18,6 @@ export default function ViewAccountDetails({ setActive }) {
       password: userDetails?.data?.userDetails?.password,
     };
   }
-  console.log("userdetails:", userDetails, userData);
 
   if (userDetails.success) {
     // const userData = {
@@ -26,7 +25,6 @@ export default function ViewAccountDetails({ setActive }) {
     //   phNumber: userDetails?.data?.data.userDetails?.phone,
     //   password: userDetails?.data?.data.userDetails?.password,
     // };
-    console.log("userdetails:", userDetails.data.userDetails, userData);
 
     return (
       <header className="sm:mx-20 2xl:mx-[18.75rem]">
