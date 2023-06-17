@@ -8,7 +8,7 @@ import SignOut from "../../SignOut/SignOut";
 export default function ViewAccountDetails({ setActive }) {
   const { userDetails } = useSelector((state) => state.user);
 
-  console.log(userDetails, "Sc", userDetails.data.success);
+  console.log(userDetails, "Sc", userDetails.success);
   let userData;
   if (userDetails.success) {
     console.log(userDetails);

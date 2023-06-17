@@ -23,7 +23,7 @@ export const signUp = createAsyncThunk(
   async (userData, { rejectWithValue }, thunkAPI) => {
     try {
       const result = await axios.post(`${API}register/Frontend-user`, userData);
-      if (result) return result;
+      if (result) return result.data;
     } catch (err) {
       return rejectWithValue(err.response.data.message);
     }
@@ -36,7 +36,8 @@ export const signIn = createAsyncThunk(
     try {
       const results = await axios.post(`${API}login/Frontend-user`, userData);
       if (results) {
-        localStorage.setItem("userDetails", JSON.stringify(results));
+        console.log("Slice result :", results);
+        localStorage.setItem("userDetails", JSON.stringify(results.data));
         return results;
       }
     } catch (err) {
@@ -84,6 +85,7 @@ const userSlice = createSlice({
       state.error = null;
     });
     builder.addCase(signIn.fulfilled, (state, action) => {
+      console.log("Payload:", action.payload);
       state.userDetails = action.payload.data;
       state.loading = false;
       state.error = null;
