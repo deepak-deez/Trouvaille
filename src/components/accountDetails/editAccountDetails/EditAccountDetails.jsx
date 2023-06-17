@@ -15,6 +15,7 @@ export default function EditAccountDetails({ setActive }) {
   const newPassRef = useRef();
   const confirmNewPassRef = useRef();
   const emailId = userDetails.data.userDetails.email;
+  // console.log(localStorage.getItem());
 
   const updateDetailsHandler = async () => {
     const verifyOldPassUrl = `${process.env.REACT_APP_API_HOST}login/Frontend-user`;

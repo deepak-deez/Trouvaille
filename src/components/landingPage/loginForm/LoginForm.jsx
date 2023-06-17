@@ -32,15 +32,18 @@ const LoginForm = () => {
       localStorage.setItem("email", emailRef.current.value);
       localStorage.setItem("password", passwordRef.current.value);
       localStorage.setItem("token", userDetails.token);
-      localStorage.setItem("id", userDetails._id);
-      localStorage.setItem("usertype", userDetails.userType);
+      localStorage.setItem("id", userDetails.data.userDetails._id);
+      localStorage.setItem("usertype", userDetails.data.userDetails.userType);
       localStorage.setItem("rememberMe", checked);
     } else {
       localStorage.removeItem("email", emailRef.current.value);
       localStorage.removeItem("password", passwordRef.current.value);
       localStorage.removeItem("token", userDetails.token);
-      localStorage.removeItem("id", userDetails._id);
-      localStorage.removeItem("usertype", userDetails.userType);
+      localStorage.removeItem("id", userDetails.data.userDetails._id);
+      localStorage.removeItem(
+        "usertype",
+        userDetails.data.userDetails.userType
+      );
       localStorage.setItem("rememberMe", checked);
     }
     Cookies.set("TOKEN", userDetails.token, { expires: 7 });
