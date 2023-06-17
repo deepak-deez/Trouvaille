@@ -30,11 +30,11 @@ export default function TripDetails(props) {
   const currentTripId = useParams();
   const currentUserId = useSelector((state) => state.user)?.userDetails?.data
     ?.userDetails?._id;
-  console.log(currentUserId);
+
   const tripImage = tripDetails?.data?.data[0]?.image;
-  const email = userDetails?.data?.data?.userDetails?.email;
-  const phNumber = userDetails?.data?.data?.userDetails?.phone;
-  const name = userDetails?.data?.data?.userDetails?.name;
+  const email = userDetails?.data?.userDetails?.email;
+  const phNumber = userDetails?.data?.userDetails?.phone;
+  const name = userDetails?.data?.userDetails?.name;
   const backgroundImg = { backgroundImage: `url(${tripImage})` };
 
   const navigate = useNavigate();
