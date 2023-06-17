@@ -6,7 +6,8 @@ import getAllApiData from "./logic";
 import TripNames from "./tripNames/TripNames";
 export default function TripList() {
   const { userDetails } = useSelector((state) => state.user);
-  const userId = userDetails.data?.data?.userDetails?._id;
+  console.log(userDetails);
+  const userId = userDetails.data?.userDetails?._id;
   const [userBookingDetails, setUserBookingDetails] = useState();
 
   useEffect(() => {

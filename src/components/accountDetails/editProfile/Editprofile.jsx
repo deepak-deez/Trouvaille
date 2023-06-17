@@ -8,7 +8,7 @@ import editIcon from "../../../assets/images/accountDetails/profileSettings/edit
 import accountSettingsImgChange from "../../../assets/images/accountDetails/profileSettings/edit-img.svg";
 import axios from "axios";
 import ProfileSideBar from "../profileSideBar/ProfileSideBar";
-
+import { updateUserDetails } from "../../../redux/slices/userSlice";
 import SignOut from "../../SignOut/SignOut";
 
 export default function EditProfile({ setActive }) {
@@ -21,23 +21,25 @@ export default function EditProfile({ setActive }) {
   const { userDetails } = useSelector((state) => state.user);
 
   const navigate = useNavigate();
-  const nameRef = useRef();
-  const DOBRef = useRef();
-  const placeRef = useRef();
-  const genderRef = useRef();
-  const maritalStatusRef = useRef();
-  const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/Frontend-user/${userDetails.data.data.userDetails._id}`;
-
-  const userPLace = responseData?.data?.data[0].userDetails?.place;
-  const userName = responseData?.data?.data[0].userDetails?.name;
-  const userDOB = responseData?.data?.data[0].userDetails?.DOB;
-  const userJoiningYear = responseData?.data.data[0]?.joiningYear;
+  const nameRef = useRef("");
+  const DOBRef = useRef("");
+  const placeRef = useRef("");
+  const genderRef = useRef("");
+  const maritalStatusRef = useRef("");
+  const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/Frontend-user/${userDetails.data.userDetails._id}`;
+  // console.log(dataBaseUrl);
+  const userPLace = responseData?.data?.data[0]?.userDetails?.place;
+  const userName = responseData?.data?.data[0]?.userDetails?.name;
+  const userDOB = responseData?.data?.data[0]?.userDetails?.DOB;
+  const userJoiningYear = responseData?.data?.data[0]?.joiningYear;
 
   const updateDataHandler = async () => {
     try {
       const getUpdatedData = await axios.get(dataBaseUrl);
+      console.log(getUpdatedData);
       setResponseData(getUpdatedData);
-      setProfileImg(getUpdatedData?.data.data[0].userDetails.image.url);
+      setProfileImg(getUpdatedData?.data?.data[0]?.userDetails?.image);
+      setImageUrlState(getUpdatedData?.data?.data[0]?.userDetails?.image);
     } catch (error) {
       setProfileImg(defaultProfileImage);
     }
@@ -56,6 +58,8 @@ export default function EditProfile({ setActive }) {
 
   const uploadImgHandler = (e) => {
     try {
+      console.log(e.target.files[0]);
+      // setProfileImg(e.target.files[0]);
       setImageUrlState(e.target.files[0]);
       setProfileImg(URL.createObjectURL(e.target.files[0]));
       setUploadImgBtnDisplay(!uploadImgBtnDisplay);
@@ -65,30 +69,45 @@ export default function EditProfile({ setActive }) {
   };
 
   const updateDetailsHandler = async () => {
-    const imgUrl = await handleProfileImagetoUrl(imageUrlState).then((res) => {
-      return res;
-    });
+    //   const imgUrl = await handleProfileImagetoUrl(imageUrlState).then((res) => {
+    //     return res;
+    //   });
 
-    const userData = {
-      image: imgUrl ? imgUrl : responseData?.data.data[0].userDetails.image.url,
-      name: nameRef.current.value,
-      place: placeRef.current.value,
-      DOB: DOBRef.current.value,
-      gender: genderRef.current.value,
-      maritalStatus: maritalStatusRef.current.value,
-    };
+    // console.log(e.target.files);
+    const imgUrl = imageUrlState;
+    // console.log(nameRef.current.value);
+    const formData = new FormData();
+    formData.append("image", imgUrl);
+    formData.append("name", nameRef.current.value);
+    formData.append("place", placeRef.current.value);
+    formData.append("DOB", DOBRef.current.value);
+    formData.append("gender", genderRef.current.value);
+    formData.append("maritalStatus", maritalStatusRef.current.value);
+    console.log(formData);
 
-    const updateUrl = `${process.env.REACT_APP_API_HOST}update/Frontend-user/${userDetails.data.data.userDetails._id}`;
+    // const userData = {
+    //   image: imgUrl ? imgUrl : responseData?.data.data[0].userDetails.image.url,
+    //   name: nameRef.current.value,
+    //   place: placeRef.current.value,
+    //   DOB: DOBRef.current.value,
+    //   gender: genderRef.current.value,
+    //   maritalStatus: maritalStatusRef.current.value,
+    // };
+    console.log(userDetails.data.userDetails._id);
 
+    const updateUrl = `${process.env.REACT_APP_API_HOST}update/Frontend-user/${userDetails.data.userDetails._id}`;
+    console.log(updateUrl);
     try {
-      const response = await axios.post(updateUrl, userData);
+      const response = await axios.post(updateUrl, formData);
       if (response.data.success) {
+        // updateDataHandler({ userDetails: response.data });
         navigate("/profile");
       }
     } catch (error) {}
   };
 
-  if (userDetails.data.data.success) {
+  console.log(userDetails);
+  if (userDetails.success) {
     return (
       <header className="sm:mx-20 2xl:mx-[18.75rem]">
         <div className="flex justify-between px-10 xl:px-0 lg:text-[22px]">
@@ -144,7 +163,7 @@ export default function EditProfile({ setActive }) {
           <div className="flex flex-col items-center sm:items-start gap-[1rem]">
             <input
               className="sm:text-[2.5rem] grey-text text-[1.5rem] bg-transparent"
-              defaultValue={userDetails.data.data.userDetails.email}
+              defaultValue={userDetails.data.userDetails.email}
               disabled={true}
             />
             <div className="flex gap-[1rem] items-center">

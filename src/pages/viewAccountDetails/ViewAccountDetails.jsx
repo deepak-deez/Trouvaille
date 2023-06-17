@@ -9,12 +9,12 @@ import { useSelector } from "react-redux";
 
 const ViewAccDetails = () => {
   const [active, setActive] = useState("view-account");
-  const { userDetails} = useSelector((state) => state.user);
-  const navigate = useNavigate()
-  useEffect(()=>{
-    if(!userDetails)
-    navigate("/")
-  })
+  const { userDetails } = useSelector((state) => state.user);
+  console.log(userDetails);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!userDetails) navigate("/");
+  });
 
   return (
     <section className="account-details pt-[10rem] pb-[35rem] sm:pb-[20rem]">

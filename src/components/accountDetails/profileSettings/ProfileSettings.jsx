@@ -12,7 +12,9 @@ import ProfileSideBar from "../profileSideBar/ProfileSideBar";
 
 export default function ProfileSettings({ setActive }) {
   const { userDetails } = useSelector((state) => state.user);
-  const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/Frontend-user/${userDetails.data.data.userDetails._id}`;
+
+  console.log("Profile:", userDetails);
+  const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/Frontend-user/${userDetails.data.userDetails._id}`;
   const [responseData, setResponseData] = useState();
 
   const updateDataHandler = async () => {
@@ -26,14 +28,15 @@ export default function ProfileSettings({ setActive }) {
   useEffect(() => {
     updateDataHandler();
   }, []);
-  const profileImage = responseData?.data.data[0].userDetails?.image;
-  const userLcoation = responseData?.data.data[0].userDetails?.place;
-  const userName = responseData?.data.data[0].userDetails?.name;
-  const userDOB = responseData?.data.data[0].userDetails?.DOB;
-  const userGender = responseData?.data.data[0].userDetails?.gender;
+  console.log(responseData);
+  const profileImage = responseData?.data?.data[0]?.userDetails?.image;
+  const userLcoation = responseData?.data?.data[0]?.userDetails?.place;
+  const userName = responseData?.data?.data[0]?.userDetails?.name;
+  const userDOB = responseData?.data?.data[0]?.userDetails?.DOB;
+  const userGender = responseData?.data.data[0]?.userDetails?.gender;
   const userMaritalStatus =
-    responseData?.data.data[0].userDetails?.maritalStatus;
-  const userJoiningYear = responseData?.data.data[0]?.joiningYear;
+    responseData?.data?.data[0]?.userDetails?.maritalStatus;
+  const userJoiningYear = responseData?.data?.data[0]?.joiningYear;
 
   if (userDetails) {
     return (
@@ -46,6 +49,7 @@ export default function ProfileSettings({ setActive }) {
         </div>
         <div className="flex flex-col sm:flex-row gap-[2rem] items-center xl:items-start mt-[1.5rem] sm:mt-[2rem] profile-section ">
           <div className="flex flex-col h-[256px] w-[225px] overflow-hidden">
+            {console.log(responseData?.data.data[0].userDetails.image)}
             {profileImage && (
               <img
                 className={
@@ -53,8 +57,8 @@ export default function ProfileSettings({ setActive }) {
                 }
                 src={
                   responseData?.data.data[0].userDetails.image &&
-                  responseData?.data.data[0].userDetails.image.url
-                    ? responseData.data.data[0].userDetails.image.url
+                  responseData?.data.data[0].userDetails.image
+                    ? responseData.data.data[0].userDetails.image
                     : profileImg
                 }
                 alt="profile-img"
@@ -71,7 +75,7 @@ export default function ProfileSettings({ setActive }) {
           </div>
           <div className="flex flex-col items-center sm:items-start gap-[1rem]">
             <h2 className="sm:text-[2.5rem] grey-text text-[1.5rem]">
-              {userDetails.data.data.userDetails.email}
+              {userDetails.data.userDetails.email}
             </h2>
             <div className="flex gap-[1rem] items-center">
               <span className="lg:text-[1.6rem] grey-text">

@@ -29,7 +29,7 @@ export default function TripDetails(props) {
 
   const currentTripId = useParams();
   const currentUserId = useSelector((state) => state.user)?.userDetails?.data
-    ?.data?.userDetails?._id;
+    ?.userDetails?._id;
   console.log(currentUserId);
   const tripImage = tripDetails?.data?.data[0]?.image;
   const email = userDetails?.data?.data?.userDetails?.email;
