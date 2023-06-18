@@ -8,7 +8,6 @@ import ProfileSideBar from "../profileSideBar/ProfileSideBar";
 import SignOut from "../../SignOut/SignOut";
 
 export default function EditAccountDetails({ setActive }) {
-
   const { userDetails } = useSelector((state) => state.user);
   const [checkPass, setCheckPass] = useState(true);
   const [emptyFields, setEmptyFields] = useState();
@@ -19,12 +18,13 @@ export default function EditAccountDetails({ setActive }) {
   // console.log(localStorage.getItem());
 
   const updateDetailsHandler = async () => {
-    const verifyOldPassUrl = `${process.env.REACT_APP_API_HOST}login/Frontend-user`;
-    const updateUPassUrl = `${process.env.REACT_APP_API_HOST}set-password/Frontend-user`;
+    const verifyOldPassUrl = `${process.env.REACT_APP_API_HOST}login/${userDetails.data.userDetails.userType}`;
+    const updateUPassUrl = `${process.env.REACT_APP_API_HOST}set-password/${userDetails.data.userDetails.userType}`;
     const checkOldPass = await axios.post(verifyOldPassUrl, {
       email: emailId,
       password: oldPassRef.current.value,
     });
+    console.log("login check :", checkOldPass);
 
     if (checkOldPass.data.success) {
       setCheckPass(true);
@@ -34,16 +34,16 @@ export default function EditAccountDetails({ setActive }) {
         newPassRef.current.value === confirmNewPassRef.current.value
       ) {
         setEmptyFields(false);
-
         const updatePassRes = await axios.post(updateUPassUrl, {
           logInStatus: true,
-          id: localStorage.getItem("id"),
+          id: userDetails.data.userDetails._id,
           newPassword: newPassRef.current.value,
         });
+        console.log("update Status :", updatePassRes);
 
         if (updatePassRes.data.success) {
           Swal.fire("Success!", "Pasword Updated!", "success");
-          setActive("view-account")
+          setActive("view-account");
         }
       } else {
         setEmptyFields(true);

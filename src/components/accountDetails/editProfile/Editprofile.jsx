@@ -12,7 +12,6 @@ import { updateUserDetails } from "../../../redux/slices/userSlice";
 import SignOut from "../../SignOut/SignOut";
 
 export default function EditProfile({ setActive }) {
-
   const [responseData, setResponseData] = useState();
   const [userFetchedData, setUserFetchedData] = useState();
   const [uploadImgBtnDisplay, setUploadImgBtnDisplay] = useState(false);
@@ -27,20 +26,20 @@ export default function EditProfile({ setActive }) {
   const placeRef = useRef("");
   const genderRef = useRef("");
   const maritalStatusRef = useRef("");
-  const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/Frontend-user/${userDetails.data.userDetails._id}`;
-  // console.log(dataBaseUrl);
-  const userPLace = responseData?.data?.data[0]?.userDetails?.place;
-  const userName = responseData?.data?.data[0]?.userDetails?.name;
-  const userDOB = responseData?.data?.data[0]?.userDetails?.DOB;
-  const userJoiningYear = responseData?.data?.data[0]?.joiningYear;
+  const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/${userDetails.data.userDetails.userType}/${userDetails.data.userDetails._id}`;
+
+  const userPLace = responseData?.data?.data?.userDetails?.place;
+  const userName = responseData?.data?.data?.userDetails?.name;
+  const userDOB = responseData?.data?.data?.userDetails?.DOB;
+  const userJoiningYear = responseData?.data?.data?.joiningYear;
 
   const updateDataHandler = async () => {
     try {
       const getUpdatedData = await axios.get(dataBaseUrl);
       console.log(getUpdatedData);
       setResponseData(getUpdatedData);
-      setProfileImg(getUpdatedData?.data?.data[0]?.userDetails?.image);
-      setImageUrlState(getUpdatedData?.data?.data[0]?.userDetails?.image);
+      setProfileImg(getUpdatedData?.data?.data?.userDetails?.image);
+      setImageUrlState(getUpdatedData?.data?.data?.userDetails?.image);
     } catch (error) {
       setProfileImg(defaultProfileImage);
     }
@@ -70,13 +69,7 @@ export default function EditProfile({ setActive }) {
   };
 
   const updateDetailsHandler = async () => {
-    //   const imgUrl = await handleProfileImagetoUrl(imageUrlState).then((res) => {
-    //     return res;
-    //   });
-
-    // console.log(e.target.files);
     const imgUrl = imageUrlState;
-    // console.log(nameRef.current.value);
     const formData = new FormData();
     formData.append("image", imgUrl);
     formData.append("name", nameRef.current.value);
@@ -102,7 +95,7 @@ export default function EditProfile({ setActive }) {
       const response = await axios.post(updateUrl, formData);
       if (response.data.success) {
         // updateDataHandler({ userDetails: response.data });
-        setActive("profile")
+        setActive("profile");
       }
     } catch (error) {}
   };

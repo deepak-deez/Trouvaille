@@ -11,33 +11,40 @@ import SignOut from "../../SignOut/SignOut";
 import ProfileSideBar from "../profileSideBar/ProfileSideBar";
 
 export default function ProfileSettings({ setActive }) {
-
   const { userDetails } = useSelector((state) => state.user);
 
-  console.log("Profile:", userDetails);
-  const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/Frontend-user/${userDetails.data.userDetails._id}`;
+  console.log(
+    "Profile:",
+    userDetails,
+    "ID :",
+    userDetails.data.userDetails._id
+  );
+  const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/${userDetails.data.userDetails.userType}/${userDetails.data.userDetails._id}`;
   const [responseData, setResponseData] = useState();
 
   const updateDataHandler = async () => {
     try {
+      console.log(dataBaseUrl);
       const getUpdatedData = await axios.get(dataBaseUrl);
+      console.log("API data :", getUpdatedData);
       setResponseData(getUpdatedData);
     } catch (err) {
       return err;
     }
   };
   useEffect(() => {
+    console.log("Empty");
     updateDataHandler();
   }, []);
   console.log(responseData);
-  const profileImage = responseData?.data?.data[0]?.userDetails?.image;
-  const userLcoation = responseData?.data?.data[0]?.userDetails?.place;
-  const userName = responseData?.data?.data[0]?.userDetails?.name;
-  const userDOB = responseData?.data?.data[0]?.userDetails?.DOB;
-  const userGender = responseData?.data.data[0]?.userDetails?.gender;
+  const profileImage = responseData?.data?.data?.userDetails?.image;
+  const userLcoation = responseData?.data?.data?.userDetails?.place;
+  const userName = responseData?.data?.data?.userDetails?.name;
+  const userDOB = responseData?.data?.data?.userDetails?.DOB;
+  const userGender = responseData?.data.data?.userDetails?.gender;
   const userMaritalStatus =
-    responseData?.data?.data[0]?.userDetails?.maritalStatus;
-  const userJoiningYear = responseData?.data?.data[0]?.joiningYear;
+    responseData?.data?.data?.userDetails?.maritalStatus;
+  const userJoiningYear = responseData?.data?.data?.joiningYear;
 
   if (userDetails) {
     return (
@@ -50,16 +57,16 @@ export default function ProfileSettings({ setActive }) {
         </div>
         <div className="flex flex-col sm:flex-row gap-[2rem] items-center xl:items-start mt-[1.5rem] sm:mt-[2rem] profile-section ">
           <div className="flex flex-col h-[256px] w-[225px] overflow-hidden">
-            {console.log(responseData?.data.data[0].userDetails.image)}
+            {console.log(responseData?.data?.data?.userDetails?.image)}
             {profileImage && (
               <img
                 className={
                   "profile-img" + (responseData ? " block " : " hidden ")
                 }
                 src={
-                  responseData?.data.data[0].userDetails.image &&
-                  responseData?.data.data[0].userDetails.image
-                    ? responseData.data.data[0].userDetails.image
+                  responseData?.data?.data?.userDetails?.image &&
+                  responseData?.data?.data?.userDetails?.image
+                    ? responseData?.data?.data?.userDetails?.image
                     : profileImg
                 }
                 alt="profile-img"
