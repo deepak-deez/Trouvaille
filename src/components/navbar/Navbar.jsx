@@ -10,13 +10,16 @@ import profileIcon from "../../assets/images/navbar/user-profile-icon.svg";
 import menuHamburger from "../../assets/images/navbar/menu-hamburger.svg";
 import SearchBar from "./searchBar/SearchBar";
 import { useSelector } from "react-redux";
+import NotificationPopUp from "../viewNotifications/notificationPopUp/NotificationPopUp";
 
 export default function Navbar({ setActive }) {
   const navigate = useNavigate();
   const [navCollapse, setnavColapse] = useState(true);
+  const [showNotis, setShowNotis] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const currentPageLocation = useLocation().pathname;
   const { userDetails } = useSelector((state) => state.user);
+
   useEffect(() => {
     function handleScroll() {
       const scrollTop = window.scrollY;
@@ -29,10 +32,14 @@ export default function Navbar({ setActive }) {
     };
   }, []);
 
+  const handleNotificationPopUp = () => {
+    setShowNotis(!showNotis);
+  };
+
   return (
     <nav
       className={
-        "p-2 sm:p-5 lg:px-[10] lg:py-5 2xl:px-[4rem] 2xl:py-[2.6rem] transition-all duration-500 " +
+        "p-2 sm:p-5 lg:px-[10] lg:py-5 2xl:px-[4rem] 2xl:py-[1.6rem] transition-all duration-500 " +
         (isScrolled ? "bg-white text-black nav-box-shadow " : "")
       }
     >
@@ -85,16 +92,19 @@ export default function Navbar({ setActive }) {
         {dashboardLocations.find(
           (location) => location === currentPageLocation
         ) ? (
-          <div className="flex gap-10 2xl:gap-[4.1rem]">
+          <div className="flex gap-10 2xl:gap-[4.1rem] items-center">
             <SearchBar />
-            <Link to={"/notifications"}>
-              <img
-                src={notificationIcon}
-                className="w-8 hidden xl:block h-full"
-                // Remove class name hidden
-                alt="notification-icon"
-              />
-            </Link>
+
+            <div className="my-auto relative hidden xl:block">
+              <button onClick={handleNotificationPopUp} className="my-auto">
+                <img
+                  src={notificationIcon}
+                  className=" mt-2 w-8  h-full  my-auto"
+                  alt="notification-icon"
+                />
+              </button>
+              {showNotis ? <NotificationPopUp /> : ""}
+            </div>
 
             <Link to={"/booking"}>
               <img
@@ -131,7 +141,7 @@ export default function Navbar({ setActive }) {
       ) : (
         <div
           className={
-            "flex flex-col gap-10 sm:mt-10 nav-tab-menu " +
+            "flex flex-col gap-10 sm:mt-4 nav-tab-menu " +
             (navCollapse ? "nav-close" : "nav-open")
           }
         >
@@ -142,17 +152,13 @@ export default function Navbar({ setActive }) {
                 <Link to={"/notifications"}>
                   <img
                     src={notificationIcon}
-                    className="h-full"
+                    className="w-[25px] h-[27px]"
                     alt="notification-icon"
                   />
                 </Link>
-                {/* <img
-                  src={notificationIcon}
-                  className=""
-                  alt="notification-icon"
-                /> */}
-                {/* Remove class name hidden */}
-                <img src={bookingsIcon} alt="document-icon" />
+                <Link to={"/booking"}>
+                  <img src={bookingsIcon} alt="bookings-icon" />
+                </Link>
               </div>
             </li>
             <li>

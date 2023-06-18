@@ -35,6 +35,7 @@ export default function EditProfile({ setActive }) {
 
   const updateDataHandler = async () => {
     try {
+      console.log("Database URL : ", dataBaseUrl);
       const getUpdatedData = await axios.get(dataBaseUrl);
       console.log(getUpdatedData);
       setResponseData(getUpdatedData);
