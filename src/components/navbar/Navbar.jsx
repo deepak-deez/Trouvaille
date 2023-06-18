@@ -9,12 +9,13 @@ import bookingsIcon from "../../assets/images/navbar/document-icon.svg";
 import profileIcon from "../../assets/images/navbar/user-profile-icon.svg";
 import menuHamburger from "../../assets/images/navbar/menu-hamburger.svg";
 import SearchBar from "./searchBar/SearchBar";
+import { useSelector } from "react-redux";
 
 export default function Navbar() {
   const [navCollapse, setnavColapse] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const currentPageLocation = useLocation().pathname;
-
+  const { userDetails } = useSelector((state) => state.user);
   useEffect(() => {
     function handleScroll() {
       const scrollTop = window.scrollY;
@@ -102,11 +103,17 @@ export default function Navbar() {
               />
             </Link>
             <Link to="/accountDetails">
-              <img
-                className="h-[100%] w-10"
-                src={profileIcon}
-                alt="profile-icon"
-              />
+              <div className="rounded-[50%] border-salte-300 border-4">
+                <img
+                  className="h-[100%] w-10 rounded-[50%]"
+                  src={
+                    userDetails?.data?.userDetails?.userDetails?.image
+                      ? userDetails?.data?.userDetails?.userDetails?.image
+                      : profileIcon
+                  }
+                  alt="profile-icon"
+                />
+              </div>
             </Link>
           </div>
         ) : (
