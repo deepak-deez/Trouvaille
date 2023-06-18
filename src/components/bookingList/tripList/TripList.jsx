@@ -16,7 +16,7 @@ export default function TripList() {
     getAllApiData(userId, setUserBookingDetails);
   }, []);
   return (
-    <section className="flex flex-col trip-list-container justify-center items-center pb-[20rem]">
+    <section className="flex flex-col trip-list-container justify-center items-center ">
       <h2 className="md:text-[64px] text-center mt-[10px] lg:mt-[30px] text-[50px]">
         Trip List
       </h2>

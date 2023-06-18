@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Signin from "./pages/signIn/SignIn.jsx";
 import SetPassword from "./pages/setPassword/SetPassword.jsx";
@@ -20,9 +20,11 @@ import Footer from "./components/footer/Footer.jsx";
 import PageNotAvailable from "./components/pageNotAvailable/PageNotAvailable.jsx";
 
 const Router = () => {
+  const [active, setActive] = useState("view-account");
+
   return (
     <BrowserRouter>
-      <Navbar />
+      <Navbar setActive={setActive} />
       <Routes>
         <Route path="/" element={<Signin />} exact />
         <Route path="/setPassword" element={<SetPassword />} />
@@ -37,7 +39,10 @@ const Router = () => {
         <Route path="/trips" element={<TripsPage />} />
         <Route path="/tripDetails/:id" element={<TripDetails />} />
         <Route path="/bookingForm" element={<BookingForm />} />
-        <Route path="/accountDetails" element={<AccountDetails />} />
+        <Route
+          path="/accountDetails"
+          element={<AccountDetails active={active} setActive={setActive} />}
+        />
         <Route path="/editAccDetails" element={<EditAccountDetails />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/editProfile" element={<EditProfile />} />

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { fullNavLocations, dashboardLocations } from "./locationData";
 import "./style.scss";
 import logo from "../../assets/images/navbar/logo.svg";
@@ -11,7 +11,8 @@ import menuHamburger from "../../assets/images/navbar/menu-hamburger.svg";
 import SearchBar from "./searchBar/SearchBar";
 import { useSelector } from "react-redux";
 
-export default function Navbar() {
+export default function Navbar({ setActive }) {
+  const navigate = useNavigate();
   const [navCollapse, setnavColapse] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const currentPageLocation = useLocation().pathname;
@@ -102,10 +103,15 @@ export default function Navbar() {
                 alt="document-icon"
               />
             </Link>
-            <Link to="/accountDetails">
+            <button
+              onClick={() => {
+                navigate("/accountDetails");
+                setActive("view-account");
+              }}
+            >
               <div className="rounded-[50%] border-salte-300 border-4">
                 <img
-                  className="h-[100%] w-10 rounded-[50%]"
+                  className="h-10 w-10 rounded-[50%]"
                   src={
                     userDetails?.data?.userDetails?.userDetails?.image
                       ? userDetails?.data?.userDetails?.userDetails?.image
@@ -114,7 +120,7 @@ export default function Navbar() {
                   alt="profile-icon"
                 />
               </div>
-            </Link>
+            </button>
           </div>
         ) : (
           ""

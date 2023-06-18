@@ -10,6 +10,9 @@ $button-color-green: #219653;
 $button-color-green-v2: #022f15;
 
 .trip-list-page {
+  .bookings-table-container::-webkit-scrollbar {
+    display: none;
+  }
   .trip-list-container {
     z-index: 1;
     p {

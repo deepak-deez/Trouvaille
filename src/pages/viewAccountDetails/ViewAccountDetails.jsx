@@ -7,15 +7,14 @@ import Editprofile from "../../components/accountDetails/editProfile/Editprofile
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const ViewAccDetails = () => {  
-  const [active, setActive] = useState("view-account");
+const ViewAccDetails = ({ active, setActive }) => {
   const { userDetails } = useSelector((state) => state.user);
   console.log(userDetails);
   const navigate = useNavigate();
   useEffect(() => {
     if (!userDetails) navigate("/");
   });
-  console.log("setActive : --",active);
+  console.log("setActive : --", active);
 
   return (
     <section className="account-details pt-[10rem] pb-[35rem] sm:pb-[20rem]">
