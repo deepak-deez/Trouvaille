@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { fullNavLocations, dashboardLocations } from "./locationData";
 import "./style.scss";
@@ -18,7 +18,7 @@ export default function Navbar({ setActive }) {
   const [showNotis, setShowNotis] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const currentPageLocation = useLocation().pathname;
-  const { userDetails } = useSelector((state) => state.user);
+  const { FrontendUserData } = useSelector((state) => state.user);
 
   useEffect(() => {
     function handleScroll() {
@@ -36,6 +36,19 @@ export default function Navbar({ setActive }) {
     setShowNotis(!showNotis);
   };
 
+  const refMenu = useRef(null)
+
+const handleClickOutside=(e)=>{
+  if(refMenu.current && !refMenu.current.contains(e.target)){
+    setnavColapse(true)
+  }
+}
+
+useEffect(()=>{
+  document.addEventListener("click",handleClickOutside,"true")
+  console.log(navCollapse);
+},[])
+
   return (
     <nav
       className={
@@ -43,21 +56,22 @@ export default function Navbar({ setActive }) {
         (isScrolled ? "bg-white text-black nav-box-shadow " : "")
       }
     >
-      <div className="flex justify-between flex-wrap">
-        {dashboardLocations.find(
+      <div ref={refMenu} className="flex justify-between flex-wrap">
+        {/* {dashboardLocations.find(
           (location) => location === currentPageLocation
-        ) ? (
-          <button
-            className="xl:hidden"
-            onClick={() => {
+        ) ? ( */}
+          <button 
+            className="collapse-button xl:hidden"
+            onClick={(e) => {
               navCollapse ? setnavColapse(false) : setnavColapse(true);
+              handleClickOutside(e)
             }}
           >
             <img src={menuHamburger} alt="menu-hamburger" />
           </button>
-        ) : (
+        {/* ) : (
           ""
-        )}
+        )} */}
 
         <Link to="/searchResult">
           <div className="flex gap-2">
@@ -113,7 +127,12 @@ export default function Navbar({ setActive }) {
                 alt="document-icon"
               />
             </Link>
-            <button
+           
+          </div>
+        ) : (
+          ""
+        )}
+         <button
               onClick={() => {
                 navigate("/accountDetails");
                 setActive("view-account");
@@ -123,25 +142,20 @@ export default function Navbar({ setActive }) {
                 <img
                   className="h-10 w-10 rounded-[50%]"
                   src={
-                    userDetails?.data?.userDetails?.userDetails?.image
-                      ? userDetails?.data?.userDetails?.userDetails?.image
+                    FrontendUserData?.data?.userDetails?.userDetails?.image
+                      ? FrontendUserData?.data?.userDetails?.userDetails?.image
                       : profileIcon
                   }
                   alt="profile-icon"
                 />
               </div>
             </button>
-          </div>
-        ) : (
-          ""
-        )}
-      </div>
-      {navCollapse ? (
+            {navCollapse ? (
         ""
       ) : (
         <div
           className={
-            "flex flex-col gap-10 sm:mt-4 nav-tab-menu " +
+            "flex flex-col xl:hidden gap-10 sm:mt-4 nav-tab-menu " +
             (navCollapse ? "nav-close" : "nav-open")
           }
         >
@@ -165,14 +179,13 @@ export default function Navbar({ setActive }) {
               <Link to="/trips">Trips</Link>
             </li>
             <li>
-              <Link to="/">Contacts</Link>
+              <Link to="/contacts">Contacts</Link>
             </li>
           </ul>
-          <div className="flex nav-serach-area justify-between">
-            <SearchBar />
-          </div>
         </div>
       )}
+      </div>
+      
     </nav>
   );
 }

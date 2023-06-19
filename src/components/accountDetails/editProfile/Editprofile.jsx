@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./style.scss";
-import { handleProfileImagetoUrl } from "./logic.js";
+// import { handleProfileImagetoUrl } from "./logic.js";
 import defaultProfileImage from "../../../assets/images/accountDetails/profileSettings/defaultProfileImage.png";
 import editIcon from "../../../assets/images/accountDetails/profileSettings/edit.svg";
 import accountSettingsImgChange from "../../../assets/images/accountDetails/profileSettings/edit-img.svg";
@@ -18,7 +18,7 @@ export default function EditProfile({ setActive }) {
   const [profileImg, setProfileImg] = useState();
   const [imageUrlState, setImageUrlState] = useState("");
 
-  const { userDetails } = useSelector((state) => state.user);
+  const { FrontendUserData } = useSelector((state) => state.user);
 
   const navigate = useNavigate();
   const nameRef = useRef("");
@@ -26,7 +26,7 @@ export default function EditProfile({ setActive }) {
   const placeRef = useRef("");
   const genderRef = useRef("");
   const maritalStatusRef = useRef("");
-  const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/${userDetails.data.userDetails.userType}/${userDetails.data.userDetails._id}`;
+  const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/${FrontendUserData.data.userDetails.userType}/${FrontendUserData.data.userDetails._id}`;
 
   const userPLace = responseData?.data?.data?.userDetails?.place;
   const userName = responseData?.data?.data?.userDetails?.name;
@@ -88,9 +88,9 @@ export default function EditProfile({ setActive }) {
     //   gender: genderRef.current.value,
     //   maritalStatus: maritalStatusRef.current.value,
     // };
-    console.log(userDetails.data.userDetails._id);
+    console.log(FrontendUserData.data.userDetails._id);
 
-    const updateUrl = `${process.env.REACT_APP_API_HOST}update/Frontend-user/${userDetails.data.userDetails._id}`;
+    const updateUrl = `${process.env.REACT_APP_API_HOST}update/Frontend-user/${FrontendUserData.data.userDetails._id}`;
     console.log(updateUrl);
     try {
       const response = await axios.post(updateUrl, formData);
@@ -101,8 +101,8 @@ export default function EditProfile({ setActive }) {
     } catch (error) {}
   };
 
-  console.log(userDetails);
-  if (userDetails.success) {
+  console.log(FrontendUserData);
+  if (FrontendUserData.success) {
     return (
       <header className="sm:mx-20 2xl:mx-[18.75rem]">
         <div className="flex justify-between px-10 xl:px-0 lg:text-[22px]">
@@ -158,7 +158,7 @@ export default function EditProfile({ setActive }) {
           <div className="flex flex-col items-center sm:items-start gap-[1rem]">
             <input
               className="sm:text-[2.5rem] grey-text text-[1.5rem] bg-transparent"
-              defaultValue={userDetails.data.userDetails.email}
+              defaultValue={FrontendUserData.data.userDetails.email}
               disabled={true}
             />
             <div className="flex gap-[1rem] items-center">
@@ -249,7 +249,7 @@ export default function EditProfile({ setActive }) {
       <div className="text-center  py-[30rem] md:py-[20rem]">
         <h1 className="text-5xl leading-[5rem]">
           <span className="text-red-700">Oops</span> Something's Wrong, <br />{" "}
-          With Status Code : {userDetails.status}
+          With Status Code : {FrontendUserData.status}
         </h1>
         <Link
           to="/searchResult"

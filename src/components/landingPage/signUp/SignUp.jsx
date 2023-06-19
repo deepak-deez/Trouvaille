@@ -28,7 +28,7 @@ const SignUp = () => {
   const newUserDetails = {};
   const dispatch = useDispatch();
 
-  const {userDetails,error,loading ,success} = useSelector((state) => state.user);
+  const {FrontendUserData,error,loading ,success} = useSelector((state) => state.user);
   // const userDetails = useSelector(userDetailsState);
   // const loading = useSelector(loadingState);
   // const error = useSelector(errorState);
@@ -70,7 +70,7 @@ const SignUp = () => {
         position: "center",
         icon: "success",
         title: "Success",
-        text: userDetails,
+        text: FrontendUserData,
         showConfirmButton: false,
         timer: 2000,
         timerProgressBar: true,

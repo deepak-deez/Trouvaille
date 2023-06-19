@@ -10,7 +10,7 @@ import HostingPartner from "../../components/tripDetails/hostingPartner/HostingP
 import PricingDetails from "../../components/tripDetails/pricingDetails/PricingDetails";
 import Ammenities from "../../components/tripDetails/ammenities/Ammenities";
 import Faqs from "../../components/tripDetails/faqs/Faqs";
-import getApiDatas, { handleProfileImagetoUrl } from "./logic";
+import getApiDatas from "./logic";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import loader from "../../../src/assets/loaders/airplaneLoading.gif";
@@ -19,7 +19,7 @@ import NoResponse from "../../components/noResponse/NoResponse";
 
 export default function TripDetails(props) {
   const location = useLocation();
-  const { userDetails } = useSelector((state) => state.user);
+  const { FrontendUserData } = useSelector((state) => state.user);
   const [tripDetails, setTripDetails] = useState();
   const [ocassionImgData, setOcassionImgData] = useState();
   const [ammenityImgData, setAmmenityImgData] = useState();
@@ -29,18 +29,21 @@ export default function TripDetails(props) {
   const [tripResponseData, setTripResponseData] = useState();
 
   const currentTripId = useParams();
-  const currentUserId = useSelector((state) => state.user)?.userDetails?.data
+  const currentUserId = useSelector((state) => state.user)?.FrontendUserData?.data
     ?.userDetails?._id;
+    console.log(currentUserId);
 
   const tripImage = tripDetails?.data?.data[0]?.image;
-  const email = userDetails?.data?.userDetails?.email;
-  const phNumber = userDetails?.data?.userDetails?.phone;
-  const name = userDetails?.data?.userDetails?.name;
+  const email = FrontendUserData?.data?.userDetails?.email;
+  const phNumber = FrontendUserData?.data?.userDetails?.phone;
+  const name = FrontendUserData?.data?.userDetails?.name;
   const backgroundImg = { backgroundImage: `url(${tripImage})` };
+
+
 
   const navigate = useNavigate();
   useEffect(() => {
-    if (!userDetails) navigate("/");
+    if (!FrontendUserData) navigate("/");
   });
 
   useEffect(() => {
@@ -58,6 +61,7 @@ export default function TripDetails(props) {
     setTripResponseData(tripDetails?.data?.data[0]);
     setFeaturesData();
   }, [tripDetails]);
+  console.log(tripResponseData);
 
   const acitivitiesData = tripResponseData?.activities;
   const durationData = tripResponseData?.duration;
@@ -94,7 +98,8 @@ export default function TripDetails(props) {
       tripResponseData?.features?.filter((data) => data.purpose === "amenity")
     );
   };
-  console.log(occasions, travelType, amenities);
+  // console.log(tripDetails?.data);
+
 
   if (tripDetails?.data?.success) {
     return (
@@ -134,7 +139,7 @@ export default function TripDetails(props) {
                   <TripHighlights
                     title={data?.title}
                     content={data?.name}
-                    imgSrc={data?.icon?.url}
+                    imgSrc={data?.icon}
                     key={index}
                   />
                 );

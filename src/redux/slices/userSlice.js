@@ -10,8 +10,8 @@ const API = process.env.REACT_APP_API_HOST;
 const nameSpace = "user";
 
 const initialState = {
-  userDetails: localStorage.getItem("userDetails")
-    ? JSON.parse(localStorage.getItem("userDetails"))
+  FrontendUserData: localStorage.getItem("FrontendUserData")
+    ? JSON.parse(localStorage.getItem("FrontendUserData"))
     : null,
   loading: false,
   error: null,
@@ -37,7 +37,7 @@ export const signIn = createAsyncThunk(
       const results = await axios.post(`${API}login/Frontend-user`, userData);
       if (results) {
         console.log("Slice result :", results);
-        localStorage.setItem("userDetails", JSON.stringify(results.data));
+        localStorage.setItem("FrontendUserData", JSON.stringify(results.data));
         return results;
       }
     } catch (err) {
@@ -54,25 +54,25 @@ const userSlice = createSlice({
       state.success = action.payload.success;
     },
     updateUserDetails: (state, action) => {
-      state.userDetails = action.payload.userDetails;
+      state.FrontendUserData = action.payload.FrontendUserData;
     },
   },
 
   extraReducers(builder) {
     builder.addCase(signUp.pending, (state, action) => {
-      state.userDetails = null;
+      state.FrontendUserData = null;
       state.loading = true;
       state.error = null;
       state.success = false;
     });
     builder.addCase(signUp.fulfilled, (state, action) => {
-      state.userDetails = action.payload.data.message;
+      state.FrontendUserData = action.payload.data.message;
       state.loading = false;
       state.error = null;
       state.success = true;
     });
     builder.addCase(signUp.rejected, (state, action) => {
-      state.userDetails = null;
+      state.FrontendUserData = null;
       state.loading = false;
       state.error = action.payload;
       state.success = false;
@@ -80,19 +80,19 @@ const userSlice = createSlice({
 
     builder.addCase(signIn.pending, (state, action) => {
       state.success = false;
-      state.userDetails = null;
+      state.FrontendUserData = null;
       state.loading = true;
       state.error = null;
     });
     builder.addCase(signIn.fulfilled, (state, action) => {
       console.log("Payload:", action.payload);
-      state.userDetails = action.payload.data;
+      state.FrontendUserData = action.payload.data;
       state.loading = false;
       state.error = null;
       state.success = true;
     });
     builder.addCase(signIn.rejected, (state, action) => {
-      state.userDetails = null;
+      state.FrontendUserData = null;
       state.loading = false;
       state.error = action.payload;
       state.success = false;

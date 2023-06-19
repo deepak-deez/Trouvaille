@@ -12,10 +12,10 @@ export default function Trips() {
   const [tripFilterClicked, setTripFilterClicked] = useState(0);
   const [filterDestination, setFilterDestination] = useState([]);
   const [filterPerson, setFilterPerson] = useState("");
-  const { userDetails} = useSelector((state) => state.user);
+  const { FrontendUserData} = useSelector((state) => state.user);
   const navigate = useNavigate()
   useEffect(()=>{
-    if(!userDetails)
+    if(!FrontendUserData)
     navigate("/")
   })
 

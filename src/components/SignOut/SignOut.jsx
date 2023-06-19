@@ -8,7 +8,7 @@ const SignOut = () => {
   const dispatch = useDispatch();
   function handleSignout() {
     Cookies.remove("TOKEN");
-    localStorage.removeItem("userDetails");
+    localStorage.removeItem("FrontendUserData");
     navigate("/");
   }
   return (
