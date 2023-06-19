@@ -141,7 +141,7 @@ export default function Navbar({ setActive }) {
       ) : (
         <div
           className={
-            "flex flex-col gap-10 sm:mt-4 nav-tab-menu " +
+            "flex flex-col xl:hidden gap-10 sm:mt-4 nav-tab-menu " +
             (navCollapse ? "nav-close" : "nav-open")
           }
         >
@@ -165,12 +165,9 @@ export default function Navbar({ setActive }) {
               <Link to="/trips">Trips</Link>
             </li>
             <li>
-              <Link to="/">Contacts</Link>
+              <Link to="/contacts">Contacts</Link>
             </li>
           </ul>
-          <div className="flex nav-serach-area justify-between">
-            <SearchBar />
-          </div>
         </div>
       )}
     </nav>

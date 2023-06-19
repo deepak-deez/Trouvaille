@@ -71,6 +71,11 @@ const LoginForm = () => {
     }
   };
 
+  useEffect(()=>{
+   if(localStorage.getItem('userDetails')) 
+    navigate("/searchResult");
+  },[])
+
   useEffect(() => {
     console.log("User details : ", userDetails);
     if (success) {

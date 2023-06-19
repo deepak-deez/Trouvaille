@@ -178,7 +178,7 @@ export default function TripCategory({
               key={index}
             >
               <div
-                className="category border-[5px] rounded-[2.5rem] transition-all duration-500 w-40 h-40 flex justify-center"
+                className="category border-[5px] rounded-[2.5rem] cursor-pointer transition-all duration-500 w-40 h-40 flex justify-center"
                 data-category-selected={response.title}
               >
                 <img
@@ -266,7 +266,7 @@ export default function TripCategory({
 
         <div
           className={
-            "trip-category-filter-results all-trip-list grid justify-center grid-flow-col overflow-scroll gap-[2.2rem] md:h-[56rem] overflow-y-scroll px-5 transition-all duration-300" +
+            "trip-category-filter-results all-trip-list grid  grid-flow-col overflow-scroll gap-[2.2rem] md:h-[56rem] overflow-y-scroll px-5 transition-all duration-300" +
             (showFilter ? " xl:w-[75%]  " : "")
           }
         >
