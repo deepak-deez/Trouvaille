@@ -27,20 +27,36 @@ export default function EditAccountDetails({ setActive }) {
 
   const updateDetailsHandler = async () => {
     try {
-      if (
-        newPassRef.current.value.length &&
-        confirmNewPassRef.current.value.length
-      ) {
-        setEmptyFields(false);
+      if (!oldPassRef.current.value.length) {
+        document
+          .getElementById("oldPasswordField")
+          .classList.toggle("border-red-500");
+      } else if (!newPassRef.current.value.length) {
+        document
+          .getElementById("newPasswordField")
+          .classList.toggle("border-red-500");
+      } else if (!confirmNewPassRef.current.value.length) {
+        document
+          .getElementById("confirmPasswordField")
+          .classList.toggle("border-red-500");
       } else {
-        setEmptyFields(true);
-      }
-      if (newPassRef.current.value === oldPassRef.current.value) {
-        setNewPasswordValid(false);
-        throw new Error("Old Password and New Password cannot be same!");
-      } else {
-        setNewPasswordValid(true);
-        document.getElementById("newPassword").textContent = "";
+        document
+          .getElementById("oldPasswordField")
+          .classList.toggle("border-transparent");
+        document
+          .getElementById("confirmPasswordField")
+          .classList.toggle("border-transparent");
+        document
+          .getElementById("newPasswordField")
+          .classList.toggle("border-transparent");
+
+        if (newPassRef.current.value === oldPassRef.current.value) {
+          setNewPasswordValid(false);
+          throw new Error("Old Password and New Password cannot be same!");
+        } else {
+          setNewPasswordValid(true);
+          document.getElementById("newPassword").textContent = "";
+        }
       }
     } catch (err) {
       document.getElementById("newPassword").textContent = err.message;
@@ -78,11 +94,15 @@ export default function EditAccountDetails({ setActive }) {
       }
     }
   };
+
   const checkValidPassword = () => {
     try {
       if (strongRegexPassword.test(newPassRef.current.value)) {
         setPwdError(false);
-        throw new Error("Password Strength : Strong!");
+        console.log(pwdError);
+        document.getElementById("validPassword").textContent =
+          "Password Strength : Strong!";
+        // throw new Error("Password Strength : Strong!");
       } else {
         if (mediumRegexPassword.test(newPassRef.current.value)) {
           setPwdError(true);
@@ -144,12 +164,11 @@ export default function EditAccountDetails({ setActive }) {
             />
             <h4 className={""}>Old Password</h4>
             <input
+              id="oldPasswordField"
               type="password"
               className={
-                " grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl" +
-                (!checkPass
-                  ? " border border-red-500 outline outline-red-500 "
-                  : "")
+                " border-[3px]  grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl" +
+                (!checkPass ? "  border-red-500  outline-red-500 " : "")
               }
               ref={oldPassRef}
             />
@@ -159,33 +178,24 @@ export default function EditAccountDetails({ setActive }) {
             ></h4>
             <h4 className={""}>New Password</h4>
             <input
+              id="newPasswordField"
               type="password"
-              className={
-                " grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl" +
-                (emptyFields
-                  ? " border border-red-500 outline outline-red-500 "
-                  : "")
-              }
+              className=" border-[3px]  grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl"
               onChange={checkValidPassword}
               ref={newPassRef}
             />
             <h4
               id="validPassword"
               className={
-                "font-bold bg-transparent text-xl" + setPwdError
-                  ? " text-red-700 "
-                  : " text-green-700 "
+                "font-bold bg-transparent text-xl " +
+                (pwdError ? "text-red-700" : "text-green-700")
               }
             ></h4>
             <h4 className="">Confirm Password</h4>
             <input
+              id="confirmPasswordField"
               type="password"
-              className={
-                " grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl" +
-                (emptyFields
-                  ? " border border-red-500 outline outline-red-500 "
-                  : "")
-              }
+              className="  border-[3px] grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl"
               ref={confirmNewPassRef}
               onChange={handlePasswordCheck}
             />
