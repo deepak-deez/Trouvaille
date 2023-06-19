@@ -20,13 +20,13 @@ const ResetPassword = () => {
       <div className="flex flex-col lg:w-[975px] w-[90%] md:px-[30px] md:py-[30px] mt-[15px] login-details px-[25px] py-[15px] lg:py-[67px] lg:px-[97px] justify-center">
         <input
           className=" input-fields text-[20px] lg:px-[39px] px-[15px] py-[15px] lg:py-[25px] mt-[9px] "
-          type="text"
+          type="password"
           placeholder="New Password"
           ref={passwordRef}
         />
         <input
           className=" input-fields text-[20px] lg:px-[39px] px-[15px] py-[15px] lg:py-[25px] mt-[25px]"
-          type="text"
+          type="password"
           placeholder="Confirm Password"
           ref={confirmPasswordRef}
         />

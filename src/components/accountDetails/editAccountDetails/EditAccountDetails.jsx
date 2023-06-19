@@ -6,7 +6,10 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import ProfileSideBar from "../profileSideBar/ProfileSideBar";
 import SignOut from "../../SignOut/SignOut";
-import { validPassword } from "../../../constants/regex";
+import {
+  mediumRegexPassword,
+  strongRegexPassword,
+} from "../../../constants/regex";
 
 export default function EditAccountDetails({ setActive }) {
   const { userDetails } = useSelector((state) => state.user);
@@ -77,12 +80,17 @@ export default function EditAccountDetails({ setActive }) {
   };
   const checkValidPassword = () => {
     try {
-      if (!validPassword.test(newPassRef.current.value)) {
-        setPwdError(true);
-        throw new Error("Not a valid Password!");
-      } else {
+      if (strongRegexPassword.test(newPassRef.current.value)) {
         setPwdError(false);
-        document.getElementById("validPassword").textContent = "";
+        throw new Error("Password Strength : Strong!");
+      } else {
+        if (mediumRegexPassword.test(newPassRef.current.value)) {
+          setPwdError(true);
+          throw new Error("Password Strength : Medium!");
+        } else {
+          setPwdError(true);
+          throw new Error("Password Strength : Weak!");
+        }
       }
     } catch (err) {
       document.getElementById("validPassword").textContent = err.message;
@@ -163,7 +171,11 @@ export default function EditAccountDetails({ setActive }) {
             />
             <h4
               id="validPassword"
-              className="text-red-700 font-bold bg-transparent text-xl"
+              className={
+                "font-bold bg-transparent text-xl" + setPwdError
+                  ? " text-red-700 "
+                  : " text-green-700 "
+              }
             ></h4>
             <h4 className="">Confirm Password</h4>
             <input
