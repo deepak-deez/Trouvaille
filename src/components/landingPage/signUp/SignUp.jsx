@@ -4,7 +4,9 @@ import "./style.scss";
 import eye from "../../../assets/images/landingPage/loginForm/eye.svg";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { signUp,resetState } from "../../../redux/slices/userSlice";
+import { signUp, resetState } from "../../../redux/slices/userSlice";
+import { validEmail } from "../../../constants/regex";
+
 // import {
 //   userDetailsState,
 //   loadingState,
@@ -12,7 +14,6 @@ import { signUp,resetState } from "../../../redux/slices/userSlice";
 // } from "../../../redux/slices/userSlice";
 import swal from "sweetalert2";
 import { useSlider } from "@mui/base";
-
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -28,7 +29,34 @@ const SignUp = () => {
   const newUserDetails = {};
   const dispatch = useDispatch();
 
-  const {FrontendUserData,error,loading ,success} = useSelector((state) => state.user);
+  const { FrontendUserData, error, loading, success } = useSelector(
+    (state) => state.user
+  );
+
+  const handleEmailValidation = () => {
+    try {
+      if (!validEmail.test(emailRef.current.value)) {
+        throw new Error("Please Enter a valid E-mail!");
+      } else {
+        document.getElementById("validEmail").textContent = "";
+      }
+    } catch (err) {
+      document.getElementById("validEmail").textContent = err.message;
+    }
+  };
+
+  const handlePhoneNumberValidation = () => {
+    try {
+      if (phoneNoRef.current.value.length > 10) {
+        throw new Error("Please Enter a valid Phone number!");
+      } else {
+        document.getElementById("validPhone").textContent = "";
+      }
+    } catch (err) {
+      document.getElementById("validPhone").textContent = err.message;
+    }
+  };
+
   // const userDetails = useSelector(userDetailsState);
   // const loading = useSelector(loadingState);
   // const error = useSelector(errorState);
@@ -45,7 +73,6 @@ const SignUp = () => {
       newUserDetails["password"] = passowrdRef.current.value;
 
       dispatch(signUp(newUserDetails));
-   
 
       // const response = await axios.post(
       //   `${process.env.REACT_APP_API_HOST}register/Frontend-user`,
@@ -75,14 +102,12 @@ const SignUp = () => {
         timer: 2000,
         timerProgressBar: true,
       });
-      dispatch(resetState({success:false}))
+      dispatch(resetState({ success: false }));
       setTimeout(() => {
         navigate("/");
       }, 2000);
-      
     }
   }, [success]);
-
 
   useEffect(() => {
     if (error) {
@@ -97,7 +122,6 @@ const SignUp = () => {
     }
   }, [error]);
 
-
   // console.log(
   //   "UserDetails:",userDetails,
   //   "Success : ",
@@ -108,7 +132,6 @@ const SignUp = () => {
   //   loading
   // );
 
-  
   return (
     <header className="flex flex-col signup-form justify-center items-center">
       <p className="md:text-[34px]">Sign up</p>
@@ -121,13 +144,23 @@ const SignUp = () => {
           type="text"
           placeholder="Email ID"
           ref={emailRef}
+          onChange={handleEmailValidation}
         />
+        <h4
+          id="validEmail"
+          className="text-red-800 bg-transparent text-xl"
+        ></h4>
         <input
           className=" input-fields text-[20px] lg:px-[39px] px-[15px] py-[20px] lg:py-[25px] lg:mt-[60px] mt-[30px] w-[100%]"
-          type="text"
+          type="number"
           placeholder="Phone Number"
           ref={phoneNoRef}
+          onChange={handlePhoneNumberValidation}
         />
+        <h4
+          id="validPhone"
+          className="text-red-800 bg-transparent text-xl"
+        ></h4>
         <div className=" input-fields lg:px-[39px] px-[15px]  lg:mt-[60px] mt-[30px] flex flex-row items-center justify-between">
           <input
             className="bg-transparent text-[20px] lg:py-[25px] py-[20px] w-[100%] password-field"
