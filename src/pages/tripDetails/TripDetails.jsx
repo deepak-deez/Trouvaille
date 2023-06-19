@@ -29,17 +29,15 @@ export default function TripDetails(props) {
   const [tripResponseData, setTripResponseData] = useState();
 
   const currentTripId = useParams();
-  const currentUserId = useSelector((state) => state.user)?.FrontendUserData?.data
-    ?.userDetails?._id;
-    console.log(currentUserId);
+  const currentUserId = useSelector((state) => state.user)?.FrontendUserData
+    ?.data?.userDetails?._id;
+  console.log(currentUserId);
 
   const tripImage = tripDetails?.data?.data[0]?.image;
   const email = FrontendUserData?.data?.userDetails?.email;
   const phNumber = FrontendUserData?.data?.userDetails?.phone;
   const name = FrontendUserData?.data?.userDetails?.name;
   const backgroundImg = { backgroundImage: `url(${tripImage})` };
-
-
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -100,20 +98,19 @@ export default function TripDetails(props) {
   };
   // console.log(tripDetails?.data);
 
-
   if (tripDetails?.data?.success) {
     return (
       <section className="trip-details " style={backgroundImg}>
         <Header location={locationName} />
         <section className="md:px-10 xl:px-28 2xl:px-44 min-[1920px]:px-[20rem] trip-fetched-details pb-[20rem] dark-gradient">
-          <h1 className="pt-[5rem] text-center lg:text-start">Itinerary</h1>
-          <ul className="flex flex-wrap justify-center lg:justify-start sm:flex-row gap-5 text-[#838597] my-[3rem] text-[22px]">
+          <h1 className="pt-[5rem] lg:text-start">Itinerary</h1>
+          <ul className="flex flex-wrap lg:justify-start sm:flex-row gap-5 text-[#838597] my-[3rem] text-[22px]">
             <li>Maximum guests 12</li>
             <li>Explore {explorePlaces} PLaces </li>
             <li>Available for 6 guests</li>
           </ul>
           <h4 className="mb-[2rem] text-2xl">Dates</h4>
-          <div className="flex flex-wrap justify-center  gap-5 xl:justify-between  available-dates overflow-x-scroll">
+          <div className="flex flex-wrap gap-5 xl:justify-start  available-dates overflow-x-scroll">
             {acitivitiesData?.map((data, index) => {
               return (
                 <Dates
@@ -133,7 +130,7 @@ export default function TripDetails(props) {
           </p>
           <div className="trip-highlights-container my-5">
             <h2>Highlights of the package</h2>
-            <div className="flex flex-wrap gap-10">
+            <div className="flex  flex-wrap gap-10">
               {tripHighlightsData?.map((data, index) => {
                 return (
                   <TripHighlights
@@ -148,7 +145,7 @@ export default function TripDetails(props) {
           </div>
           <div className="mt-[5rem]">
             <h2 className="mb-[3rem]">Occassions Related</h2>
-            <div className="flex flex-wrap justify-center lg:justify-start gap-10 xl:gap-[4rem] occassions-cards">
+            <div className="flex flex-wrap  lg:justify-start gap-10 xl:gap-[4rem] occassions-cards">
               {occasions?.map((data, index) => {
                 return (
                   <Ocassions
@@ -162,7 +159,7 @@ export default function TripDetails(props) {
           </div>
           <div className="mt-[5rem]">
             <h2 className="mb-[3rem]">Travel Type</h2>
-            <div className="flex gap-10 xl:gap-[5rem]">
+            <div className="flex  gap-10 xl:gap-[5rem]">
               {travelType?.map((data, index) => {
                 return (
                   <TravelType
@@ -202,20 +199,18 @@ export default function TripDetails(props) {
               })}
             </div>
           </div>
-          <div>
-            <h2 className="mt-20 lg:mt-[9rem] mb-10">FAQs</h2>
-            <ul className="faqs-container flex flex-col gap-10">
-              {faqData?.map((data, index) => {
-                return (
-                  <Faqs
-                    key={index}
-                    question={data?.question}
-                    answer={data?.answer}
-                  />
-                );
-              })}
-            </ul>
-          </div>
+          <h2 className="mt-20 lg:mt-[9rem] mb-10">FAQs</h2>
+          <ul className="faqs-container flex flex-col gap-10 pb-[10rem] min-[480px]:pb-5">
+            {faqData?.map((data, index) => {
+              return (
+                <Faqs
+                  key={index}
+                  question={data?.question}
+                  answer={data?.answer}
+                />
+              );
+            })}
+          </ul>
         </section>
       </section>
     );
