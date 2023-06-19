@@ -6,10 +6,10 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 export default function SearchResult() {
-  const { userDetails, error,loading } = useSelector((state) => state.user);
+  const { FrontendUserData, error,loading } = useSelector((state) => state.user);
   const navigate = useNavigate()
   useEffect(()=>{
-    if(!userDetails)
+    if(!FrontendUserData)
     navigate("/")
   })
 

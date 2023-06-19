@@ -7,8 +7,8 @@ import { notifications } from "./data";
 import TripNotifications from "./tripNotifications/TripNotifications";
 
 export default function Notification() {
-  const { userDetails } = useSelector((state) => state.user);
-  const userId = userDetails.data.userDetails._id;
+  const { FrontendUserData } = useSelector((state) => state.user);
+  const userId = FrontendUserData.data.userDetails._id;
   const [userBookingDetails, setUserBookingDetails] = useState();
 
   useEffect(() => {

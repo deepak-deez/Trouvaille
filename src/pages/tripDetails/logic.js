@@ -10,7 +10,7 @@ const getApiDatas = async (
   currentUserId,
   currentTripId
 ) => {
-  const getErrTripDetails = `${process.env.REACT_APP_API_HOST}get-trip-details/trip-package/6465bc874e71527`;
+  // const getErrTripDetails = `${process.env.REACT_APP_API_HOST}get-trip-details/trip-package/6465bc874e71527`;
   const getTripDetailsUrl = `${process.env.REACT_APP_API_HOST}get-trip-details/trip-package/${currentTripId}`;
   const getAmmenityDataUrl = `${process.env.REACT_APP_API_HOST}get-feature/amenity`;
   const getOcassionDataUrl = `${process.env.REACT_APP_API_HOST}get-feature/occasion`;
@@ -29,27 +29,27 @@ const getApiDatas = async (
   setUserDatabaseData(getUserDatabase);
 };
 
-export const handleProfileImagetoUrl = async (image) => {
-  let imageUrl = "";
+// export const handleProfileImagetoUrl = async (image) => {
+//   let imageUrl = "";
 
-  if (image) {
-    const formData = new FormData();
-    formData.append("file", image);
-    formData.append("upload_preset", "trouvaille");
-    formData.append("cloud_name", `${cloudinaryName}`);
-    await fetch(`${cloudinaryApi}/${cloudinaryName}/image/upload`, {
-      method: "post",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        imageUrl = data.secure_url;
-      })
-      .catch((err) => {
-        return err;
-      });
-    return imageUrl;
-  } else return "";
-};
+//   if (image) {
+//     const formData = new FormData();
+//     formData.append("file", image);
+//     formData.append("upload_preset", "trouvaille");
+//     formData.append("cloud_name", `${cloudinaryName}`);
+//     await fetch(`${cloudinaryApi}/${cloudinaryName}/image/upload`, {
+//       method: "post",
+//       body: formData,
+//     })
+//       .then((res) => res.json())
+//       .then((data) => {
+//         imageUrl = data.secure_url;
+//       })
+//       .catch((err) => {
+//         return err;
+//       });
+//     return imageUrl;
+//   } else return "";
+// };
 
 export default getApiDatas;

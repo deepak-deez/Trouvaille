@@ -18,38 +18,38 @@ const LoginForm = () => {
   // const [apiMessage, setApiMessage] = useState("");
   const [empyFieldsMessage, setEmptyFieldsMessage] = useState(false);
   const dispatch = useDispatch();
-  const { userDetails, error, loading, success } = useSelector(
+  const { FrontendUserData, error, loading, success } = useSelector(
     (state) => state.user
   );
   const [checked, setChecked] = useState(
     localStorage.getItem("rememberMe") === "true" ? true : false
   );
 
-  console.log(userDetails?.data?.token);
+  console.log(FrontendUserData?.data?.token);
 
-  const handleRemember = (userDetails) => {
+  const handleRemember = (FrontendUserData) => {
     if (checked) {
       localStorage.setItem("email", emailRef.current.value);
       localStorage.setItem("password", passwordRef.current.value);
       // localStorage.setItem("token", userDetails?.data?.token);
-      localStorage.setItem("id", userDetails.data.userDetails._id);
-      localStorage.setItem("userType", userDetails.data.userDetails.userType);
+      localStorage.setItem("id", FrontendUserData.data.userDetails._id);
+      localStorage.setItem("userType", FrontendUserData.data.userDetails.userType);
       localStorage.setItem("rememberMe", checked);
     } else {
       localStorage.removeItem("email", emailRef.current.value);
       localStorage.removeItem("password", passwordRef.current.value);
-      // localStorage.removeItem("token", userDetails?.data?.token);
-      localStorage.removeItem("id", userDetails.data.userDetails._id);
+      // localStorage.removeItem("token", FrontendUserData?.data?.token);
+      localStorage.removeItem("id", FrontendUserData.data.userDetails._id);
       localStorage.removeItem(
         "userType",
-        userDetails.data.userDetails.userType
+        FrontendUserData.data.userDetails.userType
       );
       localStorage.setItem("rememberMe", checked);
     }
-    Cookies.set("TOKEN", userDetails?.data?.token, { expires: 7 });
+    Cookies.set("TOKEN", FrontendUserData?.data?.token, { expires: 7 });
   };
 
-  console.log(userDetails?.data?.token);
+  console.log(FrontendUserData?.data?.token);
 
   const logInHandler = async () => {
     accDetails["email"] = emailRef.current.value;
@@ -71,26 +71,26 @@ const LoginForm = () => {
     }
   };
 
-  useEffect(()=>{
-   if(localStorage.getItem('userDetails')) 
-    navigate("/searchResult");
-  },[])
+  // useEffect(()=>{
+  //  if(localStorage.getItem('FrontendUserData')) 
+  //   navigate("/searchResult");
+  // },[])
 
   useEffect(() => {
-    console.log("User details : ", userDetails);
+    console.log("User details : ", FrontendUserData);
     if (success) {
-      handleRemember(userDetails);
+      handleRemember(FrontendUserData);
       dispatch(resetState({ success: false }));
       navigate("/searchResult");
     }
-    // else if(userDetails?.success === false){
-    //   // console.log(userDetails);
+    // else if(FrontendUserData?.success === false){
+    //   // console.log(FrontendUserData);
     //   swal.fire({
     //     position: "center",
     //     width: "40vh",
     //     icon: "error",
     //     title: "failed",
-    //     text:userDetails.message,
+    //     text:FrontendUserData.message,
     //     showConfirmButton: false,
     //     toast: false,
     //     timer: 2000,
@@ -104,7 +104,7 @@ const LoginForm = () => {
       "ERROR : ",
       error,
       ", User Details : ",
-      userDetails,
+      FrontendUserData,
       "Loading",
       loading
     );

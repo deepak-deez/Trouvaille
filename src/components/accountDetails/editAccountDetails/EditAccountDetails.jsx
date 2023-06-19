@@ -8,18 +8,18 @@ import ProfileSideBar from "../profileSideBar/ProfileSideBar";
 import SignOut from "../../SignOut/SignOut";
 
 export default function EditAccountDetails({ setActive }) {
-  const { userDetails } = useSelector((state) => state.user);
+  const { FrontendUserData } = useSelector((state) => state.user);
   const [checkPass, setCheckPass] = useState(true);
   const [emptyFields, setEmptyFields] = useState();
   const oldPassRef = useRef();
   const newPassRef = useRef();
   const confirmNewPassRef = useRef();
-  const emailId = userDetails.data.userDetails.email;
+  const emailId = FrontendUserData.data.userDetails.email;
   // console.log(localStorage.getItem());
 
   const updateDetailsHandler = async () => {
-    const verifyOldPassUrl = `${process.env.REACT_APP_API_HOST}login/${userDetails.data.userDetails.userType}`;
-    const updateUPassUrl = `${process.env.REACT_APP_API_HOST}set-password/${userDetails.data.userDetails.userType}`;
+    const verifyOldPassUrl = `${process.env.REACT_APP_API_HOST}login/${FrontendUserData.data.userDetails.userType}`;
+    const updateUPassUrl = `${process.env.REACT_APP_API_HOST}set-password/${FrontendUserData.data.userDetails.userType}`;
     const checkOldPass = await axios.post(verifyOldPassUrl, {
       email: emailId,
       password: oldPassRef.current.value,
@@ -36,7 +36,7 @@ export default function EditAccountDetails({ setActive }) {
         setEmptyFields(false);
         const updatePassRes = await axios.post(updateUPassUrl, {
           logInStatus: true,
-          id: userDetails.data.userDetails._id,
+          id: FrontendUserData.data.userDetails._id,
           newPassword: newPassRef.current.value,
         });
         console.log("update Status :", updatePassRes);
@@ -53,7 +53,7 @@ export default function EditAccountDetails({ setActive }) {
     }
   };
 
-  if (userDetails) {
+  if (FrontendUserData) {
     return (
       <header className="sm:mx-20 2xl:mx-[18.75rem]">
         <div className=" flex justify-between px-10 xl:px-0 lg:text-[22px]">
@@ -74,7 +74,7 @@ export default function EditAccountDetails({ setActive }) {
             <input
               type="text"
               className="mb-[2.6rem] grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl"
-              defaultValue={userDetails.data.userDetails.phone}
+              defaultValue={FrontendUserData.data.userDetails.phone}
               disabled={true}
             />
             <h4 className="mb-[1.5rem]">Email ID</h4>
@@ -132,7 +132,7 @@ export default function EditAccountDetails({ setActive }) {
       <div className="text-center  py-[30rem] md:py-[20rem]">
         <h1 className="text-5xl leading-[5rem]">
           <span className="text-red-700">Oops</span> Something's Wrong, <br />{" "}
-          With Status Code : {userDetails.status}
+          With Status Code : {FrontendUserData.status}
         </h1>
         <Link
           to="/searchResult"

@@ -11,15 +11,15 @@ import SignOut from "../../SignOut/SignOut";
 import ProfileSideBar from "../profileSideBar/ProfileSideBar";
 
 export default function ProfileSettings({ setActive }) {
-  const { userDetails } = useSelector((state) => state.user);
+  const { FrontendUserData } = useSelector((state) => state.user);
 
   console.log(
     "Profile:",
-    userDetails,
+    FrontendUserData,
     "ID :",
-    userDetails.data.userDetails._id
+    FrontendUserData.data.userDetails._id
   );
-  const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/${userDetails.data.userDetails.userType}/${userDetails.data.userDetails._id}`;
+  const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/${FrontendUserData.data.userDetails.userType}/${FrontendUserData.data.userDetails._id}`;
   const [responseData, setResponseData] = useState();
 
   const updateDataHandler = async () => {
@@ -46,7 +46,7 @@ export default function ProfileSettings({ setActive }) {
     responseData?.data?.data?.userDetails?.maritalStatus;
   const userJoiningYear = responseData?.data?.data?.joiningYear;
 
-  if (userDetails) {
+  if (FrontendUserData) {
     return (
       <header className=" sm:mx-20 2xl:mx-[18.75rem]">
         <div className="flex justify-between px-10 xl:px-0 lg:text-[22px]">
@@ -83,7 +83,7 @@ export default function ProfileSettings({ setActive }) {
           </div>
           <div className="flex flex-col items-center sm:items-start gap-[1rem]">
             <h2 className="sm:text-[2.5rem] grey-text text-[1.5rem]">
-              {userDetails.data.userDetails.email}
+              {FrontendUserData.data.userDetails.email}
             </h2>
             <div className="flex gap-[1rem] items-center">
               <span className="lg:text-[1.6rem] grey-text">
@@ -152,7 +152,7 @@ export default function ProfileSettings({ setActive }) {
       <div className="text-center  py-[30rem] md:py-[20rem]">
         <h1 className="text-5xl leading-[5rem]">
           <span className="text-red-700">Oops</span> Something's Wrong, <br />{" "}
-          With Status Code : {userDetails.status}
+          With Status Code : {FrontendUserData.status}
         </h1>
         <Link
           to="/searchResult"

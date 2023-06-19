@@ -3,16 +3,16 @@ import { useNavigate } from "react-router-dom";
 import "./style.scss";
 export default function TripNames(props) {
   const navigate = useNavigate();
-  let userDetails = {};
+  let FrontendUserData = {};
 
   const viewButtonHandler = (e) => {
-    userDetails = {
+    FrontendUserData = {
       bookingId: e.target.getAttribute("data-booking-id"),
       userId: props.userId,
     };
     navigate(
-      "/bookingDetails/" + userDetails.userId + "/" + userDetails.bookingId,
-      { state: userDetails }
+      "/bookingDetails/" + FrontendUserData.userId + "/" + FrontendUserData.bookingId,
+      { state: FrontendUserData }
     );
   };
 

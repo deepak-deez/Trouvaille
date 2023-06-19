@@ -5,10 +5,10 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const BookingList = () => {
-  const { userDetails} = useSelector((state) => state.user);
+  const { FrontendUserData} = useSelector((state) => state.user);
   const navigate = useNavigate()
   useEffect(()=>{
-    if(!userDetails)
+    if(!FrontendUserData)
     navigate("/")
   })
   return (
