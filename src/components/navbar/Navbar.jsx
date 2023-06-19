@@ -18,7 +18,7 @@ export default function Navbar({ setActive }) {
   const [showNotis, setShowNotis] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const currentPageLocation = useLocation().pathname;
-  const { FrontendUserData } = useSelector((state) => state.user);
+  const { userDetails } = useSelector((state) => state.user);
 
   useEffect(() => {
     function handleScroll() {
@@ -103,9 +103,9 @@ useEffect(()=>{
           ""
         )}
 
-        {dashboardLocations.find(
+        {/* {dashboardLocations.find(
           (location) => location === currentPageLocation
-        ) ? (
+        ) ? ( */}
           <div className="flex gap-10 2xl:gap-[4.1rem] items-center">
             <SearchBar />
 
@@ -127,12 +127,7 @@ useEffect(()=>{
                 alt="document-icon"
               />
             </Link>
-           
-          </div>
-        ) : (
-          ""
-        )}
-         <button
+            <button
               onClick={() => {
                 navigate("/accountDetails");
                 setActive("view-account");
@@ -142,25 +137,31 @@ useEffect(()=>{
                 <img
                   className="h-10 w-10 rounded-[50%]"
                   src={
-                    FrontendUserData?.data?.userDetails?.userDetails?.image
-                      ? FrontendUserData?.data?.userDetails?.userDetails?.image
+                    userDetails?.data?.userDetails?.userDetails?.image
+                      ? userDetails?.data?.userDetails?.userDetails?.image
                       : profileIcon
                   }
                   alt="profile-icon"
                 />
               </div>
             </button>
+          </div>
+        {/* ) : (
+          ""
+        )} */}
+        
             {navCollapse ? (
         ""
       ) : (
         <div
           className={
-            "flex flex-col xl:hidden gap-10 sm:mt-4 nav-tab-menu " +
+            "flex flex-col xl:hidden gap-10 mt-[4rem] nav-tab-menu " +
             (navCollapse ? "nav-close" : "nav-open")
           }
+
         >
-          <ul className={"flex flex-col gap-10 2xl:gap-[88px] my-auto "}>
-            <li className="flex justify-between">
+          <ul className={"flex flex-col gap-10 2xl:gap-[88px] my-auto "} >
+            <li className="flex justify-between" >
               <Link to="/searchResult">Home</Link>
               <div className="flex gap-10">
                 <Link to={"/notifications"}>

@@ -71,10 +71,10 @@ const LoginForm = () => {
     }
   };
 
-  // useEffect(()=>{
-  //  if(localStorage.getItem('FrontendUserData')) 
-  //   navigate("/searchResult");
-  // },[])
+  useEffect(()=>{
+   if(localStorage.getItem('FrontendUserData')) 
+    navigate("/searchResult");
+  },[])
 
   useEffect(() => {
     console.log("User details : ", FrontendUserData);
