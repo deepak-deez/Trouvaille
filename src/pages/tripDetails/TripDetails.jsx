@@ -134,7 +134,7 @@ export default function TripDetails(props) {
                   <TripHighlights
                     title={data?.title}
                     content={data?.name}
-                    imgSrc={data?.icon?.url}
+                    imgSrc={data?.icon}
                     key={index}
                   />
                 );

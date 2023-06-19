@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { fullNavLocations, dashboardLocations } from "./locationData";
 import "./style.scss";
@@ -36,6 +36,19 @@ export default function Navbar({ setActive }) {
     setShowNotis(!showNotis);
   };
 
+  const refMenu = useRef(null)
+
+const handleClickOutside=(e)=>{
+  if(refMenu.current && !refMenu.current.contains(e.target)){
+    setnavColapse(true)
+  }
+}
+
+useEffect(()=>{
+  document.addEventListener("click",handleClickOutside,"true")
+  console.log(navCollapse);
+},[])
+
   return (
     <nav
       className={
@@ -43,21 +56,22 @@ export default function Navbar({ setActive }) {
         (isScrolled ? "bg-white text-black nav-box-shadow " : "")
       }
     >
-      <div className="flex justify-between flex-wrap">
-        {dashboardLocations.find(
+      <div ref={refMenu} className="flex justify-between flex-wrap">
+        {/* {dashboardLocations.find(
           (location) => location === currentPageLocation
-        ) ? (
-          <button
-            className="xl:hidden"
-            onClick={() => {
+        ) ? ( */}
+          <button 
+            className="collapse-button xl:hidden"
+            onClick={(e) => {
               navCollapse ? setnavColapse(false) : setnavColapse(true);
+              handleClickOutside(e)
             }}
           >
             <img src={menuHamburger} alt="menu-hamburger" />
           </button>
-        ) : (
+        {/* ) : (
           ""
-        )}
+        )} */}
 
         <Link to="/searchResult">
           <div className="flex gap-2">
@@ -113,7 +127,12 @@ export default function Navbar({ setActive }) {
                 alt="document-icon"
               />
             </Link>
-            <button
+           
+          </div>
+        ) : (
+          ""
+        )}
+         <button
               onClick={() => {
                 navigate("/accountDetails");
                 setActive("view-account");
@@ -131,12 +150,7 @@ export default function Navbar({ setActive }) {
                 />
               </div>
             </button>
-          </div>
-        ) : (
-          ""
-        )}
-      </div>
-      {navCollapse ? (
+            {navCollapse ? (
         ""
       ) : (
         <div
@@ -170,6 +184,8 @@ export default function Navbar({ setActive }) {
           </ul>
         </div>
       )}
+      </div>
+      
     </nav>
   );
 }
