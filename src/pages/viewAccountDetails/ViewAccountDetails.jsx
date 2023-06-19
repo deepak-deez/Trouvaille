@@ -8,11 +8,11 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const ViewAccDetails = ({ active, setActive }) => {
-  const { userDetails } = useSelector((state) => state.user);
-  console.log(userDetails);
+  const { FrontendUserData } = useSelector((state) => state.user);
+  console.log(FrontendUserData);
   const navigate = useNavigate();
   useEffect(() => {
-    if (!userDetails) navigate("/");
+    if (!FrontendUserData) navigate("/");
   });
   console.log("setActive : --", active);
 

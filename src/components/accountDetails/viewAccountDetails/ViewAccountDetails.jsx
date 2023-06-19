@@ -7,19 +7,19 @@ import SignOut from "../../SignOut/SignOut";
 
 export default function ViewAccountDetails({ setActive }) {
 
-  const { userDetails } = useSelector((state) => state.user);
+  const { FrontendUserData } = useSelector((state) => state.user);
 
   let userData;
-  if (userDetails.success) {
-    console.log(userDetails);
+  if (FrontendUserData.success) {
+    console.log(FrontendUserData);
     userData = {
-      email: userDetails?.data?.userDetails?.email,
-      phNumber: userDetails?.data?.userDetails?.phone,
-      password: userDetails?.data?.userDetails?.password,
+      email: FrontendUserData?.data?.userDetails?.email,
+      phNumber: FrontendUserData?.data?.userDetails?.phone,
+      password: FrontendUserData?.data?.userDetails?.password,
     };
   }
 
-  if (userDetails.success) {
+  if (FrontendUserData.success) {
     // const userData = {
     //   email: userDetails?.data?.data.userDetails?.email,
     //   phNumber: userDetails?.data?.data.userDetails?.phone,
@@ -74,7 +74,7 @@ export default function ViewAccountDetails({ setActive }) {
       <div className="text-center  py-[30rem] md:py-[20rem]">
         <h1 className="text-5xl leading-[5rem]">
           <span className="text-red-700">Oops</span> Something's Wrong, <br />{" "}
-          {/* With Message : {userDetails.data.data.message} */}
+          {/* With Message : {FrontendUserData.data.data.message} */}
         </h1>
         <Link
           to="/searchResult"

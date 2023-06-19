@@ -5,9 +5,9 @@ import "./style.scss";
 import getAllApiData from "./logic";
 import TripNames from "./tripNames/TripNames";
 export default function TripList() {
-  const { userDetails } = useSelector((state) => state.user);
-  console.log(userDetails);
-  const userId = userDetails.data?.userDetails?._id;
+  const { FrontendUserData } = useSelector((state) => state.user);
+  console.log(FrontendUserData);
+  const userId = FrontendUserData.data?.userDetails?._id;
   const [userBookingDetails, setUserBookingDetails] = useState();
 
   if (userBookingDetails?.data?.success) {

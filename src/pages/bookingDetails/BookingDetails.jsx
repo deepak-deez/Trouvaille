@@ -12,10 +12,10 @@ export default function BookingDetails(props) {
   const [userBookingDetails, setUserBookingDetails] = useState();
   const [success, setSuccess] = useState();
 
-  const { userDetails} = useSelector((state) => state.user);
+  const { FrontendUserData} = useSelector((state) => state.user);
   const navigate = useNavigate()
   useEffect(()=>{
-    if(!userDetails)
+    if(!FrontendUserData)
     navigate("/")
   })
 
