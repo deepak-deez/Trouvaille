@@ -14,15 +14,17 @@ export default function EditAccountDetails({ setActive }) {
   const oldPassRef = useRef();
   const newPassRef = useRef();
   const confirmNewPassRef = useRef();
-  const emailId = userDetails.data.data.userDetails.email;
+  const emailId = userDetails.data.userDetails.email;
+  // console.log(localStorage.getItem());
 
   const updateDetailsHandler = async () => {
-    const verifyOldPassUrl = `${process.env.REACT_APP_API_HOST}login/Frontend-user`;
-    const updateUPassUrl = `${process.env.REACT_APP_API_HOST}set-password/Frontend-user`;
+    const verifyOldPassUrl = `${process.env.REACT_APP_API_HOST}login/${userDetails.data.userDetails.userType}`;
+    const updateUPassUrl = `${process.env.REACT_APP_API_HOST}set-password/${userDetails.data.userDetails.userType}`;
     const checkOldPass = await axios.post(verifyOldPassUrl, {
       email: emailId,
       password: oldPassRef.current.value,
     });
+    console.log("login check :", checkOldPass);
 
     if (checkOldPass.data.success) {
       setCheckPass(true);
@@ -32,15 +34,16 @@ export default function EditAccountDetails({ setActive }) {
         newPassRef.current.value === confirmNewPassRef.current.value
       ) {
         setEmptyFields(false);
-
         const updatePassRes = await axios.post(updateUPassUrl, {
           logInStatus: true,
-          id: localStorage.getItem("id"),
+          id: userDetails.data.userDetails._id,
           newPassword: newPassRef.current.value,
         });
+        console.log("update Status :", updatePassRes);
 
         if (updatePassRes.data.success) {
           Swal.fire("Success!", "Pasword Updated!", "success");
+          setActive("view-account");
         }
       } else {
         setEmptyFields(true);
@@ -71,7 +74,7 @@ export default function EditAccountDetails({ setActive }) {
             <input
               type="text"
               className="mb-[2.6rem] grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl"
-              defaultValue={userDetails.data.data.userDetails.phone}
+              defaultValue={userDetails.data.userDetails.phone}
               disabled={true}
             />
             <h4 className="mb-[1.5rem]">Email ID</h4>
@@ -94,7 +97,7 @@ export default function EditAccountDetails({ setActive }) {
             />
             <h4 className={"mb-[1.5rem]"}>New Password</h4>
             <input
-              type="text"
+              type="password"
               className={
                 "mb-[3.1rem] grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl" +
                 (emptyFields
@@ -105,7 +108,7 @@ export default function EditAccountDetails({ setActive }) {
             />
             <h4 className="mb-[1.5rem]">Confirm Password</h4>
             <input
-              type="text"
+              type="password"
               className={
                 "mb-[3.1rem] grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl" +
                 (emptyFields

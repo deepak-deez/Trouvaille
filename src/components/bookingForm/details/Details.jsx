@@ -24,8 +24,6 @@ const Details = (props) => {
   };
 
   const submitBtnHandler = async () => {
-    console.log(bookingFormDetails);
-
     const otherPassengerSelector = document.querySelectorAll(
       ".other-passenger-details"
     );
@@ -110,6 +108,8 @@ const Details = (props) => {
     setPassengerCountArray(passengerHeadCount);
     passengerCount = props.bookingFormData.guestsSelected;
   }
+  console.log("Booking form details : ",bookingFormDetails);
+
   return (
     <>
       <section className="flex flex-col details-form justify-center items-center pb-[20rem]">
@@ -133,7 +133,7 @@ const Details = (props) => {
           <input
             className=" input-fields lg:px-[39px] lg:py-[32px] text-[20px] px-[15px] py-[20px]  w-[100%]"
             type="text"
-            placeholder="Phone Number"
+            placeholder="E-mail"
             defaultValue={bookingFormDetails.email}
             disabled={true}
           />
@@ -186,7 +186,11 @@ const Details = (props) => {
 
           <ul className="list-disc flex flex-col gap-5">
             {bookingNotes?.map((data, index) => {
-              return <li className="grey-text">{data.note}</li>;
+              return (
+                <li className="grey-text" key={index}>
+                  {data.note}
+                </li>
+              );
             })}
           </ul>
 

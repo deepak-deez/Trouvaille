@@ -35,11 +35,12 @@ export default function FilterCategories({
 
   useEffect(() => {
     setFilterDatas();
-    console.log(ocassionData);
+    // console.log(ocassionData);
   }, [filterResponse]);
 
   const getFilterData = async () => {
     const response = await axios.get(filterApiUrl);
+    console.log("Filter", response.data);
     setFilterResponse(response?.data?.data);
   };
 

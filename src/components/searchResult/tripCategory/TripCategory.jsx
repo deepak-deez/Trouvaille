@@ -23,6 +23,8 @@ export default function TripCategory({
   const [allTripCategory, setAllTripCategory] = useState();
   const [showFilter, setShowFilter] = useState(false);
   const [closingAnimation, setClosingAnimation] = useState(false);
+  const [closingAnimationSort, setClosingAnimationSort] = useState(false);
+
   const [showMore, setShowMore] = useState(true);
   const [sortClicked, setSortClicked] = useState(false);
   const [categoryFilter, setCategoryFilter] = useState([]);
@@ -120,7 +122,18 @@ export default function TripCategory({
   };
 
   const sortTrips = () => {
-    sortClicked ? setSortClicked(false) : setSortClicked(true);
+    if (sortClicked) {
+      setClosingAnimationSort(true);
+
+      setTimeout(() => {
+        setSortClicked(false);
+        setClosingAnimationSort(false);
+      }, 500);
+    } else {
+      setShowFilter(false);
+
+      setSortClicked(true);
+    }
   };
 
   const getTripCategory = async () => {
@@ -156,12 +169,12 @@ export default function TripCategory({
 
   return (
     <section className="trip-category">
-      <div className="flex justify-center 2xl:justify-between flex-wrap gap-10 lg:gap-12 trip-category-icons ">
+      <div className="flex justify-center 2xl:justify-between flex-wrap gap-0 lg:gap-12 trip-category-icons ">
         {allTripCategory?.map((response, index) => {
           return (
             <div
               onClick={handleClickedCategory}
-              className=" p-3 flex flex-col justify-end  "
+              className=" p-1 lg:p-3 flex flex-col justify-end  "
               key={index}
             >
               <div
@@ -195,8 +208,9 @@ export default function TripCategory({
           </button>
           <ul
             className={
-              "bg-transparent flex flex-col gap-[1rem] sort-list absolute z-50 top-[3rem] p-10 outline-none " +
-              (sortClicked ? "flex" : "hidden")
+              "bg-transparent flex flex-col gap-[1rem] sort-list absolute z-50 top-[3rem] p-10 outline-none openning-animation-y " +
+              (sortClicked ? "flex  " : "hidden") +
+              (closingAnimationSort ? " closing-animation-y " : "")
             }
           >
             <li
@@ -253,7 +267,7 @@ export default function TripCategory({
         <div
           className={
             "trip-category-filter-results all-trip-list grid justify-center grid-flow-col overflow-scroll gap-[2.2rem] md:h-[56rem] overflow-y-scroll px-5 transition-all duration-300" +
-            (showFilter ? " xl:w-[75%]" : "")
+            (showFilter ? " xl:w-[75%]  " : "")
           }
         >
           {showMore

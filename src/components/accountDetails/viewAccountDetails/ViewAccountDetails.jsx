@@ -6,18 +6,29 @@ import ProfileSideBar from "../profileSideBar/ProfileSideBar";
 import SignOut from "../../SignOut/SignOut";
 
 export default function ViewAccountDetails({ setActive }) {
+
   const { userDetails } = useSelector((state) => state.user);
 
-  console.log(userDetails,"Sc",userDetails.success);
+  let userData;
+  if (userDetails.success) {
+    console.log(userDetails);
+    userData = {
+      email: userDetails?.data?.userDetails?.email,
+      phNumber: userDetails?.data?.userDetails?.phone,
+      password: userDetails?.data?.userDetails?.password,
+    };
+  }
 
-  const userData = {
-    email: userDetails?.data?.data?.userDetails?.email,
-    phNumber: userDetails?.data?.data?.userDetails?.phone,
-    password: userDetails?.data?.data?.userDetails?.password,
-  };
-  if (userDetails) {
+  if (userDetails.success) {
+    // const userData = {
+    //   email: userDetails?.data?.data.userDetails?.email,
+    //   phNumber: userDetails?.data?.data.userDetails?.phone,
+    //   password: userDetails?.data?.data.userDetails?.password,
+    // };
+
     return (
       <header className="sm:mx-20 2xl:mx-[18.75rem]">
+        {console.log(userData)}
         <div className="flex justify-between px-10 xl:px-0 lg:text-[22px]">
           <h2 className="font-[600]">
             Settings/
@@ -63,7 +74,7 @@ export default function ViewAccountDetails({ setActive }) {
       <div className="text-center  py-[30rem] md:py-[20rem]">
         <h1 className="text-5xl leading-[5rem]">
           <span className="text-red-700">Oops</span> Something's Wrong, <br />{" "}
-          With Message : {userDetails.data.data.message}
+          {/* With Message : {userDetails.data.data.message} */}
         </h1>
         <Link
           to="/searchResult"

@@ -26,15 +26,16 @@ export default function TripDetails(props) {
   const [userDatabase, setUserdatabase] = useState();
   const [toShowDetails, setToShowDetails] = useState(false);
   const [details, setDetails] = useState(false);
+  const [tripResponseData, setTripResponseData] = useState();
 
   const currentTripId = useParams();
   const currentUserId = useSelector((state) => state.user)?.userDetails?.data
-    ?.data?.userDetails?._id;
-  console.log(currentUserId);
+    ?.userDetails?._id;
+
   const tripImage = tripDetails?.data?.data[0]?.image;
-  const email = userDetails?.data?.data?.userDetails?.email;
-  const phNumber = userDetails?.data?.data?.userDetails?.phone;
-  const name = userDetails?.data?.data?.userDetails?.name;
+  const email = userDetails?.data?.userDetails?.email;
+  const phNumber = userDetails?.data?.userDetails?.phone;
+  const name = userDetails?.data?.userDetails?.name;
   const backgroundImg = { backgroundImage: `url(${tripImage})` };
 
   const navigate = useNavigate();
@@ -51,10 +52,12 @@ export default function TripDetails(props) {
       currentUserId,
       currentTripId.id
     );
-    setFeaturesData();
   }, []);
 
-  const tripResponseData = tripDetails?.data?.data[0];
+  useEffect(() => {
+    setTripResponseData(tripDetails?.data?.data[0]);
+    setFeaturesData();
+  }, [tripDetails]);
 
   const acitivitiesData = tripResponseData?.activities;
   const durationData = tripResponseData?.duration;
@@ -91,12 +94,13 @@ export default function TripDetails(props) {
       tripResponseData?.features?.filter((data) => data.purpose === "amenity")
     );
   };
+  console.log(occasions, travelType, amenities);
 
   if (tripDetails?.data?.success) {
     return (
-      <section className="trip-details" style={backgroundImg}>
+      <section className="trip-details " style={backgroundImg}>
         <Header location={locationName} />
-        <section className="md:px-10 xl:px-28 2xl:px-44 min-[1920px]:mx-[20rem] trip-fetched-details pb-[20rem] dark-gradient">
+        <section className="md:px-10 xl:px-28 2xl:px-44 min-[1920px]:px-[20rem] trip-fetched-details pb-[20rem] dark-gradient">
           <h1 className="pt-[5rem] text-center lg:text-start">Itinerary</h1>
           <ul className="flex flex-wrap justify-center lg:justify-start sm:flex-row gap-5 text-[#838597] my-[3rem] text-[22px]">
             <li>Maximum guests 12</li>

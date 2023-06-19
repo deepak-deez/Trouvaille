@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import eye from "../../../assets/images/landingPage/loginForm/eye.svg";
 import Cookies from "js-cookie";
 // import { logInUser } from "../../../redux/actions/userActions";
-import { signIn,resetState } from "../../../redux/slices/userSlice";
+import { signIn, resetState } from "../../../redux/slices/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import swal from "sweetalert2";
 import LoadingScreen from "../../loading/loadingScreen";
@@ -18,34 +18,38 @@ const LoginForm = () => {
   // const [apiMessage, setApiMessage] = useState("");
   const [empyFieldsMessage, setEmptyFieldsMessage] = useState(false);
   const dispatch = useDispatch();
-  const { userDetails, error,loading,success } = useSelector((state) => state.user);
+  const { userDetails, error, loading, success } = useSelector(
+    (state) => state.user
+  );
   const [checked, setChecked] = useState(
     localStorage.getItem("rememberMe") === "true" ? true : false
   );
-  
-console.log(userDetails);
+
+  console.log(userDetails?.data?.token);
 
   const handleRemember = (userDetails) => {
     if (checked) {
       localStorage.setItem("email", emailRef.current.value);
       localStorage.setItem("password", passwordRef.current.value);
-      localStorage.setItem("token", userDetails.data.token);
-      localStorage.setItem("id", userDetails.data._id);
-      localStorage.setItem("usertype", userDetails.data.userType);
+      // localStorage.setItem("token", userDetails?.data?.token);
+      localStorage.setItem("id", userDetails.data.userDetails._id);
+      localStorage.setItem("userType", userDetails.data.userDetails.userType);
       localStorage.setItem("rememberMe", checked);
     } else {
       localStorage.removeItem("email", emailRef.current.value);
       localStorage.removeItem("password", passwordRef.current.value);
-      localStorage.removeItem("token", userDetails.data.token);
-      localStorage.removeItem("id", userDetails.data._id);
+      // localStorage.removeItem("token", userDetails?.data?.token);
+      localStorage.removeItem("id", userDetails.data.userDetails._id);
       localStorage.removeItem(
-        "usertype",
-        userDetails.data.userType
+        "userType",
+        userDetails.data.userDetails.userType
       );
       localStorage.setItem("rememberMe", checked);
     }
-    Cookies.set("TOKEN", userDetails.data.token, { expires: 7 });
+    Cookies.set("TOKEN", userDetails?.data?.token, { expires: 7 });
   };
+
+  console.log(userDetails?.data?.token);
 
   const logInHandler = async () => {
     accDetails["email"] = emailRef.current.value;
@@ -68,10 +72,10 @@ console.log(userDetails);
   };
 
   useEffect(() => {
-    console.log("User details : ",userDetails);
+    console.log("User details : ", userDetails);
     if (success) {
       handleRemember(userDetails);
-      dispatch(resetState({success:false}))
+      dispatch(resetState({ success: false }));
       navigate("/searchResult");
     }
     // else if(userDetails?.success === false){
@@ -91,7 +95,14 @@ console.log(userDetails);
   }, [success]);
 
   useEffect(() => {
-    console.log("ERROR : ",error, ", User Details : ",userDetails,"Loading",loading);
+    console.log(
+      "ERROR : ",
+      error,
+      ", User Details : ",
+      userDetails,
+      "Loading",
+      loading
+    );
     if (error) {
       // setApiMessage(error.response.data.message);
       swal.fire({
@@ -108,7 +119,7 @@ console.log(userDetails);
 
   return (
     <>
-    {loading && <LoadingScreen/>}
+      {loading && <LoadingScreen />}
       <header className="flex flex-col login-form justify-center items-center my-auto">
         <p className="md:text-[34px]">Signin</p>
 

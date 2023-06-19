@@ -9,7 +9,6 @@ const SignOut = () => {
   function handleSignout() {
     Cookies.remove("TOKEN");
     localStorage.removeItem("userDetails");
-    dispatch({ type: "SIGN_IN_USER_SUCCESS", payload: null });
     navigate("/");
   }
   return (

@@ -12,6 +12,9 @@
       #e6664c -19.43%,
       #8c2009 109.14%
     );
+    .available-dates::-webkit-scrollbar {
+      display: none;
+    }
 
     h1 {
       font-size: 50px;
