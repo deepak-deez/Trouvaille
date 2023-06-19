@@ -8,6 +8,7 @@ import { signIn, resetState } from "../../../redux/slices/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import swal from "sweetalert2";
 import LoadingScreen from "../../loading/loadingScreen";
+import { validEmail } from "../../../constants/regex";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -26,6 +27,18 @@ const LoginForm = () => {
   );
 
   console.log(FrontendUserData?.data?.token);
+
+  const handleEmailValidation = () => {
+    try {
+      if (!validEmail.test(emailRef.current.value)) {
+        throw new Error("Please Enter a valid E-mail!");
+      } else {
+        document.getElementById("validEmail").textContent = "";
+      }
+    } catch (err) {
+      document.getElementById("validEmail").textContent = err.message;
+    }
+  };
 
   const handleRemember = (FrontendUserData) => {
     if (checked) {
@@ -141,7 +154,12 @@ const LoginForm = () => {
             defaultValue={
               localStorage.getItem("email") ? localStorage.getItem("email") : ""
             }
+            onChange={handleEmailValidation}
           />
+          <h4
+            id="validEmail"
+            className="text-red-800 bg-transparent text-xl"
+          ></h4>
           <div className=" input-fields lg:px-[39px]  px-[15px]  lg:mt-[60px] mt-[30px] flex flex-row items-center justify-between">
             <input
               className="text-[20px] lg:py-[32px] py-[20px] w-[100%] bg-transparent"

@@ -2,10 +2,24 @@ import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "./style.scss";
 import axios from "axios";
+import { validEmail } from "../../../constants/regex";
 
 const SetPassword = () => {
   const emailref = useRef();
   const [apiMessage, setApiMessage] = useState("");
+
+  const handleEmailValidation = () => {
+    try {
+      if (!validEmail.test(emailref.current.value)) {
+        throw new Error("Please Enter a valid E-mail!");
+      } else {
+        document.getElementById("validEmail").textContent = "";
+      }
+    } catch (err) {
+      document.getElementById("validEmail").textContent = err.message;
+    }
+  };
+
   const sendLink = async () => {
     const data = {
       email: emailref.current.value,
@@ -37,7 +51,12 @@ const SetPassword = () => {
           type="text"
           ref={emailref}
           placeholder="Enter Your Email Address"
+          onChange={handleEmailValidation}
         />
+        <h4
+          id="validEmail"
+          className="text-red-800 bg-transparent text-xl"
+        ></h4>
         <button
           to="/resetPassword"
           onClick={sendLink}

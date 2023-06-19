@@ -14,7 +14,6 @@ const ViewAccDetails = ({ active, setActive }) => {
   useEffect(() => {
     if (!FrontendUserData) navigate("/");
   });
-  console.log("setActive : --", active);
 
   return (
     <section className="account-details pt-[10rem] pb-[35rem] sm:pb-[20rem]">
