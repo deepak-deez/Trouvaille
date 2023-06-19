@@ -25,29 +25,31 @@ const LoginForm = () => {
     localStorage.getItem("rememberMe") === "true" ? true : false
   );
 
-  console.log(userDetails);
+  console.log(userDetails?.data?.token);
 
   const handleRemember = (userDetails) => {
     if (checked) {
       localStorage.setItem("email", emailRef.current.value);
       localStorage.setItem("password", passwordRef.current.value);
-      localStorage.setItem("token", userDetails.token);
+      // localStorage.setItem("token", userDetails?.data?.token);
       localStorage.setItem("id", userDetails.data.userDetails._id);
-      localStorage.setItem("usertype", userDetails.data.userDetails.userType);
+      localStorage.setItem("userType", userDetails.data.userDetails.userType);
       localStorage.setItem("rememberMe", checked);
     } else {
       localStorage.removeItem("email", emailRef.current.value);
       localStorage.removeItem("password", passwordRef.current.value);
-      localStorage.removeItem("token", userDetails.token);
+      // localStorage.removeItem("token", userDetails?.data?.token);
       localStorage.removeItem("id", userDetails.data.userDetails._id);
       localStorage.removeItem(
-        "usertype",
+        "userType",
         userDetails.data.userDetails.userType
       );
       localStorage.setItem("rememberMe", checked);
     }
-    Cookies.set("TOKEN", userDetails.token, { expires: 7 });
+    Cookies.set("TOKEN", userDetails?.data?.token, { expires: 7 });
   };
+
+  console.log(userDetails?.data?.token);
 
   const logInHandler = async () => {
     accDetails["email"] = emailRef.current.value;
