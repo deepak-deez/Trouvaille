@@ -42,11 +42,13 @@ export const getAllUserBooking = createAsyncThunk(
 export const getUserBookingById = createAsyncThunk(
   `${nameSpace}/getUserBookingById`,
   async (bookedData, { rejectWithValue }, thunkAPI) => {
+    console.log(bookedData.bookingId);
     try {
       const result = await axios.get(
-        `${API}user-booking/${bookedData.userId}/${bookedData.id}`
+        `${API}user-booking/${bookedData.userId}/${bookedData.bookingId}`
       );
-      if (result) return result.data;
+      console.log(result);
+      if (result) return result;
     } catch (err) {
       return rejectWithValue(err.response.data.message);
     }
@@ -72,7 +74,7 @@ const featureSlice = createSlice({
       state.success = false;
     });
     builder.addCase(createBooking.fulfilled, (state, action) => {
-      state.bookingData = action.payload.data.message;
+      state.bookingData = action.payload.data;
       state.loading = false;
       state.error = null;
       state.success = true;
@@ -91,7 +93,7 @@ const featureSlice = createSlice({
       state.success = false;
     });
     builder.addCase(getAllUserBooking.fulfilled, (state, action) => {
-      state.bookingData = action.payload.data.message;
+      state.bookingData = action.payload.data;
       state.loading = false;
       state.error = null;
       state.success = true;
@@ -110,7 +112,7 @@ const featureSlice = createSlice({
       state.success = false;
     });
     builder.addCase(getUserBookingById.fulfilled, (state, action) => {
-      state.bookingData = action.payload.data.message;
+      state.bookingData = action.payload.data;
       state.loading = false;
       state.error = null;
       state.success = true;
