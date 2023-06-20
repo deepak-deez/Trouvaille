@@ -14,13 +14,14 @@ const initialState = {
 
 export const getAllPackages = createAsyncThunk(
   `${nameSpace}/getAllPackages`,
-  async ({ rejectWithValue }) => {
+  async () => {
     try {
       const result = await axios.get(`${API}get-module/trip-package`);
-      if (result) return result.data;
+      console.log(result);
+      if (result) return result;
       return result;
     } catch (err) {
-      return rejectWithValue(err.response.data.message);
+      return (err.response.data.message);
     }
   }
 );
@@ -28,11 +29,14 @@ export const getAllPackages = createAsyncThunk(
 export const getPackagesById = createAsyncThunk(
   `${nameSpace}/getPackagesById`,
   async (tripId, { rejectWithValue }) => {
+    console.log(tripId);
     try {
       const result = await axios.get(
         `${API}get-trip-details/trip-package/${tripId}`
       );
+
       if (result) return result.data;
+
       return result;
     } catch (err) {
       return rejectWithValue(err.response.data.message);
@@ -52,7 +56,7 @@ const tripPackageSlice = createSlice({
       state.success = false;
     });
     builder.addCase(getAllPackages.fulfilled, (state, action) => {
-      state.tripPackageData = action.payload.data.message;
+      state.tripPackageData = action.payload.data;
       state.loading = false;
       state.error = null;
       state.success = true;
@@ -71,7 +75,7 @@ const tripPackageSlice = createSlice({
       state.success = false;
     });
     builder.addCase(getPackagesById.fulfilled, (state, action) => {
-      state.tripPackageData = action.payload.data.message;
+      state.tripPackageData = action.payload.data;
       state.loading = false;
       state.error = null;
       state.success = true;

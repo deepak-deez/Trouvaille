@@ -20,9 +20,10 @@ export const sortData = (
   sortProp,
   sortOrder
 ) => {
-  allPackagesData?.map((data) => {
-    data.title = data.title.charAt(0).toUpperCase() + data.title.slice(1);
-  });
+  allPackagesData &&
+    allPackagesData?.map((data) => {
+      data.title = data.title.charAt(0).toUpperCase() + data.title.slice(1);
+    });
 
   if (sortProp === "price" && sortOrder === "ascending") {
     setAllPackagesData([...allPackagesData].sort((a, b) => a.price - b.price));

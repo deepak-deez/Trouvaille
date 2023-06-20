@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from "react";
+import {
+  getAllPackages,
+  getPackagesById,
+} from "../../redux/slices/tripPackageSlice";
 import "./style.scss";
 import Header from "../../components/tripDetails/header/Header";
 import Dates from "../../components/tripDetails/dates/Dates";
@@ -10,72 +14,82 @@ import HostingPartner from "../../components/tripDetails/hostingPartner/HostingP
 import PricingDetails from "../../components/tripDetails/pricingDetails/PricingDetails";
 import Ammenities from "../../components/tripDetails/ammenities/Ammenities";
 import Faqs from "../../components/tripDetails/faqs/Faqs";
-import getApiDatas from "./logic";
+import GetApiDatas from "./logic";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import loader from "../../../src/assets/loaders/airplaneLoading.gif";
-import { faL } from "@fortawesome/free-solid-svg-icons";
 import NoResponse from "../../components/noResponse/NoResponse";
 
 export default function TripDetails(props) {
   const location = useLocation();
+  const dispatch = useDispatch();
+  const { tripPackageData } = useSelector((state) => state.tripPackage);
+
   const { FrontendUserData } = useSelector((state) => state.user);
   const [tripDetails, setTripDetails] = useState();
-  const [ocassionImgData, setOcassionImgData] = useState();
-  const [ammenityImgData, setAmmenityImgData] = useState();
-  const [userDatabase, setUserdatabase] = useState();
+  // const [ocassionImgData, setOcassionImgData] = useState();
+  // const [ammenityImgData, setAmmenityImgData] = useState();
+  // const [userDatabase, setUserdatabase] = useState();
   const [toShowDetails, setToShowDetails] = useState(false);
   const [details, setDetails] = useState(false);
   const [tripResponseData, setTripResponseData] = useState();
+  const [occasions, setOccassions] = useState();
+  const [travelType, setTravelType] = useState();
+  const [amenities, setAmenities] = useState();
 
   const currentTripId = useParams();
-  const currentUserId = useSelector((state) => state.user)?.FrontendUserData?.data
-    ?.userDetails?._id;
-    console.log(currentUserId);
+  const currentUserId = useSelector((state) => state.user)?.FrontendUserData
+    ?.data?.userDetails?._id;
 
-  const tripImage = tripDetails?.data?.data[0]?.image;
+  useEffect(() => {
+    dispatch(getPackagesById(currentTripId.id));
+  }, []);
+
+  useEffect(() => {
+    if (tripPackageData) {
+      setTripDetails(tripPackageData);
+      setFeaturesData();
+    }
+  }, [tripPackageData]);
+
+  const tripImage = tripDetails && tripDetails[0].image;
   const email = FrontendUserData?.data?.userDetails?.email;
   const phNumber = FrontendUserData?.data?.userDetails?.phone;
   const name = FrontendUserData?.data?.userDetails?.name;
   const backgroundImg = { backgroundImage: `url(${tripImage})` };
-
-
-
+  console.log(tripPackageData);
   const navigate = useNavigate();
   useEffect(() => {
     if (!FrontendUserData) navigate("/");
   });
 
-  useEffect(() => {
-    getApiDatas(
-      setTripDetails,
-      setAmmenityImgData,
-      setOcassionImgData,
-      setUserdatabase,
-      currentUserId,
-      currentTripId.id
-    );
-  }, []);
+  // useEffect(() => {
+  //   GetApiDatas(
+  //     setTripDetails,
+  //     setAmmenityImgData,
+  //     setOcassionImgData,
+  //     setUserdatabase,
+  //     currentUserId,
+  //     currentTripId.id
+  //   );
+  // }, []);
 
-  useEffect(() => {
-    setTripResponseData(tripDetails?.data?.data[0]);
-    setFeaturesData();
-  }, [tripDetails]);
-  console.log(tripResponseData);
+  // useEffect(() => {
+  //   setTripResponseData(tripDetails?.data?.data[0]);
+  //   setFeaturesData();
+  // }, [tripDetails]);
 
-  const acitivitiesData = tripResponseData?.activities;
-  const durationData = tripResponseData?.duration;
-  const ammenitiesData = tripResponseData?.amenities;
-  const ocassionData = tripResponseData?.occasions;
-  const faqData = tripResponseData?.faq;
-  const tripHighlightsData = tripResponseData?.tripHighlights;
-  const tripCost = tripResponseData?.price;
-  const discountedPrice = tripResponseData?.discountedPrice;
-  const locationName = tripResponseData?.title;
-  const explorePlaces = tripResponseData?.placeNumber;
-  const [occasions, setOccassions] = useState();
-  const [travelType, setTravelType] = useState();
-  const [amenities, setAmenities] = useState();
+  const acitivitiesData = tripDetails && tripDetails[0]?.activities;
+  const durationData = tripDetails && tripDetails[0]?.duration;
+  const ammenitiesData = tripDetails && tripDetails[0]?.amenities;
+  const ocassionData = tripDetails && tripDetails[0]?.occasions;
+  const faqData = tripDetails && tripDetails[0]?.faq;
+  const tripHighlightsData = tripDetails && tripDetails[0]?.tripHighlights;
+  const tripCost = tripDetails && tripDetails[0]?.price;
+  const discountedPrice = tripDetails && tripDetails[0]?.discountedPrice;
+  const locationName = tripDetails && tripDetails[0]?.title;
+  const explorePlaces = tripDetails && tripDetails[0]?.placeNumber;
+  console.log(ammenitiesData);
 
   const bookingFormData = {
     email,
@@ -89,19 +103,20 @@ export default function TripDetails(props) {
 
   const setFeaturesData = () => {
     setOccassions(
-      tripResponseData?.features?.filter((data) => data.purpose === "occasion")
+      tripDetails &&
+        tripDetails[0]?.features?.filter((data) => data.purpose === "occasion")
     );
     setTravelType(
-      tripResponseData?.features?.filter((data) => data.purpose === "travel")
+      tripDetails &&
+        tripDetails[0]?.features?.filter((data) => data.purpose === "travel")
     );
     setAmenities(
-      tripResponseData?.features?.filter((data) => data.purpose === "amenity")
+      tripDetails &&
+        tripDetails[0]?.features?.filter((data) => data.purpose === "amenity")
     );
   };
-  // console.log(tripDetails?.data);
 
-
-  if (tripDetails?.data?.success) {
+  if (tripDetails) {
     return (
       <section className="trip-details " style={backgroundImg}>
         <Header location={locationName} />
@@ -181,9 +196,9 @@ export default function TripDetails(props) {
 
             <PricingDetails
               bookingFormData={bookingFormData}
-              maxGuests={tripResponseData?.maximumGuests}
-              originalPrice={discountedPrice}
-              discountedPrice={tripCost}
+              maxGuests={tripDetails && tripDetails[0]?.maximumGuests}
+              originalPrice={tripCost}
+              discountedPrice={discountedPrice}
             />
           </div>
           <div className="mt-20 lg:mt-[9rem] ammenities-container">

@@ -15,8 +15,9 @@ const initialState = {
 export const getFeature = createAsyncThunk(
   `${nameSpace}/getFeature`,
   async (featureName, { rejectWithValue }) => {
+    console.log(featureName);
     try {
-      const result = await axios.get(`${API}get-feature`, featureName);
+      const result = await axios.get(`${API}get-feature/${featureName}`);
       if (result) return result.data;
     } catch (err) {
       return rejectWithValue(err.response.data.message);
@@ -50,7 +51,7 @@ const featureSlice = createSlice({
       state.success = false;
     });
     builder.addCase(getFeature.fulfilled, (state, action) => {
-      state.featureData = action.payload.data.message;
+      state.featureData = action.payload.data;
       state.loading = false;
       state.error = null;
       state.success = true;
@@ -69,7 +70,7 @@ const featureSlice = createSlice({
       state.success = false;
     });
     builder.addCase(getFilteredFeature.fulfilled, (state, action) => {
-      state.featureData = action.payload.data.message;
+      state.featureData = action.payload.data;
       state.loading = false;
       state.error = null;
       state.success = true;

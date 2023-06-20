@@ -6,11 +6,14 @@ import sortIcon from "../../../assets/images/searchResult/tripCategory/sort-icon
 import filterIcon from "../../../assets/images/searchResult/tripCategory/filter-icon.svg";
 import TripCard from "../tripCard/TripCard";
 import FilterCategories from "../filterCategories/FilterCategories";
-import { getAllApiData, getFilteredData, sortData } from "./logic";
+import { getFilteredData, sortData } from "./logic";
 import "rc-slider/assets/index.css";
 import defaultCategoryImg from "../../../assets/images/searchResult/tripCategory/hills-icon.svg";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getFeature } from "../../../redux/slices/featureSlice";
+import { getAllPackages } from "../../../redux/slices/tripPackageSlice";
 
 export default function TripCategory({
   checkinDate,
@@ -19,6 +22,8 @@ export default function TripCategory({
   filterDestination,
   filterPerson,
 }) {
+  const { featureData } = useSelector((state) => state.feature);
+  const { tripPackageData } = useSelector((state) => state.tripPackage);
   const [allPackagesData, setAllPackagesData] = useState();
   const [allTripCategory, setAllTripCategory] = useState();
   const [showFilter, setShowFilter] = useState(false);
@@ -40,6 +45,18 @@ export default function TripCategory({
     checkOut: "",
   });
   const location = useLocation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getFeature("category"));
+    dispatch(getAllPackages());
+    document.addEventListener("click", hideOnClickOutside, true);
+  }, []);
+
+  // useEffect(() => {
+  //   // getAllApiData(setAllPackagesData);
+  //   console.log("Hello");
+  // }, []);
 
   useEffect(() => {
     if (filterPerson !== "") handleFilterRequirements();
@@ -55,8 +72,6 @@ export default function TripCategory({
     }
   }, [tripFilterClicked]);
 
-  useEffect(() => {}, [allPackagesData]);
-
   const handleFilterRequirements = () => {
     const setFilterRequirementsCopy = { ...filterRequirements };
 
@@ -67,15 +82,10 @@ export default function TripCategory({
       setFilterRequirementsCopy.title = filterDestination;
       setFilterRequirementsCopy.maximumGuests = filterPerson;
     }
-
     setFilterRequirementsCopy.tripCategory = categoryFilter;
     setFilterRequirements(setFilterRequirementsCopy);
   };
   const refOne = useRef(null);
-
-  useEffect(() => {
-    getTripCategory();
-  }, []);
 
   useEffect(() => {
     console.log(filterRequirements);
@@ -87,9 +97,16 @@ export default function TripCategory({
   }, [filterRequirements]);
 
   useEffect(() => {
-    getAllApiData(setAllPackagesData);
-    document.addEventListener("click", hideOnClickOutside, true);
-  }, []);
+    if (featureData) {
+      setAllTripCategory(featureData);
+    }
+  }, [featureData]);
+
+  useEffect(() => {
+    if (tripPackageData) {
+      setAllPackagesData(tripPackageData?.data);
+    }
+  }, [tripPackageData]);
 
   const hideOnClickOutside = (e) => {
     if (refOne.current && !refOne.current.contains(e.target)) {
@@ -136,13 +153,13 @@ export default function TripCategory({
     }
   };
 
-  const getTripCategory = async () => {
-    const response = await axios.get(
-      `${process.env.REACT_APP_API_HOST}get-feature/category`
-    );
+  // const getTripCategory = async () => {
+  //   const response = await axios.get(
+  //     `${process.env.REACT_APP_API_HOST}get-feature/category`
+  //   );
 
-    setAllTripCategory(response.data.data);
-  };
+  //   setAllTripCategory(response.data.data);
+  // };
 
   const handleClickedCategory = (e) => {
     const targetSelected = e.target.parentElement.getAttribute(
@@ -271,7 +288,8 @@ export default function TripCategory({
           }
         >
           {showMore
-            ? allPackagesData?.slice(0, 8).map((data, index) => {
+            ? allPackagesData &&
+              allPackagesData?.slice(0, 8).map((data, index) => {
                 return <TripCard data={data} key={index} />;
               })
             : allPackagesData?.map((data, index) => {
