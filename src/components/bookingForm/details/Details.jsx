@@ -19,7 +19,7 @@ const Details = (props) => {
     title: props.bookingFormData.locationName,
     phone: props.bookingFormData.phNumber,
     email: props.bookingFormData.email,
-    bookingStatus: "pending",
+    bookingStatus: "Pending",
     deleteReason: "",
     deleteStatus: false,
     cancellationStatus: false,

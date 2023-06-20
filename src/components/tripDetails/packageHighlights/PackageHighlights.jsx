@@ -4,11 +4,17 @@ import "./style.scss";
 
 export default function PackageHighlights(props) {
   return (
-    <div className="flex gap-7 w-[25rem]">
-      <img src={props.imgSrc} alt="diving-icon" />
-      <div className="text-[#B4BBC1]">
-        <h4 className=" pt-10 text-[#B4BBC1] text-[2rem]">{props.title}</h4>
-        <p className="mt-[2rem]">{props.content}</p>
+    <div className="w-[25rem]">
+      <div className="flex gap-7 ">
+        <img
+          className=" w-20 md:w-32 h-20 md:h-32 rounded-lg self-center"
+          src={props.imgSrc}
+          alt="diving-icon"
+        />
+        <div className="flex flex-col">
+          <h4 className=" text-[#B4BBC1] text-[2rem]">{props.title}</h4>
+          <p className="">{props.content}</p>
+        </div>
       </div>
     </div>
   );
