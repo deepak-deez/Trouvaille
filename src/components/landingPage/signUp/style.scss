@@ -18,6 +18,7 @@ $button-color-green-v2: #022f15;
     input:focus {
       outline: none;
     }
+
     h2 {
       font-family: $font-name-poppins;
       background: linear-gradient(268.24deg, #d25e46 19.54%, #8c2009 110.31%);
@@ -25,7 +26,11 @@ $button-color-green-v2: #022f15;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-
+    .phone-field::-webkit-outer-spin-button,
+    .phone-field::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
     .input-fields {
       background: rgba(255, 255, 255, 0.78);
       border-radius: 21px;

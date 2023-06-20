@@ -5,7 +5,11 @@ import eye from "../../../assets/images/landingPage/loginForm/eye.svg";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { signUp, resetState } from "../../../redux/slices/userSlice";
-import { validEmail } from "../../../constants/regex";
+import {
+  validEmail,
+  mediumRegexPassword,
+  strongRegexPassword,
+} from "../../../constants/regex";
 
 // import {
 //   userDetailsState,
@@ -25,6 +29,7 @@ const SignUp = () => {
   const [showConfirmPassword, setShowCofirmPassword] = useState(false);
   const [differentPassword, setDifferentPassword] = useState(false);
   let [apiMessage, setApiMessage] = useState("");
+  const [pwdError, setPwdError] = useState(false);
 
   const newUserDetails = {};
   const dispatch = useDispatch();
@@ -57,6 +62,20 @@ const SignUp = () => {
     }
   };
 
+  const handlePasswordCheck = () => {
+    try {
+      if (passowrdRef.current.value === confirmPasswordRef.current.value) {
+        setDifferentPassword(true);
+        document.getElementById("confirmPassword").textContent = "";
+      } else {
+        setDifferentPassword(false);
+        throw new Error("Passwords doesn't match!");
+      }
+    } catch (err) {
+      document.getElementById("confirmPassword").textContent = err.message;
+    }
+  };
+
   // const userDetails = useSelector(userDetailsState);
   // const loading = useSelector(loadingState);
   // const error = useSelector(errorState);
@@ -65,7 +84,22 @@ const SignUp = () => {
   // }, [userDetails, dispatch]);
 
   const handleCreateNewAccount = async () => {
-    if (confirmPasswordRef.current.value === passowrdRef.current.value) {
+    if (
+      !emailRef.current.value.length ||
+      !phoneNoRef.current.value.length ||
+      !passowrdRef.current.value.length ||
+      !confirmPasswordRef.current.value.length
+    ) {
+      swal.fire({
+        position: "center",
+        icon: "warning",
+        title: "Warning",
+        text: "Fields cannot be Empty!!",
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+      });
+    } else if (!differentPassword && !pwdError) {
       setDifferentPassword(false);
 
       newUserDetails["email"] = emailRef.current.value;
@@ -89,6 +123,25 @@ const SignUp = () => {
     }
   };
 
+  const checkValidPassword = () => {
+    try {
+      if (strongRegexPassword.test(passowrdRef.current.value)) {
+        setPwdError(false);
+        document.getElementById("validPassword").textContent =
+          "Password Strength : Strong!";
+      } else {
+        if (mediumRegexPassword.test(passowrdRef.current.value)) {
+          setPwdError(true);
+          throw new Error("Password Strength : Medium!");
+        } else {
+          setPwdError(true);
+          throw new Error("Password Strength : Weak!");
+        }
+      }
+    } catch (err) {
+      document.getElementById("validPassword").textContent = err.message;
+    }
+  };
   // navigate('/')
 
   useEffect(() => {
@@ -138,9 +191,9 @@ const SignUp = () => {
       <h2 className="md:text-[64px] text-center mt-[10px] lg:mt-[30px] text-[50px]">
         Welcome to Trouvaille
       </h2>
-      <div className="flex flex-col lg:w-[975px] w-[90%] md:px-[30px] md:py-[30px] mt-[15px] signup-details px-[25px] py-[15px] lg:py-[67px] lg:px-[97px] justify-center">
+      <div className="flex flex-col gap-[30px] lg:w-[975px] w-[90%] md:px-[30px] md:py-[30px] mt-[15px] signup-details px-[25px] py-[15px] lg:py-[67px] lg:px-[97px] justify-center">
         <input
-          className="input-fields text-[20px] lg:px-[39px] px-[15px] py-[20px] lg:py-[25px] mt-[9px] bg-transparent w-[100%]"
+          className="input-fields text-[20px] lg:px-[39px] px-[15px] py-[20px] lg:py-[25px] bg-transparent w-[100%]"
           type="text"
           placeholder="Email ID"
           ref={emailRef}
@@ -148,10 +201,10 @@ const SignUp = () => {
         />
         <h4
           id="validEmail"
-          className="text-red-800 bg-transparent text-xl"
+          className="text-red-600 bg-transparent text-xl"
         ></h4>
         <input
-          className=" input-fields text-[20px] lg:px-[39px] px-[15px] py-[20px] lg:py-[25px] lg:mt-[60px] mt-[30px] w-[100%]"
+          className=" input-fields phone-field text-[20px] lg:px-[39px] px-[15px] py-[20px] lg:py-[25px]  w-[100%]"
           type="number"
           placeholder="Phone Number"
           ref={phoneNoRef}
@@ -159,14 +212,15 @@ const SignUp = () => {
         />
         <h4
           id="validPhone"
-          className="text-red-800 bg-transparent text-xl"
+          className="text-red-600 bg-transparent text-xl"
         ></h4>
-        <div className=" input-fields lg:px-[39px] px-[15px]  lg:mt-[60px] mt-[30px] flex flex-row items-center justify-between">
+        <div className=" input-fields lg:px-[39px] px-[15px]  flex flex-row items-center justify-between">
           <input
             className="bg-transparent text-[20px] lg:py-[25px] py-[20px] w-[100%] password-field"
             type={showPassword ? "" : "password"}
             placeholder="Password"
             ref={passowrdRef}
+            onChange={checkValidPassword}
           />
           <button
             type="button"
@@ -177,12 +231,20 @@ const SignUp = () => {
             <img className="input-icon" src={eye} alt="view-icon" />
           </button>
         </div>
-        <div className=" input-fields lg:px-[39px] px-[15px] lg:mt-[60px] mt-[30px] flex flex-row items-center justify-between">
+        <h4
+          id="validPassword"
+          className={
+            "font-bold bg-transparent text-xl " +
+            (pwdError ? "text-red-700" : "text-green-700")
+          }
+        ></h4>
+        <div className=" input-fields lg:px-[39px] px-[15px] flex flex-row items-center justify-between">
           <input
             className="py-[20px] text-[20px] w-[100%] lg:py-[25px] bg-transparent password-field"
             type={showConfirmPassword ? "" : "password"}
             placeholder="Confirm Password"
             ref={confirmPasswordRef}
+            onChange={handlePasswordCheck}
           />
           <button
             type="button"
@@ -193,22 +255,13 @@ const SignUp = () => {
             <img className="input-icon" src={eye} alt="view-icon" />
           </button>
         </div>
-        <p
-          className={
-            "text-3xl different-password my-5 " +
-            (differentPassword ? " block " : " hidden ")
-          }
-        >
-          Password Doesn't Match
-        </p>
-        <p className={apiMessage ? " api-message my-5 " : ""}>{apiMessage}</p>
+        <h4
+          id="confirmPassword"
+          className="text-red-700 font-bold bg-transparent text-xl"
+        ></h4>
+
         <button
-          className={
-            "px-[15px] py-[20px] lg:py-[26px] text-center continue-button " +
-            (!differentPassword && !apiMessage.length
-              ? " lg:mt-[60px] mt-[20px] "
-              : "")
-          }
+          className="px-[15px] py-[20px] lg:py-[26px] text-center continue-button "
           onClick={handleCreateNewAccount}
         >
           CONTINUE
