@@ -49,8 +49,11 @@ const userSlice = createSlice({
     resetState: (state, action) => {
       state.success = action.payload.success;
     },
-    updateUserDetails: (state, action) => {
-      state.FrontendUserData = action.payload.FrontendUserData;
+    updateUserDetails: (state) => {
+      state.FrontendUserData = null;
+      state.success = false;
+      state.loading = false;
+      state.error = null;
     },
   },
 

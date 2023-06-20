@@ -26,11 +26,10 @@ export const getFeature = createAsyncThunk(
 
 export const getFilteredFeature = createAsyncThunk(
   `${nameSpace}/getFilteredFeature`,
-  async ({ rejectWithValue }) => {
+  async (featureName, { rejectWithValue }) => {
     try {
       const result = await axios.get(
-        `${API}get-filtered-feature/trip-package`,
-        featureName
+        `${API}get-filtered-feature/${featureName}`
       );
       if (result) return result.data;
     } catch (err) {

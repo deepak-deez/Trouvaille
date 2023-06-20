@@ -56,7 +56,14 @@ export const getUserBookingById = createAsyncThunk(
 const featureSlice = createSlice({
   name: nameSpace,
   initialState,
-  reducers: {},
+  reducers: {
+    resetBooking: (state) => {
+      state.bookingData = null;
+      state.success = false;
+      state.loading = false;
+      state.error = null;
+    },
+  },
   extraReducers(builder) {
     builder.addCase(createBooking.pending, (state, action) => {
       state.bookingData = null;
@@ -118,3 +125,4 @@ const featureSlice = createSlice({
 });
 
 export default featureSlice.reducer;
+export const { resetBooking } = featureSlice.actions;
