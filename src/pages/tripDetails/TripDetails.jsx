@@ -71,9 +71,11 @@ export default function TripDetails(props) {
   const discountedPrice = tripResponseData?.discountedPrice;
   const locationName = tripResponseData?.title;
   const explorePlaces = tripResponseData?.placeNumber;
+  const maximumGuests = tripResponseData?.maximumGuests;
   const [occasions, setOccassions] = useState();
   const [travelType, setTravelType] = useState();
   const [amenities, setAmenities] = useState();
+  console.log(maximumGuests);
 
   const bookingFormData = {
     email,
@@ -83,6 +85,7 @@ export default function TripDetails(props) {
     currentTripId,
     currentUserId,
     tripImage,
+    maximumGuests,
   };
 
   const setFeaturesData = () => {
@@ -187,7 +190,7 @@ export default function TripDetails(props) {
             <h2 className="font-[400] mt-20 lg:mt-40 mb-[3.5rem]">
               Ammenities (<span>{ammenitiesData?.length}</span>)
             </h2>
-            <div className="flex flex-wrap 2xl:justify-start gap-10  justify-center lg:justify-start ammenities-container">
+            <div className="flex flex-wrap 2xl:justify-start gap-10 lg:justify-start ammenities-container">
               {amenities?.map((data, index) => {
                 return (
                   <Ammenities

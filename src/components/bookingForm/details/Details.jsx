@@ -22,7 +22,7 @@ const Details = (props) => {
     deleteStatus: false,
     cancellationStatus: false,
   };
-
+  console.log(props);
   const submitBtnHandler = async () => {
     const otherPassengerSelector = document.querySelectorAll(
       ".other-passenger-details"
@@ -77,7 +77,9 @@ const Details = (props) => {
 
   const [sucessModal, setsucessModal] = useState(false);
   const [passenger, setpassenger] = useState(false);
-  let passengerCount = useRef(props.bookingFormData.guestsSelected);
+  let [passengerCount, setPassengerCount] = useState(
+    props.bookingFormData.guestsSelected
+  );
   let passengerHeadCount = [];
   const [passengerCountArray, setPassengerCountArray] = useState([]);
   const [bookingNotes, setBookingNotes] = useState();
@@ -102,13 +104,14 @@ const Details = (props) => {
   }, [passengerCount]);
 
   function handlePassengerHeadCount() {
+    passengerHeadCount = [];
     for (let i = 1; i <= passengerCount; i++) {
       passengerHeadCount.push(i);
     }
     setPassengerCountArray(passengerHeadCount);
     passengerCount = props.bookingFormData.guestsSelected;
   }
-  console.log("Booking form details : ",bookingFormDetails);
+  console.log("Booking form details : ", bookingFormDetails);
 
   return (
     <>
@@ -140,10 +143,23 @@ const Details = (props) => {
           <div className="flex input-fields items-center justify-between  lg:px-[39px] px-[15px] ">
             <input
               className=" w-[100%] lg:py-[32px] py-[20px] bg-transparent text-[20px] other-passenger"
-              type="text"
+              type="number"
               placeholder="Other Passenger (number)"
               defaultValue={props.bookingFormData.guestsSelected}
-              disabled={true}
+              onChange={(e) => {
+                console.log(props);
+                if (e.target.value > props.bookingFormData.maximumGuests) {
+                  setPassengerCount(props.bookingFormData.maximumGuests);
+                  swal.fire({
+                    icon: "warning",
+                    title: "Oops...",
+                    text: "cant exceed maximum guests for this package",
+                    timer: "2500",
+                    buttons: true,
+                  });
+                  e.target.value = props.bookingFormData.maximumGuests;
+                } else setPassengerCount(e.target.value);
+              }}
             />
             <button
               onClick={() => {
