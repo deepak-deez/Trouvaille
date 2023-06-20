@@ -52,7 +52,7 @@ export default function TripDetails(props) {
     }
   }, [tripPackageData]);
 
-  const tripImage = tripDetails && tripDetails[0].image;
+  const tripImage = tripDetails && tripDetails[0]?.image;
   const email = FrontendUserData?.data?.userDetails?.email;
   const phNumber = FrontendUserData?.data?.userDetails?.phone;
   const name = FrontendUserData?.data?.userDetails?.name;

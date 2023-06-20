@@ -12,7 +12,10 @@ import defaultCategoryImg from "../../../assets/images/searchResult/tripCategory
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getFeature } from "../../../redux/slices/featureSlice";
+import {
+  getFeature,
+  getFilteredFeature,
+} from "../../../redux/slices/featureSlice";
 import { getAllPackages } from "../../../redux/slices/tripPackageSlice";
 
 export default function TripCategory({
@@ -23,6 +26,7 @@ export default function TripCategory({
   filterPerson,
 }) {
   const { featureData } = useSelector((state) => state.feature);
+  const { filterFeatureData } = useSelector((state) => state.feature);
   const { tripPackageData } = useSelector((state) => state.tripPackage);
   const [allPackagesData, setAllPackagesData] = useState();
   const [allTripCategory, setAllTripCategory] = useState();
@@ -46,7 +50,7 @@ export default function TripCategory({
   });
   const location = useLocation();
   const dispatch = useDispatch();
-
+  console.log(tripPackageData, "tripPackageData");
   useEffect(() => {
     dispatch(getFeature("category"));
     dispatch(getAllPackages());
@@ -76,7 +80,6 @@ export default function TripCategory({
     const setFilterRequirementsCopy = { ...filterRequirements };
 
     if (location.pathname === "/trips") {
-      console.log("Trips!");
       setFilterRequirementsCopy.checkIn = checkinDate;
       setFilterRequirementsCopy.checkOut = checkOutDate;
       setFilterRequirementsCopy.title = filterDestination;
@@ -88,13 +91,14 @@ export default function TripCategory({
   const refOne = useRef(null);
 
   useEffect(() => {
-    console.log(filterRequirements);
-    try {
-      getFilteredData(filterRequirements, setAllPackagesData);
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(getFilteredFeature(filterRequirements));
   }, [filterRequirements]);
+
+  useEffect(() => {
+    if (filterFeatureData) {
+      setAllPackagesData(filterFeatureData.data);
+    }
+  }, [filterFeatureData]);
 
   useEffect(() => {
     if (featureData) {
@@ -183,7 +187,7 @@ export default function TripCategory({
 
     handleFilterRequirements();
   };
-
+  console.log(allPackagesData, "allPackagesData");
   return (
     <section className="trip-category">
       <div className="flex justify-center 2xl:justify-between flex-wrap gap-0 lg:gap-12 trip-category-icons ">
@@ -292,7 +296,8 @@ export default function TripCategory({
               allPackagesData?.slice(0, 8).map((data, index) => {
                 return <TripCard data={data} key={index} />;
               })
-            : allPackagesData?.map((data, index) => {
+            : allPackagesData &&
+              allPackagesData?.map((data, index) => {
                 return <TripCard data={data} key={index} />;
               })}
         </div>

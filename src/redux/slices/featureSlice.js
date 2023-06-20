@@ -10,6 +10,7 @@ const initialState = {
   loading: false,
   error: null,
   success: false,
+  filterFeatureData: null,
 };
 
 export const getFeature = createAsyncThunk(
@@ -27,12 +28,14 @@ export const getFeature = createAsyncThunk(
 
 export const getFilteredFeature = createAsyncThunk(
   `${nameSpace}/getFilteredFeature`,
-  async (featureName, { rejectWithValue }) => {
+  async (filterRequirements, { rejectWithValue }) => {
+    console.log(filterRequirements);
     try {
-      const result = await axios.get(
-        `${API}get-filtered-feature/${featureName}`
+      const result = await axios.post(
+        `${API}get-filtered-feature/trip-package`,
+        filterRequirements
       );
-      if (result) return result.data;
+      if (result) return result;
     } catch (err) {
       return rejectWithValue(err.response.data.message);
     }
@@ -64,19 +67,19 @@ const featureSlice = createSlice({
     });
 
     builder.addCase(getFilteredFeature.pending, (state, action) => {
-      state.featureData = null;
+      state.filterFeatureData = null;
       state.loading = true;
       state.error = null;
       state.success = false;
     });
     builder.addCase(getFilteredFeature.fulfilled, (state, action) => {
-      state.featureData = action.payload.data;
+      state.filterFeatureData = action.payload.data;
       state.loading = false;
       state.error = null;
       state.success = true;
     });
     builder.addCase(getFilteredFeature.rejected, (state, action) => {
-      state.featureData = null;
+      state.filterFeatureData = null;
       state.loading = false;
       state.error = action.payload;
       state.success = false;
