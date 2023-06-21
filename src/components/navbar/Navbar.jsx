@@ -12,6 +12,8 @@ import SearchBar from "./searchBar/SearchBar";
 import { useSelector } from "react-redux";
 import NotificationPopUp from "../viewNotifications/notificationPopUp/NotificationPopUp";
 import socketIOClient from "socket.io-client";
+import axios from "axios";
+import { set } from "date-fns";
 
 const ENDPOINT = "http://localhost:7000";
 
@@ -27,21 +29,30 @@ export default function Navbar({ setActive }) {
   const userId = localStorage.getItem("id");
 
   useEffect(() => {
-    socket.on("getStatusUpdates", (data) => {
+    if (!statusNotis) {
+      getAllNotifications();
+    }
+    socket.on(localStorage.getItem("id"), (data) => {
+      console.log("Recieved By Only Me : ", data);
       setStatusNotis(data);
-    });
-
-    socket.on("hello-joy", (data) => {
-      console.log(data);
     });
 
     console.log("Status : ", statusNotis);
   }, [socket]);
 
+  const getAllNotifications = async () => {
+    const allNotisApi =
+      process.env.REACT_APP_API_HOST +
+      "get-user-notification/" +
+      localStorage.getItem("id");
+
+    const response = await axios.get(allNotisApi);
+    setStatusNotis(response?.data);
+
+    console.log("Response : ", response.data);
+  };
+
   useEffect(() => {
-    socket.on("getAllNotis", (data) => {
-      setStatusNotis(data);
-    });
     function handleScroll() {
       const scrollTop = window.scrollY;
       const isTop = scrollTop < 20;
@@ -130,6 +141,9 @@ export default function Navbar({ setActive }) {
           <SearchBar />
 
           <div className="my-auto relative hidden xl:block">
+            <p className="absolute text-center pt-1 h-8 w-8 bg-green-600 rounded-full left-[-1rem] text-white font-bold">
+              {statusNotis?.data?.length}
+            </p>
             <button onClick={handleNotificationPopUp} className="my-auto">
               <img
                 src={notificationIcon}
