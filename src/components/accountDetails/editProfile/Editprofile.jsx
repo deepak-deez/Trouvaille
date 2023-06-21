@@ -10,6 +10,7 @@ import axios from "axios";
 import ProfileSideBar from "../profileSideBar/ProfileSideBar";
 import { updateUserDetails } from "../../../redux/slices/userSlice";
 import SignOut from "../../SignOut/SignOut";
+import CountrySelector from "./CountrySelector";
 
 export default function EditProfile({ setActive }) {
   const [responseData, setResponseData] = useState();
@@ -92,15 +93,22 @@ export default function EditProfile({ setActive }) {
 
     const updateUrl = `${process.env.REACT_APP_API_HOST}update/Frontend-user/${FrontendUserData.data.userDetails._id}`;
     console.log(updateUrl);
+    console.log(placeRef);
     try {
-      const response = await axios.post(updateUrl, formData);
-      if (response.data.success) {
-        // updateDataHandler({ userDetails: response.data });
-        setActive("profile");
+      if (nameRef.current.value.length) {
+        document.getElementById("nameField").textContent = "";
+        const response = await axios.post(updateUrl, formData);
+        if (response.data.success) {
+          // updateDataHandler({ userDetails: response.data });
+          setActive("profile");
+        }
+      } else {
+        throw new Error("Name is required!");
       }
-    } catch (error) {}
+    } catch (error) {
+      document.getElementById("nameField").textContent = error.message;
+    }
   };
-
   console.log(FrontendUserData);
   if (FrontendUserData.success) {
     return (
@@ -167,6 +175,11 @@ export default function EditProfile({ setActive }) {
                 placeholder="Your Location"
                 defaultValue={userPLace ? userPLace : ""}
                 ref={placeRef}
+                disabled
+              />
+              <CountrySelector
+                selectedValue={userPLace ? userPLace : ""}
+                placeRef={placeRef}
               />
               <img src={editIcon} alt="edit-icon" />
               <span className="lg:text-[1.6rem] grey-text">
@@ -183,15 +196,21 @@ export default function EditProfile({ setActive }) {
               Basic info, for a faster booking experience
             </h5>
             <h4 className="mb-[1.5rem] grey-text">Name</h4>
-            <div className="flex mb-[2.6rem] rounded-2xl px-[1.2rem] bg-white">
-              <input
-                className=" bg-transparent w-[100%] grey-text py-[1rem] "
-                type="text"
-                placeholder="Your Name"
-                defaultValue={userName ? userName : ""}
-                ref={nameRef}
-              />
-              <img src={editIcon} alt="edit-icon" />
+            <div className="flex flex-co relative">
+              <div className="flex mb-[2.6rem] w-full rounded-2xl px-[1.2rem] bg-white">
+                <input
+                  className=" bg-transparent outline-none w-[100%] grey-text py-[1rem] "
+                  type="text"
+                  placeholder="Your Name"
+                  defaultValue={userName ? userName : ""}
+                  ref={nameRef}
+                />
+                <img src={editIcon} alt="edit-icon" />
+              </div>
+              <h4
+                id="nameField"
+                className="text-red-700 font-bold absolute mt-[3.5rem] bg-transparent text-md"
+              ></h4>
             </div>
             <h4 className="mb-[1.5rem] grey-text">DOB</h4>
             <input
