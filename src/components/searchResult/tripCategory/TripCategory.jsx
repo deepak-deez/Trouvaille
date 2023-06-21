@@ -107,10 +107,7 @@ export default function TripCategory({
 
   useEffect(() => {
     if (tripPackageData) {
-      console.log(
-        tripPackageData?.data.filter((item) => item.status !== "In-Active"),
-        "hii"
-      );
+  
       tripPackageData &&
         tripPackageData?.data &&
         setAllPackagesData(
