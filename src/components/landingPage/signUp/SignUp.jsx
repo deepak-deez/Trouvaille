@@ -19,6 +19,11 @@ import {
 import swal from "sweetalert2";
 import { useSlider } from "@mui/base";
 
+const generateCaptcha = () => {
+  const randomText = Math.random().toString(36).substring(2, 8);
+  return randomText;
+};
+
 const SignUp = () => {
   const navigate = useNavigate();
   const emailRef = useRef();
@@ -28,6 +33,11 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowCofirmPassword] = useState(false);
   const [differentPassword, setDifferentPassword] = useState(false);
+  const [captchaText, setCaptchaText] = useState(generateCaptcha());
+  const [userInput, setUserInput] = useState("");
+  const [isValidCaptcha, setIsValidCaptcha] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+  const [toOpenDiv, setToOpenDiv] = useState(false);
   let [apiMessage, setApiMessage] = useState("");
   const [pwdError, setPwdError] = useState(false);
 
@@ -62,6 +72,10 @@ const SignUp = () => {
     }
   };
 
+  const inputChange = (e) => {
+    setUserInput(e.target.value);
+  };
+
   const handlePasswordCheck = () => {
     try {
       if (passowrdRef.current.value === confirmPasswordRef.current.value) {
@@ -76,14 +90,41 @@ const SignUp = () => {
     }
   };
 
-  // const userDetails = useSelector(userDetailsState);
-  // const loading = useSelector(loadingState);
-  // const error = useSelector(errorState);
-  // useEffect(() => {
-  //   if (userDetails !== null) dispatch(signUp(newUserDetails));
-  // }, [userDetails, dispatch]);
+  const checkCaptcha = (e) => {
+    e.preventDefault();
+    if (userInput === captchaText) {
+      setIsValidCaptcha(true);
+      setIsChecked(true);
+    } else {
+      setIsValidCaptcha(false);
+      setCaptchaText(generateCaptcha());
+      setUserInput("");
+    }
+  };
 
-  const handleCreateNewAccount = async () => {
+  const openDiv = () => {
+    console.log("div opening");
+    // setIsChecked(true);
+    setToOpenDiv(true);
+  }
+
+  // const handleCreateNewAccount = async (e) => {
+  
+    // const inputVal = await e.target.value;
+    // const token = captchaRef.current.getValue();
+    // console.log(token);
+    // console.log(inputVal);
+    // captchaRef.current.reset();
+
+    // await axios
+    //   .post(inputVal, token)
+    //   .then((res) => console.log(res))
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
+  const handleCreateNewAccount = async (e) => {
+    e.preventDefault();
     if (
       !emailRef.current.value.length ||
       !phoneNoRef.current.value.length ||
@@ -259,10 +300,54 @@ const SignUp = () => {
           id="confirmPassword"
           className="text-red-700 font-bold bg-transparent text-xl"
         ></h4>
+       
+        <p className={apiMessage ? " api-message my-5 " : ""}>{apiMessage}</p>
 
+        <div className="bg-white w-[20rem] py-3 mt-2 lg:mb-[-15px] lg:px-3 lg:py-3 lg:text-lg rounded-lg">
+          <input type="checkbox" className="ml-2" checked={isValidCaptcha} onClick={openDiv} />
+          <label className="pl-4 pr-3">I am not a Robot</label>
+        </div>
+
+        <div className={"flex flex-col " + (isChecked ? "hidden" : "block")}>
+          <p
+            className=" mt-2 w-[5rem] captcha-text bg-white font-bold text-lg sm:text-xl"
+            onPaste={(e) => {
+              e.preventDefault();
+              return false;
+            }}
+            onCopy={(e) => {
+              e.preventDefault();
+              return false;
+            }}
+          >
+            {captchaText}
+          </p>
+          <input
+            className="rounded-xl pl-2 py-2 w-[20rem] mt-2"
+            type="text"
+            value={userInput}
+            onChange={inputChange}
+          />
+          <button
+            className="submit-button text-center px-[5px] py-[10px] mt-4 w-[30%] sm:mx-96 lg:mx-72"
+            type="submit"
+            onClick={checkCaptcha}
+          >
+            submit
+          </button>
+        </div>
         <button
-          className="px-[15px] py-[20px] lg:py-[26px] text-center continue-button "
-          onClick={handleCreateNewAccount}
+          className={
+            "px-[15px] py-[20px] lg:py-[26px] text-center continue-button " +
+            (!differentPassword && !apiMessage.length
+              ? " lg:mt-[60px] mt-[20px] "
+              : "")
+          }
+          onClick={(e) => {
+            if (isChecked) {
+              handleCreateNewAccount(e);
+            }
+          }}
         >
           CONTINUE
         </button>
