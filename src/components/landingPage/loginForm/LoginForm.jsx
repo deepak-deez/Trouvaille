@@ -93,7 +93,6 @@ const LoginForm = () => {
     console.log("User details : ", FrontendUserData);
     if (success) {
       handleRemember(FrontendUserData);
-      dispatch(resetState({ success: false }));
       navigate("/searchResult");
     }
     // else if(FrontendUserData?.success === false){

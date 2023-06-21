@@ -8,6 +8,7 @@ const getAllApiData = async (
 ) => {
   const userBookingApi = `${process.env.REACT_APP_API_HOST}user-booking/${userId}/${bookingId}`;
   const getAllTripPackagesData = await axios.get(userBookingApi);
+  console.log(getAllTripPackagesData);
   setSuccess(getAllTripPackagesData.data.success);
   setUserBookingDetails(getAllTripPackagesData.data.data);
 };

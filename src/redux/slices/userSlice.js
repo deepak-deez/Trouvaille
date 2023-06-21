@@ -1,8 +1,4 @@
-import {
-  createAsyncThunk,
-  createSlice,
-  isRejectedWithValue,
-} from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const API = process.env.REACT_APP_API_HOST;
@@ -53,8 +49,11 @@ const userSlice = createSlice({
     resetState: (state, action) => {
       state.success = action.payload.success;
     },
-    updateUserDetails: (state, action) => {
-      state.FrontendUserData = action.payload.FrontendUserData;
+    updateUserDetails: (state) => {
+      state.FrontendUserData = null;
+      state.success = false;
+      state.loading = false;
+      state.error = null;
     },
   },
 

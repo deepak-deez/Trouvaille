@@ -2,6 +2,7 @@ import React from "react";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { updateUserDetails } from "../../redux/slices/userSlice";
 
 const SignOut = () => {
   const navigate = useNavigate();
@@ -9,6 +10,7 @@ const SignOut = () => {
   function handleSignout() {
     Cookies.remove("TOKEN");
     localStorage.removeItem("FrontendUserData");
+    dispatch(updateUserDetails());
     navigate("/");
   }
   return (
