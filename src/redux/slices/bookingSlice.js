@@ -18,7 +18,7 @@ export const createBooking = createAsyncThunk(
   async (bookedData, { rejectWithValue }, thunkAPI) => {
     try {
       const result = await axios.post(`${API}trip-booking`, bookedData);
-      if (result) return result.data;
+      if (result) return result;
     } catch (err) {
       return rejectWithValue(err.response.data.message);
     }
@@ -27,12 +27,10 @@ export const createBooking = createAsyncThunk(
 
 export const getAllUserBooking = createAsyncThunk(
   `${nameSpace}/getAllUserBooking`,
-  async (bookedData, { rejectWithValue }, thunkAPI) => {
+  async (userId, { rejectWithValue }, thunkAPI) => {
     try {
-      const result = await axios.get(
-        `${API}user-all-booking/${bookedData.userId}`
-      );
-      if (result) return result.data;
+      const result = await axios.get(`${API}user-all-booking/${userId}`);
+      if (result) return result;
     } catch (err) {
       return rejectWithValue(err.response.data.message);
     }

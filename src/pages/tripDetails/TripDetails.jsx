@@ -48,16 +48,19 @@ export default function TripDetails(props) {
   useEffect(() => {
     if (tripPackageData) {
       setTripDetails(tripPackageData);
-      setFeaturesData();
     }
   }, [tripPackageData]);
+
+  useEffect(() => {
+    setFeaturesData();
+  }, [tripDetails]);
 
   const tripImage = tripDetails && tripDetails[0]?.image;
   const email = FrontendUserData?.data?.userDetails?.email;
   const phNumber = FrontendUserData?.data?.userDetails?.phone;
   const name = FrontendUserData?.data?.userDetails?.name;
   const backgroundImg = { backgroundImage: `url(${tripImage})` };
-  console.log(tripPackageData);
+  console.log(tripPackageData, "tripPackageData");
   const navigate = useNavigate();
   useEffect(() => {
     if (!FrontendUserData) navigate("/");
@@ -89,7 +92,8 @@ export default function TripDetails(props) {
   const discountedPrice = tripDetails && tripDetails[0]?.discountedPrice;
   const locationName = tripDetails && tripDetails[0]?.title;
   const explorePlaces = tripDetails && tripDetails[0]?.placeNumber;
-  console.log(ammenitiesData);
+  console.log(occasions, "occasions");
+  console.log();
 
   const bookingFormData = {
     email,
@@ -164,15 +168,16 @@ export default function TripDetails(props) {
           <div className="mt-[5rem]">
             <h2 className="mb-[3rem]">Occassions Related</h2>
             <div className="flex flex-wrap justify-center lg:justify-start gap-10 xl:gap-[4rem] occassions-cards">
-              {occasions?.map((data, index) => {
-                return (
-                  <Ocassions
-                    image={data?.icon}
-                    type={data?.title}
-                    key={index}
-                  />
-                );
-              })}
+              {occasions &&
+                occasions?.map((data, index) => {
+                  return (
+                    <Ocassions
+                      image={data?.icon}
+                      type={data?.title}
+                      key={index}
+                    />
+                  );
+                })}
             </div>
           </div>
           <div className="mt-[5rem]">
@@ -203,7 +208,7 @@ export default function TripDetails(props) {
           </div>
           <div className="mt-20 lg:mt-[9rem] ammenities-container">
             <h2 className="font-[400] mt-20 lg:mt-40 mb-[3.5rem]">
-              Ammenities (<span>{ammenitiesData?.length}</span>)
+              Ammenities (<span>{amenities?.length}</span>)
             </h2>
             <div className="flex flex-wrap 2xl:justify-start gap-10  justify-center lg:justify-start ammenities-container">
               {amenities?.map((data, index) => {

@@ -1,15 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
 import swal from "sweetalert2";
 import "./style.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PassengerDetails from "../passengerDetails/PassengerDetails";
 import arrow from "../../../assets/images/bookingForm/loginForm/arrow.svg";
 import Success from "../successBox/SuccessBox";
 import axios from "axios";
+import {
+  createBooking,
+  resetBooking,
+} from "../../../redux/slices/bookingSlice";
 
 const Details = (props) => {
   const address = useRef();
   const userName = useRef();
+  const dispatch = useDispatch();
+
+  const { bookingData } = useSelector((state) => state.booking);
   const otherPassengerDetails = [];
   const bookingFormDetails = {
     tripId: props.bookingFormData.currentTripId.id,
@@ -55,23 +62,39 @@ const Details = (props) => {
     bookingFormDetails["otherPassenger"] = otherPassengerDetails;
     bookingFormDetails["address"] = address.current.value;
     bookingFormDetails["name"] = userName.current.value;
-
-    try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_HOST}trip-booking`,
-        bookingFormDetails
-      );
-      setsucessModal(!sucessModal);
-    } catch (err) {
+    if (userName.current.value && address.current.value) {
+      dispatch(createBooking(bookingFormDetails));
+    } else {
       swal.fire({
         icon: "error",
         title: "Oops...",
-        text: err.message,
+        text: "message",
         timer: "2500",
         buttons: true,
       });
     }
+    // try {
+    //   const response = await axios.post(
+    //     `${process.env.REACT_APP_API_HOST}trip-booking`,
+    //     bookingFormDetails
+    //   );
+    //   setsucessModal(!sucessModal);
+    // } catch (err) {
+    //   swal.fire({
+    //     icon: "error",
+    //     title: "Oops...",
+    //     text: err.message,
+    //     timer: "2500",
+    //     buttons: true,
+    //   });
+    // }
   };
+  useEffect(() => {
+    if (bookingData) {
+      setsucessModal(!sucessModal);
+      dispatch(resetBooking());
+    }
+  }, bookingData);
 
   const { FrontendUserData } = useSelector((state) => state.user);
 
@@ -108,7 +131,7 @@ const Details = (props) => {
     setPassengerCountArray(passengerHeadCount);
     passengerCount = props.bookingFormData.guestsSelected;
   }
-  console.log("Booking form details : ",bookingFormDetails);
+  console.log("Booking form details : ", bookingFormDetails);
 
   return (
     <>
@@ -137,6 +160,13 @@ const Details = (props) => {
             defaultValue={bookingFormDetails.email}
             disabled={true}
           />
+          <input
+            className=" input-fields text-[20px] w-[100%] lg:px-[39px] lg:py-[32px] px-[15px] py-[20px]  "
+            type="text"
+            placeholder="Address"
+            ref={address}
+          />
+
           <div className="flex input-fields items-center justify-between  lg:px-[39px] px-[15px] ">
             <input
               className=" w-[100%] lg:py-[32px] py-[20px] bg-transparent text-[20px] other-passenger"
@@ -176,13 +206,6 @@ const Details = (props) => {
                 );
               })
             : ""}
-
-          <input
-            className=" input-fields text-[20px] w-[100%] lg:px-[39px] lg:py-[32px] px-[15px] py-[20px]  "
-            type="text"
-            placeholder="Address"
-            ref={address}
-          />
 
           <ul className="list-disc flex flex-col gap-5">
             {bookingNotes?.map((data, index) => {

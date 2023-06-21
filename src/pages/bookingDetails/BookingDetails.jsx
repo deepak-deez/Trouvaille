@@ -2,8 +2,6 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getUserBookingById } from "../../redux/slices/bookingSlice";
-
-import getAllApiData from "./logic";
 import "./style.scss";
 import PassengerDetails from "../../components/bookignDetails/passengerDetails/PassengerDetails";
 import { useDispatch, useSelector } from "react-redux";

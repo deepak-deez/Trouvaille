@@ -6,10 +6,9 @@ import sortIcon from "../../../assets/images/searchResult/tripCategory/sort-icon
 import filterIcon from "../../../assets/images/searchResult/tripCategory/filter-icon.svg";
 import TripCard from "../tripCard/TripCard";
 import FilterCategories from "../filterCategories/FilterCategories";
-import { getFilteredData, sortData } from "./logic";
+import { sortData } from "./logic";
 import "rc-slider/assets/index.css";
 import defaultCategoryImg from "../../../assets/images/searchResult/tripCategory/hills-icon.svg";
-import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -33,7 +32,6 @@ export default function TripCategory({
   const [showFilter, setShowFilter] = useState(false);
   const [closingAnimation, setClosingAnimation] = useState(false);
   const [closingAnimationSort, setClosingAnimationSort] = useState(false);
-
   const [showMore, setShowMore] = useState(true);
   const [sortClicked, setSortClicked] = useState(false);
   const [categoryFilter, setCategoryFilter] = useState([]);
@@ -96,6 +94,7 @@ export default function TripCategory({
 
   useEffect(() => {
     if (filterFeatureData) {
+      console.log(filterFeatureData, "filterFeatureData");
       setAllPackagesData(filterFeatureData.data);
     }
   }, [filterFeatureData]);
@@ -108,10 +107,18 @@ export default function TripCategory({
 
   useEffect(() => {
     if (tripPackageData) {
-      setAllPackagesData(tripPackageData?.data);
+      console.log(
+        tripPackageData?.data.filter((item) => item.status !== "In-Active"),
+        "hii"
+      );
+      tripPackageData &&
+        tripPackageData?.data &&
+        setAllPackagesData(
+          tripPackageData?.data.filter((item) => item.status !== "In-Active")
+        );
     }
   }, [tripPackageData]);
-
+  console.log(allPackagesData, "allPackagesData");
   const hideOnClickOutside = (e) => {
     if (refOne.current && !refOne.current.contains(e.target)) {
       setSortClicked(false);
@@ -121,7 +128,6 @@ export default function TripCategory({
   const handleFilterStateChange = () => {
     if (showFilter) {
       setClosingAnimation(true);
-
       setTimeout(() => {
         setShowFilter(false);
         setClosingAnimation(false);
@@ -187,7 +193,6 @@ export default function TripCategory({
 
     handleFilterRequirements();
   };
-  console.log(allPackagesData, "allPackagesData");
   return (
     <section className="trip-category">
       <div className="flex justify-center 2xl:justify-between flex-wrap gap-0 lg:gap-12 trip-category-icons ">
