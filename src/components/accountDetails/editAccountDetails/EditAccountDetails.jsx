@@ -99,10 +99,8 @@ export default function EditAccountDetails({ setActive }) {
     try {
       if (strongRegexPassword.test(newPassRef.current.value)) {
         setPwdError(false);
-        console.log(pwdError);
         document.getElementById("validPassword").textContent =
           "Password Strength : Strong!";
-        // throw new Error("Password Strength : Strong!");
       } else {
         if (mediumRegexPassword.test(newPassRef.current.value)) {
           setPwdError(true);

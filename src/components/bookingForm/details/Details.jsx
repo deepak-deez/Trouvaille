@@ -6,6 +6,7 @@ import PassengerDetails from "../passengerDetails/PassengerDetails";
 import arrow from "../../../assets/images/bookingForm/loginForm/arrow.svg";
 import Success from "../successBox/SuccessBox";
 import axios from "axios";
+import { validName } from "../../../constants/regex";
 import {
   createBooking,
   resetBooking,
@@ -17,6 +18,7 @@ const Details = (props) => {
   const dispatch = useDispatch();
 
   const { bookingData } = useSelector((state) => state.booking);
+  const phoneNumberRef = useRef();
   const otherPassengerDetails = [];
   const bookingFormDetails = {
     tripId: props.bookingFormData.currentTripId.id,
@@ -24,7 +26,7 @@ const Details = (props) => {
     title: props.bookingFormData.locationName,
     phone: props.bookingFormData.phNumber,
     email: props.bookingFormData.email,
-    bookingStatus: "pending",
+    bookingStatus: "Pending",
     deleteReason: "",
     deleteStatus: false,
     cancellationStatus: false,
@@ -104,6 +106,7 @@ const Details = (props) => {
   let passengerHeadCount = [];
   const [passengerCountArray, setPassengerCountArray] = useState([]);
   const [bookingNotes, setBookingNotes] = useState();
+  const [errorField, setErrorField] = useState(false);
 
   const fetchBookingNotes = async () => {
     try {
@@ -133,6 +136,38 @@ const Details = (props) => {
   }
   console.log("Booking form details : ", bookingFormDetails);
 
+  const checkValidUserName = () => {
+    try {
+      console.log(userName.current.value);
+      if (validName.test(userName.current.value)) {
+        setErrorField(false);
+        document.getElementById("validUserName").textContent = "";
+      } else {
+        if (userName.current.value) {
+          setErrorField(true);
+          throw new Error("Enter a valid Name");
+        }
+      }
+    } catch (err) {
+      document.getElementById("validUserName").textContent = err.message;
+    }
+  };
+
+  const checkValidPhoneNumber = () => {
+    try {
+      console.log(phoneNumberRef.current.value);
+      if (validName.test(phoneNumberRef.current.value)) {
+        setErrorField(false);
+        document.getElementById("validPhone").textContent = "Great!";
+      } else {
+        setErrorField(true);
+        throw new Error("Not a valid Phone Number");
+      }
+    } catch (err) {
+      document.getElementById("validPhone").textContent = err.message;
+    }
+  };
+
   return (
     <>
       <section className="flex flex-col details-form justify-center items-center pb-[20rem]">
@@ -140,19 +175,42 @@ const Details = (props) => {
           Details about you
         </h2>
         <div className="flex flex-col lg:w-[975px] w-[90%] md:px-[30px] md:py-[30px] mt-[15px] details-container px-[25px] py-[15px] lg:py-[67px] lg:px-[97px] gap-[2rem] md:gap-[3rem] justify-center">
-          <input
-            className="input-fields lg:px-[39px] px-[15px] py-[20px] text-[20px] lg:py-[32px] mt-[9px]"
-            type="text"
-            placeholder="Full Name"
-            ref={userName}
-          />
-          <input
-            className=" input-fields lg:px-[39px] lg:py-[32px] text-[20px] px-[15px] py-[20px]  w-[100%]"
-            type="text"
-            placeholder="Phone Number"
-            defaultValue={bookingFormDetails.phone}
-            disabled={true}
-          />
+          <div className="relative">
+            <input
+              className="input-fields w-full lg:px-[39px] px-[15px] py-[20px] text-[20px] lg:py-[32px] mt-[9px]"
+              type="text"
+              placeholder="Full Name"
+              ref={userName}
+              onChange={checkValidUserName}
+            />
+            <h4
+              id="validUserName"
+              className={
+                "font-bold bg-transparent text-xl absolute top-28 " +
+                (errorField ? "text-red-700" : "text-green-700")
+              }
+            ></h4>
+          </div>
+
+          <div>
+            <input
+              className="input-fields lg:px-[39px] lg:py-[32px] text-[20px] px-[15px] py-[20px]  w-[100%]"
+              type="text"
+              placeholder="Phone Number"
+              defaultValue={bookingFormDetails.phone}
+              ref={phoneNumberRef}
+              disabled={true}
+              onChange={checkValidPhoneNumber}
+            />
+            <h4
+              id="validPhone"
+              className={
+                "font-bold bg-transparent text-xl absolute top-28 " +
+                (errorField ? "text-red-700" : "text-green-700")
+              }
+            ></h4>
+          </div>
+
           <input
             className=" input-fields lg:px-[39px] lg:py-[32px] text-[20px] px-[15px] py-[20px]  w-[100%]"
             type="text"

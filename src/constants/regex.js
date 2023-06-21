@@ -8,3 +8,5 @@ export const strongRegexPassword = new RegExp(
 export const mediumRegexPassword = new RegExp(
   "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})"
 );
+
+export const validName = /^[a-zA-Z\-]+$/;
