@@ -13,6 +13,10 @@ import SignOut from "../../SignOut/SignOut";
 import CountrySelector from "./CountrySelector";
 
 export default function EditProfile({ setActive }) {
+  const options = {
+    genders: ["Male", "Female", "Others"],
+    maritalStatus: ["Single", "Married", "Divorced", "In a Relationship"],
+  };
   const [responseData, setResponseData] = useState();
   const [userFetchedData, setUserFetchedData] = useState();
   const [uploadImgBtnDisplay, setUploadImgBtnDisplay] = useState(false);
@@ -33,12 +37,12 @@ export default function EditProfile({ setActive }) {
   const userName = responseData?.data?.data?.userDetails?.name;
   const userDOB = responseData?.data?.data?.userDetails?.DOB;
   const userJoiningYear = responseData?.data?.data?.joiningYear;
-
+  const userGender = responseData?.data?.data?.userDetails?.gender;
+  const userMarried = responseData?.data?.data?.userDetails?.maritalStatus;
   const updateDataHandler = async () => {
     try {
-      console.log("Database URL : ", dataBaseUrl);
       const getUpdatedData = await axios.get(dataBaseUrl);
-      console.log(getUpdatedData);
+
       setResponseData(getUpdatedData);
       setProfileImg(getUpdatedData?.data?.data?.userDetails?.image);
       setImageUrlState(getUpdatedData?.data?.data?.userDetails?.image);
@@ -72,14 +76,27 @@ export default function EditProfile({ setActive }) {
 
   const updateDetailsHandler = async () => {
     const imgUrl = imageUrlState;
+    console.log(nameRef.current.value);
+
     const formData = new FormData();
+
     formData.append("image", imgUrl);
     formData.append("name", nameRef.current.value);
     formData.append("place", placeRef.current.value);
     formData.append("DOB", DOBRef.current.value);
     formData.append("gender", genderRef.current.value);
     formData.append("maritalStatus", maritalStatusRef.current.value);
-    console.log(formData);
+    let arr = [];
+    console.log(
+      "formData",
+      formData.forEach((value, key) => {
+        arr.push(value);
+        console.log(key, " : ", value);
+      })
+    );
+
+    console.log(arr);
+    console.log("heyData", formData);
 
     // const userData = {
     //   image: imgUrl ? imgUrl : responseData?.data.data[0].userDetails.image.url,
@@ -89,15 +106,23 @@ export default function EditProfile({ setActive }) {
     //   gender: genderRef.current.value,
     //   maritalStatus: maritalStatusRef.current.value,
     // };
+
+    // console.log(userData);
     console.log(FrontendUserData.data.userDetails._id);
 
     const updateUrl = `${process.env.REACT_APP_API_HOST}update/Frontend-user/${FrontendUserData.data.userDetails._id}`;
-    console.log(updateUrl);
+
     console.log(placeRef);
     try {
       if (nameRef.current.value.length) {
         document.getElementById("nameField").textContent = "";
-        const response = await axios.post(updateUrl, formData);
+        console.log(updateUrl, formData);
+
+        const response = await axios.post(updateUrl, formData, {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        });
         if (response.data.success) {
           // updateDataHandler({ userDetails: response.data });
           setActive("profile");
@@ -109,14 +134,21 @@ export default function EditProfile({ setActive }) {
       document.getElementById("nameField").textContent = error.message;
     }
   };
-  console.log(FrontendUserData);
   if (FrontendUserData.success) {
     return (
       <header className="sm:mx-20 2xl:mx-[18.75rem]">
         <div className="flex justify-between px-10 xl:px-0 lg:text-[22px]">
-          <h2 className="font-[600]">
-            Settings/<span className="font-[400] grey-text"> My profile</span>
-          </h2>
+          <div className="flex">
+            <h2
+              className="font-[600]"
+              onClick={() => {
+                setActive("view-account");
+              }}
+            >
+              Settings/
+            </h2>
+            <span className="font-[400] grey-text"> My profile</span>
+          </div>
           <SignOut />
         </div>
         <div className="flex flex-col sm:flex-row gap-[2rem] mt-[1.5rem] sm:mt-[2rem] profile-section">
@@ -214,7 +246,7 @@ export default function EditProfile({ setActive }) {
             </div>
             <h4 className="mb-[1.5rem] grey-text">DOB</h4>
             <input
-              className="mb-[3.1rem] grey-text py-[1rem] px-[1.2rem] rounded-2xl"
+              className="mb-[3.1rem] outline-none grey-text py-[1rem] px-[1.2rem] rounded-2xl"
               type="date"
               placeholder="D O B"
               defaultValue={userDOB ? userDOB : ""}
@@ -223,33 +255,50 @@ export default function EditProfile({ setActive }) {
             <h4 className="mb-[1.5rem] grey-text">Gender</h4>
             <div className="bg-white mb-[3.1rem] px-[1.2rem] rounded-2xl">
               <select
-                className="bg-transparent w-[100%] py-[1rem] outline-none"
+                className="bg-transparent grey-text w-[100%] py-[1rem] outline-none"
                 name="gender"
                 id="gender"
                 ref={genderRef}
-                // defaultValue={userGender ? userGender : ""}
               >
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Others">Others</option>
+                {options.genders.map((data, index) => {
+                  return (
+                    <option
+                      key={index}
+                      selected={userGender === data ? "selected" : ""}
+                    >
+                      {data}
+                    </option>
+                  );
+                })}
               </select>
             </div>
             <h4 className="mb-[1.5rem] grey-text">Marital Status</h4>
             <div className="bg-white mb-[3.1rem] px-[1.2rem] rounded-2xl">
               <select
-                className="bg-transparent w-[100%] py-[1rem] outline-none"
+                className="bg-transparent grey-text w-[100%] py-[1rem] outline-none"
                 name="Marital Status"
                 id="maritalStatus"
                 ref={maritalStatusRef}
               >
-                <option value="Single">Single</option>
-                <option value="Married">Married</option>
-                <option value="Divorced">Divorced</option>
-                <option value="Relationship">In a Relationship</option>
+                {options.maritalStatus.map((data, index) => {
+                  return (
+                    <option
+                      key={index}
+                      selected={userMarried === data ? "selected" : ""}
+                    >
+                      {data}
+                    </option>
+                  );
+                })}
               </select>
             </div>
             <div className="flex gap-[1.2rem]">
-              <button className="mt-[2rem] rounded-2xl text-white bg-[#555B58] w-[100%] text-center py-4 xl:py-[1.5rem] ">
+              <button
+                className="mt-[2rem] rounded-2xl text-white bg-[#555B58] w-[100%] text-center py-4 xl:py-[1.5rem] "
+                onClick={() => {
+                  setActive("profile");
+                }}
+              >
                 CANCEL
               </button>
               <button

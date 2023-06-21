@@ -14,20 +14,16 @@
     }
     position: relative;
 
-    .share-icon {
-      position: absolute;
-      right: 23px;
-      top: 23px;
-    }
     .show-detail-text {
+      padding: 0 1rem;
       position: absolute;
       top: 15rem;
-      left: -1rem;
-    }
-    .review-stars {
-      position: absolute;
-      top: 19rem;
-      left: 1rem;
+      background-color: rgba(0, 0, 0, 0.701);
+      backdrop-filter: blur(15px);
+      border-top-right-radius: 1rem;
+      border-bottom-right-radius: 1rem;
+      font-weight: 600;
+      color: white;
     }
     .result-card-details {
       font-weight: 600;

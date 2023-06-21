@@ -22,8 +22,8 @@ export default function EditAccountDetails({ setActive }) {
   const oldPassRef = useRef();
   const newPassRef = useRef();
   const confirmNewPassRef = useRef();
+  const phoneRef = useRef();
   const emailId = FrontendUserData?.data?.userDetails?.email;
-  // console.log(localStorage.getItem());
 
   const updateDetailsHandler = async () => {
     try {
@@ -133,10 +133,17 @@ export default function EditAccountDetails({ setActive }) {
     return (
       <header className="sm:mx-20 2xl:mx-[18.75rem]">
         <div className=" flex justify-between px-10 xl:px-0 lg:text-[22px]">
-          <h2 className="font-[600]">
-            Settings/
+          <div className="flex">
+            <h2
+              className="font-[600]"
+              onClick={() => {
+                setActive("view-account");
+              }}
+            >
+              Settings/
+            </h2>
             <span className="font-[400] grey-text"> Accounts Page</span>
-          </h2>
+          </div>
           <SignOut />
         </div>
         <div className="mt-[3rem] xl:mt-[5rem] flex flex-col xl:flex-row xl:justify-between gap-8 xl:gap-14 lg:text-[20px] xl:flex ">

@@ -168,21 +168,18 @@ export default function TripCategory({
   //   setAllTripCategory(response.data.data);
   // };
 
-  const handleClickedCategory = (e) => {
-    const targetSelected = e.target.parentElement.getAttribute(
-      "data-category-selected"
+  const handleClickedCategory = (e, targetSelected) => {
+    const parentElement = document.querySelector(
+      `[data-category-selected="${targetSelected}"]`
     );
-
-    const parentElement = e.target.parentElement;
     const grandParentElement = parentElement.parentElement;
 
     if (categoryFilter.includes(targetSelected)) {
       const categoryIndex = categoryFilter.indexOf(targetSelected);
       categoryFilter.splice(categoryIndex, 1);
     } else {
-      categoryFilter.push(grandParentElement.lastChild.textContent);
+      categoryFilter.push(targetSelected);
     }
-
     setCategoryFilter(categoryFilter);
 
     parentElement.classList.toggle("border-amber-500");
@@ -192,16 +189,16 @@ export default function TripCategory({
   };
   return (
     <section className="trip-category">
-      <div className="flex justify-center 2xl:justify-between flex-wrap gap-0 lg:gap-12 trip-category-icons ">
+      <div className="flex justify-center 2xl:justify-between flex-wrap gap-7 lg:gap-12 trip-category-icons ">
         {allTripCategory?.map((response, index) => {
           return (
             <div
-              onClick={handleClickedCategory}
-              className=" p-1 lg:p-3 flex flex-col justify-end  "
+              onClick={(e) => handleClickedCategory(e, response.title)}
+              className=" p-1 category-section lg:p-3 flex flex-col justify-end  "
               key={index}
             >
               <div
-                className="category border-[5px] rounded-[2.5rem] cursor-pointer transition-all duration-500 w-40 h-40 flex justify-center"
+                className="category border-[5px] rounded-[2.5rem] cursor-pointer transition-all duration-200 w-40 h-40 flex justify-center"
                 data-category-selected={response.title}
               >
                 <img

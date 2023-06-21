@@ -36,7 +36,8 @@ export default function ProfileSettings({ setActive }) {
     console.log("Empty");
     updateDataHandler();
   }, []);
-  console.log(responseData);
+  console.log("response", responseData);
+
   const profileImage = responseData?.data?.data?.userDetails?.image;
   const userLcoation = responseData?.data?.data?.userDetails?.place;
   const userName = responseData?.data?.data?.userDetails?.name;
@@ -50,9 +51,17 @@ export default function ProfileSettings({ setActive }) {
     return (
       <header className=" sm:mx-20 2xl:mx-[18.75rem]">
         <div className="flex justify-between px-10 xl:px-0 lg:text-[22px]">
-          <h2 className="font-[600]">
-            Settings/<span className="font-[400] grey-text"> My profile</span>
-          </h2>
+          <div className="flex">
+            <h2
+              className="font-[600]"
+              onClick={() => {
+                setActive("view-account");
+              }}
+            >
+              Settings/
+            </h2>
+            <span className="font-[400] grey-text"> My profile</span>
+          </div>
           <SignOut />
         </div>
         <div className="flex flex-col sm:flex-row gap-[2rem] items-center xl:items-start mt-[1.5rem] sm:mt-[2rem] profile-section ">
@@ -94,18 +103,18 @@ export default function ProfileSettings({ setActive }) {
                 Joined in {userJoiningYear}
               </span>
             </div>
-            <div className="flex gap-[1.3rem] items-center">
-              <img src={editIcon} alt="edit-icon" />
-              <p className="lg:text-[1.6rem] underline grey-text">
-                <button
-                  onClick={() => {
-                    setActive("edit-profile");
-                  }}
-                >
+            <button
+              onClick={() => {
+                setActive("edit-profile");
+              }}
+            >
+              <div className="flex gap-[1.3rem] items-center">
+                <img src={editIcon} alt="edit-icon" />
+                <p className="lg:text-[1.6rem] edit-profile-link underline grey-text">
                   Edit Profile
-                </button>
-              </p>
-            </div>
+                </p>
+              </div>
+            </button>
           </div>
         </div>
         <div className="xl:mt-[5rem] mt-[2rem] flex flex-col xl:flex-row xl:justify-between gap-8 xl:gap-14 lg:text-[20px]">
