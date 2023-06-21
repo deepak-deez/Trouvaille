@@ -174,11 +174,11 @@ export default function TripCategory({
           return (
             <div
               onClick={handleClickedCategory}
-              className=" p-1 lg:p-3 flex flex-col justify-end  "
+              className=" p-1 category-section lg:p-3 flex flex-col justify-end  "
               key={index}
             >
               <div
-                className="category border-[5px] rounded-[2.5rem] cursor-pointer transition-all duration-500 w-40 h-40 flex justify-center"
+                className="category border-[5px] rounded-[2.5rem] cursor-pointer transition-all duration-200 w-40 h-40 flex justify-center"
                 data-category-selected={response.title}
               >
                 <img

@@ -24,7 +24,6 @@ export default function EditAccountDetails({ setActive }) {
   const confirmNewPassRef = useRef();
   const phoneRef = useRef();
   const emailId = FrontendUserData?.data?.userDetails?.email;
-  // console.log(localStorage.getItem());
 
   const updateDetailsHandler = async () => {
     try {
