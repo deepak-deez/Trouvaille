@@ -45,6 +45,8 @@ export default function Header({
               setTripFilterClicked(tripFilterClicked + 1);
               if (destination.current.value) {
                 setFilterDestination([destination.current.value]);
+              } else {
+                setFilterDestination("");
               }
 
               setFilterPerson(noOfPersons.current.value);
@@ -61,6 +63,8 @@ export default function Header({
               setTripFilterClicked(tripFilterClicked + 1);
               if (destination.current.value) {
                 setFilterDestination([destination.current.value]);
+              } else {
+                setFilterDestination("");
               }
               setFilterPerson(noOfPersons.current.value);
             }}
