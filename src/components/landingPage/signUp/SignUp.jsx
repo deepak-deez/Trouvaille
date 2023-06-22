@@ -65,11 +65,11 @@ const SignUp = () => {
   const handlePasswordCheck = () => {
     try {
       if (passowrdRef.current.value === confirmPasswordRef.current.value) {
-        setDifferentPassword(true);
+        setDifferentPassword(false);
         document.getElementById("confirmPassword").textContent = "";
       } else {
-        setDifferentPassword(false);
-        throw new Error("Passwords doesn't match!");
+        setDifferentPassword(true);
+        throw new Error("Passwords don't match!");
       }
     } catch (err) {
       document.getElementById("confirmPassword").textContent = err.message;
@@ -84,6 +84,7 @@ const SignUp = () => {
   // }, [userDetails, dispatch]);
 
   const handleCreateNewAccount = async () => {
+    console.log("gii");
     if (
       !emailRef.current.value.length ||
       !phoneNoRef.current.value.length ||
@@ -100,8 +101,7 @@ const SignUp = () => {
         timerProgressBar: true,
       });
     } else if (!differentPassword && !pwdError) {
-      setDifferentPassword(false);
-
+      console.log("asddsadsaii");
       newUserDetails["email"] = emailRef.current.value;
       newUserDetails["phone"] = phoneNoRef.current.value;
       newUserDetails["password"] = passowrdRef.current.value;
@@ -119,7 +119,8 @@ const SignUp = () => {
       //   navigate("/");
       // }
     } else {
-      setDifferentPassword(true);
+      console.log(differentPassword, pwdError);
+      console.log("else");
     }
   };
 
