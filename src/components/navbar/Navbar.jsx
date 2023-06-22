@@ -27,18 +27,33 @@ export default function Navbar({ setActive }) {
   const [statusNotis, setStatusNotis] = useState("");
   const socket = socketIOClient(ENDPOINT);
   const userId = localStorage.getItem("id");
+  const refNoti = useRef(null);
+  const [notisUnread, setNotisUnread] = useState();
 
   useEffect(() => {
     if (!statusNotis) {
       getAllNotifications();
     }
-    socket.on(localStorage.getItem("id"), (data) => {
-      console.log("Recieved By Only Me : ", data);
-      setStatusNotis(data);
+    socket.on(localStorage.getItem("id"), (res) => {
+      console.log("Recieved By Only Me : ", res);
+      setStatusNotis(res);
+      const unread = res?.data?.find(({ readStatus }) => {
+        console.log("Data : ", readStatus);
+        return readStatus === false;
+      });
+      setNotisUnread(unread);
     });
 
     console.log("Status : ", statusNotis);
+    console.log("Unread : ", notisUnread);
   }, [socket]);
+
+  useEffect(() => {
+    console.log(
+      notisUnread,
+      " : Hey asdkjaduasjkdgwfashduasudqgwowidhjasoudguasgdashdnails"
+    );
+  }, [notisUnread]);
 
   const getAllNotifications = async () => {
     const allNotisApi =
@@ -47,7 +62,18 @@ export default function Navbar({ setActive }) {
       localStorage.getItem("id");
 
     const response = await axios.get(allNotisApi);
-    setStatusNotis(response?.data);
+
+    setStatusNotis(response?.data, ": Status Notis");
+
+    const unread = response?.data?.find(({ readStatus }) => {
+      console.log(
+        readStatus,
+        " : data hdasjbdaskjdhbaskdhqwldhnlqjdnakjbdkasbdhudklasndhlasihdnlai"
+      );
+      return readStatus === false;
+    });
+
+    setNotisUnread(unread);
 
     console.log("Response : ", response.data);
   };
@@ -58,11 +84,19 @@ export default function Navbar({ setActive }) {
       const isTop = scrollTop < 20;
       setIsScrolled(!isTop);
     }
+    document.addEventListener("click", handleOutsideClickNotification, true);
+
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const handleOutsideClickNotification = (e) => {
+    if (refNoti.current && !refNoti.current.contains(e.target)) {
+      setShowNotis(false);
+    }
+  };
 
   const handleNotificationPopUp = () => {
     setShowNotis(!showNotis);
@@ -140,9 +174,9 @@ export default function Navbar({ setActive }) {
         <div className="flex gap-10 2xl:gap-[4.1rem] items-center">
           <SearchBar />
 
-          <div className="my-auto relative hidden xl:block">
+          <div ref={refNoti} className="my-auto relative hidden xl:block">
             <p className="absolute text-center pt-1 h-8 w-8 bg-green-600 rounded-full left-[-1rem] text-white font-bold">
-              {statusNotis?.data?.length}
+              {notisUnread ? notisUnread.length : "0"}
             </p>
             <button onClick={handleNotificationPopUp} className="my-auto">
               <img
@@ -151,11 +185,12 @@ export default function Navbar({ setActive }) {
                 alt="notification-icon"
               />
             </button>
-            {showNotis ? (
-              <NotificationPopUp statusNotis={statusNotis.data} />
-            ) : (
-              ""
-            )}
+            <div className={showNotis ? " block " : " hidden "}>
+              <NotificationPopUp
+                setShowNotis={setShowNotis}
+                statusNotis={statusNotis?.data}
+              />
+            </div>
           </div>
 
           <Link to={"/booking"}>

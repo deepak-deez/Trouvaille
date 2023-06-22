@@ -11,8 +11,10 @@ import {
   createBooking,
   resetBooking,
 } from "../../../redux/slices/bookingSlice";
+import socketIOClient from "socket.io-client";
 
 const Details = (props) => {
+  const socket = socketIOClient(process.env.REACT_APP_API_HOST);
   const address = useRef();
   const userName = useRef();
   const dispatch = useDispatch();
@@ -31,7 +33,7 @@ const Details = (props) => {
     deleteStatus: false,
     cancellationStatus: false,
   };
-  console.log(props);
+
   const submitBtnHandler = async () => {
     const otherPassengerSelector = document.querySelectorAll(
       ".other-passenger-details"
@@ -66,6 +68,10 @@ const Details = (props) => {
     bookingFormDetails["name"] = userName.current.value;
     if (userName.current.value && address.current.value) {
       dispatch(createBooking(bookingFormDetails));
+
+      // socket.on("connect", () => {
+      //   console.log(socket.id);
+      // });
     } else {
       swal.fire({
         icon: "error",
@@ -95,10 +101,25 @@ const Details = (props) => {
     if (bookingData) {
       setsucessModal(!sucessModal);
       dispatch(resetBooking());
+      console.log(bookingData.data._id, " : id");
+
+      const notificationObj = {
+        userType: "Frontend-user",
+        title: "Trip Update",
+        description: bookingFormDetails.title,
+        refId: bookingData.data._id,
+        userId: bookingFormDetails.userId,
+        createdAt: new Date(),
+        readStatus: false,
+        userName: userName.current.value,
+        userEmail: bookingFormDetails.email,
+      };
+
+      socket.emit("sendCurrentBooking", notificationObj);
+
+      console.log("Emitted : ", notificationObj);
     }
   }, bookingData);
-
-  const { FrontendUserData } = useSelector((state) => state.user);
 
   const [sucessModal, setsucessModal] = useState(false);
   const [passenger, setpassenger] = useState(false);

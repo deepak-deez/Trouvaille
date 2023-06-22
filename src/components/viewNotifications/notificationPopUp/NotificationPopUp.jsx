@@ -3,58 +3,55 @@ import { notifications } from "../data";
 import { Link } from "react-router-dom";
 import "./style.scss";
 import { format, compareDesc } from "date-fns";
+import { useNavigate } from "react-router-dom/dist/umd/react-router-dom.development";
+import axios from "axios";
 
-export default function NotificationPopUp({ statusNotis }) {
-  console.log(statusNotis);
+export default function NotificationPopUp({ statusNotis, setShowNotis }) {
+  const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   socket.on("getNotis", (data) => {
-  //     console.log("You have a new Notification : ", data);
-  //   });
-  // }, [socket]);
+  const handleNavigate = async (e) => {
+    const parentElement = e.target.parentElement;
+    const notificatonId = e.target.getAttribute("data-notification-id");
+    const markasReadApi =
+      process.env.REACT_APP_API_HOST +
+      "set-notification-mark-read/" +
+      notificatonId;
 
-  // useEffect(() => {
-  //   socket.on("hello-bye", (data) => {
-  //     console.log(data);
-  //   });
-  // }, [socket]);
+    try {
+      const response = await axios.get(markasReadApi);
+      console.log(response);
+      if (response.status === 200) {
+        parentElement.classList.toggle("bg-green-100");
+      }
+    } catch (err) {
+      console.error(err);
+    }
 
-  // useEffect(() => {
-  //   socket.emit("getId", userId);
-  //   socket.on("response", (data) => {
-  //     console.log(data);
-  //   });
-  // }, []);
-
-  // console.log(format(statusNotis.createdAt.substring(0, 9)));
-
-  statusNotis = statusNotis.sort((objA, objB) => {
-    console.log("Sort ele:", objA, objB);
-    return Number(objB.createdAt) - Number(objA.createdAt);
-  });
-
-  console.log("Status Notis : ", statusNotis);
+    navigate("/booking");
+    setShowNotis(false);
+  };
 
   return (
     <div className="notification-popup absolute bottom-[-1rem] right-0 top-[110%] w-[25rem]  h-[25rem] overflow-auto bg-white p-4 rounded-3xl">
       {statusNotis?.map((data, index) => {
-        console.log(data.createdAt);
-        // console.log(format(data.createdAt.substring(0, 10), "yyyy-mm-dd"));
         return (
           <div
             key={index}
-            className="notification-popup-item p-3 border border-orange-700 my-2 rounded-3xl"
+            className={
+              "notification-popup-item p-3 border border-orange-700 my-2 rounded-3xl " +
+              (data.readStatus ? "" : " bg-green-100 ")
+            }
           >
             <h2 className="font-bold">{data.title}</h2>
             <p className="my-3">{data.description}</p>
             <p className="text-right text-xs text-gray-400">{data.createdAt}</p>
-            <Link
-              // to={"/bookingDetails/" + data.userId + "/" + data.refId}
-              to={"/booking"}
+            <button
+              data-notification-id={data._id}
+              onClick={handleNavigate}
               className=" text-center text-xs p-2 bg-orange-700 text-white rounded-3xl"
             >
               View Details
-            </Link>
+            </button>
           </div>
         );
       })}
