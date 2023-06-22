@@ -93,9 +93,6 @@ export default function TripDetails(props) {
   const locationName = tripDetails && tripDetails[0]?.title;
   const explorePlaces = tripDetails && tripDetails[0]?.placeNumber;
   const maximumGuests = tripResponseData?.maximumGuests;
-  console.log(occasions, "occasions");
-  console.log();
-  console.log(maximumGuests);
 
   const bookingFormData = {
     email,
@@ -135,7 +132,7 @@ export default function TripDetails(props) {
             <li>Available for 6 guests</li>
           </ul>
           <h4 className="mb-[2rem] text-2xl">Dates</h4>
-          <div className="flex flex-wrap gap-5 xl:justify-start  available-dates overflow-x-scroll">
+          <div className="flex flex-wrap gap-5 xl:justify-start justify-center available-dates overflow-x-scroll">
             {acitivitiesData?.map((data, index) => {
               return (
                 <Dates
@@ -154,7 +151,7 @@ export default function TripDetails(props) {
             Till now 4 suits empty for this day, hurry up!
           </p>
           <div className="trip-highlights-container my-5">
-            <h2>Highlights of the package</h2>
+            <h2 className="mb-[3rem]">Highlights of the package</h2>
             <div className="flex  flex-wrap gap-10">
               {tripHighlightsData?.map((data, index) => {
                 return (
@@ -170,13 +167,14 @@ export default function TripDetails(props) {
           </div>
           <div className="mt-[5rem]">
             <h2 className="mb-[3rem]">Occassions Related</h2>
-            <div className="flex flex-wrap justify-center lg:justify-start gap-10 xl:gap-[4rem] occassions-cards">
+            <div className="flex flex-wrap justify-start gap-10 xl:gap-[4rem] occassions-cards">
               {occasions &&
                 occasions?.map((data, index) => {
                   return (
                     <Ocassions
                       image={data?.icon}
                       type={data?.title}
+                      desc={data?.description}
                       key={index}
                     />
                   );

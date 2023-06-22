@@ -185,7 +185,7 @@ export default function EditAccountDetails({ setActive }) {
             <input
               id="newPasswordField"
               type="password"
-              className=" border-[3px]  grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl"
+              className=" border-[3px] grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl"
               onChange={checkValidPassword}
               ref={newPassRef}
             />

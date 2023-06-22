@@ -44,20 +44,20 @@ export default function ViewAccountDetails({ setActive }) {
         </div>
         <div className="mt-[3rem] xl:mt-[5rem] flex flex-col xl:flex-row xl:justify-between gap-8 xl:gap-14 lg:text-[20px]">
           <ProfileSideBar activePage={"accounts"} setActive={setActive} />
-          <div className="login-details flex flex-col lg:text-[22px]  p-5 lg:p-10 2xl:p-[2.2rem] rounded-2xl xl:w-[80%] backdrop-blur-sm">
+          <div className="login-details flex flex-col lg:text-[22px] gap-[1.5rem] p-5 lg:p-10 2xl:p-[2.2rem] rounded-2xl xl:w-[80%] backdrop-blur-sm">
             <h2 className="font-[600]">Login Details</h2>
-            <h5 className="mb-[2rem] grey-text text-[1rem]">
+            <h5 className="grey-text text-[1rem]">
               Manage your email address mobile number and password
             </h5>
-            <h4 className="mb-[1.5rem]">Mobile Number</h4>
+            <h4 className="">Mobile Number</h4>
             <input
               type="text"
               defaultValue={userData.phNumber}
               disabled={true}
             />
-            <h4 className="mb-[1.5rem]">Email ID</h4>
+            <h4 className="">Email ID</h4>
             <input type="text" defaultValue={userData.email} disabled={true} />
-            <h4 className="mb-[1.5rem]">Password</h4>
+            <h4 className="">Password</h4>
             <input
               type="password"
               defaultValue={userData.password.substring(0, 7)}
