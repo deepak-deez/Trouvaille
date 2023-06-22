@@ -11,6 +11,11 @@ import menuHamburger from "../../assets/images/navbar/menu-hamburger.svg";
 import SearchBar from "./searchBar/SearchBar";
 import { useSelector } from "react-redux";
 import NotificationPopUp from "../viewNotifications/notificationPopUp/NotificationPopUp";
+import socketIOClient from "socket.io-client";
+import axios from "axios";
+import { set } from "date-fns";
+
+const ENDPOINT = "http://localhost:7000";
 
 export default function Navbar({ setActive }) {
   const navigate = useNavigate();
@@ -19,6 +24,33 @@ export default function Navbar({ setActive }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const currentPageLocation = useLocation().pathname;
   const { userDetails } = useSelector((state) => state.user);
+  const [statusNotis, setStatusNotis] = useState("");
+  const socket = socketIOClient(ENDPOINT);
+  const userId = localStorage.getItem("id");
+
+  useEffect(() => {
+    if (!statusNotis) {
+      getAllNotifications();
+    }
+    socket.on(localStorage.getItem("id"), (data) => {
+      console.log("Recieved By Only Me : ", data);
+      setStatusNotis(data);
+    });
+
+    console.log("Status : ", statusNotis);
+  }, [socket]);
+
+  const getAllNotifications = async () => {
+    const allNotisApi =
+      process.env.REACT_APP_API_HOST +
+      "get-user-notification/" +
+      localStorage.getItem("id");
+
+    const response = await axios.get(allNotisApi);
+    setStatusNotis(response?.data);
+
+    console.log("Response : ", response.data);
+  };
 
   useEffect(() => {
     function handleScroll() {
@@ -36,18 +68,17 @@ export default function Navbar({ setActive }) {
     setShowNotis(!showNotis);
   };
 
-  const refMenu = useRef(null)
+  const refMenu = useRef(null);
 
-const handleClickOutside=(e)=>{
-  if(refMenu.current && !refMenu.current.contains(e.target)){
-    setnavColapse(true)
-  }
-}
+  const handleClickOutside = (e) => {
+    if (refMenu.current && !refMenu.current.contains(e.target)) {
+      setnavColapse(true);
+    }
+  };
 
-useEffect(()=>{
-  document.addEventListener("click",handleClickOutside,"true")
-  console.log(navCollapse);
-},[])
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside, "true");
+  }, []);
 
   return (
     <nav
@@ -60,15 +91,15 @@ useEffect(()=>{
         {/* {dashboardLocations.find(
           (location) => location === currentPageLocation
         ) ? ( */}
-          <button 
-            className="collapse-button xl:hidden"
-            onClick={(e) => {
-              navCollapse ? setnavColapse(false) : setnavColapse(true);
-              handleClickOutside(e)
-            }}
-          >
-            <img src={menuHamburger} alt="menu-hamburger" />
-          </button>
+        <button
+          className="collapse-button xl:hidden"
+          onClick={(e) => {
+            navCollapse ? setnavColapse(false) : setnavColapse(true);
+            handleClickOutside(e);
+          }}
+        >
+          <img src={menuHamburger} alt="menu-hamburger" />
+        </button>
         {/* ) : (
           ""
         )} */}
@@ -106,87 +137,92 @@ useEffect(()=>{
         {/* {dashboardLocations.find(
           (location) => location === currentPageLocation
         ) ? ( */}
-          <div className="flex gap-10 2xl:gap-[4.1rem] items-center">
-            <SearchBar />
+        <div className="flex gap-10 2xl:gap-[4.1rem] items-center">
+          <SearchBar />
 
-            <div className="my-auto relative hidden xl:block">
-              <button onClick={handleNotificationPopUp} className="my-auto">
-                <img
-                  src={notificationIcon}
-                  className=" mt-2 w-8  h-full  my-auto"
-                  alt="notification-icon"
-                />
-              </button>
-              {showNotis ? <NotificationPopUp /> : ""}
-            </div>
-
-            <Link to={"/booking"}>
+          <div className="my-auto relative hidden xl:block">
+            <p className="absolute text-center pt-1 h-8 w-8 bg-green-600 rounded-full left-[-1rem] text-white font-bold">
+              {statusNotis?.data?.length}
+            </p>
+            <button onClick={handleNotificationPopUp} className="my-auto">
               <img
-                src={bookingsIcon}
-                className="hidden xl:block w-8 h-full"
-                alt="document-icon"
+                src={notificationIcon}
+                className=" mt-2 w-8  h-full  my-auto"
+                alt="notification-icon"
               />
-            </Link>
-            <button
-              onClick={() => {
-                navigate("/accountDetails");
-                setActive("view-account");
-              }}
-            >
-              <div className="rounded-[50%] border-salte-300 border-4">
-                <img
-                  className="h-10 w-10 rounded-[50%]"
-                  src={
-                    userDetails?.data?.userDetails?.userDetails?.image
-                      ? userDetails?.data?.userDetails?.userDetails?.image
-                      : profileIcon
-                  }
-                  alt="profile-icon"
-                />
-              </div>
             </button>
+            {showNotis ? (
+              <NotificationPopUp statusNotis={statusNotis.data} />
+            ) : (
+              ""
+            )}
           </div>
+
+          <Link to={"/booking"}>
+            <img
+              src={bookingsIcon}
+              className="hidden xl:block w-8 h-full"
+              alt="document-icon"
+            />
+          </Link>
+          <button
+            onClick={() => {
+              navigate("/accountDetails");
+              setActive("view-account");
+            }}
+          >
+            <div className="rounded-[50%] border-salte-300 border-4">
+              <img
+                className="h-10 w-10 rounded-[50%]"
+                src={
+                  userDetails?.data?.userDetails?.userDetails?.image
+                    ? userDetails?.data?.userDetails?.userDetails?.image
+                    : profileIcon
+                }
+                alt="profile-icon"
+              />
+            </div>
+          </button>
+        </div>
         {/* ) : (
           ""
         )} */}
-        
-            {navCollapse ? (
-        ""
-      ) : (
-        <div
-          className={
-            "flex flex-col xl:hidden gap-10 mt-[4rem] nav-tab-menu " +
-            (navCollapse ? "nav-close" : "nav-open")
-          }
 
-        >
-          <ul className={"flex flex-col gap-10 2xl:gap-[88px] my-auto "} >
-            <li className="flex justify-between" >
-              <Link to="/searchResult">Home</Link>
-              <div className="flex gap-10">
-                <Link to={"/notifications"}>
-                  <img
-                    src={notificationIcon}
-                    className="w-[25px] h-[27px]"
-                    alt="notification-icon"
-                  />
-                </Link>
-                <Link to={"/booking"}>
-                  <img src={bookingsIcon} alt="bookings-icon" />
-                </Link>
-              </div>
-            </li>
-            <li>
-              <Link to="/trips">Trips</Link>
-            </li>
-            <li>
-              <Link to="/contacts">Contacts</Link>
-            </li>
-          </ul>
-        </div>
-      )}
+        {navCollapse ? (
+          ""
+        ) : (
+          <div
+            className={
+              "flex flex-col xl:hidden gap-10 mt-[4rem] nav-tab-menu " +
+              (navCollapse ? "nav-close" : "nav-open")
+            }
+          >
+            <ul className={"flex flex-col gap-10 2xl:gap-[88px] my-auto "}>
+              <li className="flex justify-between">
+                <Link to="/searchResult">Home</Link>
+                <div className="flex gap-10">
+                  <Link to={"/notifications"}>
+                    <img
+                      src={notificationIcon}
+                      className="w-[25px] h-[27px]"
+                      alt="notification-icon"
+                    />
+                  </Link>
+                  <Link to={"/booking"}>
+                    <img src={bookingsIcon} alt="bookings-icon" />
+                  </Link>
+                </div>
+              </li>
+              <li>
+                <Link to="/trips">Trips</Link>
+              </li>
+              <li>
+                <Link to="/contacts">Contacts</Link>
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
-      
     </nav>
   );
 }

@@ -19,8 +19,7 @@ export default function TripCard(props) {
   };
 
   return (
-    <div className="filter-results-cards">
-      <img className="share-icon" src={shareIcon} alt="share-icon" />
+    <div className="filter-results-cards lg:hover:scale-105  hover:shadow-xl transition-all duration-500 hover:z-[80]">
       {/* Remove the classname Hidden from the classlist */}
       <LazyLoadImage
         className="filter-results-card-img cursor-pointer"
@@ -37,10 +36,6 @@ export default function TripCard(props) {
       <div className="gap-5 hidden show-detail-text cursor-pointer">
         <Link to={"/tripDetails/" + props.data._id}>Show detail</Link>
         <img src={readMoreIcon} alt="read-more-icon" />
-      </div>
-      <div className="flex gap-2 review-stars">
-        <img src={reviewStarIcon} alt="review-start-icon" />
-        <p>4.2</p>
       </div>
       <div className="result-card-details">
         <p className="location">{props.data.title}</p>

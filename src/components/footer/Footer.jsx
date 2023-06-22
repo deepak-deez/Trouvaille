@@ -67,11 +67,15 @@ export default function Footer() {
           </div>
         </Link>
         <ul className="flex flex-wrap justify-center gap-10 xl:gap-[3rem]">
-          <li>Home</li>
-          <li>Trips</li>
-          <li>Contacts</li>
-          <li>Terms & Conditions</li>
-          <li>Privacy Policy</li>
+          <Link to="/searchResult">
+            <li className="footer-links">Home</li>
+          </Link>
+          <Link to="/trips">
+            <li className="footer-links">Trips</li>
+          </Link>
+          <li className="footer-links">Contacts</li>
+          <li className="footer-links">Terms & Conditions</li>
+          <li className="footer-links">Privacy Policy</li>
         </ul>
         <p className="text-center">© 2023 Trouville, Inc.</p>
       </div>
