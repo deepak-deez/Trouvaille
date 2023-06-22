@@ -13,7 +13,7 @@ export default function PriceSlider({
   let minPrice = useRef();
 
   const [max, setMax] = useState();
-  const [min, setMin] = useState();
+
   const tripPrice = [];
 
   useEffect(() => {
@@ -24,24 +24,19 @@ export default function PriceSlider({
     allPackagesData = await getAllApiData().then((res) => {
       return res;
     });
-
+    console.log(allPackagesData);
     allPackagesData.forEach((element) => {
-      tripPrice.push(element.price);
+      if (element.status === "Active ") tripPrice.push(element.price);
     });
     maxPrice = 0;
-    minPrice = tripPrice[0];
 
     tripPrice.forEach((element) => {
       if (element > maxPrice) {
         maxPrice = element;
       }
-      if (element < minPrice) {
-        minPrice = element;
-      }
     });
 
     setMax(maxPrice);
-    setMin(minPrice);
   };
 
   const onChangeEventTriggered = (newValue) => {
@@ -57,7 +52,7 @@ export default function PriceSlider({
       <Slider
         value={filterSliderValue}
         step={1000}
-        min={min}
+        min={0}
         max={max}
         onChange={onChangeEventTriggered}
       />

@@ -48,7 +48,7 @@ export default function TripCategory({
   });
   const location = useLocation();
   const dispatch = useDispatch();
-  console.log(tripPackageData, "tripPackageData");
+
   useEffect(() => {
     dispatch(getFeature("category"));
     dispatch(getAllPackages());
@@ -94,7 +94,6 @@ export default function TripCategory({
 
   useEffect(() => {
     if (filterFeatureData) {
-      console.log(filterFeatureData, "filterFeatureData");
       setAllPackagesData(filterFeatureData.data);
     }
   }, [filterFeatureData]);
@@ -107,7 +106,6 @@ export default function TripCategory({
 
   useEffect(() => {
     if (tripPackageData) {
-  
       tripPackageData &&
         tripPackageData?.data &&
         setAllPackagesData(
@@ -115,7 +113,7 @@ export default function TripCategory({
         );
     }
   }, [tripPackageData]);
-  console.log(allPackagesData, "allPackagesData");
+
   const hideOnClickOutside = (e) => {
     if (refOne.current && !refOne.current.contains(e.target)) {
       setSortClicked(false);
