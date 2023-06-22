@@ -28,7 +28,6 @@ export default function EditProfile({ setActive }) {
   const navigate = useNavigate();
   const nameRef = useRef("");
   const DOBRef = useRef("");
-  const placeRef = useRef("");
   const genderRef = useRef("");
   const maritalStatusRef = useRef("");
   const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/${FrontendUserData.data.userDetails.userType}/${FrontendUserData.data.userDetails._id}`;
@@ -39,6 +38,8 @@ export default function EditProfile({ setActive }) {
   const userJoiningYear = responseData?.data?.data?.joiningYear;
   const userGender = responseData?.data?.data?.userDetails?.gender;
   const userMarried = responseData?.data?.data?.userDetails?.maritalStatus;
+  const [destination, setDestination] = useState();
+
   const updateDataHandler = async () => {
     try {
       const getUpdatedData = await axios.get(dataBaseUrl);
@@ -82,7 +83,7 @@ export default function EditProfile({ setActive }) {
 
     formData.append("image", imgUrl);
     formData.append("name", nameRef.current.value);
-    formData.append("place", placeRef.current.value);
+    formData.append("place", destination);
     formData.append("DOB", DOBRef.current.value);
     formData.append("gender", genderRef.current.value);
     formData.append("maritalStatus", maritalStatusRef.current.value);
@@ -95,24 +96,8 @@ export default function EditProfile({ setActive }) {
       })
     );
 
-    console.log(arr);
-    console.log("heyData", formData);
-
-    // const userData = {
-    //   image: imgUrl ? imgUrl : responseData?.data.data[0].userDetails.image.url,
-    //   name: nameRef.current.value,
-    //   place: placeRef.current.value,
-    //   DOB: DOBRef.current.value,
-    //   gender: genderRef.current.value,
-    //   maritalStatus: maritalStatusRef.current.value,
-    // };
-
-    // console.log(userData);
-    console.log(FrontendUserData.data.userDetails._id);
-
     const updateUrl = `${process.env.REACT_APP_API_HOST}update/Frontend-user/${FrontendUserData.data.userDetails._id}`;
 
-    console.log(placeRef);
     try {
       if (nameRef.current.value.length) {
         document.getElementById("nameField").textContent = "";
@@ -123,8 +108,9 @@ export default function EditProfile({ setActive }) {
             "content-type": "multipart/form-data",
           },
         });
+
         if (response.data.success) {
-          // updateDataHandler({ userDetails: response.data });
+          updateDataHandler({ userDetails: response.data });
           setActive("profile");
         }
       } else {
@@ -201,21 +187,15 @@ export default function EditProfile({ setActive }) {
               defaultValue={FrontendUserData.data.userDetails.email}
               disabled={true}
             />
-            <div className="flex gap-[1rem] items-center">
-              <input
-                className="lg:text-[1.6rem] grey-text bg-transparent p-2"
-                placeholder="Your Location"
-                defaultValue={userPLace ? userPLace : ""}
-                ref={placeRef}
-                disabled
-              />
+            <div className="flex gap-[1rem] w-[100%] items-center">
               <CountrySelector
                 selectedValue={userPLace ? userPLace : ""}
-                placeRef={placeRef}
+                setDestination={setDestination}
+                // placeRef={placeRef}
               />
               <img src={editIcon} alt="edit-icon" />
               <span className="lg:text-[1.6rem] grey-text">
-                Joined in {userJoiningYear}
+                Joined in {userJoiningYear ? userJoiningYear : "2023"}
               </span>
             </div>
           </div>

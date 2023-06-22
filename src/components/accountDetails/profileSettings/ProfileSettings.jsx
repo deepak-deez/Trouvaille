@@ -65,13 +65,11 @@ export default function ProfileSettings({ setActive }) {
           <SignOut />
         </div>
         <div className="flex flex-col sm:flex-row gap-[2rem] items-center xl:items-start mt-[1.5rem] sm:mt-[2rem] profile-section ">
-          <div className="flex flex-col h-[256px] w-[225px] overflow-hidden">
+          <div className="flex flex-col h-[256px] w-[225px] profile-img overflow-hidden">
             {console.log(responseData?.data?.data?.userDetails?.image)}
             {profileImage && (
               <img
-                className={
-                  "profile-img" + (responseData ? " block " : " hidden ")
-                }
+                className={responseData ? " block " : " hidden "}
                 src={
                   responseData?.data?.data?.userDetails?.image &&
                   responseData?.data?.data?.userDetails?.image
@@ -100,7 +98,7 @@ export default function ProfileSettings({ setActive }) {
               </span>
               <i className="fa-solid fa-circle text-[0.8rem]"></i>
               <span className="lg:text-[1.6rem] grey-text">
-                Joined in {userJoiningYear}
+                Joined in {userJoiningYear ? userJoiningYear : "2023"}
               </span>
             </div>
             <button

@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect } from "react";
 import Select from "react-select";
 import countryList from "react-select-country-list";
 
-function CountrySelector({ selectedValue, placeRef }) {
+function CountrySelector({ selectedValue, setDestination }) {
   const [value, setValue] = useState();
   const options = useMemo(() => countryList().getData(), []);
   useEffect(() => {
@@ -13,10 +13,11 @@ function CountrySelector({ selectedValue, placeRef }) {
 
   const changeHandler = (e) => {
     setValue(e.label);
-    placeRef.current.value = e.label;
+    setDestination(e.label);
   };
   return (
     <Select
+      className="text-2xl outline-none"
       options={options}
       value={value}
       onChange={(e) => changeHandler(e)}

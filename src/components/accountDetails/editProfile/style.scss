@@ -17,6 +17,8 @@ $font-color-grey: #444a61;
 
     .profile-img-container {
       position: relative;
+      border-radius: 1rem;
+
       .user-profile-img {
         background-size: cover;
         background-repeat: no-repeat;
@@ -30,7 +32,6 @@ $font-color-grey: #444a61;
         justify-content: center;
         flex-direction: column;
         align-items: center;
-        border-radius: 1rem;
       }
     }
   }

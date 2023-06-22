@@ -23,10 +23,11 @@ export default function Navbar({ setActive }) {
   const [showNotis, setShowNotis] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const currentPageLocation = useLocation().pathname;
-  const { userDetails } = useSelector((state) => state.user);
+  const { FrontendUserData } = useSelector((state) => state.user);
   const [statusNotis, setStatusNotis] = useState("");
   const socket = socketIOClient(ENDPOINT);
   const userId = localStorage.getItem("id");
+  console.log(FrontendUserData);
 
   useEffect(() => {
     if (!statusNotis) {
@@ -51,6 +52,8 @@ export default function Navbar({ setActive }) {
 
     console.log("Response : ", response.data);
   };
+
+  console.log(FrontendUserData.data.userDetails.userDetails.image);
 
   useEffect(() => {
     function handleScroll() {
@@ -175,8 +178,8 @@ export default function Navbar({ setActive }) {
               <img
                 className="h-10 w-10 rounded-[50%]"
                 src={
-                  userDetails?.data?.userDetails?.userDetails?.image
-                    ? userDetails?.data?.userDetails?.userDetails?.image
+                  FrontendUserData?.data?.userDetails?.userDetails?.image
+                    ? FrontendUserData?.data?.userDetails?.userDetails?.image
                     : profileIcon
                 }
                 alt="profile-icon"
