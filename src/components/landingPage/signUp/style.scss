@@ -8,6 +8,7 @@ $font-color-grey: #444a61;
 $font-color-white: aliceblue;
 $font-color-grey-v2: #ded3cf;
 $button-color-green: #219653;
+$button-color-brown: #863307;
 $button-color-green-v2: #022f15;
 
 .landing-page {
@@ -36,10 +37,15 @@ $button-color-green-v2: #022f15;
       background: rgba(255, 255, 255, 0.78);
       border-radius: 21px;
     }
-
-    // .captcha-text {
-    //   // color: $font-color-white;
-    // }
+    .captcha-field {
+      background: rgba(255, 255, 255, 0.78);
+      border-radius: 10px;
+    }
+    .captcha-box {
+      background: rgba(255, 255, 255, 0.78);
+      border-top-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+    }
 
     .grey-text {
       color: $font-color-grey-v2;
@@ -69,7 +75,7 @@ $button-color-green-v2: #022f15;
     }
 
     .submit-button {
-      background: $button-color-green;
+      background: $button-color-brown;
       border-radius: 10px;
       color: white;
     }

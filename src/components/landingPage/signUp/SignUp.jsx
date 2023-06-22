@@ -37,7 +37,6 @@ const SignUp = () => {
   const [userInput, setUserInput] = useState("");
   const [isValidCaptcha, setIsValidCaptcha] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
-  const [toOpenDiv, setToOpenDiv] = useState(false);
   let [apiMessage, setApiMessage] = useState("");
   const [pwdError, setPwdError] = useState(false);
 
@@ -102,26 +101,20 @@ const SignUp = () => {
     }
   };
 
-  const openDiv = () => {
-    console.log("div opening");
-    // setIsChecked(true);
-    setToOpenDiv(true);
-  }
-
   // const handleCreateNewAccount = async (e) => {
-  
-    // const inputVal = await e.target.value;
-    // const token = captchaRef.current.getValue();
-    // console.log(token);
-    // console.log(inputVal);
-    // captchaRef.current.reset();
 
-    // await axios
-    //   .post(inputVal, token)
-    //   .then((res) => console.log(res))
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+  // const inputVal = await e.target.value;
+  // const token = captchaRef.current.getValue();
+  // console.log(token);
+  // console.log(inputVal);
+  // captchaRef.current.reset();
+
+  // await axios
+  //   .post(inputVal, token)
+  //   .then((res) => console.log(res))
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });
 
   const handleCreateNewAccount = async (e) => {
     e.preventDefault();
@@ -232,7 +225,7 @@ const SignUp = () => {
       <h2 className="md:text-[64px] text-center mt-[10px] lg:mt-[30px] text-[50px]">
         Welcome to Trouvaille
       </h2>
-      <div className="flex flex-col gap-[30px] lg:w-[975px] w-[90%] md:px-[30px] md:py-[30px] mt-[15px] signup-details px-[25px] py-[15px] lg:py-[67px] lg:px-[97px] justify-center">
+      <div className="flex flex-col gap-[20px] lg:w-[975px] w-[90%] md:px-[30px] md:py-[30px] mt-[15px] signup-details px-[25px] py-[15px] lg:py-[67px] lg:px-[97px] justify-center">
         <input
           className="input-fields text-[20px] lg:px-[39px] px-[15px] py-[20px] lg:py-[25px] bg-transparent w-[100%]"
           type="text"
@@ -300,17 +293,33 @@ const SignUp = () => {
           id="confirmPassword"
           className="text-red-700 font-bold bg-transparent text-xl"
         ></h4>
-       
-        <p className={apiMessage ? " api-message my-5 " : ""}>{apiMessage}</p>
 
-        <div className="bg-white w-[20rem] py-3 mt-2 lg:mb-[-15px] lg:px-3 lg:py-3 lg:text-lg rounded-lg">
-          <input type="checkbox" className="ml-2" checked={isValidCaptcha} onClick={openDiv} />
-          <label className="pl-4 pr-3">I am not a Robot</label>
+        <p className={apiMessage ? " api-message my-5" : ""}>{apiMessage}</p>
+
+        <div className="bg-transparent w-[20rem] mt-[-3rem] py-3 lg:mb-[-15px] lg:px-3 lg:py-3 lg:text-lg rounded-lg">
+          <input
+            type="checkbox"
+            className="ml-2 w-5 h-5"
+            checked={isValidCaptcha}
+          />
+          <label className="pl-2 pr-3 text-white text-xl">
+            I am not a Robot
+            <span
+              className={"text-red-500 " + (isChecked ? "hidden" : "block")}
+            >
+              (Type Captcha before)
+            </span>
+          </label>
         </div>
 
-        <div className={"flex flex-col " + (isChecked ? "hidden" : "block")}>
+        <div
+          className={
+            "flex flex-col ml-2 sm:w-[20rem] captcha-box mt-[-1rem] sm:mt-[-2rem] lg:mt-[-1rem] " +
+            (isChecked ? "hidden" : "block")
+          }
+        >
           <p
-            className=" mt-2 w-[5rem] captcha-text bg-white font-bold text-lg sm:text-xl"
+            className=" captcha-text font-bold text-xl mx-auto py-2 px-2 mt-2 sm:mx-4"
             onPaste={(e) => {
               e.preventDefault();
               return false;
@@ -323,13 +332,14 @@ const SignUp = () => {
             {captchaText}
           </p>
           <input
-            className="rounded-xl pl-2 py-2 w-[20rem] mt-2"
+            className="pl-3 py-3 w-[15rem] mt-2 captcha-field mx-auto sm:mx-4"
             type="text"
             value={userInput}
             onChange={inputChange}
+            placeholder="Type Captcha here"
           />
           <button
-            className="submit-button text-center px-[5px] py-[10px] mt-4 w-[30%] sm:mx-96 lg:mx-72"
+            className="submit-button text-center px-[5px] py-[10px] mx-auto mt-4 mb-2 w-[5rem] sm:mx-4 sm:w-[5rem] "
             type="submit"
             onClick={checkCaptcha}
           >
