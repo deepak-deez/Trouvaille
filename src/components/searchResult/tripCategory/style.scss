@@ -8,7 +8,7 @@ $color-primary-grey: #b2b8bd;
 $bg-color-blue: #212b33;
 
 .trip-category {
-  margin-top: 5rem;
+  margin-top: 3.75rem;
   color: $color-primary-white;
   .all-trip-list {
     border-bottom-left-radius: 2rem;
@@ -49,10 +49,10 @@ $bg-color-blue: #212b33;
     background-color: rgb(213, 213, 213);
     color: #1e242a;
     border-radius: 30px;
-    padding: 1rem 1rem;
+    padding: 0.75rem 0.75rem;
     li {
       cursor: pointer;
-      padding: 1rem;
+      padding: 0.75rem;
       border-radius: 1rem;
     }
     li:hover {
@@ -77,12 +77,14 @@ $bg-color-blue: #212b33;
   .trip-category-icons {
     img {
       width: 4rem;
+      height: 4rem;
     }
 
     //media queries
     @media only screen and (min-width: 1024px) {
       img {
-        width: 140px;
+        width: 120px;
+        height: 120px;
       }
     }
   }
@@ -105,19 +107,19 @@ $bg-color-blue: #212b33;
 
 @media screen and (min-width: 1024px) {
   .trip-category {
-    padding-left: 6rem;
-    padding-right: 6rem;
+    padding-left: 4.5rem;
+    padding-right: 4.5rem;
   }
 }
 @media screen and (min-width: 1400px) {
   .trip-category {
-    padding-left: 15rem;
-    padding-right: 15rem;
+    padding-left: 7.5rem;
+    padding-right: 7.5rem;
   }
 }
 @media screen and (min-width: 1920px) {
   .trip-category {
-    padding-left: 24rem;
-    padding-right: 24rem;
+    padding-left: 18.75rem;
+    padding-right: 18.75rem;
   }
 }

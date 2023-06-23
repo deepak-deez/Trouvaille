@@ -187,16 +187,16 @@ export default function TripCategory({
   };
   return (
     <section className="trip-category">
-      <div className="flex justify-center 2xl:justify-between flex-wrap gap-7 lg:gap-12 trip-category-icons ">
+      <div className="flex justify-center 2xl:justify-between flex-wrap gap-4 lg:gap-12 trip-category-icons ">
         {allTripCategory?.map((response, index) => {
           return (
             <div
               onClick={(e) => handleClickedCategory(e, response.title)}
-              className=" p-1 category-section lg:p-3 flex flex-col justify-end  "
+              className=" p-1 category-section lg:p-2 flex flex-col justify-end  "
               key={index}
             >
               <div
-                className="category border-[5px] rounded-[2.5rem] cursor-pointer transition-all duration-200 w-40 h-40 flex justify-center"
+                className="category border-[5px] rounded-[2.5rem] cursor-pointer transition-all duration-200 md:w-[100%] md:h-[100%] flex justify-center"
                 data-category-selected={response.title}
               >
                 <img
@@ -206,7 +206,7 @@ export default function TripCategory({
                     currentTarget.onerror = null; // prevents looping
                     currentTarget.src = defaultCategoryImg;
                   }}
-                  className="category-icon saturate-0 m-8 lg:m-0 lg:p-8"
+                  className="category-icon saturate-0 m-8 lg:m-0 lg:p-7"
                 />
               </div>
               <p className="text-center text-2xl category-title">
@@ -216,17 +216,17 @@ export default function TripCategory({
           );
         })}
       </div>
-      <div className="my-[3.75rem] flex justify-start relative items-start text-[26px] gap-[4.75rem] ">
+      <div className="my-[3.75rem] flex justify-start relative items-start text-[16px] gap-[4.75rem] ">
         <div className="flex flex-col gap-[1.5rem] ">
           <button onClick={sortTrips} ref={refOne}>
-            <div className="flex justify-center relative gap-[1.5rem]">
+            <div className="flex justify-center relative gap-[1rem]">
               <img src={sortIcon} alt="sort-icon" />
               <p className="">Sort</p>
             </div>
           </button>
           <ul
             className={
-              "bg-transparent flex flex-col gap-[1rem] sort-list absolute z-50 top-[3rem] p-10 outline-none openning-animation-y " +
+              "bg-transparent flex flex-col gap-[1rem] sort-list absolute z-[81] top-[3rem] outline-none openning-animation-y " +
               (sortClicked ? "flex  " : "hidden") +
               (closingAnimationSort ? " closing-animation-y " : "")
             }
@@ -262,16 +262,16 @@ export default function TripCategory({
           </ul>
         </div>
         <button onClick={handleFilterStateChange}>
-          <div className="flex gap-[1.5rem]">
+          <div className="flex gap-[1rem]">
             <img src={filterIcon} alt="filter-icon" />
             <p className="">Filter</p>
           </div>
         </button>
       </div>
-      <div className={"flex flex-col xl:flex-row gap-[2rem] "}>
+      <div className={"flex flex-col xl:flex-row gap-[1.1rem] "}>
         <div
           className={
-            "trip-category-filters flex flex-col lg:flex-row justify-between xl:justify-normal xl:flex-col gap-5 xl:gap-20 xl:w-[25%] p-10 lg:p-10 2xl:p-[2rem] xl:pb-10 xl:h-[56rem] overflow-y-scroll bg-[#212b33] rounded-[2rem]  openning-animation-y " +
+            "trip-category-filters flex flex-col lg:flex-row justify-between xl:justify-normal xl:flex-col gap-[2.2rem] xl:gap-[3.4rem] xl:w-[25%] p-7 lg:p-8 2xl:p-[1.6rem] xl:pb-10 xl:h-[42rem] overflow-y-scroll bg-[#212b33] rounded-[2rem]  openning-animation-y " +
             (showFilter ? "" : "hidden") +
             (closingAnimation ? " closing-animation-y " : "")
           }
@@ -284,7 +284,7 @@ export default function TripCategory({
 
         <div
           className={
-            "trip-category-filter-results all-trip-list grid  grid-flow-col overflow-scroll gap-[2.2rem] md:h-[56rem] overflow-y-scroll px-5 transition-all duration-300" +
+            "trip-category-filter-results all-trip-list grid  grid-flow-col overflow-scroll  md:h-[42rem] overflow-y-scroll px-5 transition-all duration-300" +
             (showFilter ? " xl:w-[75%]  " : "")
           }
         >

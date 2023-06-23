@@ -19,10 +19,10 @@ export default function TripCard(props) {
   };
 
   return (
-    <div className="filter-results-cards lg:hover:scale-105  hover:shadow-xl transition-all duration-500 hover:z-[80]">
+    <div className="filter-results-cards lg:hover:scale-105 text-[14px] hover:z-[80] transition-all duration-500 hover:shadow-xl ">
       {/* Remove the classname Hidden from the classlist */}
       <LazyLoadImage
-        className="filter-results-card-img cursor-pointer"
+        className="filter-results-card-img  cursor-pointer"
         src={props.data.image}
         onError={({ currentTarget }) => {
           currentTarget.onerror = null;
