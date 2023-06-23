@@ -131,8 +131,8 @@ export default function EditAccountDetails({ setActive }) {
 
   if (FrontendUserData) {
     return (
-      <header className="sm:mx-20 2xl:mx-[18.75rem]">
-        <div className=" flex justify-between px-10 xl:px-0 lg:text-[22px]">
+      <header className="sm:mx-20 2xl:mx-[18.75rem] ">
+        <div className=" flex justify-between px-10 xl:px-0 lg:text-[20px]">
           <div className="flex">
             <h2
               className="font-[600]"
@@ -146,9 +146,9 @@ export default function EditAccountDetails({ setActive }) {
           </div>
           <SignOut />
         </div>
-        <div className="mt-[3rem] xl:mt-[5rem] flex flex-col xl:flex-row xl:justify-between gap-8 xl:gap-14 lg:text-[20px] xl:flex ">
+        <div className="mt-[2rem] xl:mt-[1.5rem] flex flex-col xl:flex-row xl:justify-between gap-6 xl:gap-10 lg:text-[16px] xl:flex ">
           <ProfileSideBar activePage={"accounts"} setActive={setActive} />
-          <div className="edit-details flex flex-col gap-[2rem] lg:text-[22px]  p-5 lg:p-10 2xl:p-[2.2rem] rounded-2xl xl:w-[80%] backdrop-blur-sm">
+          <div className="edit-details flex flex-col gap-[1rem] lg:text-[18px]  p-5 lg:p-10 2xl:p-[2.2rem] rounded-2xl xl:w-[80%] backdrop-blur-sm">
             <h2 className="font-[600]">Login Details</h2>
             <h5 className="mb-[2rem] text-[1rem] grey-text">
               Manage your email address mobile number and password
@@ -156,14 +156,14 @@ export default function EditAccountDetails({ setActive }) {
             <h4 className="">Mobile Number</h4>
             <input
               type="text"
-              className=" grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl"
+              className=" "
               defaultValue={FrontendUserData.data.userDetails.phone}
               disabled={true}
             />
             <h4 className="">Email ID</h4>
             <input
               type="text"
-              className=" grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl"
+              className=" "
               defaultValue={emailId}
               disabled={true}
             />
@@ -172,7 +172,7 @@ export default function EditAccountDetails({ setActive }) {
               id="oldPasswordField"
               type="password"
               className={
-                " border-[3px]  grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl" +
+                " border-[3px]  " +
                 (!checkPass ? "  border-red-500  outline-red-500 " : "")
               }
               ref={oldPassRef}
@@ -185,7 +185,7 @@ export default function EditAccountDetails({ setActive }) {
             <input
               id="newPasswordField"
               type="password"
-              className=" border-[3px] grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl"
+              className=" border-[3px] "
               onChange={checkValidPassword}
               ref={newPassRef}
             />
@@ -200,7 +200,7 @@ export default function EditAccountDetails({ setActive }) {
             <input
               id="confirmPasswordField"
               type="password"
-              className="  border-[3px] grey-text pl-[1.5rem] py-[0.88rem] rounded-2xl"
+              className="  border-[3px] "
               ref={confirmNewPassRef}
               onChange={handlePasswordCheck}
             />
@@ -209,7 +209,7 @@ export default function EditAccountDetails({ setActive }) {
               className="text-red-700 font-bold bg-transparent text-xl"
             ></h4>
             <button
-              className="mt-[4rem] rounded-2xl text-white bg-[#219653] text-center py-4 xl:py-[1.5rem] xl:mx-[6rem]"
+              className="mt-[1rem] rounded-2xl text-white bg-[#219653] text-center py-4 xl:py-[1rem] xl:mx-[4rem]"
               onClick={updateDetailsHandler}
             >
               SUBMIT

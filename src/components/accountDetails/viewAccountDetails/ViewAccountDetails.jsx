@@ -26,9 +26,9 @@ export default function ViewAccountDetails({ setActive }) {
     // };
 
     return (
-      <header className="sm:mx-20 2xl:mx-[18.75rem]">
+      <header className="sm:mx-20 2xl:mx-[18.75rem] h-screen">
         {console.log(userData)}
-        <div className="flex justify-between px-10 xl:px-0 lg:text-[22px]">
+        <div className="flex justify-between px-10 xl:px-0 lg:text-[20px]">
           <div className="flex">
             <h2
               className="font-[600]"
@@ -42,11 +42,11 @@ export default function ViewAccountDetails({ setActive }) {
           </div>
           <SignOut />
         </div>
-        <div className="mt-[3rem] xl:mt-[5rem] flex flex-col xl:flex-row xl:justify-between gap-8 xl:gap-14 lg:text-[20px]">
+        <div className="mt-[2rem] xl:mt-[1.5rem] flex flex-col xl:flex-row xl:justify-between gap-6 xl:gap-10 lg:text-[16px]">
           <ProfileSideBar activePage={"accounts"} setActive={setActive} />
-          <div className="login-details flex flex-col lg:text-[22px] gap-[1.5rem] p-5 lg:p-10 2xl:p-[2.2rem] rounded-2xl xl:w-[80%] backdrop-blur-sm">
+          <div className="login-details flex flex-col lg:text-[18px] gap-[1rem] p-5 lg:p-10 2xl:p-[2.2rem] rounded-2xl xl:w-[80%] backdrop-blur-sm">
             <h2 className="font-[600]">Login Details</h2>
-            <h5 className="grey-text text-[1rem]">
+            <h5 className="grey-text text-[1rem] mb-[2rem]">
               Manage your email address mobile number and password
             </h5>
             <h4 className="">Mobile Number</h4>
@@ -67,7 +67,7 @@ export default function ViewAccountDetails({ setActive }) {
               onClick={() => {
                 setActive("edit-account");
               }}
-              className="mt-[4rem] rounded-2xl text-white bg-[#219653] text-center py-4 xl:py-[1.5rem] xl:mx-[6rem]"
+              className="mt-[1rem] rounded-2xl text-white bg-[#219653] text-center py-4 xl:py-[1rem] xl:mx-[4rem]"
             >
               EDIT ACCOUNT DETAILS
             </button>
