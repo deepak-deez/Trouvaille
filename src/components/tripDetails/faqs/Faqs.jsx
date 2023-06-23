@@ -7,7 +7,7 @@ export default function Faqs(props) {
 
   return (
     <li
-      className="flex flex-col gap-5 cursor-pointer"
+      className="flex flex-col text-[14px] md:text-[18px] gap-5 cursor-pointer"
       onClick={() => {
         setDropdown(!dropdown);
       }}

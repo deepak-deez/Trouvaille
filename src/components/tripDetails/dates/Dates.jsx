@@ -25,13 +25,13 @@ export default function Dates(props) {
       <div
         ref={refOne}
         className={
-          "flex flex-col date w-30 lg:w-32 h-30 lg:h-32 items-center px-10 py-4 " +
+          "flex flex-col date w-[7rem] lg:w-[8rem] h-[7rem] lg:h-[8rem] items-center px-10 py-4 " +
           (toShow ? " dates-active " : " dates ")
         }
         onClick={detailsClickHandler}
       >
-        <h2 className="">{date[0]}</h2>
-        <p className="">{date[1].substring(0, 3)}</p>
+        <h2 className="text-[30px] lg:text-[40px]">{date[0]}</h2>
+        <p className="text-[18px] lg:text-[22px]">{date[1].substring(0, 3)}</p>
       </div>
       {toShow && (
         <div className="flex flex-col  gap-0 absolute ">

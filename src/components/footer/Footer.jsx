@@ -13,48 +13,48 @@ import pinterestIcon from "../../assets/images/footer/pinterest-icon.svg";
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col gap-5 lg:gap-10 xl:gap-0  pb-10   lg:px-[2rem] 2xl:px-[10rem]">
-      <p className="text-center xl:mb-[2rem] text-[#B4BBC1] text-[22px]">
+    <footer className="flex flex-col gap-3 lg:gap-8 xl:gap-0 lg:px-[2rem] 2xl:px-[10rem]">
+      <p className="text-center xl:mb-[2rem] text-[#B4BBC1] text-[16px]">
         Get Social with us
       </p>
-      <ul className="flex flex-wrap justify-center gap-10 xl:gap-[3rem] xl:mb-[4.5rem]">
-        <a href="https://www.facebook.com/" target="_blank">
-          <li>
+      <ul className="flex flex-wrap justify-center gap-8  xl:gap-[3rem] xl:mb-[4.5rem]">
+        <li className=" w-6 h-6">
+          <a href="https://www.facebook.com/" target="_blank">
             <img src={facebookIcon} alt="facebook-icon" />
-          </li>
-        </a>
-        <a href="https://twitter.com/" target="_blank">
-          <li>
+          </a>
+        </li>
+        <li className=" w-6 h-6">
+          <a href="https://twitter.com/" target="_blank">
             <img src={twitterIcon} alt="twitter-icon" />
-          </li>
-        </a>
-        <a href="https://www.instagram.com/" target="_blank">
-          <li>
+          </a>
+        </li>
+        <li className=" w-6 h-6">
+          <a href="https://www.instagram.com/" target="_blank">
             <img src={instagramIcon} alt="instagram-icon" />
-          </li>
-        </a>
-        <a href="https://in.linkedin.com/" target="_blank">
-          <li>
+          </a>
+        </li>
+        <li className=" w-6 h-6">
+          <a href="https://in.linkedin.com/" target="_blank">
             <img src={linkedinIcon} alt="linkedin-icon" />
-          </li>
-        </a>
-        <a href="https://www.youtube.com/" target="_blank">
-          <li>
+          </a>
+        </li>
+        <li className=" w-6 h-6">
+          <a href="https://www.youtube.com/" target="_blank">
             <img src={youtubeIcon} alt="youtube-icon" />
-          </li>
-        </a>
-        <a href="https://www.apple.com/in/" target="_blank">
-          <li>
+          </a>
+        </li>
+        <li className=" w-6 h-6">
+          <a href="https://www.apple.com/in/" target="_blank">
             <img src={appleIcon} alt="appleIcon" />
-          </li>
-        </a>
-        <a href="https://in.pinterest.com/" target="_blank">
-          <li>
+          </a>
+        </li>
+        <li className=" w-6 h-6">
+          <a href="https://in.pinterest.com/" target="_blank">
             <img src={pinterestIcon} alt="pinterestIcon" />
-          </li>
-        </a>
+          </a>
+        </li>
       </ul>
-      <div className="flex flex-col items-center gap-5 lg:flex-row lg:justify-between">
+      <div className="flex flex-col scale-[85%] items-center gap-5 lg:pb-[2rem] lg:flex-row lg:justify-between">
         <Link to="/searchResult">
           <div className="flex gap-2">
             <img src={logo} className="" alt="logo" />
@@ -66,7 +66,7 @@ export default function Footer() {
             </div>
           </div>
         </Link>
-        <ul className="flex flex-wrap justify-center gap-10 xl:gap-[3rem]">
+        <ul className="flex flex-wrap text-[16px] justify-center gap-3 xl:gap-[3rem]">
           <Link to="/searchResult">
             <li className="footer-links">Home</li>
           </Link>

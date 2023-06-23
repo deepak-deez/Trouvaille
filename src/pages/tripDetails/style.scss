@@ -1,4 +1,5 @@
 .trip-details {
+  padding: 0;
   .white-border {
     border: 1px solid #ffffff4a;
   }
@@ -20,7 +21,7 @@
     }
 
     h1 {
-      font-size: 50px;
+      font-size: 37.5px;
       background: linear-gradient(266.53deg, #d25e46 -18.39%, #8c2009 146.29%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -28,7 +29,7 @@
     }
     h2 {
       color: $color-orange;
-      font-size: 30px;
+      font-size: 22.5px;
       font-weight: 600;
     }
   }

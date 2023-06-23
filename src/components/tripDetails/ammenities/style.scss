@@ -13,8 +13,11 @@
       // background: #eaeaf1b2;
     }
     h2 {
-      font-size: 4rem;
+      font-size: 2rem;
       color: $color-orange;
+      @media screen and (min-width: 768px) {
+        font-size: 3.2rem;
+      }
     }
   }
 }

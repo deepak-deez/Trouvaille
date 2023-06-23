@@ -187,16 +187,16 @@ export default function TripCategory({
   };
   return (
     <section className="trip-category">
-      <div className="flex justify-center 2xl:justify-between flex-wrap gap-4 lg:gap-12 trip-category-icons ">
+      <div className="flex justify-center 2xl:justify-between flex-wrap gap-7 lg:gap-12 trip-category-icons ">
         {allTripCategory?.map((response, index) => {
           return (
             <div
               onClick={(e) => handleClickedCategory(e, response.title)}
-              className=" p-1 category-section lg:p-2 flex flex-col justify-end  "
+              className=" p-1 category-section  lg:p-2 flex flex-col justify-end  "
               key={index}
             >
               <div
-                className="category border-[5px] rounded-[2.5rem] cursor-pointer transition-all duration-200 md:w-[100%] md:h-[100%] flex justify-center"
+                className="category border-[5px] rounded-[2.5rem] cursor-pointer transition-all duration-200 max-w-[9rem] max-h-[9rem] flex justify-center"
                 data-category-selected={response.title}
               >
                 <img
@@ -209,7 +209,7 @@ export default function TripCategory({
                   className="category-icon saturate-0 m-8 lg:m-0 lg:p-7"
                 />
               </div>
-              <p className="text-center text-2xl category-title">
+              <p className="text-center text-[16px] max-w-[9rem] category-title">
                 {response.title}
               </p>
             </div>

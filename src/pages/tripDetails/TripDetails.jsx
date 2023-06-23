@@ -124,14 +124,14 @@ export default function TripDetails(props) {
     return (
       <section className="trip-details " style={backgroundImg}>
         <Header location={locationName} />
-        <section className="md:px-10 xl:px-28 2xl:px-44 min-[1920px]:px-[20rem] trip-fetched-details pb-[20rem] dark-gradient">
+        <section className="md:px-8 xl:px-24 2xl:px-40 min-[1920px]:px-[16rem] trip-fetched-details pb-[16rem] dark-gradient">
           <h1 className="pt-[5rem] lg:text-start">Itinerary</h1>
           <ul className="flex flex-wrap lg:justify-start sm:flex-row gap-5 text-[#838597] my-[3rem] text-[22px]">
             <li>Maximum guests 12</li>
             <li>Explore {explorePlaces} PLaces </li>
             <li>Available for 6 guests</li>
           </ul>
-          <h4 className="mb-[2rem] text-2xl">Dates</h4>
+          <h4 className="mb-[2rem] text-[1.7rem]">Dates</h4>
           <div className="flex flex-wrap gap-5 xl:justify-start justify-center available-dates overflow-x-scroll">
             {acitivitiesData?.map((data, index) => {
               return (
@@ -211,7 +211,7 @@ export default function TripDetails(props) {
             <h2 className="font-[400] mt-20 lg:mt-40 mb-[3.5rem]">
               Ammenities (<span>{amenities?.length}</span>)
             </h2>
-            <div className="flex flex-wrap 2xl:justify-start gap-10 lg:justify-start ammenities-container">
+            <div className="flex flex-wrap 2xl:justify-start gap-[1.7rem] lg:justify-start ammenities-container">
               {amenities?.map((data, index) => {
                 return (
                   <Ammenities

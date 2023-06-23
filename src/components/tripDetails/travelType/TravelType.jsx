@@ -6,11 +6,11 @@ export default function TravelType({ image, title }) {
   return (
     <div>
       <img
-        className="saturate-0 brightness-200 max-w-[4rem] md:max-w-[5rem] h-[4rem] md:h-[5rem]"
+        className="saturate-0 brightness-200 max-w-[3rem] md:max-w-[3.75rem] h-[3rem] md:h-[3.75rem]"
         src={image}
         alt="travel-type-icon"
       />
-      <p className="mt-[1.35rem]">{title}</p>
+      <p className="mt-[1rem]">{title}</p>
     </div>
   );
 }

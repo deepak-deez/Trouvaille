@@ -12,7 +12,7 @@ export default function PackageHighlights(props) {
           alt="diving-icon"
         />
         <div className="flex flex-col">
-          <h4 className=" text-[#B4BBC1] text-[2rem]">{props.title}</h4>
+          <h4 className=" text-[#B4BBC1] text-[1.5rem]">{props.title}</h4>
           <p className="">{props.content}</p>
         </div>
       </div>

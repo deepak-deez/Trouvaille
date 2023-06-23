@@ -23,24 +23,24 @@ export default function Ocassions({ type, image, desc }) {
   return (
     <div className="relative ">
       <div
-        className="flex flex-col  items-center ocassions"
+        className="flex flex-col items-center ocassions"
         ref={refOne}
         onClick={detailsClickHandler}
       >
         <div className="ocassion-image">
           <img
-            className=" max-w-[4rem] md:max-w-[5rem] h-[4rem] md:h-[5rem]"
+            className=" max-w-[3rem] md:max-w-[3.75rem] h-[3rem] md:h-[3.75rem]"
             src={image}
             alt="honeymoon-icon"
           />
         </div>
-        <p className="pt-[1rem] font-[600] text-[20px]">{type}</p>
+        <p className="pt-[1rem] font-[600] text-[16px]">{type}</p>
       </div>
       {toShow && (
-        <div className="flex flex-col   gap-0 absolute ">
+        <div className="flex flex-col gap-0 absolute ">
           <div className="up-arrow ml-5"></div>
-          <div className="  bg-[#a53c27ba] h-[10rem] w-[15rem] overflow-y-scroll text-white z-[2] p-5 occassions rounded-2xl">
-            <h3 className="  text-[1rem]  ">{desc}</h3>
+          <div className="  bg-[#a53c27ba] h-[7.5rem] w-[11.25rem] overflow-y-scroll text-white z-[2] p-2 occassions rounded-2xl">
+            <h3 className="  text-[0.75rem]  ">{desc}</h3>
           </div>
         </div>
       )}
