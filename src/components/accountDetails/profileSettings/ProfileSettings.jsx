@@ -13,21 +13,21 @@ import ProfileSideBar from "../profileSideBar/ProfileSideBar";
 export default function ProfileSettings({ setActive }) {
   const { FrontendUserData } = useSelector((state) => state.user);
 
-  console.log(
-    "Profile:",
-    FrontendUserData,
-    "ID :",
-    FrontendUserData.data.userDetails._id
-  );
-  const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/${FrontendUserData.data.userDetails.userType}/${FrontendUserData.data.userDetails._id}`;
+  // console.log(
+  //   "Profile:",
+  //   FrontendUserData,
+  //   "ID :",
+  //   FrontendUserData.data.userDetails._id
+  // );
+  // const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/${FrontendUserData.data.userDetails.userType}/${FrontendUserData.data.userDetails._id}`;
   const [responseData, setResponseData] = useState();
 
   const updateDataHandler = async () => {
     try {
-      console.log(dataBaseUrl);
-      const getUpdatedData = await axios.get(dataBaseUrl);
-      console.log("API data :", getUpdatedData);
-      setResponseData(getUpdatedData);
+      // console.log(dataBaseUrl);
+      // const getUpdatedData = await axios.get(dataBaseUrl);
+      // console.log("API data :", getUpdatedData);
+      setResponseData(FrontendUserData);
     } catch (err) {
       return err;
     }
@@ -38,14 +38,14 @@ export default function ProfileSettings({ setActive }) {
   }, []);
   console.log("response", responseData);
 
-  const profileImage = responseData?.data?.data?.userDetails?.image;
-  const userLcoation = responseData?.data?.data?.userDetails?.place;
-  const userName = responseData?.data?.data?.userDetails?.name;
-  const userDOB = responseData?.data?.data?.userDetails?.DOB;
-  const userGender = responseData?.data.data?.userDetails?.gender;
+  const profileImage = responseData?.data?.userDetails?.userDetails?.image;
+  const userLcoation = responseData?.data?.userDetails?.userDetails?.place;
+  const userName = responseData?.data?.userDetails?.userDetails?.name;
+  const userDOB = responseData?.data?.userDetails?.userDetails?.DOB;
+  const userGender = responseData?.data?.userDetails?.userDetails?.gender;
   const userMaritalStatus =
-    responseData?.data?.data?.userDetails?.maritalStatus;
-  const userJoiningYear = responseData?.data?.data?.joiningYear;
+    responseData?.data?.userDetails?.userDetails?.maritalStatus;
+  const userJoiningYear = responseData?.data?.userDetails?.joiningYear;
 
   if (FrontendUserData) {
     return (
@@ -66,16 +66,16 @@ export default function ProfileSettings({ setActive }) {
         </div>
         <div className="flex flex-col sm:flex-row gap-[2rem] items-center xl:items-start mt-[1.5rem] sm:mt-[2rem] profile-section ">
           <div className="flex flex-col h-[256px] w-[225px] overflow-hidden">
-            {console.log(responseData?.data?.data?.userDetails?.image)}
+            {console.log(responseData?.data?.userDetails?.userDetails?.image)}
             {profileImage && (
               <img
                 className={
                   "profile-img" + (responseData ? " block " : " hidden ")
                 }
                 src={
-                  responseData?.data?.data?.userDetails?.image &&
-                  responseData?.data?.data?.userDetails?.image
-                    ? responseData?.data?.data?.userDetails?.image
+                  responseData?.data?.userDetails?.userDetails?.image &&
+                  responseData?.data?.userDetails?.userDetails?.image
+                    ? responseData?.data?.userDetails?.userDetails?.image
                     : profileImg
                 }
                 alt="profile-img"
@@ -161,7 +161,7 @@ export default function ProfileSettings({ setActive }) {
       <div className="text-center  py-[30rem] md:py-[20rem]">
         <h1 className="text-5xl leading-[5rem]">
           <span className="text-red-700">Oops</span> Something's Wrong, <br />{" "}
-          With Status Code : {FrontendUserData.status}
+          With Status Code : {FrontendUserData?.status}
         </h1>
         <Link
           to="/searchResult"

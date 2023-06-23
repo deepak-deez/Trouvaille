@@ -107,7 +107,6 @@ export default function TripCategory({
 
   useEffect(() => {
     if (tripPackageData) {
-  
       tripPackageData &&
         tripPackageData?.data &&
         setAllPackagesData(
@@ -115,7 +114,7 @@ export default function TripCategory({
         );
     }
   }, [tripPackageData]);
-  console.log(allPackagesData, "allPackagesData");
+  // console.log(allPackagesData, "allPackagesData");
   const hideOnClickOutside = (e) => {
     if (refOne.current && !refOne.current.contains(e.target)) {
       setSortClicked(false);

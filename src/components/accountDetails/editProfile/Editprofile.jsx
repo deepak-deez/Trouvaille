@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./style.scss";
 // import { handleProfileImagetoUrl } from "./logic.js";
 import defaultProfileImage from "../../../assets/images/accountDetails/profileSettings/defaultProfileImage.png";
@@ -8,7 +8,8 @@ import editIcon from "../../../assets/images/accountDetails/profileSettings/edit
 import accountSettingsImgChange from "../../../assets/images/accountDetails/profileSettings/edit-img.svg";
 import axios from "axios";
 import ProfileSideBar from "../profileSideBar/ProfileSideBar";
-import { updateUserDetails } from "../../../redux/slices/userSlice";
+// import { updateUserDetails } from "../../../redux/slices/userSlice";
+import { updateUser } from "../../../redux/slices/userSlice";
 import SignOut from "../../SignOut/SignOut";
 import CountrySelector from "./CountrySelector";
 
@@ -22,6 +23,7 @@ export default function EditProfile({ setActive }) {
   const [uploadImgBtnDisplay, setUploadImgBtnDisplay] = useState(false);
   const [profileImg, setProfileImg] = useState();
   const [imageUrlState, setImageUrlState] = useState("");
+  const dispatch = useDispatch();
 
   const { FrontendUserData } = useSelector((state) => state.user);
 
@@ -31,35 +33,40 @@ export default function EditProfile({ setActive }) {
   const placeRef = useRef("");
   const genderRef = useRef("");
   const maritalStatusRef = useRef("");
-  const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/${FrontendUserData.data.userDetails.userType}/${FrontendUserData.data.userDetails._id}`;
+  // const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/${FrontendUserData.data.userDetails.userType}/${FrontendUserData.data.userDetails._id}`;
 
-  const userPLace = responseData?.data?.data?.userDetails?.place;
-  const userName = responseData?.data?.data?.userDetails?.name;
-  const userDOB = responseData?.data?.data?.userDetails?.DOB;
-  const userJoiningYear = responseData?.data?.data?.joiningYear;
-  const userGender = responseData?.data?.data?.userDetails?.gender;
-  const userMarried = responseData?.data?.data?.userDetails?.maritalStatus;
+  const userPLace = responseData?.data?.userDetails?.userDetails?.place;
+  const userName = responseData?.data?.userDetails?.userDetails?.name;
+  const userDOB = responseData?.data?.userDetails?.userDetails?.DOB;
+  const userJoiningYear = responseData?.data?.userDetails?.joiningYear;
+  const userGender = responseData?.data?.userDetails?.userDetails?.gender;
+  const userMarried =
+    responseData?.data?.userDetails?.userDetails?.maritalStatus;
   const updateDataHandler = async () => {
+    console.log(
+      "Before edit : ",
+      FrontendUserData.data.userDetails.userDetails.image
+    );
     try {
-      const getUpdatedData = await axios.get(dataBaseUrl);
+      // const getUpdatedData = await axios.get(dataBaseUrl);
 
-      setResponseData(getUpdatedData);
-      setProfileImg(getUpdatedData?.data?.data?.userDetails?.image);
-      setImageUrlState(getUpdatedData?.data?.data?.userDetails?.image);
+      setResponseData(FrontendUserData);
+      setProfileImg(FrontendUserData?.data?.userDetails?.userDetails?.image);
+      setImageUrlState(FrontendUserData?.data?.userDetails?.userDetails?.image);
     } catch (error) {
       setProfileImg(defaultProfileImage);
     }
   };
 
-  const getUserData = async () => {
-    const getUserDataRes = await axios.get(dataBaseUrl);
-    setUserFetchedData(getUserDataRes);
-    return getUserDataRes;
-  };
+  // const getUserData = async () => {
+  //   // const getUserDataRes = await axios.get(dataBaseUrl);
+  //   setUserFetchedData(getUserDataRes);
+  //   return getUserDataRes;
+  // };
 
   useEffect(() => {
     updateDataHandler();
-    getUserData();
+    // getUserData();
   }, []);
 
   const uploadImgHandler = (e) => {
@@ -110,20 +117,28 @@ export default function EditProfile({ setActive }) {
     // console.log(userData);
     console.log(FrontendUserData.data.userDetails._id);
 
-    const updateUrl = `${process.env.REACT_APP_API_HOST}update/Frontend-user/${FrontendUserData.data.userDetails._id}`;
+    // const updateUrl = `${process.env.REACT_APP_API_HOST}update/Frontend-user/${FrontendUserData.data.userDetails._id}`;
 
     console.log(placeRef);
     try {
       if (nameRef.current.value.length) {
         document.getElementById("nameField").textContent = "";
-        console.log(updateUrl, formData);
-
-        const response = await axios.post(updateUrl, formData, {
-          headers: {
-            "content-type": "multipart/form-data",
-          },
-        });
-        if (response.data.success) {
+        // console.log(updateUrl, formData);
+        console.log(FrontendUserData.data.userDetails.userType);
+        dispatch(
+          updateUser({
+            type: FrontendUserData?.data?.userDetails?.userType,
+            id: FrontendUserData?.data?.userDetails?._id,
+            formdata: formData,
+          })
+        );
+        console.log("After dispatch : ", FrontendUserData);
+        // const response = await axios.post(updateUrl, formData, {
+        //   headers: {
+        //     "content-type": "multipart/form-data",
+        //   },
+        // });
+        if (FrontendUserData?.success) {
           // updateDataHandler({ userDetails: response.data });
           setActive("profile");
         }
@@ -198,7 +213,7 @@ export default function EditProfile({ setActive }) {
           <div className="flex flex-col items-center sm:items-start gap-[1rem]">
             <input
               className="sm:text-[2.5rem] grey-text text-[1.5rem] bg-transparent"
-              defaultValue={FrontendUserData.data.userDetails.email}
+              defaultValue={FrontendUserData?.data?.userDetails?.email}
               disabled={true}
             />
             <div className="flex gap-[1rem] items-center">

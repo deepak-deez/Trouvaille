@@ -42,29 +42,36 @@ export const signIn = createAsyncThunk(
   }
 );
 
-export const getUser = createAsyncThunk(
-  `${nameSpace}/getUser`,
-  async (userData, { rejectWithValue }) => {
-    try {
-      const result = await axios.get(
-        `${API}database/${userData.userType}/${userData.id}`
-      );
-      if (result) return result;
-    } catch (err) {
-      return rejectWithValue(err.response.data.message);
-    }
-  }
-);
+// export const getUser = createAsyncThunk(
+//   `${nameSpace}/getUser`,
+//   async (userData, { rejectWithValue }) => {
+//     try {
+//       const result = await axios.get(
+//         `${API}database/${userData.userType}/${userData.id}`
+//       );
+//       if (result) return result;
+//     } catch (err) {
+//       return rejectWithValue(err.response.data.message);
+//     }
+//   }
+// );
 
 export const updateUser = createAsyncThunk(
   `${nameSpace}/updateUser`,
   async (userData, { rejectWithValue }) => {
     try {
-      const result = await axios.get(
-        `${API}/update/${userData.userType}/${userData.id}`,
+      console.log(`${API}update/${userData.type}/${userData.id}`);
+      const result = await axios.post(
+        `${API}update/${userData.type}/${userData.id}`,
         userData.formdata
       );
-      if (result) return result;
+      console.log(result);
+      if (result) {
+        console.log("Slice result :", result);
+        localStorage.removeItem("FrontendUserData");
+        localStorage.setItem("FrontendUserData", JSON.stringify(result.data));
+        return result;
+      }
     } catch (err) {
       return rejectWithValue(err.response.data.message);
     }
@@ -128,26 +135,26 @@ const userSlice = createSlice({
       state.success = false;
     });
 
-    // For get user details
-    builder.addCase(getUser.pending, (state, action) => {
-      state.success = false;
-      state.FrontendUserData = null;
-      state.loading = true;
-      state.error = null;
-    });
-    builder.addCase(getUser.fulfilled, (state, action) => {
-      console.log("Payload:", action.payload);
-      state.FrontendUserData = action.payload.data;
-      state.loading = false;
-      state.error = null;
-      state.success = true;
-    });
-    builder.addCase(getUser.rejected, (state, action) => {
-      state.FrontendUserData = null;
-      state.loading = false;
-      state.error = action.payload;
-      state.success = false;
-    });
+    // // For get user details
+    // builder.addCase(getUser.pending, (state, action) => {
+    //   state.success = false;
+    //   state.FrontendUserData = null;
+    //   state.loading = true;
+    //   state.error = null;
+    // });
+    // builder.addCase(getUser.fulfilled, (state, action) => {
+    //   console.log("Payload:", action.payload);
+    //   state.FrontendUserData = action.payload.data;
+    //   state.loading = false;
+    //   state.error = null;
+    //   state.success = true;
+    // });
+    // builder.addCase(getUser.rejected, (state, action) => {
+    //   state.FrontendUserData = null;
+    //   state.loading = false;
+    //   state.error = action.payload;
+    //   state.success = false;
+    // });
 
     // For update user details
     builder.addCase(updateUser.pending, (state, action) => {
