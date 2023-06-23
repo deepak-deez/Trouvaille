@@ -5,8 +5,8 @@ import "./style.scss";
 // import { handleProfileImagetoUrl } from "./logic.js";
 import defaultProfileImage from "../../../assets/images/accountDetails/profileSettings/defaultProfileImage.png";
 import editIcon from "../../../assets/images/accountDetails/profileSettings/edit.svg";
-import accountSettingsImgChange from "../../../assets/images/accountDetails/profileSettings/edit-img.svg";
-import axios from "axios";
+// import accountSettingsImgChange from "../../../assets/images/accountDetails/profileSettings/edit-img.svg";
+// import axios from "axios";
 import ProfileSideBar from "../profileSideBar/ProfileSideBar";
 // import { updateUserDetails } from "../../../redux/slices/userSlice";
 import { updateUser } from "../../../redux/slices/userSlice";
@@ -18,8 +18,8 @@ export default function EditProfile({ setActive }) {
     genders: ["Male", "Female", "Others"],
     maritalStatus: ["Single", "Married", "Divorced", "In a Relationship"],
   };
-  const [responseData, setResponseData] = useState();
-  const [userFetchedData, setUserFetchedData] = useState();
+  // const [responseData, setResponseData] = useState();
+  // const [userFetchedData, setUserFetchedData] = useState();
   const [uploadImgBtnDisplay, setUploadImgBtnDisplay] = useState(false);
   const [profileImg, setProfileImg] = useState();
   const [imageUrlState, setImageUrlState] = useState("");
@@ -35,28 +35,29 @@ export default function EditProfile({ setActive }) {
   const maritalStatusRef = useRef("");
   // const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/${FrontendUserData.data.userDetails.userType}/${FrontendUserData.data.userDetails._id}`;
 
-  const userPLace = responseData?.data?.userDetails?.userDetails?.place;
-  const userName = responseData?.data?.userDetails?.userDetails?.name;
-  const userDOB = responseData?.data?.userDetails?.userDetails?.DOB;
-  const userJoiningYear = responseData?.data?.userDetails?.joiningYear;
-  const userGender = responseData?.data?.userDetails?.userDetails?.gender;
+  const userPLace = FrontendUserData?.data?.userDetails?.userDetails?.place;
+  const userName = FrontendUserData?.data?.userDetails?.userDetails?.name;
+  const userDOB = FrontendUserData?.data?.userDetails?.userDetails?.DOB;
+  const userJoiningYear = FrontendUserData?.data?.userDetails?.joiningYear;
+  const userGender = FrontendUserData?.data?.userDetails?.userDetails?.gender;
   const userMarried =
-    responseData?.data?.userDetails?.userDetails?.maritalStatus;
-  const updateDataHandler = async () => {
-    console.log(
-      "Before edit : ",
-      FrontendUserData.data.userDetails.userDetails.image
-    );
-    try {
-      // const getUpdatedData = await axios.get(dataBaseUrl);
+    FrontendUserData?.data?.userDetails?.userDetails?.maritalStatus;
+  // const updateDataHandler = async () => {
+  //   console.log(
+  //     "Before edit : ",
+  //     FrontendUserData.data.userDetails.userDetails.image
+  //   );
 
-      setResponseData(FrontendUserData);
-      setProfileImg(FrontendUserData?.data?.userDetails?.userDetails?.image);
-      setImageUrlState(FrontendUserData?.data?.userDetails?.userDetails?.image);
-    } catch (error) {
-      setProfileImg(defaultProfileImage);
-    }
-  };
+  //   try {
+  //     // const getUpdatedData = await axios.get(dataBaseUrl);
+
+  //     // setResponseData(FrontendUserData);
+  //     setProfileImg(FrontendUserData?.data?.userDetails?.userDetails?.image);
+  //     setImageUrlState(FrontendUserData?.data?.userDetails?.userDetails?.image);
+  //   } catch (error) {
+  //     setProfileImg(defaultProfileImage);
+  //   }
+  // };
 
   // const getUserData = async () => {
   //   // const getUserDataRes = await axios.get(dataBaseUrl);
@@ -65,7 +66,12 @@ export default function EditProfile({ setActive }) {
   // };
 
   useEffect(() => {
-    updateDataHandler();
+    const img = FrontendUserData?.data?.userDetails?.userDetails?.image
+      ? FrontendUserData?.data?.userDetails?.userDetails?.image
+      : defaultProfileImage;
+    setProfileImg(img);
+    setImageUrlState(img);
+    // updateDataHandler();
     // getUserData();
   }, []);
 
