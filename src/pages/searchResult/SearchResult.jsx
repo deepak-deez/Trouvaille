@@ -4,19 +4,24 @@ import TripCategory from "../../components/searchResult/tripCategory/TripCategor
 import Header from "../../components/searchResult/header/Header";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import LoadingScreen from "../../components/loading/loadingScreen";
 
 export default function SearchResult() {
-  const { FrontendUserData, error,loading } = useSelector((state) => state.user);
-  const navigate = useNavigate()
-  useEffect(()=>{
-    if(!FrontendUserData)
-    navigate("/")
-  })
+  const { FrontendUserData, error, loading } = useSelector(
+    (state) => state.user
+  );
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!FrontendUserData) navigate("/");
+  });
 
   return (
-    <section className="search-result pb-[35rem] sm:pb-[20rem]">
-      <Header />
-      <TripCategory />
-    </section>
+    <>
+      {loading && <LoadingScreen />}
+      <section className="search-result pb-[35rem] sm:pb-[20rem]">
+        <Header />
+        <TripCategory />
+      </section>
+    </>
   );
 }

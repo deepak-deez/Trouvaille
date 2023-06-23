@@ -7,6 +7,7 @@ import arrow from "../../../assets/images/bookingForm/loginForm/arrow.svg";
 import Success from "../successBox/SuccessBox";
 import axios from "axios";
 import { validName } from "../../../constants/regex";
+import LoadingScreen from "../../loading/loadingScreen";
 import {
   createBooking,
   resetBooking,
@@ -17,7 +18,7 @@ const Details = (props) => {
   const userName = useRef();
   const dispatch = useDispatch();
 
-  const { bookingData } = useSelector((state) => state.booking);
+  const { bookingData, loading } = useSelector((state) => state.booking);
   const phoneNumberRef = useRef();
   const otherPassengerDetails = [];
   const bookingFormDetails = {
@@ -173,6 +174,7 @@ const Details = (props) => {
 
   return (
     <>
+      {loading && <LoadingScreen />}
       <section className="flex flex-col details-form justify-center items-center pb-[20rem]">
         <h2 className="md:text-[64px] text-center mt-[10px] lg:mt-[30px] text-[50px]">
           Details about you
