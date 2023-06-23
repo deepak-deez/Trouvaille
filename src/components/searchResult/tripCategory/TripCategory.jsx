@@ -110,7 +110,7 @@ export default function TripCategory({
       tripPackageData &&
         tripPackageData?.data &&
         setAllPackagesData(
-          tripPackageData?.data.filter((item) => item.status !== "In-Active")
+          tripPackageData?.data?.filter((item) => item.status !== "In-Active")
         );
     }
   }, [tripPackageData]);

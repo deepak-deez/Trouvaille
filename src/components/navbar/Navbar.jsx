@@ -172,6 +172,8 @@ export default function Navbar({ setActive }) {
             }}
           >
             {console.log(
+              FrontendUserData,
+              "image:",
               FrontendUserData?.data?.userDetails?.userDetails?.image
             )}
             <div className="rounded-[50%] border-salte-300 border-4">

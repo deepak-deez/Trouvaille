@@ -6,6 +6,7 @@ const API = process.env.REACT_APP_API_HOST;
 const nameSpace = "user";
 
 const initialState = {
+  updatedUserData: null,
   FrontendUserData: localStorage.getItem("FrontendUserData")
     ? JSON.parse(localStorage.getItem("FrontendUserData"))
     : null,
@@ -82,8 +83,8 @@ const userSlice = createSlice({
   name: nameSpace,
   initialState,
   reducers: {
-    resetState: (state, action) => {
-      state.success = action.payload.success;
+    updateFrontendUserData: (state, action) => {
+      state.FrontendUserData = state.updatedUserData;
     },
     updateUserDetails: (state) => {
       state.FrontendUserData = null;
@@ -159,19 +160,20 @@ const userSlice = createSlice({
     // For update user details
     builder.addCase(updateUser.pending, (state, action) => {
       state.success = false;
-      state.FrontendUserData = null;
+      // state.FrontendUserData = null;
+      state.updatedUserData = null;
       state.loading = true;
       state.error = null;
     });
     builder.addCase(updateUser.fulfilled, (state, action) => {
-      console.log("Payload:", action.payload);
-      state.FrontendUserData = action.payload.data;
+      console.log("Update payloadn:", action.payload);
+      state.updatedUserData = action.payload.data;
       state.loading = false;
       state.error = null;
       state.success = true;
     });
     builder.addCase(updateUser.rejected, (state, action) => {
-      state.FrontendUserData = null;
+      state.updatedUserData = null;
       state.loading = false;
       state.error = action.payload;
       state.success = false;
@@ -183,4 +185,4 @@ const userSlice = createSlice({
 // export const loadingState = (state) => state.user.loading;
 // export const errorState = (state) => state.user.error;
 export default userSlice.reducer;
-export const { resetState, updateUserDetails } = userSlice.actions;
+export const { updateFrontendUserData, updateUserDetails } = userSlice.actions;

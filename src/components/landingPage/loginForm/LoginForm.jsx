@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import eye from "../../../assets/images/landingPage/loginForm/eye.svg";
 import Cookies from "js-cookie";
 // import { logInUser } from "../../../redux/actions/userActions";
-import { signIn, resetState } from "../../../redux/slices/userSlice";
+import { signIn } from "../../../redux/slices/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import swal from "sweetalert2";
 import LoadingScreen from "../../loading/loadingScreen";
@@ -46,7 +46,10 @@ const LoginForm = () => {
       localStorage.setItem("password", passwordRef.current.value);
       // localStorage.setItem("token", userDetails?.data?.token);
       localStorage.setItem("id", FrontendUserData.data.userDetails._id);
-      localStorage.setItem("userType", FrontendUserData.data.userDetails.userType);
+      localStorage.setItem(
+        "userType",
+        FrontendUserData.data.userDetails.userType
+      );
       localStorage.setItem("rememberMe", checked);
     } else {
       localStorage.removeItem("email", emailRef.current.value);
@@ -84,10 +87,9 @@ const LoginForm = () => {
     }
   };
 
-  useEffect(()=>{
-   if(localStorage.getItem('FrontendUserData')) 
-    navigate("/searchResult");
-  },[])
+  useEffect(() => {
+    if (localStorage.getItem("FrontendUserData")) navigate("/searchResult");
+  }, []);
 
   useEffect(() => {
     console.log("User details : ", FrontendUserData);

@@ -11,7 +11,9 @@ import SignOut from "../../SignOut/SignOut";
 import ProfileSideBar from "../profileSideBar/ProfileSideBar";
 
 export default function ProfileSettings({ setActive }) {
-  const { FrontendUserData } = useSelector((state) => state.user);
+  const { updatedUserData, FrontendUserData } = useSelector(
+    (state) => state.user
+  );
 
   // console.log(
   //   "Profile:",
@@ -67,12 +69,15 @@ export default function ProfileSettings({ setActive }) {
         <div className="flex flex-col sm:flex-row gap-[2rem] items-center xl:items-start mt-[1.5rem] sm:mt-[2rem] profile-section ">
           <div className="flex flex-col h-[256px] w-[225px] overflow-hidden">
             {console.log(
-              FrontendUserData?.data?.userDetails?.userDetails?.image
+              FrontendUserData?.data?.userDetails?.userDetails?.image,
+              "Profile Image : ",
+              profileImage
             )}
             {profileImage && (
               <img
                 className={
-                  "profile-img" + (FrontendUserData ? " block " : " hidden ")
+                  "profile-img" +
+                  (FrontendUserData?.success ? " block " : " hidden ")
                 }
                 src={
                   FrontendUserData?.data?.userDetails?.userDetails?.image &&
