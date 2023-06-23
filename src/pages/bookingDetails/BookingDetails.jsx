@@ -23,9 +23,6 @@ export default function BookingDetails(props) {
   useEffect(() => {
     dispatch(getUserBookingById(userDetail));
   }, []);
-  console.log(bookingData?.data[0]);
-
-  console.log(userDetail);
 
   // useEffect(() => {
   //   getAllApiData(

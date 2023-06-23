@@ -13,7 +13,6 @@ import { useSelector } from "react-redux";
 import NotificationPopUp from "../viewNotifications/notificationPopUp/NotificationPopUp";
 import socketIOClient from "socket.io-client";
 import axios from "axios";
-import { set } from "date-fns";
 
 const ENDPOINT = "http://localhost:7000";
 
@@ -24,36 +23,26 @@ export default function Navbar({ setActive }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const currentPageLocation = useLocation().pathname;
   const { userDetails } = useSelector((state) => state.user);
-  const [statusNotis, setStatusNotis] = useState("");
   const socket = socketIOClient(ENDPOINT);
-  const userId = localStorage.getItem("id");
   const refNoti = useRef(null);
-  const [notisUnread, setNotisUnread] = useState();
+  const [notisUnread, setNotisUnread] = useState([]);
+  const [statusNotis, setStatusNotis] = useState("");
 
   useEffect(() => {
     if (!statusNotis) {
       getAllNotifications();
     }
+
     socket.on(localStorage.getItem("id"), (res) => {
-      console.log("Recieved By Only Me : ", res);
       setStatusNotis(res);
-      const unread = res?.data?.find(({ readStatus }) => {
-        console.log("Data : ", readStatus);
-        return readStatus === false;
-      });
-      setNotisUnread(unread);
+
+      setNotisUnread(
+        res?.data?.filter((data) => {
+          return data.readStatus === false;
+        })
+      );
     });
-
-    console.log("Status : ", statusNotis);
-    console.log("Unread : ", notisUnread);
   }, [socket]);
-
-  useEffect(() => {
-    console.log(
-      notisUnread,
-      " : Hey asdkjaduasjkdgwfashduasudqgwowidhjasoudguasgdashdnails"
-    );
-  }, [notisUnread]);
 
   const getAllNotifications = async () => {
     const allNotisApi =
@@ -63,19 +52,13 @@ export default function Navbar({ setActive }) {
 
     const response = await axios.get(allNotisApi);
 
-    setStatusNotis(response?.data, ": Status Notis");
+    setStatusNotis(response?.data);
 
-    const unread = response?.data?.find(({ readStatus }) => {
-      console.log(
-        readStatus,
-        " : data hdasjbdaskjdhbaskdhqwldhnlqjdnakjbdkasbdhudklasndhlasihdnlai"
-      );
-      return readStatus === false;
-    });
-
-    setNotisUnread(unread);
-
-    console.log("Response : ", response.data);
+    setNotisUnread(
+      response?.data?.data.filter((data) => {
+        return data.readStatus === false;
+      })
+    );
   };
 
   useEffect(() => {
@@ -176,7 +159,7 @@ export default function Navbar({ setActive }) {
 
           <div ref={refNoti} className="my-auto relative hidden xl:block">
             <p className="absolute text-center pt-1 h-8 w-8 bg-green-600 rounded-full left-[-1rem] text-white font-bold">
-              {notisUnread ? notisUnread.length : "0"}
+              {notisUnread.length}
             </p>
             <button onClick={handleNotificationPopUp} className="my-auto">
               <img
@@ -189,6 +172,8 @@ export default function Navbar({ setActive }) {
               <NotificationPopUp
                 setShowNotis={setShowNotis}
                 statusNotis={statusNotis?.data}
+                notisUnread={notisUnread}
+                setNotisUnread={setNotisUnread}
               />
             </div>
           </div>
