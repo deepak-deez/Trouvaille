@@ -5,8 +5,10 @@ $font-name-montserrat: "Montserrat", sans-serif;
 $font-name-roboto: "Roboto", sans-serif;
 $font-name-poppins: "Poppins", sans-serif;
 $font-color-grey: #444a61;
+$font-color-white: aliceblue;
 $font-color-grey-v2: #ded3cf;
 $button-color-green: #219653;
+$button-color-brown: #863307;
 $button-color-green-v2: #022f15;
 
 .landing-page {
@@ -35,6 +37,15 @@ $button-color-green-v2: #022f15;
       background: rgba(255, 255, 255, 0.78);
       border-radius: 21px;
     }
+    .captcha-field {
+      background: rgba(255, 255, 255, 0.78);
+      border-radius: 10px;
+    }
+    .captcha-box {
+      background: rgba(255, 255, 255, 0.78);
+      border-top-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+    }
 
     .grey-text {
       color: $font-color-grey-v2;
@@ -60,6 +71,12 @@ $button-color-green-v2: #022f15;
     .continue-button {
       background: $button-color-green;
       border-radius: 22px;
+      color: white;
+    }
+
+    .submit-button {
+      background: $button-color-brown;
+      border-radius: 10px;
       color: white;
     }
     .continue-button:hover {
