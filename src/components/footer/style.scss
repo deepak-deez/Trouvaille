@@ -6,8 +6,9 @@ body {
 }
 footer {
   color: $color-grey-footer;
-  position: absolute;
-  bottom: 0;
+  background-image: url("../../assets/images/footer/footerBg.jpg");
+  background-size: cover;
+  background-position-y: 80%;
   width: 100%;
   font-weight: 500;
   font-size: 20px;

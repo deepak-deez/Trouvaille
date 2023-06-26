@@ -65,7 +65,7 @@ export default function ProfileSettings({ setActive }) {
           <SignOut />
         </div>
         <div className="flex flex-col sm:flex-row gap-[2rem] items-center xl:items-start mt-[1.5rem] sm:mt-[2rem] profile-section ">
-          <div className="flex flex-col h-[256px] w-[225px] profile-img overflow-hidden">
+          <div className="flex flex-col h-[180px] w-[150px] profile-img overflow-hidden">
             {console.log(responseData?.data?.data?.userDetails?.image)}
             {profileImage && (
               <img
@@ -89,15 +89,15 @@ export default function ProfileSettings({ setActive }) {
             </h4>
           </div>
           <div className="flex flex-col items-center sm:items-start gap-[1rem]">
-            <h2 className="sm:text-[2.5rem] grey-text text-[1.5rem]">
+            <h2 className="grey-text">
               {FrontendUserData.data.userDetails.email}
             </h2>
             <div className="flex gap-[1rem] items-center">
-              <span className="lg:text-[1.6rem] grey-text">
+              <span className=" grey-text">
                 {userLcoation ? userLcoation : "Location"}
               </span>
               <i className="fa-solid fa-circle text-[0.8rem]"></i>
-              <span className="lg:text-[1.6rem] grey-text">
+              <span className=" grey-text">
                 Joined in {userJoiningYear ? userJoiningYear : "2023"}
               </span>
             </div>
@@ -107,8 +107,8 @@ export default function ProfileSettings({ setActive }) {
               }}
             >
               <div className="flex gap-[1.3rem] items-center">
-                <img src={editIcon} alt="edit-icon" />
-                <p className="lg:text-[1.6rem] edit-profile-link underline grey-text">
+                <img src={editIcon} alt="edit-icon" className="w-6 h-6" />
+                <p className="edit-profile-link underline grey-text">
                   Edit Profile
                 </p>
               </div>
@@ -122,30 +122,30 @@ export default function ProfileSettings({ setActive }) {
             <h5 className="mb-[2rem] text-[1rem]">
               Basic info, for a faster booking experience
             </h5>
-            <h4 className="mb-[1.5rem] grey-text">Name</h4>
+            <h4 className="mb-[1rem] grey-text">Name</h4>
             <input
-              className="mb-[2.6rem] grey-text"
+              className="mb-[1rem] grey-text"
               defaultValue={userName ? userName : ""}
               placeholder="Your Name"
               disabled={true}
             />
-            <h4 className="mb-[1.5rem] grey-text">Date</h4>
+            <h4 className="mb-[1rem] grey-text">Date</h4>
             <input
-              className="mb-[2.6rem] grey-text"
+              className="mb-[1rem] grey-text"
               defaultValue={userDOB ? userDOB : ""}
               placeholder="Your DOB"
               disabled={true}
             />
-            <h4 className="mb-[1.5rem] grey-text">Gender</h4>
+            <h4 className="mb-[1rem] grey-text">Gender</h4>
             <input
-              className="mb-[2.6rem] grey-text"
+              className="mb-[1rem] grey-text"
               defaultValue={userGender ? userGender : ""}
               placeholder="Your Gender"
               disabled={true}
             />
-            <h4 className="mb-[1.5rem] grey-text">Marital Status</h4>
+            <h4 className="mb-[1rem] grey-text">Marital Status</h4>
             <input
-              className="mb-[2.6rem] grey-text"
+              className="mb-[1rem] grey-text"
               defaultValue={userMaritalStatus ? userMaritalStatus : ""}
               placeholder="Your Martial Status"
               disabled={true}

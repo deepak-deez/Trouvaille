@@ -8,6 +8,7 @@ $font-color-grey: #444a61;
     .profile-section {
       h2 {
         font-weight: 600;
+        font-size: 20px;
       }
       .profile-img {
         border-radius: 26.0741px;
@@ -22,11 +23,16 @@ $font-color-grey: #444a61;
         background-color: rgba(255, 255, 255, 0.588);
         padding: 14px 25px;
         border-radius: 0.6rem;
+        font-size: 16px;
       }
       input {
         background-color: rgba(255, 255, 255, 0.588);
         padding: 14px 25px;
         border-radius: 0.6rem;
+        font-size: 16px;
+      }
+      h4 {
+        font-size: 20px;
       }
     }
   }

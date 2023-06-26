@@ -7,7 +7,7 @@ export default function Faqs(props) {
 
   return (
     <li
-      className="flex flex-col text-[14px] md:text-[18px] gap-5 cursor-pointer"
+      className="flex flex-col text-[14px] md:text-[18px] gap-5 cursor-pointer break-all"
       onClick={() => {
         setDropdown(!dropdown);
       }}
@@ -26,7 +26,7 @@ export default function Faqs(props) {
           <img src={dropdownIcon} alt="dropdownicon" />
         </button>
       </div>
-      <p className={dropdown ? "hidden" : "block"}>{props.answer}</p>
+      <p className={dropdown ? "hidden" : "block break-all"}>{props.answer}</p>
     </li>
   );
 }

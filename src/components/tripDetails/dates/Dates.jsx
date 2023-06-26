@@ -37,7 +37,7 @@ export default function Dates(props) {
         <div className="flex flex-col  gap-0 absolute ">
           <div className="up-arrow ml-5"></div>
           <div className="  bg-[#a53c27f0] text-white z-[2] p-5  rounded-2xl">
-            <h3 className=" activities text-[1rem]  font-extrabold ">
+            <h3 className=" activities text-[1rem]  font-extrabold  break-all">
               {props.detail}
             </h3>
           </div>

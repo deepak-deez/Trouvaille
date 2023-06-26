@@ -10,14 +10,7 @@ import {
   mediumRegexPassword,
   strongRegexPassword,
 } from "../../../constants/regex";
-
-// import {
-//   userDetailsState,
-//   loadingState,
-//   errorState,
-// } from "../../../redux/slices/userSlice";
 import swal from "sweetalert2";
-import { useSlider } from "@mui/base";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -76,13 +69,6 @@ const SignUp = () => {
     }
   };
 
-  // const userDetails = useSelector(userDetailsState);
-  // const loading = useSelector(loadingState);
-  // const error = useSelector(errorState);
-  // useEffect(() => {
-  //   if (userDetails !== null) dispatch(signUp(newUserDetails));
-  // }, [userDetails, dispatch]);
-
   const handleCreateNewAccount = async () => {
     if (
       !emailRef.current.value.length ||
@@ -107,17 +93,6 @@ const SignUp = () => {
       newUserDetails["password"] = passowrdRef.current.value;
 
       dispatch(signUp(newUserDetails));
-
-      // const response = await axios.post(
-      //   `${process.env.REACT_APP_API_HOST}register/Frontend-user`,
-      //   newUserDetails
-      // );
-
-      // setApiMessage(response?.data?.message);
-
-      // if (response?.data?.success) {
-      //   navigate("/");
-      // }
     } else {
       setDifferentPassword(true);
     }
@@ -175,25 +150,15 @@ const SignUp = () => {
     }
   }, [error]);
 
-  // console.log(
-  //   "UserDetails:",userDetails,
-  //   "Success : ",
-  //   success,
-  //   "ERROR: ",
-  //   error,
-  //   "Loading: ",
-  //   loading
-  // );
-
   return (
-    <header className="flex flex-col signup-form justify-center items-center">
-      <p className="md:text-[34px]">Sign up</p>
-      <h2 className="md:text-[64px] text-center mt-[10px] lg:mt-[30px] text-[50px]">
+    <header className=" signup-form justify-center items-center my-auto] h-screen">
+      <p className="md:text-[28px] text-center">Sign up</p>
+      <h2 className="md:text-[40px] text-center mt-[10px] lg:mt-[30px] text-[32px]">
         Welcome to Trouvaille
       </h2>
-      <div className="flex flex-col gap-[30px] lg:w-[975px] w-[90%] md:px-[30px] md:py-[30px] mt-[15px] signup-details px-[25px] py-[15px] lg:py-[67px] lg:px-[97px] justify-center">
+      <div className="mx-auto flex flex-col gap-[15px] lg:w-[900px] w-[90%] md:px-[30px] md:py-[30px] mt-[15px] signup-details px-[25px] py-[15px] lg:py-[50px] lg:px-[60px] justify-center ">
         <input
-          className="input-fields text-[20px] lg:px-[39px] px-[15px] py-[20px] lg:py-[25px] bg-transparent w-[100%]"
+          className="input-fields py-[1rem] px-[1.5rem] bg-transparent w-[100%]"
           type="text"
           placeholder="Email ID"
           ref={emailRef}
@@ -204,7 +169,7 @@ const SignUp = () => {
           className="text-red-600 bg-transparent text-xl"
         ></h4>
         <input
-          className=" input-fields phone-field text-[20px] lg:px-[39px] px-[15px] py-[20px] lg:py-[25px]  w-[100%]"
+          className=" input-fields phone-field  py-[1rem] px-[1.5rem]  w-[100%]"
           type="number"
           placeholder="Phone Number"
           ref={phoneNoRef}
@@ -214,9 +179,9 @@ const SignUp = () => {
           id="validPhone"
           className="text-red-600 bg-transparent text-xl"
         ></h4>
-        <div className=" input-fields lg:px-[39px] px-[15px]  flex flex-row items-center justify-between">
+        <div className=" input-fields px-[25px]  flex flex-row items-center justify-between">
           <input
-            className="bg-transparent text-[20px] lg:py-[25px] py-[20px] w-[100%] password-field"
+            className="bg-transparent py-[1rem]  w-[100%] password-field"
             type={showPassword ? "" : "password"}
             placeholder="Password"
             ref={passowrdRef}
@@ -238,9 +203,9 @@ const SignUp = () => {
             (pwdError ? "text-red-700" : "text-green-700")
           }
         ></h4>
-        <div className=" input-fields lg:px-[39px] px-[15px] flex flex-row items-center justify-between">
+        <div className=" input-fields px-[25px] flex flex-row items-center justify-between">
           <input
-            className="py-[20px] text-[20px] w-[100%] lg:py-[25px] bg-transparent password-field"
+            className="py-[1rem]  w-[100%]  bg-transparent password-field"
             type={showConfirmPassword ? "" : "password"}
             placeholder="Confirm Password"
             ref={confirmPasswordRef}
@@ -261,7 +226,7 @@ const SignUp = () => {
         ></h4>
 
         <button
-          className="px-[15px] py-[20px] lg:py-[26px] text-center continue-button "
+          className="px-[15px] py-[20px]  text-center continue-button "
           onClick={handleCreateNewAccount}
         >
           CONTINUE
