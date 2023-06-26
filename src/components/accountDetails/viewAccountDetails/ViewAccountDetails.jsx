@@ -9,7 +9,7 @@ export default function ViewAccountDetails({ setActive }) {
   const { FrontendUserData } = useSelector((state) => state.user);
 
   let userData;
-  if (FrontendUserData.success) {
+  if (FrontendUserData?.success) {
     console.log(FrontendUserData);
     userData = {
       email: FrontendUserData?.data?.userDetails?.email,
@@ -18,7 +18,7 @@ export default function ViewAccountDetails({ setActive }) {
     };
   }
 
-  if (FrontendUserData.success) {
+  if (FrontendUserData?.success) {
     // const userData = {
     //   email: userDetails?.data?.data.userDetails?.email,
     //   phNumber: userDetails?.data?.data.userDetails?.phone,

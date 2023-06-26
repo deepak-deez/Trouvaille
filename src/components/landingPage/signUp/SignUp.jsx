@@ -4,7 +4,7 @@ import "./style.scss";
 import eye from "../../../assets/images/landingPage/loginForm/eye.svg";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { signUp, resetState } from "../../../redux/slices/userSlice";
+import { signUp, updateUserDetails } from "../../../redux/slices/userSlice";
 import {
   validEmail,
   mediumRegexPassword,
@@ -17,6 +17,7 @@ import {
 //   errorState,
 // } from "../../../redux/slices/userSlice";
 import swal from "sweetalert2";
+import SweetAlert from "../../alert/sweetAlert";
 import { useSlider } from "@mui/base";
 
 const generateCaptcha = () => {
@@ -78,11 +79,11 @@ const SignUp = () => {
   const handlePasswordCheck = () => {
     try {
       if (passowrdRef.current.value === confirmPasswordRef.current.value) {
-        setDifferentPassword(true);
+        setDifferentPassword(false);
         document.getElementById("confirmPassword").textContent = "";
       } else {
-        setDifferentPassword(false);
-        throw new Error("Passwords doesn't match!");
+        setDifferentPassword(true);
+        throw new Error("Passwords don't match!");
       }
     } catch (err) {
       document.getElementById("confirmPassword").textContent = err.message;
@@ -124,18 +125,18 @@ const SignUp = () => {
       !passowrdRef.current.value.length ||
       !confirmPasswordRef.current.value.length
     ) {
-      swal.fire({
-        position: "center",
-        icon: "warning",
-        title: "Warning",
-        text: "Fields cannot be Empty!!",
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-      });
+      SweetAlert("warning", "", "Fields cannot be Empty!");
+      // swal.fire({
+      //   position: "center",
+      //   icon: "warning",
+      //   title: "Warning",
+      //   text: "Fields cannot be Empty!!",
+      //   showConfirmButton: false,
+      //   timer: 2000,
+      //   timerProgressBar: true,
+      // });
     } else if (!differentPassword && !pwdError) {
-      setDifferentPassword(false);
-
+      console.log("asddsadsaii");
       newUserDetails["email"] = emailRef.current.value;
       newUserDetails["phone"] = phoneNoRef.current.value;
       newUserDetails["password"] = passowrdRef.current.value;
@@ -152,8 +153,10 @@ const SignUp = () => {
       // if (response?.data?.success) {
       //   navigate("/");
       // }
+      console.log(FrontendUserData);
     } else {
-      setDifferentPassword(true);
+      console.log(differentPassword, pwdError);
+      console.log("else");
     }
   };
 
@@ -178,34 +181,40 @@ const SignUp = () => {
   };
   // navigate('/')
 
+  console.log(FrontendUserData);
   useEffect(() => {
-    if (success) {
+    // console.log(FrontendUserData);
+    if (FrontendUserData?.success) {
+      console.log(FrontendUserData.message);
+      // SweetAlert("success", FrontendUserData.message);
       swal.fire({
         position: "center",
         icon: "success",
         title: "Success",
-        text: FrontendUserData,
+        text: FrontendUserData.message,
         showConfirmButton: false,
         timer: 2000,
         timerProgressBar: true,
       });
-      dispatch(resetState({ success: false }));
+      dispatch(updateUserDetails());
       setTimeout(() => {
         navigate("/");
       }, 2000);
     }
-  }, [success]);
+  }, [FrontendUserData]);
 
   useEffect(() => {
     if (error) {
-      setApiMessage(error);
-      swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: error,
-        timer: "2500",
-        buttons: true,
-      });
+      console.log("error: ", error);
+      SweetAlert("error", error);
+      // setApiMessage(error);
+      // swal.fire({
+      //   icon: "error",
+      //   title: "Oops...",
+      //   text: error,
+      //   timer: "2500",
+      //   buttons: true,
+      // });
     }
   }, [error]);
 

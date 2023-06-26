@@ -4,9 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import eye from "../../../assets/images/landingPage/loginForm/eye.svg";
 import Cookies from "js-cookie";
 // import { logInUser } from "../../../redux/actions/userActions";
-import { signIn, resetState } from "../../../redux/slices/userSlice";
+import { signIn } from "../../../redux/slices/userSlice";
 import { useSelector, useDispatch } from "react-redux";
-import swal from "sweetalert2";
+// import swal from "sweetalert2";
+import SweetAlert from "../../alert/sweetAlert";
 import LoadingScreen from "../../loading/loadingScreen";
 import { validEmail } from "../../../constants/regex";
 
@@ -46,7 +47,10 @@ const LoginForm = () => {
       localStorage.setItem("password", passwordRef.current.value);
       // localStorage.setItem("token", userDetails?.data?.token);
       localStorage.setItem("id", FrontendUserData.data.userDetails._id);
-      localStorage.setItem("userType", FrontendUserData.data.userDetails.userType);
+      localStorage.setItem(
+        "userType",
+        FrontendUserData.data.userDetails.userType
+      );
       localStorage.setItem("rememberMe", checked);
     } else {
       localStorage.removeItem("email", emailRef.current.value);
@@ -73,21 +77,21 @@ const LoginForm = () => {
       // console.log("User input : ",emailRef.current.value, passwordRef.current.value);
       dispatch(signIn(accDetails));
     } else {
-      swal.fire({
-        icon: "warning",
-        title: "Warning",
-        text: "Fields cannot be Empty",
-        timer: "2500",
-        buttons: true,
-      });
+      SweetAlert("warning", "", "Fields cannot be Empty!");
+      // swal.fire({
+      //   icon: "warning",
+      //   title: "Warning",
+      //   text: "Fields cannot be Empty",
+      //   timer: "2500",
+      //   buttons: true,
+      // });
       setEmptyFieldsMessage(true);
     }
   };
 
-  useEffect(()=>{
-   if(localStorage.getItem('FrontendUserData')) 
-    navigate("/searchResult");
-  },[])
+  useEffect(() => {
+    if (localStorage.getItem("FrontendUserData")) navigate("/searchResult");
+  }, []);
 
   useEffect(() => {
     console.log("User details : ", FrontendUserData);
@@ -122,15 +126,17 @@ const LoginForm = () => {
     );
     if (error) {
       // setApiMessage(error.response.data.message);
-      swal.fire({
-        position: "center",
-        width: "40vh",
-        icon: "error",
-        title: "failed",
-        text: error,
-        timer: "2500",
-        buttons: true,
-      });
+      console.log(error);
+      SweetAlert("error", error);
+      // swal.fire({
+      //   position: "center",
+      //   width: "40vh",
+      //   icon: "error",
+      //   title: "failed",
+      //   text: error,
+      //   timer: "2500",
+      //   buttons: true,
+      // });
     }
   }, [error]);
 

@@ -16,6 +16,7 @@ import {
   getFilteredFeature,
 } from "../../../redux/slices/featureSlice";
 import { getAllPackages } from "../../../redux/slices/tripPackageSlice";
+import LoadingScreen from "../../loading/loadingScreen";
 
 export default function TripCategory({
   checkinDate,
@@ -26,7 +27,9 @@ export default function TripCategory({
 }) {
   const { featureData } = useSelector((state) => state.feature);
   const { filterFeatureData } = useSelector((state) => state.feature);
-  const { tripPackageData } = useSelector((state) => state.tripPackage);
+  const { tripPackageData, loading } = useSelector(
+    (state) => state.tripPackage
+  );
   const [allPackagesData, setAllPackagesData] = useState();
   const [allTripCategory, setAllTripCategory] = useState();
   const [showFilter, setShowFilter] = useState(false);
@@ -107,15 +110,14 @@ export default function TripCategory({
 
   useEffect(() => {
     if (tripPackageData) {
-  
       tripPackageData &&
         tripPackageData?.data &&
         setAllPackagesData(
-          tripPackageData?.data.filter((item) => item.status !== "In-Active")
+          tripPackageData?.data?.filter((item) => item.status !== "In-Active")
         );
     }
   }, [tripPackageData]);
-  console.log(allPackagesData, "allPackagesData");
+  // console.log(allPackagesData, "allPackagesData");
   const hideOnClickOutside = (e) => {
     if (refOne.current && !refOne.current.contains(e.target)) {
       setSortClicked(false);
@@ -188,122 +190,125 @@ export default function TripCategory({
     handleFilterRequirements();
   };
   return (
-    <section className="trip-category">
-      <div className="flex justify-center 2xl:justify-between flex-wrap gap-7 lg:gap-12 trip-category-icons ">
-        {allTripCategory?.map((response, index) => {
-          return (
-            <div
-              onClick={(e) => handleClickedCategory(e, response.title)}
-              className=" p-1 category-section lg:p-3 flex flex-col justify-end  "
-              key={index}
-            >
+    <>
+      {loading && <LoadingScreen />}
+      <section className="trip-category">
+        <div className="flex justify-center 2xl:justify-between flex-wrap gap-7 lg:gap-12 trip-category-icons ">
+          {allTripCategory?.map((response, index) => {
+            return (
               <div
-                className="category border-[5px] rounded-[2.5rem] cursor-pointer transition-all duration-200 w-40 h-40 flex justify-center"
-                data-category-selected={response.title}
+                onClick={(e) => handleClickedCategory(e, response.title)}
+                className=" p-1 category-section lg:p-3 flex flex-col justify-end  "
+                key={index}
               >
-                <img
-                  src={response.icon}
-                  alt={response.title}
-                  onError={({ currentTarget }) => {
-                    currentTarget.onerror = null; // prevents looping
-                    currentTarget.src = defaultCategoryImg;
-                  }}
-                  className="category-icon saturate-0 m-8 lg:m-0 lg:p-8"
-                />
+                <div
+                  className="category border-[5px] rounded-[2.5rem] cursor-pointer transition-all duration-200 w-40 h-40 flex justify-center"
+                  data-category-selected={response.title}
+                >
+                  <img
+                    src={response.icon}
+                    alt={response.title}
+                    onError={({ currentTarget }) => {
+                      currentTarget.onerror = null; // prevents looping
+                      currentTarget.src = defaultCategoryImg;
+                    }}
+                    className="category-icon saturate-0 m-8 lg:m-0 lg:p-8"
+                  />
+                </div>
+                <p className="text-center text-2xl category-title">
+                  {response.title}
+                </p>
               </div>
-              <p className="text-center text-2xl category-title">
-                {response.title}
-              </p>
-            </div>
-          );
-        })}
-      </div>
-      <div className="my-[3.75rem] flex justify-start relative items-start text-[26px] gap-[4.75rem] ">
-        <div className="flex flex-col gap-[1.5rem] ">
-          <button onClick={sortTrips} ref={refOne}>
-            <div className="flex justify-center relative gap-[1.5rem]">
-              <img src={sortIcon} alt="sort-icon" />
-              <p className="">Sort</p>
+            );
+          })}
+        </div>
+        <div className="my-[3.75rem] flex justify-start relative items-start text-[26px] gap-[4.75rem] ">
+          <div className="flex flex-col gap-[1.5rem] ">
+            <button onClick={sortTrips} ref={refOne}>
+              <div className="flex justify-center relative gap-[1.5rem]">
+                <img src={sortIcon} alt="sort-icon" />
+                <p className="">Sort</p>
+              </div>
+            </button>
+            <ul
+              className={
+                "bg-transparent flex flex-col gap-[1rem] sort-list absolute z-50 top-[3rem] p-10 outline-none openning-animation-y " +
+                (sortClicked ? "flex  " : "hidden") +
+                (closingAnimationSort ? " closing-animation-y " : "")
+              }
+            >
+              <li
+                data-sort-category={"price"}
+                data-sort-order={"ascending"}
+                onClick={handleSortSelection}
+              >
+                By Price - Low to High
+              </li>
+              <li
+                data-sort-category={"price"}
+                data-sort-order={"descending"}
+                onClick={handleSortSelection}
+              >
+                By Price - High to Low
+              </li>
+              <li
+                data-sort-category={"name"}
+                data-sort-order={"ascending"}
+                onClick={handleSortSelection}
+              >
+                By Name - A - Z
+              </li>
+              <li
+                data-sort-category={"name"}
+                data-sort-order={"descending"}
+                onClick={handleSortSelection}
+              >
+                By Name - Z - A
+              </li>
+            </ul>
+          </div>
+          <button onClick={handleFilterStateChange}>
+            <div className="flex gap-[1.5rem]">
+              <img src={filterIcon} alt="filter-icon" />
+              <p className="">Filter</p>
             </div>
           </button>
-          <ul
+        </div>
+        <div className={"flex flex-col xl:flex-row gap-[2rem] "}>
+          <div
             className={
-              "bg-transparent flex flex-col gap-[1rem] sort-list absolute z-50 top-[3rem] p-10 outline-none openning-animation-y " +
-              (sortClicked ? "flex  " : "hidden") +
-              (closingAnimationSort ? " closing-animation-y " : "")
+              "trip-category-filters flex flex-col lg:flex-row justify-between xl:justify-normal xl:flex-col gap-5 xl:gap-20 xl:w-[25%] p-10 lg:p-10 2xl:p-[2rem] xl:pb-10 xl:h-[56rem] overflow-y-scroll bg-[#212b33] rounded-[2rem]  openning-animation-y " +
+              (showFilter ? "" : "hidden") +
+              (closingAnimation ? " closing-animation-y " : "")
             }
           >
-            <li
-              data-sort-category={"price"}
-              data-sort-order={"ascending"}
-              onClick={handleSortSelection}
-            >
-              By Price - Low to High
-            </li>
-            <li
-              data-sort-category={"price"}
-              data-sort-order={"descending"}
-              onClick={handleSortSelection}
-            >
-              By Price - High to Low
-            </li>
-            <li
-              data-sort-category={"name"}
-              data-sort-order={"ascending"}
-              onClick={handleSortSelection}
-            >
-              By Name - A - Z
-            </li>
-            <li
-              data-sort-category={"name"}
-              data-sort-order={"descending"}
-              onClick={handleSortSelection}
-            >
-              By Name - Z - A
-            </li>
-          </ul>
-        </div>
-        <button onClick={handleFilterStateChange}>
-          <div className="flex gap-[1.5rem]">
-            <img src={filterIcon} alt="filter-icon" />
-            <p className="">Filter</p>
+            <FilterCategories
+              filterRequirements={filterRequirements}
+              setFilterRequirements={setFilterRequirements}
+            />
           </div>
-        </button>
-      </div>
-      <div className={"flex flex-col xl:flex-row gap-[2rem] "}>
-        <div
-          className={
-            "trip-category-filters flex flex-col lg:flex-row justify-between xl:justify-normal xl:flex-col gap-5 xl:gap-20 xl:w-[25%] p-10 lg:p-10 2xl:p-[2rem] xl:pb-10 xl:h-[56rem] overflow-y-scroll bg-[#212b33] rounded-[2rem]  openning-animation-y " +
-            (showFilter ? "" : "hidden") +
-            (closingAnimation ? " closing-animation-y " : "")
-          }
-        >
-          <FilterCategories
-            filterRequirements={filterRequirements}
-            setFilterRequirements={setFilterRequirements}
-          />
-        </div>
 
-        <div
-          className={
-            "trip-category-filter-results all-trip-list grid  grid-flow-col overflow-scroll gap-[2.2rem] md:h-[56rem] overflow-y-scroll px-5 transition-all duration-300" +
-            (showFilter ? " xl:w-[75%]  " : "")
-          }
-        >
-          {showMore
-            ? allPackagesData &&
-              allPackagesData?.slice(0, 8).map((data, index) => {
-                return <TripCard data={data} key={index} />;
-              })
-            : allPackagesData &&
-              allPackagesData?.map((data, index) => {
-                return <TripCard data={data} key={index} />;
-              })}
+          <div
+            className={
+              "trip-category-filter-results all-trip-list grid  grid-flow-col overflow-scroll gap-[2.2rem] md:h-[56rem] overflow-y-scroll px-5 transition-all duration-300" +
+              (showFilter ? " xl:w-[75%]  " : "")
+            }
+          >
+            {showMore
+              ? allPackagesData &&
+                allPackagesData?.slice(0, 8).map((data, index) => {
+                  return <TripCard data={data} key={index} />;
+                })
+              : allPackagesData &&
+                allPackagesData?.map((data, index) => {
+                  return <TripCard data={data} key={index} />;
+                })}
+          </div>
         </div>
-      </div>
-      <div className="flex justify-end mt-[5rem] show-more">
-        <p onClick={showMoreToggler}>{showMore ? "See More" : "See Less"}</p>
-      </div>
-    </section>
+        <div className="flex justify-end mt-[5rem] show-more">
+          <p onClick={showMoreToggler}>{showMore ? "See More" : "See Less"}</p>
+        </div>
+      </section>
+    </>
   );
 }

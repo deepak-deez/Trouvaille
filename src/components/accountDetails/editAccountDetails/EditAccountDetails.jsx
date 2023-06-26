@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./style.scss";
 import axios from "axios";
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
+import SweetAlert from "../../alert/sweetAlert";
 import ProfileSideBar from "../profileSideBar/ProfileSideBar";
 import SignOut from "../../SignOut/SignOut";
 import {
@@ -71,25 +72,34 @@ export default function EditAccountDetails({ setActive }) {
     const verifyOldPassUrl = `${process.env.REACT_APP_API_HOST}login/${FrontendUserData.data.userDetails.userType}`;
     const updateUPassUrl = `${process.env.REACT_APP_API_HOST}set-password/${FrontendUserData.data.userDetails.userType}`;
     if (newPasswordValid && confirmPasswordValid && !pwdError) {
-      const checkOldPass = await axios.post(verifyOldPassUrl, {
-        email: emailId,
-        password: oldPassRef.current.value,
-      });
-
-      if (checkOldPass.data.success) {
-        setCheckPass(true);
-        const updatePassRes = await axios.post(updateUPassUrl, {
-          logInStatus: true,
-          id: FrontendUserData.data.userDetails._id,
-          newPassword: newPassRef.current.value,
+      try {
+        const checkOldPass = await axios.post(verifyOldPassUrl, {
+          email: emailId,
+          password: oldPassRef.current.value,
         });
-        console.log("update Status :", updatePassRes);
+        if (checkOldPass.data.success) {
+          setCheckPass(true);
+          const updatePassRes = await axios.post(updateUPassUrl, {
+            logInStatus: true,
+            id: FrontendUserData.data.userDetails._id,
+            newPassword: newPassRef.current.value,
+          });
+          console.log("update Status :", updatePassRes);
 
-        if (updatePassRes.data.success) {
-          Swal.fire("Success!", "Pasword Updated!", "success");
-          setActive("view-account");
+          if (updatePassRes.data.success) {
+            console.log(updatePassRes);
+            SweetAlert("success", updatePassRes);
+            // Swal.fire("Success!", "Pasword Updated!", "success");
+            setActive("view-account");
+          } else SweetAlert("error", updatePassRes.response.data.message);
         }
-      } else {
+        // else {
+        //   SweetAlert("warning", "", checkOldPass.response.data.message);
+        //   setCheckPass(false);
+        // }
+      } catch (err) {
+        console.log("Err : ", err);
+        SweetAlert("warning", "", err.response.data.message);
         setCheckPass(false);
       }
     }

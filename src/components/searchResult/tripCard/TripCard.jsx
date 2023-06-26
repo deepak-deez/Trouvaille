@@ -39,7 +39,9 @@ export default function TripCard(props) {
       </div>
       <div className="result-card-details">
         <p className="location">{props.data.title}</p>
-        <p className="trip-date">{props.data.duration} 4 People</p>
+        <p className="trip-date">
+          {props.data.duration} {props.data.maximumGuests} People
+        </p>
         <div className="flex gap-3">
           <p className="trip-cost">{props.data.price}/-</p>
           <p className="per-night">Night</p>

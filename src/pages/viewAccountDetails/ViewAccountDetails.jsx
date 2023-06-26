@@ -5,15 +5,28 @@ import EditAccountDetails from "../../components/accountDetails/editAccountDetai
 import ProfileSettings from "../../components/accountDetails/profileSettings/ProfileSettings";
 import Editprofile from "../../components/accountDetails/editProfile/Editprofile";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  updateFrontendUserData,
+  updateUserDetails,
+} from "../../redux/slices/userSlice";
 
 const ViewAccDetails = ({ active, setActive }) => {
-  const { FrontendUserData } = useSelector((state) => state.user);
-  console.log(FrontendUserData);
+  const dispatch = useDispatch();
+  const { updatedUserData, FrontendUserData } = useSelector(
+    (state) => state.user
+  );
+  useEffect(() => {
+    if (updatedUserData) {
+      dispatch(updateFrontendUserData(updatedUserData));
+      // dispatch(updateUserDetails());
+    }
+  }, [updatedUserData]);
+  // console.log(updatedUserData, FrontendUserData);
   const navigate = useNavigate();
   useEffect(() => {
     if (!FrontendUserData) navigate("/");
-  });
+  }, []);
 
   return (
     <section className="account-details pt-[10rem] pb-[35rem] sm:pb-[20rem]">
@@ -33,7 +46,11 @@ const ViewAccDetails = ({ active, setActive }) => {
         <ProfileSettings setActive={setActive} title="profile-settings" />
       )}
       {active === "edit-profile" && (
-        <Editprofile setActive={setActive} title="edit-profile" />
+        <Editprofile
+          setActive={setActive}
+          active={active}
+          title="edit-profile"
+        />
       )}
     </section>
   );
