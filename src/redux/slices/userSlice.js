@@ -85,6 +85,7 @@ const userSlice = createSlice({
   reducers: {
     updateFrontendUserData: (state, action) => {
       state.FrontendUserData = state.updatedUserData;
+      state.updatedUserData = null;
     },
     updateUserDetails: (state) => {
       state.FrontendUserData = null;
@@ -103,7 +104,7 @@ const userSlice = createSlice({
       state.success = false;
     });
     builder.addCase(signUp.fulfilled, (state, action) => {
-      state.FrontendUserData = action.payload.data.message;
+      state.FrontendUserData = action.payload;
       state.loading = false;
       state.error = null;
       state.success = true;

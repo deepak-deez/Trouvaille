@@ -13,6 +13,7 @@ import { updateUser, updateUserDetails } from "../../../redux/slices/userSlice";
 import SignOut from "../../SignOut/SignOut";
 import CountrySelector from "./CountrySelector";
 import LoadingScreen from "../../loading/loadingScreen";
+import SweetAlert from "../../alert/sweetAlert";
 
 export default function EditProfile({ setActive, active }) {
   const options = {
@@ -167,7 +168,9 @@ export default function EditProfile({ setActive, active }) {
     }
   };
   if (updatedUserData?.success) {
-    //   dispatch(updateUserDetails(updatedUserData));
+    console.log(updatedUserData);
+    SweetAlert("success", updatedUserData.message);
+    // dispatch(updateUserDetails());
     //   console.log(
     //     "After dispatch : ",
     //     updatedUserData,
@@ -176,6 +179,10 @@ export default function EditProfile({ setActive, active }) {
     //   );
     // updateDataHandler({ userDetails: response.data });
     setActive("profile");
+    // dispatch(updateUserDetails());
+  }
+  if (error) {
+    SweetAlert("error", error);
   }
   if (FrontendUserData?.success) {
     return (

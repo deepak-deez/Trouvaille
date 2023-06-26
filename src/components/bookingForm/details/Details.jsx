@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import swal from "sweetalert2";
+import SweetAlert from "../../alert/sweetAlert";
 import "./style.scss";
 import { useDispatch, useSelector } from "react-redux";
 import PassengerDetails from "../passengerDetails/PassengerDetails";
@@ -18,7 +19,7 @@ const Details = (props) => {
   const userName = useRef();
   const dispatch = useDispatch();
 
-  const { bookingData, loading } = useSelector((state) => state.booking);
+  const { bookingData, loading, error } = useSelector((state) => state.booking);
   const phoneNumberRef = useRef();
   const otherPassengerDetails = [];
   const bookingFormDetails = {
@@ -65,16 +66,11 @@ const Details = (props) => {
     bookingFormDetails["otherPassenger"] = otherPassengerDetails;
     bookingFormDetails["address"] = address.current.value;
     bookingFormDetails["name"] = userName.current.value;
+    console.log("Other Passenger : ", otherPassengerDetails);
     if (userName.current.value && address.current.value) {
       dispatch(createBooking(bookingFormDetails));
     } else {
-      swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "message",
-        timer: "2500",
-        buttons: true,
-      });
+      SweetAlert("warning", "", "All fields are required!");
     }
     // try {
     //   const response = await axios.post(
@@ -94,12 +90,14 @@ const Details = (props) => {
   };
   useEffect(() => {
     if (bookingData) {
+      // console.log(bookingData);
+      // SweetAlert("success", bookingData.message);
       setsucessModal(!sucessModal);
       dispatch(resetBooking());
     }
   }, bookingData);
 
-  const { FrontendUserData } = useSelector((state) => state.user);
+  // const { FrontendUserData } = useSelector((state) => state.user);
 
   const [sucessModal, setsucessModal] = useState(false);
   const [passenger, setpassenger] = useState(false);

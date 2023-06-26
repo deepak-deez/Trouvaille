@@ -25,12 +25,18 @@ const SetPassword = () => {
       email: emailref.current.value,
     };
 
-    const response = await axios.post(
-      `${process.env.REACT_APP_API_HOST}send-reset-mail/Frontend-user`,
-      data
-    );
-
-    setApiMessage(response.data.message);
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_HOST}send-reset-mail/Frontend-user`,
+        data
+      );
+      console.log(response.status, response);
+      if (response.data.success) setApiMessage(response.data.message);
+    } catch (err) {
+      // console.log("Err:", err);
+      if (err.response.data.success === false)
+        setApiMessage(err.response.data.message);
+    }
   };
   return (
     <header className="flex flex-col set-password justify-center items-center mt-[100px] my-auto">

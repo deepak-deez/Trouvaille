@@ -6,7 +6,10 @@ import ProfileSettings from "../../components/accountDetails/profileSettings/Pro
 import Editprofile from "../../components/accountDetails/editProfile/Editprofile";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { updateFrontendUserData } from "../../redux/slices/userSlice";
+import {
+  updateFrontendUserData,
+  updateUserDetails,
+} from "../../redux/slices/userSlice";
 
 const ViewAccDetails = ({ active, setActive }) => {
   const dispatch = useDispatch();
@@ -14,10 +17,12 @@ const ViewAccDetails = ({ active, setActive }) => {
     (state) => state.user
   );
   useEffect(() => {
-    console.log("Deepak", updatedUserData);
-    if (updatedUserData) dispatch(updateFrontendUserData(updatedUserData));
+    if (updatedUserData) {
+      dispatch(updateFrontendUserData(updatedUserData));
+      // dispatch(updateUserDetails());
+    }
   }, [updatedUserData]);
-  console.log(updatedUserData, FrontendUserData);
+  // console.log(updatedUserData, FrontendUserData);
   const navigate = useNavigate();
   useEffect(() => {
     if (!FrontendUserData) navigate("/");

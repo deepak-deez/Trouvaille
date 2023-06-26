@@ -17,6 +17,7 @@ import {
 //   errorState,
 // } from "../../../redux/slices/userSlice";
 import swal from "sweetalert2";
+import SweetAlert from "../../alert/sweetAlert";
 import { useSlider } from "@mui/base";
 
 const SignUp = () => {
@@ -28,7 +29,7 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowCofirmPassword] = useState(false);
   const [differentPassword, setDifferentPassword] = useState(false);
-  let [apiMessage, setApiMessage] = useState("");
+  // let [apiMessage, setApiMessage] = useState("");
   const [pwdError, setPwdError] = useState(false);
 
   const newUserDetails = {};
@@ -91,15 +92,16 @@ const SignUp = () => {
       !passowrdRef.current.value.length ||
       !confirmPasswordRef.current.value.length
     ) {
-      swal.fire({
-        position: "center",
-        icon: "warning",
-        title: "Warning",
-        text: "Fields cannot be Empty!!",
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-      });
+      SweetAlert("warning", "", "Fields cannot be Empty!");
+      // swal.fire({
+      //   position: "center",
+      //   icon: "warning",
+      //   title: "Warning",
+      //   text: "Fields cannot be Empty!!",
+      //   showConfirmButton: false,
+      //   timer: 2000,
+      //   timerProgressBar: true,
+      // });
     } else if (!differentPassword && !pwdError) {
       console.log("asddsadsaii");
       newUserDetails["email"] = emailRef.current.value;
@@ -118,6 +120,7 @@ const SignUp = () => {
       // if (response?.data?.success) {
       //   navigate("/");
       // }
+      console.log(FrontendUserData);
     } else {
       console.log(differentPassword, pwdError);
       console.log("else");
@@ -145,34 +148,40 @@ const SignUp = () => {
   };
   // navigate('/')
 
+  console.log(FrontendUserData);
   useEffect(() => {
-    if (success) {
+    // console.log(FrontendUserData);
+    if (FrontendUserData?.success) {
+      console.log(FrontendUserData.message);
+      // SweetAlert("success", FrontendUserData.message);
       swal.fire({
         position: "center",
         icon: "success",
         title: "Success",
-        text: FrontendUserData,
+        text: FrontendUserData.message,
         showConfirmButton: false,
         timer: 2000,
         timerProgressBar: true,
       });
-      dispatch(updateUserDetails({ success: false }));
+      dispatch(updateUserDetails());
       setTimeout(() => {
         navigate("/");
       }, 2000);
     }
-  }, [success]);
+  }, [FrontendUserData]);
 
   useEffect(() => {
     if (error) {
-      setApiMessage(error);
-      swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: error,
-        timer: "2500",
-        buttons: true,
-      });
+      console.log("error: ", error);
+      SweetAlert("error", error);
+      // setApiMessage(error);
+      // swal.fire({
+      //   icon: "error",
+      //   title: "Oops...",
+      //   text: error,
+      //   timer: "2500",
+      //   buttons: true,
+      // });
     }
   }, [error]);
 
