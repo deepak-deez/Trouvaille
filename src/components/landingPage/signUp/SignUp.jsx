@@ -307,7 +307,7 @@ const SignUp = () => {
             <span
               className={"text-red-500 " + (isChecked ? "hidden" : "block")}
             >
-              (Type Captcha before)
+              (Type Captcha First)
             </span>
           </label>
         </div>
@@ -319,7 +319,7 @@ const SignUp = () => {
           }
         >
           <p
-            className=" captcha-text font-bold text-xl mx-auto py-2 px-2 mt-2 sm:mx-4"
+            className=" captcha-text font-bold text-xl line-through mx-auto py-2 px-2 mt-2 sm:mx-4"
             onPaste={(e) => {
               e.preventDefault();
               return false;
