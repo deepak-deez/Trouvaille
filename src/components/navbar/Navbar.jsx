@@ -13,28 +13,34 @@ import { useSelector } from "react-redux";
 import NotificationPopUp from "../viewNotifications/notificationPopUp/NotificationPopUp";
 import socketIOClient from "socket.io-client";
 import axios from "axios";
-import { set } from "date-fns";
+import socket from "../../functions/socket";
 
-const ENDPOINT = "http://localhost:7000";
+// const ENDPOINT = "http://localhost:7000";
 
-export default function Navbar({ setActive }) {
+function Navbar({ setActive }) {
   const navigate = useNavigate();
   const [navCollapse, setnavColapse] = useState(true);
   const [showNotis, setShowNotis] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const currentPageLocation = useLocation().pathname;
   const { FrontendUserData } = useSelector((state) => state.user);
+  const refNoti = useRef(null);
+  const [notisUnread, setNotisUnread] = useState([]);
   const [statusNotis, setStatusNotis] = useState("");
-  const socket = socketIOClient(ENDPOINT);
-  const userId = localStorage.getItem("id");
 
   useEffect(() => {
     if (!statusNotis) {
       getAllNotifications();
     }
-    socket.on(localStorage.getItem("id"), (data) => {
-      console.log("Recieved By Only Me : ", data);
-      setStatusNotis(data);
+
+    socket.on(localStorage.getItem("id"), (res) => {
+      setStatusNotis(res);
+
+      setNotisUnread(
+        res?.data?.filter((data) => {
+          return data.readStatus === false;
+        })
+      );
     });
   }, [socket]);
 
@@ -45,7 +51,16 @@ export default function Navbar({ setActive }) {
       localStorage.getItem("id");
 
     const response = await axios.get(allNotisApi);
+
     setStatusNotis(response?.data);
+
+    setNotisUnread(
+      response?.data?.data.filter((data) => {
+        return data.readStatus === false;
+      })
+    );
+
+    console.log("Response : ", response.data);
   };
 
   useEffect(() => {
@@ -54,11 +69,19 @@ export default function Navbar({ setActive }) {
       const isTop = scrollTop < 20;
       setIsScrolled(!isTop);
     }
+    document.addEventListener("click", handleOutsideClickNotification, true);
+
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const handleOutsideClickNotification = (e) => {
+    if (refNoti.current && !refNoti.current.contains(e.target)) {
+      setShowNotis(false);
+    }
+  };
 
   const handleNotificationPopUp = () => {
     setShowNotis(!showNotis);
@@ -136,9 +159,9 @@ export default function Navbar({ setActive }) {
         <div className="flex gap-10 2xl:gap-[4.1rem] items-center">
           <SearchBar />
 
-          <div className="my-auto relative hidden xl:block">
+          <div ref={refNoti} className="my-auto relative hidden xl:block">
             <p className="absolute text-center pt-1 h-8 w-8 bg-green-600 rounded-full left-[-1rem] text-white font-bold">
-              {statusNotis?.data?.length}
+              {notisUnread.length}
             </p>
             <button onClick={handleNotificationPopUp} className="my-auto">
               <img
@@ -147,11 +170,14 @@ export default function Navbar({ setActive }) {
                 alt="notification-icon"
               />
             </button>
-            {showNotis ? (
-              <NotificationPopUp statusNotis={statusNotis.data} />
-            ) : (
-              ""
-            )}
+            <div className={showNotis ? " block " : " hidden "}>
+              <NotificationPopUp
+                setShowNotis={setShowNotis}
+                statusNotis={statusNotis?.data}
+                notisUnread={notisUnread}
+                setNotisUnread={setNotisUnread}
+              />
+            </div>
           </div>
 
           <Link to={"/booking"}>
@@ -227,3 +253,5 @@ export default function Navbar({ setActive }) {
     </nav>
   );
 }
+
+export default React.memo(Navbar);

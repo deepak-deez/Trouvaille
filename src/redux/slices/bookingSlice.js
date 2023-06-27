@@ -40,12 +40,11 @@ export const getAllUserBooking = createAsyncThunk(
 export const getUserBookingById = createAsyncThunk(
   `${nameSpace}/getUserBookingById`,
   async (bookedData, { rejectWithValue }, thunkAPI) => {
-    console.log(bookedData.bookingId);
     try {
       const result = await axios.get(
         `${API}user-booking/${bookedData.userId}/${bookedData.bookingId}`
       );
-      console.log(result);
+
       if (result) return result;
     } catch (err) {
       return rejectWithValue(err.response.data.message);
