@@ -73,33 +73,33 @@ export default function NotificationPopUp({
         </Link>
       </div>
       <div className="overflow-auto h-[23rem] rounded-2xl bg-white">
-        {statusNotis
-          ?.slice(0)
-          .reverse()
-          .map((data, index) => {
-            return (
-              <div
-                key={index}
-                className={
-                  "notification-popup-item p-3 border border-orange-700 my-2 rounded-3xl " +
-                  (data.readStatus ? "" : " bg-blue-100 ")
-                }
+        {statusNotis?.reverse().map((data, index) => {
+          {
+            console.log(data.title, " read status : ", data.readStatus);
+          }
+          return (
+            <div
+              key={index}
+              className={
+                "notification-popup-item p-3 border border-orange-700 my-2 rounded-3xl " +
+                (data.readStatus ? "" : " bg-blue-100 ")
+              }
+            >
+              <h2 className="font-bold">{data.title}</h2>
+              <p className="my-3">{data.description}</p>
+              <p className="text-right text-xs text-gray-400">
+                {data.createdAt}
+              </p>
+              <button
+                data-notification-id={data._id}
+                onClick={handleNavigate}
+                className=" text-center text-xs p-2 bg-orange-700 text-white rounded-3xl"
               >
-                <h2 className="font-bold">{data.title}</h2>
-                <p className="my-3">{data.description}</p>
-                <p className="text-right text-xs text-gray-400">
-                  {data.createdAt}
-                </p>
-                <button
-                  data-notification-id={data._id}
-                  onClick={handleNavigate}
-                  className=" text-center text-xs p-2 bg-orange-700 text-white rounded-3xl"
-                >
-                  View Details
-                </button>
-              </div>
-            );
-          })}
+                View Details
+              </button>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

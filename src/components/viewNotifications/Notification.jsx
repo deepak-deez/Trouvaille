@@ -5,16 +5,14 @@ import getAllApiData from "./logic";
 import { notifications } from "./data";
 import TripNotifications from "./tripNotifications/TripNotifications";
 import socketIOClient from "socket.io-client";
+import socket from "../../functions/socket";
 import axios from "axios";
 import "./style.scss";
-
-const ENDPOINT = process.env.REACT_APP_API_HOST;
 
 export default function Notification() {
   const { FrontendUserData } = useSelector((state) => state.user);
   const userId = FrontendUserData.data.userDetails._id;
   const [userBookingDetails, setUserBookingDetails] = useState();
-  const socket = socketIOClient(ENDPOINT);
   const [notisUnread, setNotisUnread] = useState([]);
   const [statusNotis, setStatusNotis] = useState("");
 

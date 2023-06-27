@@ -13,17 +13,18 @@ import { useSelector } from "react-redux";
 import NotificationPopUp from "../viewNotifications/notificationPopUp/NotificationPopUp";
 import socketIOClient from "socket.io-client";
 import axios from "axios";
+import socket from "../../functions/socket";
 
-const ENDPOINT = "http://localhost:7000";
+// const ENDPOINT = "http://localhost:7000";
 
-export default function Navbar({ setActive }) {
+function Navbar({ setActive }) {
   const navigate = useNavigate();
   const [navCollapse, setnavColapse] = useState(true);
   const [showNotis, setShowNotis] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const currentPageLocation = useLocation().pathname;
   const { userDetails } = useSelector((state) => state.user);
-  const socket = socketIOClient(ENDPOINT);
+  // const socket = socketIOClient(ENDPOINT);
   const refNoti = useRef(null);
   const [notisUnread, setNotisUnread] = useState([]);
   const [statusNotis, setStatusNotis] = useState("");
@@ -246,3 +247,5 @@ export default function Navbar({ setActive }) {
     </nav>
   );
 }
+
+export default React.memo(Navbar);
