@@ -8,21 +8,21 @@
 
   .filter-results-cards {
     .filter-results-card-img {
-      width: 274px;
-      height: 345px;
+      width: 200px;
+      height: 258px;
       object-fit: cover;
     }
     position: relative;
 
     .show-detail-text {
-      padding: 0 1rem;
+      padding: 0 0.75rem;
       position: absolute;
-      top: 15rem;
+      top: 12rem;
       background-color: rgba(0, 0, 0, 0.701);
       backdrop-filter: blur(15px);
       border-top-right-radius: 1rem;
       border-bottom-right-radius: 1rem;
-      font-weight: 600;
+      font-weight: 400;
       color: white;
     }
     .result-card-details {

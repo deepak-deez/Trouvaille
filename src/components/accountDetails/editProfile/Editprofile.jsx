@@ -34,7 +34,6 @@ export default function EditProfile({ setActive, active }) {
   const navigate = useNavigate();
   const nameRef = useRef("");
   const DOBRef = useRef("");
-  const placeRef = useRef("");
   const genderRef = useRef("");
   const maritalStatusRef = useRef("");
   // const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/${updatedUserData.data.userDetails.userType}/${updatedUserData.data.userDetails._id}`;
@@ -109,7 +108,7 @@ export default function EditProfile({ setActive, active }) {
 
     formData.append("image", imgUrl);
     formData.append("name", nameRef.current.value);
-    formData.append("place", placeRef.current.value);
+    formData.append("place", destination);
     formData.append("DOB", DOBRef.current.value);
     formData.append("gender", genderRef.current.value);
     formData.append("maritalStatus", maritalStatusRef.current.value);
@@ -135,7 +134,6 @@ export default function EditProfile({ setActive, active }) {
 
     // const updateUrl = `${process.env.REACT_APP_API_HOST}update/Frontend-user/${updatedUserData.data.userDetails._id}`;
 
-    console.log(placeRef);
     try {
       if (nameRef.current.value.length) {
         document.getElementById("nameField").textContent = "";

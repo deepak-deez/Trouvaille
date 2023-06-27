@@ -38,7 +38,7 @@ export default function BookingDetails(props) {
 
   if (bookingData) {
     return (
-      <section className="booking-details  pb-[35rem] sm:pb-[25rem] pt-[10rem]">
+      <section className="booking-details  pb-[5rem] h-screen">
         <section className="md:mx-20 xl:mx-44 min-[1920px]:mx-[20rem]">
           <h1 className="text-center my-[75px]">Trip details</h1>
           <div className="details-container md:p-16 lg:p-20">

@@ -36,8 +36,6 @@ export default function Navbar({ setActive }) {
       console.log("Recieved By Only Me : ", data);
       setStatusNotis(data);
     });
-
-    console.log("Status : ", statusNotis);
   }, [socket]);
 
   const getAllNotifications = async () => {
@@ -48,8 +46,6 @@ export default function Navbar({ setActive }) {
 
     const response = await axios.get(allNotisApi);
     setStatusNotis(response?.data);
-
-    console.log("Response : ", response.data);
   };
 
   useEffect(() => {

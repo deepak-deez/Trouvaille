@@ -4,7 +4,7 @@ import loader from "../../assets/loaders/airplaneLoading.gif";
 
 export default function PageNotAvailable() {
   return (
-    <div className="py-[30rem] sm:pb-[20rem] sm:pt-[10rem] text-center flex flex-col gap-10 p-5">
+    <div className="py-[30rem] h-screen sm:pb-[20rem] sm:pt-[10rem] text-center flex flex-col gap-10 p-5">
       <div className="flex">
         <img src={loader} alt="loader-icon" className="block m-auto" />
       </div>

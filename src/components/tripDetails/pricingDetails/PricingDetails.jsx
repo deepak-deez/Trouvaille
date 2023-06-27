@@ -47,11 +47,13 @@ export default function PricingDetails(props) {
   })();
 
   return (
-    <div className="lg:w-1/2 mt-10 lg:mt-0">
+    <div className="lg:w-1/2 mt-[1.8rem] lg:mt-0">
       <div>
-        <h4 className="text-[#B4BBC1] mb-[3rem]">Price Details:</h4>
-        <div className="bg-[#ffffff0d] p-10 lg:p-[3.7rem] backdrop-blur-3xl border border-gray-700 flex flex-col gap-10">
-          <div className="bg-slate-600 p-10 rounded-2xl">
+        <h4 className="text-[#B4BBC1] text-[20px] mb-[2.2rem]">
+          Price Details:
+        </h4>
+        <div className="bg-[#ffffff0d] p-[1.875rem] lg:p-[2.7rem] text-[10px] md:text-[16px] backdrop-blur-3xl border border-gray-700 flex flex-col gap-[1.875rem]">
+          <div className="bg-slate-600 p-[1.875rem] rounded-2xl">
             <h4 className="mb-5">Guests</h4>
             <div ref={refOne} className="flex flex-col relative">
               <div
@@ -81,8 +83,8 @@ export default function PricingDetails(props) {
               </ul>
             </div>
           </div>
-          <h2 className="text-[#DAE0E5]">
-            <span className="line-through font-[400]">
+          <h2 className="text-[#DAE0E5] text-[20px] md:text-[26px]">
+            <span className="line-through  font-[400]">
               ₹{props.originalPrice}
             </span>
             ₹{props.discountedPrice}/night

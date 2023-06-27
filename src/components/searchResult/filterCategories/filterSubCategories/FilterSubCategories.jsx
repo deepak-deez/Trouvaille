@@ -54,7 +54,7 @@ export default function FilterSubCategories({
   };
 
   return (
-    <div className="lg:w-[12rem] xl:w-[auto]">
+    <div className="lg:w-[10rem] xl:w-[auto]">
       <div className="flex justify-between ">
         <h4>{name}</h4>
         <button
@@ -67,7 +67,7 @@ export default function FilterSubCategories({
 
       <ul
         className={
-          "flex flex-col gap-5 xl:gap-[1.8rem] xl:text-[20px] mt-[1rem] simple-openning-animation-y " +
+          "flex flex-col gap-2 xl:gap-[1rem] xl:text-[14px] mt-[0.7rem] simple-openning-animation-y " +
           (!filterToggle ? " hidden " : "") +
           (closingAnimation ? " simple-closing-animation-y" : "")
         }

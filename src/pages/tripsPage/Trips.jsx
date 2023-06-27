@@ -12,15 +12,14 @@ export default function Trips() {
   const [tripFilterClicked, setTripFilterClicked] = useState(0);
   const [filterDestination, setFilterDestination] = useState([]);
   const [filterPerson, setFilterPerson] = useState("");
-  const { FrontendUserData} = useSelector((state) => state.user);
-  const navigate = useNavigate()
-  useEffect(()=>{
-    if(!FrontendUserData)
-    navigate("/")
-  })
-
+  const { FrontendUserData } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!FrontendUserData) navigate("/");
+  });
+  console.log(checkinDate);
   return (
-    <section className="trips pb-[35rem] sm:pb-[20rem]">
+    <section className="trips pb-[5rem]">
       <Header
         setFilterPerson={setFilterPerson}
         setFilterDestination={setFilterDestination}

@@ -8,7 +8,7 @@ export default function Ammenities({ image, title }) {
       <img
         src={image}
         alt="ammenities-icon"
-        className="p-4 md:p-10 w-20 md:w-32 h-20 md:h-32 rounded-lg object-fill self-center"
+        className="p-4 lg:p-[1.875rem]  w-[4rem] lg:w-[7.5rem] h-[4rem] lg:h-[7.5rem] rounded-lg lg:rounded-2xl object-fill self-center white-border"
       />
       <p>{title}</p>
     </div>

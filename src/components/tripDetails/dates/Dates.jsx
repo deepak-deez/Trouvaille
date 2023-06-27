@@ -12,14 +12,11 @@ export default function Dates(props) {
 
   const detailsClickHandler = () => {
     setToShow(!toShow);
-    props.setToShowDetails(props.detail);
-    props.setDetails(!props.details);
   };
 
   const hideOnClickOutside = (e) => {
     if (refOne.current && !refOne.current.contains(e.target)) {
       setToShow(false);
-      props.setDetails(false);
     }
   };
 
@@ -28,19 +25,22 @@ export default function Dates(props) {
       <div
         ref={refOne}
         className={
-          "flex flex-col date items-center px-10 py-4 " +
+          "flex flex-col date w-[7rem] lg:w-[8rem] h-[7rem] lg:h-[8rem] items-center px-10 py-4 " +
           (toShow ? " dates-active " : " dates ")
         }
         onClick={detailsClickHandler}
       >
-        <h2 className="">{date[0]}</h2>
-        <p className="">{date[1].substring(0, 3)}</p>
+        <h2 className="text-[30px] lg:text-[40px]">{date[0]}</h2>
+        <p className="text-[18px] lg:text-[22px]">{date[1].substring(0, 3)}</p>
       </div>
       {toShow && (
-        <div className="  bg-slate-100 mt-[2rem] z-[2] p-5 absolute rounded-2xl">
-          <h3 className=" activities text-[1rem]  font-extrabold ">
-            {props.detail}
-          </h3>
+        <div className="flex flex-col  gap-0 absolute ">
+          <div className="up-arrow ml-5"></div>
+          <div className="  bg-[#a53c27f0] text-white z-[2] p-5  rounded-2xl">
+            <h3 className=" activities text-[1rem] font-extrabold  break-all">
+              {props.detail}
+            </h3>
+          </div>
         </div>
       )}
     </div>

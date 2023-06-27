@@ -5,14 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const BookingList = () => {
-  const { FrontendUserData} = useSelector((state) => state.user);
-  const navigate = useNavigate()
-  useEffect(()=>{
-    if(!FrontendUserData)
-    navigate("/")
-  })
+  const { FrontendUserData } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!FrontendUserData) navigate("/");
+  });
   return (
-    <header className="notification-page pt-[10rem] pb-[35rem] sm:pb-[20rem]">
+    <header className="notification-page pt-[10rem] pb-[5rem]">
       <Notification />
     </header>
   );

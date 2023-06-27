@@ -13,7 +13,7 @@ export default function ProfileSideBar({ setActive, activePage }) {
   });
 
   return (
-    <ul className="flex xl:flex-col flex-row justify-center xl:justify-start gap-10">
+    <ul className="flex xl:flex-col flex-row justify-center xl:justify-start gap-6 text-base">
       <li
         className={
           " grey-text" + (activeProfile ? " font-bold " : " font-normal ")

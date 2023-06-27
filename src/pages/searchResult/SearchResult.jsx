@@ -18,7 +18,7 @@ export default function SearchResult() {
   return (
     <>
       {loading && <LoadingScreen />}
-      <section className="search-result pb-[35rem] sm:pb-[20rem]">
+      <section className="search-result pb-[5rem]">
         <Header />
         <TripCategory />
       </section>

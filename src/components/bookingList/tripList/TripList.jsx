@@ -30,11 +30,11 @@ export default function TripList() {
     <>
       {loading && <LoadingScreen />}
       <section className="flex flex-col trip-list-container justify-center items-center ">
-        <h2 className="md:text-[64px] text-center mt-[10px] lg:mt-[30px] text-[50px]">
+        <h2 className="md:text-[40px] text-center my-[10px] lg:my-[30px] text-[30px]">
           Trip List
         </h2>
         <div className="bookings-table-container overflow-x-scroll w-[90%] md:max-w-fit">
-          <table className="text-center trip-list lg:pt-[70px] pt-[30px]">
+          <table className="text-center trip-list pt-[20px]">
             <tbody>
               <tr className="text-[#E0DBD9]">
                 <th>Trip Title</th>

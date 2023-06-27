@@ -7,12 +7,12 @@ export default function PackageHighlights(props) {
     <div className="w-[25rem]">
       <div className="flex gap-7 ">
         <img
-          className=" w-20 md:w-32 h-20 md:h-32 rounded-lg self-center"
+          className="  max-w-[4rem] md:max-w-[5rem] h-[4rem] md:h-[5rem] rounded-lg self-center"
           src={props.imgSrc}
           alt="diving-icon"
         />
         <div className="flex flex-col">
-          <h4 className=" text-[#B4BBC1] text-[2rem]">{props.title}</h4>
+          <h4 className=" text-[#B4BBC1] text-[1.5rem]">{props.title}</h4>
           <p className="">{props.content}</p>
         </div>
       </div>
