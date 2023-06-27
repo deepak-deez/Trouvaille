@@ -99,7 +99,8 @@ export default function ProfileSettings({ setActive }) {
           </div>
           <div className="flex flex-col items-center sm:items-start gap-[1rem]">
             <h2 className="grey-text">
-              {FrontendUserData.data.userDetails.email}
+              {console.log(FrontendUserData)}
+              {FrontendUserData?.data?.userDetails?.email}
             </h2>
             <div className="flex gap-[1rem] items-center">
               <span className=" grey-text">

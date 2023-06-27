@@ -45,6 +45,7 @@ export default function EditProfile({ setActive, active }) {
   const userGender = FrontendUserData?.data?.userDetails?.userDetails?.gender;
   const userMarried =
     FrontendUserData?.data?.userDetails?.userDetails?.maritalStatus;
+  const [destination, setDestination] = useState();
   // const updateDataHandler = async () => {
   //   console.log(
   //     "Before edit : ",
@@ -203,7 +204,7 @@ export default function EditProfile({ setActive, active }) {
           </div>
           <div className="flex flex-col sm:flex-row gap-[2rem] mt-[1.5rem] sm:mt-[2rem] profile-section">
             <div className="flex flex-col items-center">
-              <div className="flex flex-col profile-img-container h-[256px] w-[225px] overflow-hidden">
+              <div className="flex flex-col profile-img-container h-[250px] w-[150px] overflow-hidden">
                 <div className="change-profile-img">
                   <div
                     className="user-profile-img w-10"
@@ -255,21 +256,22 @@ export default function EditProfile({ setActive, active }) {
                 defaultValue={updatedUserData?.data?.userDetails?.email}
                 disabled={true}
               />
-              <div className="flex gap-[1rem] items-center">
-                <input
+              <div className="flex gap-[1rem] w-[100%] items-center">
+                {/* <input
                   className="lg:text-[1.6rem] grey-text bg-transparent p-2"
                   placeholder="Your Location"
                   defaultValue={userPLace ? userPLace : ""}
                   ref={placeRef}
                   disabled
-                />
+                /> */}
                 <CountrySelector
                   selectedValue={userPLace ? userPLace : ""}
-                  placeRef={placeRef}
+                  setDestination={setDestination}
+                  // placeRef={placeRef}
                 />
                 <img src={editIcon} alt="edit-icon" />
                 <span className="lg:text-[1.6rem] grey-text">
-                  Joined in {userJoiningYear}
+                  Joined in {userJoiningYear ? userJoiningYear : "2023"}
                 </span>
               </div>
             </div>

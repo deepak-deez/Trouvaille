@@ -60,7 +60,7 @@ export default function ViewAccountDetails({ setActive }) {
             <h4 className="">Password</h4>
             <input
               type="password"
-              defaultValue={userData.password.substring(0, 7)}
+              defaultValue={userData?.password?.substring(0, 7)}
               disabled={true}
             />
             <button
