@@ -123,7 +123,7 @@ const LoginForm = () => {
           Welcome to Trouvaille
         </h2>
 
-        <div className="flex flex-col lg:w-[900px] w-[90%] md:px-[20px] md:py-[20px] mt-[15px] login-details px-[20px] py-[15px] lg:py-[50px] lg:px-[97px] justify-center">
+        <div className="flex flex-col lg:w-[900px] w-[90%] md:px-[20px] md:py-[20px] mt-[15px] login-details px-[20px] py-[15px] lg:py-[50px] lg:px-[60px] justify-center">
           <input
             className="  input-fields p-[1.5rem] mt-[9px] w-[100%]"
             type="text"

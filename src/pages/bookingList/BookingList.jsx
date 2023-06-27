@@ -11,7 +11,7 @@ const BookingList = () => {
     if (!FrontendUserData) navigate("/");
   });
   return (
-    <header className="trip-list-page pt-[7rem]  pb-10">
+    <header className="trip-list-page pt-[7rem] pb-10 h-screen">
       <TripList />
     </header>
   );

@@ -19,7 +19,7 @@ export default function Trips() {
   });
   console.log(checkinDate);
   return (
-    <section className="trips pb-[35rem] sm:pb-[20rem]">
+    <section className="trips pb-[5rem]">
       <Header
         setFilterPerson={setFilterPerson}
         setFilterDestination={setFilterDestination}

@@ -16,10 +16,10 @@ const ResetPasswordPage = () => {
   }, []);
 
   return (
-    <header className="landing-page reset-password-page flex flex-col">
+    <header className="landing-page reset-password-page flex flex-col h-screen">
       <ResetPassword />
     </header>
   );
-}; 
+};
 
 export default ResetPasswordPage;

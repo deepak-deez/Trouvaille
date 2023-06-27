@@ -139,7 +139,7 @@ export default function EditProfile({ setActive }) {
         </div>
         <div className="flex flex-col sm:flex-row gap-[2rem] mt-[1.5rem] sm:mt-[2rem] profile-section">
           <div className="flex flex-col items-center">
-            <div className="flex flex-col profile-img-container h-[256px] w-[225px] overflow-hidden">
+            <div className="flex flex-col profile-img-container h-[250px] w-[150px] overflow-hidden">
               <div className="change-profile-img">
                 <div
                   className="user-profile-img w-10"

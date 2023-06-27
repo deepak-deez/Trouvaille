@@ -4,14 +4,13 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const EditProfile = () => {
-  const { FrontendUserData} = useSelector((state) => state.user);
-  const navigate = useNavigate()
-  useEffect(()=>{
-    if(!FrontendUserData)
-    navigate("/")
-  })
+  const { FrontendUserData } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!FrontendUserData) navigate("/");
+  });
   return (
-    <section className="account-details pt-[10rem] pb-[35rem] sm:pb-[20rem]">
+    <section className="account-details pt-[10rem] pb-[5rem]">
       <Header />
     </section>
   );

@@ -16,7 +16,7 @@ const ViewAccDetails = ({ active, setActive }) => {
   });
 
   return (
-    <section className="account-details pt-[7rem] pb-[20rem] xl:pb-[10rem]">
+    <section className="account-details pt-[7rem] pb-[5rem]">
       {active === "view-account" && (
         <ViewAccountDetails
           setActive={setActive}
