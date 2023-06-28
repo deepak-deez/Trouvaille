@@ -2,7 +2,6 @@ import React, { useRef, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./style.scss";
 import eye from "../../../assets/images/landingPage/loginForm/eye.svg";
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { signUp, updateUserDetails } from "../../../redux/slices/userSlice";
 import {
@@ -23,7 +22,7 @@ const SignUp = () => {
   const navigate = useNavigate();
   const emailRef = useRef();
   const phoneNoRef = useRef();
-  const passowrdRef = useRef();
+  const passwordRef = useRef();
   const confirmPasswordRef = useRef();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowCofirmPassword] = useState(false);
@@ -72,7 +71,7 @@ const SignUp = () => {
 
   const handlePasswordCheck = () => {
     try {
-      if (passowrdRef.current.value === confirmPasswordRef.current.value) {
+      if (passwordRef.current.value === confirmPasswordRef.current.value) {
         setDifferentPassword(false);
         document.getElementById("confirmPassword").textContent = "";
       } else {
@@ -96,44 +95,20 @@ const SignUp = () => {
     }
   };
 
-  // const handleCreateNewAccount = async (e) => {
-
-  // const inputVal = await e.target.value;
-  // const token = captchaRef.current.getValue();
-  // console.log(token);
-  // console.log(inputVal);
-  // captchaRef.current.reset();
-
-  // await axios
-  //   .post(inputVal, token)
-  //   .then((res) => console.log(res))
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
-
   const handleCreateNewAccount = async (e) => {
     e.preventDefault();
     if (
       !emailRef.current.value.length ||
       !phoneNoRef.current.value.length ||
-      !passowrdRef.current.value.length ||
+      !passwordRef.current.value.length ||
       !confirmPasswordRef.current.value.length
     ) {
       SweetAlert("warning", "", "Fields cannot be Empty!");
-      // swal.fire({
-      //   position: "center",
-      //   icon: "warning",
-      //   title: "Warning",
-      //   text: "Fields cannot be Empty!!",
-      //   showConfirmButton: false,
-      //   timer: 2000,
-      //   timerProgressBar: true,
-      // });
     } else if (!differentPassword && !pwdError) {
       console.log("asddsadsaii");
       newUserDetails["email"] = emailRef.current.value;
       newUserDetails["phone"] = phoneNoRef.current.value;
-      newUserDetails["password"] = passowrdRef.current.value;
+      newUserDetails["password"] = passwordRef.current.value;
 
       dispatch(signUp(newUserDetails));
     } else {
@@ -144,12 +119,12 @@ const SignUp = () => {
 
   const checkValidPassword = () => {
     try {
-      if (strongRegexPassword.test(passowrdRef.current.value)) {
+      if (strongRegexPassword.test(passwordRef.current.value)) {
         setPwdError(false);
         document.getElementById("validPassword").textContent =
           "Password Strength : Strong!";
       } else {
-        if (mediumRegexPassword.test(passowrdRef.current.value)) {
+        if (mediumRegexPassword.test(passwordRef.current.value)) {
           setPwdError(true);
           throw new Error("Password Strength : Medium!");
         } else {
@@ -161,14 +136,10 @@ const SignUp = () => {
       document.getElementById("validPassword").textContent = err.message;
     }
   };
-  // navigate('/')
 
   console.log(FrontendUserData);
   useEffect(() => {
-    // console.log(FrontendUserData);
     if (FrontendUserData?.success) {
-      console.log(FrontendUserData.message);
-      // SweetAlert("success", FrontendUserData.message);
       swal.fire({
         position: "center",
         icon: "success",
@@ -189,14 +160,6 @@ const SignUp = () => {
     if (error) {
       console.log("error: ", error);
       SweetAlert("error", error);
-      // setApiMessage(error);
-      // swal.fire({
-      //   icon: "error",
-      //   title: "Oops...",
-      //   text: error,
-      //   timer: "2500",
-      //   buttons: true,
-      // });
     }
   }, [error]);
 
@@ -234,7 +197,7 @@ const SignUp = () => {
             className="bg-transparent py-[1rem]  w-[100%] password-field"
             type={showPassword ? "" : "password"}
             placeholder="Password"
-            ref={passowrdRef}
+            ref={passwordRef}
             onChange={checkValidPassword}
           />
           <button
