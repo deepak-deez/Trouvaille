@@ -143,56 +143,61 @@ function Navbar({ setActive }) {
         ) : (
           ""
         )}
-        <div className="flex gap-10 2xl:gap-[4.1rem] items-center">
-          <SearchBar />
 
-          <div ref={refNoti} className="my-auto relative hidden xl:block">
-            <p className="absolute text-center pt-1 h-8 w-8 bg-green-600 rounded-full left-[-1rem] text-white font-bold">
-              {notisUnread.length}
-            </p>
-            <button onClick={handleNotificationPopUp} className="my-auto">
+        {dashboardLocations.find(
+          (location) => location === currentPageLocation
+        ) ? (
+          <div className="flex gap-10 2xl:gap-[4.1rem] items-center">
+            <div ref={refNoti} className="my-auto relative hidden xl:block">
+              <p className="absolute text-center pt-1 h-8 w-8 bg-green-600 rounded-full left-[-1rem] text-white font-bold">
+                {notisUnread.length}
+              </p>
+              <button onClick={handleNotificationPopUp} className="my-auto">
+                <img
+                  src={notificationIcon}
+                  className=" mt-2 w-8  h-full  my-auto"
+                  alt="notification-icon"
+                />
+              </button>
+              <div className={showNotis ? " block " : " hidden "}>
+                <NotificationPopUp
+                  setShowNotis={setShowNotis}
+                  statusNotis={statusNotis?.data}
+                  notisUnread={notisUnread}
+                  setNotisUnread={setNotisUnread}
+                />
+              </div>
+            </div>
+
+            <Link to={"/booking"}>
               <img
-                src={notificationIcon}
-                className=" mt-2 w-8  h-full  my-auto"
-                alt="notification-icon"
+                src={bookingsIcon}
+                className="hidden xl:block w-8 h-full"
+                alt="document-icon"
               />
+            </Link>
+            <button
+              onClick={() => {
+                navigate("/accountDetails");
+                setActive("view-account");
+              }}
+            >
+              <div className="rounded-[50%] border-salte-300 border-4">
+                <img
+                  className="h-10 w-10 rounded-[50%]"
+                  src={
+                    FrontendUserData?.data?.userDetails?.userDetails?.image
+                      ? FrontendUserData?.data?.userDetails?.userDetails?.image
+                      : profileIcon
+                  }
+                  alt="profile-icon"
+                />
+              </div>
             </button>
-            <div className={showNotis ? " block " : " hidden "}>
-              <NotificationPopUp
-                setShowNotis={setShowNotis}
-                statusNotis={statusNotis?.data}
-                notisUnread={notisUnread}
-                setNotisUnread={setNotisUnread}
-              />
-            </div>
           </div>
-
-          <Link to={"/booking"}>
-            <img
-              src={bookingsIcon}
-              className="hidden xl:block w-8 h-full"
-              alt="document-icon"
-            />
-          </Link>
-          <button
-            onClick={() => {
-              navigate("/accountDetails");
-              setActive("view-account");
-            }}
-          >
-            <div className="rounded-[50%] border-salte-300 border-4">
-              <img
-                className="h-10 w-10 rounded-[50%]"
-                src={
-                  FrontendUserData?.data?.userDetails?.userDetails?.image
-                    ? FrontendUserData?.data?.userDetails?.userDetails?.image
-                    : profileIcon
-                }
-                alt="profile-icon"
-              />
-            </div>
-          </button>
-        </div>
+        ) : (
+          ""
+        )}
 
         {navCollapse ? (
           ""

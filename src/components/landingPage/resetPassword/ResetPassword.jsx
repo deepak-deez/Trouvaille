@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import "./style.scss";
 import axios from "axios";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import SweetAlert from "../../alert/sweetAlert";
 
 const ResetPassword = () => {
   const passwordRef = useRef();
@@ -62,7 +63,10 @@ const ResetPassword = () => {
                 resetPasswordData
               );
               if (response?.data?.success) {
-                navigate("/");
+                SweetAlert("success", response?.data?.message);
+                setTimeout(() => {
+                  navigate("/");
+                }, 2000);
               }
             } else {
               setDifferentPassword(true);

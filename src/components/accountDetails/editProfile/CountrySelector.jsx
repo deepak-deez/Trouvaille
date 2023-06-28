@@ -17,7 +17,7 @@ function CountrySelector({ selectedValue, setDestination }) {
   };
   return (
     <Select
-      className="text-2xl outline-none"
+      className=" text-[16px]  outline-none"
       options={options}
       value={value}
       onChange={(e) => changeHandler(e)}

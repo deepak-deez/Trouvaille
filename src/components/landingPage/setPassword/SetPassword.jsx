@@ -3,10 +3,13 @@ import { Link } from "react-router-dom";
 import "./style.scss";
 import axios from "axios";
 import { validEmail } from "../../../constants/regex";
+import SweetAlert from "../../alert/sweetAlert";
+import { useNavigate } from "react-router-dom/dist/umd/react-router-dom.development";
 
 const SetPassword = () => {
   const emailref = useRef();
   const [apiMessage, setApiMessage] = useState("");
+  const navigate = useNavigate();
   const runningPort = window.location.port;
 
   const handleEmailValidation = () => {
@@ -32,7 +35,11 @@ const SetPassword = () => {
         `${process.env.REACT_APP_API_HOST}send-reset-mail/Frontend-user`,
         data
       );
-      if (response.data.success) setApiMessage(response.data.message);
+      if (response?.data?.success) {
+        setApiMessage(response.data.message);
+        SweetAlert("success", response?.data?.message);
+        navigate("/");
+      }
     } catch (err) {
       if (err.response.data.success === false)
         setApiMessage(err.response.data.message);

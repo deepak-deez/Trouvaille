@@ -2,13 +2,9 @@ import React, { useRef, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./style.scss";
-// import { handleProfileImagetoUrl } from "./logic.js";
 import defaultProfileImage from "../../../assets/images/accountDetails/profileSettings/defaultProfileImage.png";
 import editIcon from "../../../assets/images/accountDetails/profileSettings/edit.svg";
-// import accountSettingsImgChange from "../../../assets/images/accountDetails/profileSettings/edit-img.svg";
-// import axios from "axios";
 import ProfileSideBar from "../profileSideBar/ProfileSideBar";
-// import { updateUserDetails } from "../../../redux/slices/userSlice";
 import { updateUser, updateUserDetails } from "../../../redux/slices/userSlice";
 import SignOut from "../../SignOut/SignOut";
 import CountrySelector from "./CountrySelector";
@@ -20,8 +16,6 @@ export default function EditProfile({ setActive, active }) {
     genders: ["Male", "Female", "Others"],
     maritalStatus: ["Single", "Married", "Divorced", "In a Relationship"],
   };
-  // const [responseData, setResponseData] = useState();
-  // const [userFetchedData, setUserFetchedData] = useState();
   const [uploadImgBtnDisplay, setUploadImgBtnDisplay] = useState(false);
   const [profileImg, setProfileImg] = useState();
   const [imageUrlState, setImageUrlState] = useState("");
@@ -36,8 +30,6 @@ export default function EditProfile({ setActive, active }) {
   const DOBRef = useRef("");
   const genderRef = useRef("");
   const maritalStatusRef = useRef("");
-  // const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/${updatedUserData.data.userDetails.userType}/${updatedUserData.data.userDetails._id}`;
-
   const userPLace = FrontendUserData?.data?.userDetails?.userDetails?.place;
   const userName = FrontendUserData?.data?.userDetails?.userDetails?.name;
   const userDOB = FrontendUserData?.data?.userDetails?.userDetails?.DOB;
@@ -46,28 +38,6 @@ export default function EditProfile({ setActive, active }) {
   const userMarried =
     FrontendUserData?.data?.userDetails?.userDetails?.maritalStatus;
   const [destination, setDestination] = useState();
-  // const updateDataHandler = async () => {
-  //   console.log(
-  //     "Before edit : ",
-  //     updatedUserData.data.userDetails.userDetails.image
-  //   );
-
-  //   try {
-  //     // const getUpdatedData = await axios.get(dataBaseUrl);
-
-  //     // setResponseData(updatedUserData);
-  //     setProfileImg(updatedUserData?.data?.userDetails?.userDetails?.image);
-  //     setImageUrlState(updatedUserData?.data?.userDetails?.userDetails?.image);
-  //   } catch (error) {
-  //     setProfileImg(defaultProfileImage);
-  //   }
-  // };
-
-  // const getUserData = async () => {
-  //   // const getUserDataRes = await axios.get(dataBaseUrl);
-  //   setUserFetchedData(getUserDataRes);
-  //   return getUserDataRes;
-  // };
 
   useEffect(() => {
     const img = FrontendUserData?.data?.userDetails?.userDetails?.image
@@ -75,24 +45,11 @@ export default function EditProfile({ setActive, active }) {
       : defaultProfileImage;
     setProfileImg(img);
     setImageUrlState(img);
-    // updateDataHandler();
-    // getUserData();
   }, []);
-  // useEffect(() => {
-  //   console.log(updatedUserData);
-  //   if (updatedUserData) dispatch(updateUserDetails(updatedUserData));
-  //   console.log(
-  //     "After dispatch : ",
-  //     updatedUserData,
-  //     "FrontendUserData",
-  //     FrontendUserData
-  //   );
-  // }, [updatedUserData]);
 
   const uploadImgHandler = (e) => {
     try {
       console.log(e.target.files[0]);
-      // setProfileImg(e.target.files[0]);
       setImageUrlState(e.target.files[0]);
       setProfileImg(URL.createObjectURL(e.target.files[0]));
       setUploadImgBtnDisplay(!uploadImgBtnDisplay);
@@ -122,19 +79,6 @@ export default function EditProfile({ setActive, active }) {
       })
     );
 
-    // const userData = {
-    //   image: imgUrl ? imgUrl : responseData?.data.data[0].userDetails.image.url,
-    //   name: nameRef.current.value,
-    //   place: placeRef.current.value,
-    //   DOB: DOBRef.current.value,
-    //   gender: genderRef.current.value,
-    //   maritalStatus: maritalStatusRef.current.value,
-    // };
-
-    // console.log(userData);
-
-    // const updateUrl = `${process.env.REACT_APP_API_HOST}update/Frontend-user/${updatedUserData.data.userDetails._id}`;
-
     try {
       if (nameRef.current.value.length) {
         document.getElementById("nameField").textContent = "";
@@ -145,20 +89,6 @@ export default function EditProfile({ setActive, active }) {
             formdata: formData,
           })
         );
-        // dispatch(updateUserDetails(updatedUserData));
-        // console.log(
-        //   "After dispatch : ",
-        //   updatedUserData,
-        //   "FrontendUserData",
-        //   FrontendUserData
-        // );
-        // setActive("profile");
-
-        // const response = await axios.post(updateUrl, formData, {
-        //   headers: {
-        //     "content-type": "multipart/form-data",
-        //   },
-        // });
       } else {
         throw new Error("Name is required!");
       }
@@ -169,16 +99,8 @@ export default function EditProfile({ setActive, active }) {
   if (updatedUserData?.success) {
     console.log(updatedUserData);
     SweetAlert("success", updatedUserData.message);
-    // dispatch(updateUserDetails());
-    //   console.log(
-    //     "After dispatch : ",
-    //     updatedUserData,
-    //     "FrontendUserData",
-    //     FrontendUserData
-    //   );
-    // updateDataHandler({ userDetails: response.data });
+
     setActive("profile");
-    // dispatch(updateUserDetails());
   }
   if (error) {
     SweetAlert("error", error);
@@ -204,7 +126,7 @@ export default function EditProfile({ setActive, active }) {
           </div>
           <div className="flex flex-col sm:flex-row gap-[2rem] mt-[1.5rem] sm:mt-[2rem] profile-section">
             <div className="flex flex-col items-center">
-              <div className="flex flex-col profile-img-container h-[250px] w-[150px] overflow-hidden">
+              <div className="flex flex-col profile-img-container h-[180px] w-[150px] overflow-hidden">
                 <div className="change-profile-img">
                   <div
                     className="user-profile-img w-10"
@@ -257,26 +179,18 @@ export default function EditProfile({ setActive, active }) {
                 disabled={true}
               />
               <div className="flex gap-[1rem] w-[100%] items-center">
-                {/* <input
-                  className="lg:text-[1.6rem] grey-text bg-transparent p-2"
-                  placeholder="Your Location"
-                  defaultValue={userPLace ? userPLace : ""}
-                  ref={placeRef}
-                  disabled
-                /> */}
                 <CountrySelector
                   selectedValue={userPLace ? userPLace : ""}
                   setDestination={setDestination}
-                  // placeRef={placeRef}
                 />
-                <img src={editIcon} alt="edit-icon" />
-                <span className="lg:text-[1.6rem] grey-text">
+                <img src={editIcon} className="w-6 h-6" alt="edit-icon" />
+                <span className="lg:text-[1rem] grey-text">
                   Joined in {userJoiningYear ? userJoiningYear : "2023"}
                 </span>
               </div>
             </div>
           </div>
-          <div className="xl:mt-[5rem] mt-[2rem] flex flex-col xl:flex-row xl:justify-between gap-8 xl:gap-14 lg:text-[20px]">
+          <div className="xl:mt-[3rem] mt-[1.5rem] flex flex-col xl:flex-row xl:justify-between gap-8 xl:gap-14 lg:text-[20px]">
             <ProfileSideBar activePage={"profile"} setActive={setActive} />
             <div className="profile-details flex flex-col lg:text-[22px]  p-5 lg:p-10 2xl:p-[2.2rem] rounded-2xl xl:w-[80%] backdrop-blur-sm">
               <h2 className="font-[600]">Profile</h2>
@@ -293,7 +207,11 @@ export default function EditProfile({ setActive, active }) {
                     defaultValue={userName ? userName : ""}
                     ref={nameRef}
                   />
-                  <img src={editIcon} alt="edit-icon" />
+                  <img
+                    className="w-6 h-6 m-auto"
+                    src={editIcon}
+                    alt="edit-icon"
+                  />
                 </div>
                 <h4
                   id="nameField"
@@ -309,7 +227,7 @@ export default function EditProfile({ setActive, active }) {
                 ref={DOBRef}
               />
               <h4 className="mb-[1.5rem] grey-text">Gender</h4>
-              <div className="bg-white mb-[3.1rem] px-[1.2rem] rounded-2xl">
+              <div className="bg-white mb-[3.1rem] text-[16px] px-[1.2rem] rounded-2xl">
                 <select
                   className="bg-transparent grey-text w-[100%] py-[1rem] outline-none"
                   name="gender"
@@ -329,7 +247,7 @@ export default function EditProfile({ setActive, active }) {
                 </select>
               </div>
               <h4 className="mb-[1.5rem] grey-text">Marital Status</h4>
-              <div className="bg-white mb-[3.1rem] px-[1.2rem] rounded-2xl">
+              <div className="bg-white mb-[3.1rem] text-[16px] px-[1.2rem] rounded-2xl">
                 <select
                   className="bg-transparent grey-text w-[100%] py-[1rem] outline-none"
                   name="Marital Status"
@@ -350,7 +268,7 @@ export default function EditProfile({ setActive, active }) {
               </div>
               <div className="flex gap-[1.2rem]">
                 <button
-                  className="mt-[2rem] rounded-2xl text-white bg-[#555B58] w-[100%] text-center py-4 xl:py-[1.5rem] "
+                  className="mt-[1rem] text-[16px] rounded-2xl text-white bg-[#555B58] w-[100%] text-center py-3 xl:py-[0.8rem] "
                   onClick={() => {
                     setActive("profile");
                   }}
@@ -358,7 +276,7 @@ export default function EditProfile({ setActive, active }) {
                   CANCEL
                 </button>
                 <button
-                  className="mt-[2rem] rounded-2xl text-white bg-[#219653] w-[100%] text-center py-4 xl:py-[1.5rem] "
+                  className="mt-[1rem]  text-[16px] rounded-2xl text-white bg-[#219653] w-[100%] text-center py-4 xl:py-[0.8rem] "
                   onClick={updateDetailsHandler}
                 >
                   SUBMIT
