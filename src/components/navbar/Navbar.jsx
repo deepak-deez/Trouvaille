@@ -15,7 +15,7 @@ import socketIOClient from "socket.io-client";
 import axios from "axios";
 import socket from "../../functions/socket";
 
-// const ENDPOINT = "http://localhost:7000";
+// const ENDPOINT = "http:flocalhost:7000";
 
 function Navbar({ setActive }) {
   const navigate = useNavigate();
@@ -59,8 +59,6 @@ function Navbar({ setActive }) {
         return data.readStatus === false;
       })
     );
-
-    console.log("Response : ", response.data);
   };
 
   useEffect(() => {
@@ -107,9 +105,6 @@ function Navbar({ setActive }) {
       }
     >
       <div ref={refMenu} className="flex justify-between flex-wrap">
-        {/* {dashboardLocations.find(
-          (location) => location === currentPageLocation
-        ) ? ( */}
         <button
           className="collapse-button xl:hidden"
           onClick={(e) => {
@@ -119,10 +114,6 @@ function Navbar({ setActive }) {
         >
           <img src={menuHamburger} alt="menu-hamburger" />
         </button>
-        {/* ) : (
-          ""
-        )} */}
-
         <Link to="/searchResult">
           <div className="flex gap-2">
             <img src={logo} className="" alt="logo" />
@@ -152,10 +143,6 @@ function Navbar({ setActive }) {
         ) : (
           ""
         )}
-
-        {/* {dashboardLocations.find(
-          (location) => location === currentPageLocation
-        ) ? ( */}
         <div className="flex gap-10 2xl:gap-[4.1rem] items-center">
           <SearchBar />
 
@@ -193,11 +180,6 @@ function Navbar({ setActive }) {
               setActive("view-account");
             }}
           >
-            {console.log(
-              FrontendUserData,
-              "image:",
-              FrontendUserData?.data?.userDetails?.userDetails?.image
-            )}
             <div className="rounded-[50%] border-salte-300 border-4">
               <img
                 className="h-10 w-10 rounded-[50%]"
@@ -211,9 +193,6 @@ function Navbar({ setActive }) {
             </div>
           </button>
         </div>
-        {/* ) : (
-          ""
-        )} */}
 
         {navCollapse ? (
           ""

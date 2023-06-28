@@ -3,10 +3,8 @@ import "./style.scss";
 import { Link, useNavigate } from "react-router-dom";
 import eye from "../../../assets/images/landingPage/loginForm/eye.svg";
 import Cookies from "js-cookie";
-// import { logInUser } from "../../../redux/actions/userActions";
-import { signIn } from "../../../redux/slices/userSlice";
+import { signIn, updateUserDetails } from "../../../redux/slices/userSlice";
 import { useSelector, useDispatch } from "react-redux";
-// import swal from "sweetalert2";
 import SweetAlert from "../../alert/sweetAlert";
 import LoadingScreen from "../../loading/loadingScreen";
 import { validEmail } from "../../../constants/regex";
@@ -17,8 +15,6 @@ const LoginForm = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const accDetails = {};
-  // const [apiMessage, setApiMessage] = useState("");
-  const [empyFieldsMessage, setEmptyFieldsMessage] = useState(false);
   const dispatch = useDispatch();
   const { FrontendUserData, error, loading, success } = useSelector(
     (state) => state.user
@@ -67,18 +63,9 @@ const LoginForm = () => {
     accDetails["password"] = passwordRef.current.value;
 
     if (!!emailRef.current.value.length && !!passwordRef.current.value.length) {
-      setEmptyFieldsMessage(false);
       dispatch(signIn(accDetails));
     } else {
       SweetAlert("warning", "", "Fields cannot be Empty!");
-      // swal.fire({
-      //   icon: "warning",
-      //   title: "Warning",
-      //   text: "Fields cannot be Empty",
-      //   timer: "2500",
-      //   buttons: true,
-      // });
-      setEmptyFieldsMessage(true);
     }
   };
 
@@ -94,27 +81,9 @@ const LoginForm = () => {
   }, [success]);
 
   useEffect(() => {
-    console.log(
-      "ERROR : ",
-      error,
-      ", User Details : ",
-      FrontendUserData,
-      "Loading",
-      loading
-    );
     if (error) {
-      // setApiMessage(error.response.data.message);
-      console.log(error);
       SweetAlert("error", error);
-      // swal.fire({
-      //   position: "center",
-      //   width: "40vh",
-      //   icon: "error",
-      //   title: "failed",
-      //   text: error,
-      //   timer: "2500",
-      //   buttons: true,
-      // });
+      dispatch(updateUserDetails());
     }
   }, [error]);
 

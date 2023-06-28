@@ -7,6 +7,7 @@ import { validEmail } from "../../../constants/regex";
 const SetPassword = () => {
   const emailref = useRef();
   const [apiMessage, setApiMessage] = useState("");
+  const runningPort = window.location.port;
 
   const handleEmailValidation = () => {
     try {
@@ -23,6 +24,7 @@ const SetPassword = () => {
   const sendLink = async () => {
     const data = {
       email: emailref.current.value,
+      port: runningPort,
     };
 
     try {
@@ -30,10 +32,8 @@ const SetPassword = () => {
         `${process.env.REACT_APP_API_HOST}send-reset-mail/Frontend-user`,
         data
       );
-      console.log(response.status, response);
       if (response.data.success) setApiMessage(response.data.message);
     } catch (err) {
-      // console.log("Err:", err);
       if (err.response.data.success === false)
         setApiMessage(err.response.data.message);
     }
