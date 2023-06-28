@@ -9,14 +9,12 @@ export default function PassengerDetails(props) {
   const age = useRef();
 
   return (
-    <div className="other-passenger-details">
-      <p className="passenger-number text-3xl mt-[3rem]">
-        Passenger : {props.count}
-      </p>
+    <div className="other-passenger-details flex flex-col gap-[1rem] md:gap-[2rem]">
+      <p className="passenger-number text-[18px] ">Passenger : {props.count}</p>
       <input
         className={
           `first-name${props.iterator}` +
-          " input-fields lg:px-[39px] text-[20px] w-[100%] lg:py-[32px] px-[15px] py-[20px] lg:mt-[60px] mt-[30px] "
+          " input-fields lg:px-[39px]  w-[100%]  px-[15px] py-[20px]  "
         }
         type="text"
         placeholder="First Name"
@@ -26,7 +24,7 @@ export default function PassengerDetails(props) {
       <input
         className={
           `last-name${props.iterator}` +
-          " input-fields lg:px-[39px] text-[20px] w-[100%] lg:py-[32px] px-[15px] py-[20px] lg:mt-[60px] mt-[30px] "
+          " input-fields lg:px-[39px]  w-[100%]  px-[15px] py-[20px]  "
         }
         type="text"
         placeholder="Last Name"
@@ -35,7 +33,7 @@ export default function PassengerDetails(props) {
       <input
         className={
           `gender${props.iterator}` +
-          " input-fields lg:px-[39px] text-[20px] w-[100%] lg:py-[32px] px-[15px] py-[20px] lg:mt-[60px] mt-[30px] "
+          " input-fields lg:px-[39px]  w-[100%]  px-[15px] py-[20px]  "
         }
         type="text"
         placeholder="Gender"
@@ -44,7 +42,7 @@ export default function PassengerDetails(props) {
       <input
         className={
           `age${props.iterator}` +
-          " input-fields lg:px-[39px] text-[20px] w-[100%] lg:py-[32px] px-[15px] py-[20px] lg:mt-[60px] mt-[30px] "
+          " input-fields lg:px-[39px]  w-[100%]  px-[15px] py-[20px]  "
         }
         type="number"
         placeholder="Age"

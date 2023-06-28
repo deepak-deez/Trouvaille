@@ -17,7 +17,7 @@ export default function Header({
   return (
     <>
       <header>
-        <div className="flex flex-col xl:flex-row lg:justify-between gap-5 bg-white p-10 rounded-[3rem] lg:mx-[5rem] xl:mx-[25rem] min-[1920px]:mx-[32rem]">
+        <div className="flex flex-col xl:flex-row lg:justify-between gap-5 bg-white p-7 rounded-[3rem] lg:mx-[5rem] xl:mx-[12rem] min-[1920px]:mx-[32rem]">
           {/* Remove the classname hidden from the classlist */}
           <div className="flex flex-col gap-2">
             <h4>Where to</h4>
@@ -25,7 +25,7 @@ export default function Header({
               ref={destination}
               type="text"
               placeholder="Search Result destination"
-              className="bg-transparent"
+              className="bg-transparent "
             />
           </div>
           <DatePicker setDateData={setCheckInDate} type={"Check In"} />
@@ -40,7 +40,7 @@ export default function Header({
             />
           </div>
           <button
-            className="hover:saturate-[75%] hover:scale-125 hover:contrast-150 w-20 h-20 transition-all duration-300"
+            className="hover:saturate-[75%] hover:scale-125 hidden xl:block hover:contrast-150 w-20 h-20 transition-all duration-300"
             onClick={() => {
               setTripFilterClicked(tripFilterClicked + 1);
               if (destination.current.value) {
@@ -52,11 +52,7 @@ export default function Header({
               setFilterPerson(noOfPersons.current.value);
             }}
           >
-            <img
-              src={dateSearchIcon}
-              className="hidden xl:block"
-              alt="date-search-icon"
-            />
+            <img src={dateSearchIcon} alt="date-search-icon" />
           </button>
           <button
             onClick={() => {
@@ -76,7 +72,7 @@ export default function Header({
         <h1 className="mt-[5rem] 2xl:mt-[9rem]">
           Make your Trip as beautiful as you
         </h1>
-        <h2 className="bg-[#BC4E37] heading-main">
+        <h2 className="bg-[#BC4E37]  heading-main">
           Choose your exotic holidays
         </h2>
       </header>

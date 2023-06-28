@@ -3,10 +3,14 @@ import { Link } from "react-router-dom";
 import "./style.scss";
 import axios from "axios";
 import { validEmail } from "../../../constants/regex";
+import SweetAlert from "../../alert/sweetAlert";
+import { useNavigate } from "react-router-dom/dist/umd/react-router-dom.development";
 
 const SetPassword = () => {
   const emailref = useRef();
   const [apiMessage, setApiMessage] = useState("");
+  const navigate = useNavigate();
+  const runningPort = window.location.port;
 
   const handleEmailValidation = () => {
     try {
@@ -23,6 +27,7 @@ const SetPassword = () => {
   const sendLink = async () => {
     const data = {
       email: emailref.current.value,
+      port: runningPort,
     };
 
     try {
@@ -30,10 +35,12 @@ const SetPassword = () => {
         `${process.env.REACT_APP_API_HOST}send-reset-mail/Frontend-user`,
         data
       );
-      console.log(response.status, response);
-      if (response.data.success) setApiMessage(response.data.message);
+      if (response?.data?.success) {
+        setApiMessage(response.data.message);
+        SweetAlert("success", response?.data?.message);
+        navigate("/");
+      }
     } catch (err) {
-      // console.log("Err:", err);
       if (err.response.data.success === false)
         setApiMessage(err.response.data.message);
     }
@@ -43,7 +50,7 @@ const SetPassword = () => {
       <h2 className="md:text-[40px] text-center mt-[10px] lg:mt-[30px] text-[28px]">
         Set profile password
       </h2>
-      <div className="flex flex-col lg:w-[900px] w-[90%] md:px-[20px] md:py-[20px] mt-[15px] login-details px-[25px] py-[15px] lg:py-[67px] lg:px-[97px] justify-center">
+      <div className="flex flex-col lg:w-[900px] w-[90%] md:px-[25px] md:py-[25px] mt-[15px] login-details px-[25px] py-[15px] lg:py-[40px] lg:px-[40px] justify-center">
         <p
           className={
             "text-3xl text-center api-message " +
@@ -53,7 +60,7 @@ const SetPassword = () => {
           {apiMessage}
         </p>
         <input
-          className="input-fields p-[2rem] mt-[9px] bg-transparent"
+          className="input-fields p-[1rem] mt-[9px] bg-transparent"
           type="text"
           ref={emailref}
           placeholder="Enter Your Email Address"
@@ -66,7 +73,7 @@ const SetPassword = () => {
         <button
           to="/resetPassword"
           onClick={sendLink}
-          className="lg:mt-[27px] mt-[20px] px-[15px] py-[20px] lg:py-[24px] text-center send-password-button"
+          className="lg:mt-[27px] mt-[20px] px-[15px] py-[15px] text-center send-password-button"
         >
           SEND LINK
         </button>

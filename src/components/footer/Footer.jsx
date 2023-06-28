@@ -78,7 +78,7 @@ export default function Footer() {
           </a>
         </li>
       </ul>
-      <div className="flex flex-col scale-[85%] items-center gap-5 lg:pb-[1rem] lg:flex-row lg:justify-between">
+      <div className="flex flex-col scale-[85%] items-center gap-5 lg:pb-[1rem] lg:flex-row justify-center md:justify-between">
         <Link to="/searchResult">
           <div className="flex gap-2">
             <img src={logo} className="" alt="logo" />
