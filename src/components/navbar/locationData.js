@@ -1,11 +1,18 @@
 export const fullNavLocations = ["/trips", "/tripDetails", "/searchResult"];
 
 export const dashboardLocations = [
-  "/trips",
-  "/tripDetails",
-  "/accountDetails",
-  "/editAccDetails",
-  "/profile",
-  "/editProfile",
-  "/searchResult",
+  "/",
+  "/setPassword",
+  "/resetPassword",
+  "/signup",
+  // "/trips",
+  // "/tripDetails",
+  // "/accountDetails",
+  // "/editAccDetails",
+  // "/profile",
+  // "/editProfile",
+  // "/searchResult",
+  // "/bookingForm",
+  // "/booking",
+  // "/tripDetails/:id",
 ];

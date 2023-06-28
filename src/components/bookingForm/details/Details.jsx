@@ -157,7 +157,6 @@ const Details = (props) => {
     setPassengerCountArray(passengerHeadCount);
     passengerCount = props.bookingFormData.guestsSelected;
   }
-  console.log("Booking form details : ", bookingFormDetails);
 
   const checkValidUserName = () => {
     try {
@@ -194,14 +193,14 @@ const Details = (props) => {
   return (
     <>
       {loading && <LoadingScreen />}
-      <section className="flex flex-col details-form justify-center items-center pb-[20rem]">
-        <h2 className="md:text-[64px] text-center mt-[10px] lg:mt-[30px] text-[50px]">
+      <section className="flex flex-col details-form justify-center items-center ">
+        <h2 className="md:text-[50px] text-center lg:mt-[30px] text-[35px]">
           Details about you
         </h2>
-        <div className="flex flex-col lg:w-[975px] w-[90%] md:px-[30px] md:py-[30px] mt-[15px] details-container px-[25px] py-[15px] lg:py-[67px] lg:px-[97px] gap-[2rem] md:gap-[3rem] justify-center">
+        <div className="flex flex-col lg:w-[975px] text-[1rem] w-[90%] md:px-[30px] md:py-[30px] mt-[15px] details-container px-[25px] py-[15px] lg:py-[40px] lg:px-[40px] gap-[1rem] md:gap-[2rem] justify-center">
           <div className="relative">
             <input
-              className="input-fields w-full lg:px-[39px] px-[15px] py-[20px] text-[20px] lg:py-[32px] mt-[9px]"
+              className="input-fields w-full lg:px-[30px] px-[15px] py-[20px] "
               type="text"
               placeholder="Full Name"
               ref={userName}
@@ -218,7 +217,7 @@ const Details = (props) => {
 
           <div>
             <input
-              className="input-fields lg:px-[39px] lg:py-[32px] text-[20px] px-[15px] py-[20px]  w-[100%]"
+              className="input-fields lg:px-[30px] px-[15px] py-[20px]  w-[100%]"
               type="text"
               placeholder="Phone Number"
               defaultValue={bookingFormDetails.phone}
@@ -236,27 +235,26 @@ const Details = (props) => {
           </div>
 
           <input
-            className=" input-fields lg:px-[39px] lg:py-[32px] text-[20px] px-[15px] py-[20px]  w-[100%]"
+            className=" input-fields lg:px-[30px] px-[15px] py-[20px] w-[100%]"
             type="text"
             placeholder="E-mail"
             defaultValue={bookingFormDetails.email}
             disabled={true}
           />
           <input
-            className=" input-fields text-[20px] w-[100%] lg:px-[39px] lg:py-[32px] px-[15px] py-[20px]  "
+            className=" input-fields w-[100%] lg:px-[30px] px-[15px] py-[20px]  "
             type="text"
             placeholder="Address"
             ref={address}
           />
 
-          <div className="flex input-fields items-center justify-between  lg:px-[39px] px-[15px] ">
+          <div className="flex input-fields items-center justify-between lg:px-[30px] px-[15px] ">
             <input
-              className=" w-[100%] lg:py-[32px] py-[20px] bg-transparent text-[20px] other-passenger"
+              className=" w-[100%] py-[20px] bg-transparent other-passenger"
               type="number"
               placeholder="Other Passenger (number)"
               defaultValue={props.bookingFormData.guestsSelected}
               onChange={(e) => {
-                console.log(props);
                 if (e.target.value > props.bookingFormData.maximumGuests) {
                   setPassengerCount(props.bookingFormData.maximumGuests);
                   swal.fire({
@@ -302,10 +300,10 @@ const Details = (props) => {
               })
             : ""}
 
-          <ul className="list-disc flex flex-col gap-5">
+          <ul className="list-disc flex flex-col gap-2 break-all">
             {bookingNotes?.map((data, index) => {
               return (
-                <li className="grey-text" key={index}>
+                <li className="grey-text text-[0.7rem]" key={index}>
                   {data.note}
                 </li>
               );
@@ -314,13 +312,13 @@ const Details = (props) => {
 
           <button
             onClick={submitBtnHandler}
-            className=" px-[15px] py-[20px] lg:py-[24px] text-center continue-button"
+            className=" px-[15px] py-[20px] text-center continue-button"
           >
             SUBMIT
           </button>
         </div>
       </section>
-      {sucessModal && <Success />}
+      {sucessModal && <Success setsucessModal={setsucessModal} />}
     </>
   );
 };

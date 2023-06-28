@@ -105,15 +105,11 @@ const SignUp = () => {
     ) {
       SweetAlert("warning", "", "Fields cannot be Empty!");
     } else if (!differentPassword && !pwdError) {
-      console.log("asddsadsaii");
       newUserDetails["email"] = emailRef.current.value;
       newUserDetails["phone"] = phoneNoRef.current.value;
       newUserDetails["password"] = passwordRef.current.value;
 
       dispatch(signUp(newUserDetails));
-    } else {
-      console.log(differentPassword, pwdError);
-      console.log("else");
     }
   };
 
@@ -164,139 +160,142 @@ const SignUp = () => {
   }, [error]);
 
   return (
-    <header className=" signup-form justify-center items-center my-auto] h-screen">
+    <header className=" signup-form justify-center items-center my-auto]">
       <p className="md:text-[28px] text-center">Sign up</p>
       <h2 className="md:text-[40px] text-center mt-[10px] lg:mt-[30px] text-[32px]">
         Welcome to Trouvaille
       </h2>
-      <div className="mx-auto flex flex-col gap-[15px] lg:w-[900px] w-[90%] md:px-[30px] md:py-[30px] mt-[15px] signup-details px-[25px] py-[15px] lg:py-[50px] lg:px-[60px] justify-center ">
-        <input
-          className="input-fields py-[1rem] px-[1.5rem] bg-transparent w-[100%]"
-          type="text"
-          placeholder="Email ID"
-          ref={emailRef}
-          onChange={handleEmailValidation}
-        />
-        <h4
-          id="validEmail"
-          className="text-red-600 bg-transparent text-xl"
-        ></h4>
-        <input
-          className=" input-fields phone-field  py-[1rem] px-[1.5rem]  w-[100%]"
-          type="number"
-          placeholder="Phone Number"
-          ref={phoneNoRef}
-          onChange={handlePhoneNumberValidation}
-        />
-        <h4
-          id="validPhone"
-          className="text-red-600 bg-transparent text-xl"
-        ></h4>
-        <div className=" input-fields px-[25px]  flex flex-row items-center justify-between">
+      <div className="mx-auto flex flex-col gap-[30px] lg:w-[900px] w-[90%] md:px-[30px] md:py-[30px] mt-[15px] signup-details px-[20px] py-[20px] lg:py-[40px] lg:px-[40px] justify-center ">
+        <div className="flex flex-col relative">
           <input
-            className="bg-transparent py-[1rem]  w-[100%] password-field"
-            type={showPassword ? "" : "password"}
-            placeholder="Password"
-            ref={passwordRef}
-            onChange={checkValidPassword}
-          />
-          <button
-            type="button"
-            onClick={() => {
-              setShowPassword(!showPassword);
-            }}
-          >
-            <img className="input-icon" src={eye} alt="view-icon" />
-          </button>
-        </div>
-        <h4
-          id="validPassword"
-          className={
-            "font-bold bg-transparent text-xl " +
-            (pwdError ? "text-red-700" : "text-green-700")
-          }
-        ></h4>
-        <div className=" input-fields px-[25px] flex flex-row items-center justify-between">
-          <input
-            className="py-[1rem]  w-[100%]  bg-transparent password-field"
-            type={showConfirmPassword ? "" : "password"}
-            placeholder="Confirm Password"
-            ref={confirmPasswordRef}
-            onChange={handlePasswordCheck}
-          />
-          <button
-            type="button"
-            onClick={() => {
-              setShowCofirmPassword(!showConfirmPassword);
-            }}
-          >
-            <img className="input-icon" src={eye} alt="view-icon" />
-          </button>
-        </div>
-        <h4
-          id="confirmPassword"
-          className="text-red-700 font-bold bg-transparent text-xl"
-        ></h4>
-
-        <p className={apiMessage ? " api-message my-5" : ""}>{apiMessage}</p>
-
-        <div className="bg-transparent w-[20rem] mt-[-3rem] py-3 lg:mb-[-15px] lg:px-3 lg:py-3 lg:text-lg rounded-lg">
-          <input
-            type="checkbox"
-            className="ml-2 w-5 h-5"
-            checked={isValidCaptcha}
-          />
-          <label className="pl-2 pr-3 text-white text-xl">
-            I am not a Robot
-            <span
-              className={"text-red-500 " + (isChecked ? "hidden" : "block")}
-            >
-              (Type Captcha First)
-            </span>
-          </label>
-        </div>
-
-        <div
-          className={
-            "flex flex-col ml-2 sm:w-[20rem] captcha-box mt-[-1rem] sm:mt-[-2rem] lg:mt-[-1rem] " +
-            (isChecked ? "hidden" : "block")
-          }
-        >
-          <p
-            className=" captcha-text font-bold text-xl line-through mx-auto py-2 px-2 mt-2 sm:mx-4"
-            onPaste={(e) => {
-              e.preventDefault();
-              return false;
-            }}
-            onCopy={(e) => {
-              e.preventDefault();
-              return false;
-            }}
-          >
-            {captchaText}
-          </p>
-          <input
-            className="pl-3 py-3 w-[15rem] mt-2 captcha-field mx-auto sm:mx-4"
+            className="input-fields py-[1rem] px-[1.5rem] bg-transparent w-[100%]"
             type="text"
-            value={userInput}
-            onChange={inputChange}
-            placeholder="Type Captcha here"
+            placeholder="Email ID"
+            ref={emailRef}
+            onChange={handleEmailValidation}
           />
-          <button
-            className="submit-button text-center px-[5px] py-[10px] mx-auto mt-4 mb-2 w-[5rem] sm:mx-4 sm:w-[5rem] "
-            type="submit"
-            onClick={checkCaptcha}
+          <h4
+            id="validEmail"
+            className="text-red-600 bg-transparent text-[16px] absolute mt-[3.3rem]"
+          ></h4>
+        </div>
+        <div className="flex flex-col relative">
+          <input
+            className=" input-fields phone-field  py-[1rem] px-[1.5rem]  w-[100%]"
+            type="number"
+            placeholder="Phone Number"
+            ref={phoneNoRef}
+            onChange={handlePhoneNumberValidation}
+          />
+          <h4
+            id="validPhone"
+            className="text-red-600 bg-transparent text-[16px] absolute mt-[3.3rem]"
+          ></h4>
+        </div>
+        <div className="flex flex-col relative">
+          <div className=" input-fields px-[25px] flex flex-row items-center justify-between">
+            <input
+              className="bg-transparent py-[1rem]  w-[100%] password-field"
+              type={showPassword ? "" : "password"}
+              placeholder="Password"
+              ref={passwordRef}
+              onChange={checkValidPassword}
+            />
+            <button
+              type="button"
+              onClick={() => {
+                setShowPassword(!showPassword);
+              }}
+            >
+              <img className="input-icon" src={eye} alt="view-icon" />
+            </button>
+          </div>
+          <h4
+            id="validPassword"
+            className={
+              "font-bold bg-transparent text-[16px] absolute mt-[3.3rem]" +
+              (pwdError ? "text-red-700" : "text-green-700")
+            }
+          ></h4>
+        </div>
+        <div className="flex flex-col relative">
+          <div className=" input-fields px-[25px] flex flex-row items-center justify-between">
+            <input
+              className="py-[1rem]  w-[100%]  bg-transparent password-field"
+              type={showConfirmPassword ? "" : "password"}
+              placeholder="Confirm Password"
+              ref={confirmPasswordRef}
+              onChange={handlePasswordCheck}
+            />
+            <button
+              type="button"
+              onClick={() => {
+                setShowCofirmPassword(!showConfirmPassword);
+              }}
+            >
+              <img className="input-icon" src={eye} alt="view-icon" />
+            </button>
+          </div>
+          <h4
+            id="confirmPassword"
+            className="text-red-700 font-bold bg-transparent text-[16px] absolute mt-[3.3rem]"
+          ></h4>
+        </div>
+        {apiMessage && <p className="api-message my-5">{apiMessage}</p>}
+
+        <div className="flex flex-col  gap-[30px] justify-start">
+          <div className="bg-transparent md:my-auto text-[16px] rounded-lg">
+            <input
+              type="checkbox"
+              className="w-5 h-5"
+              checked={isValidCaptcha}
+            />
+            <label className=" text-white ml-2 ">
+              I am not a Robot
+              <span
+                className={"text-red-500 " + (isChecked ? "hidden" : "block")}
+              >
+                (Type Captcha First)
+              </span>
+            </label>
+          </div>
+          <div
+            className={
+              "flex flex-col gap-2 p-3 captcha-box justify-start w-full max-w-[15rem] " +
+              (isChecked ? "hidden" : "block")
+            }
           >
-            submit
-          </button>
+            <p
+              className=" captcha-text font-bold text-[18px] line-through"
+              onPaste={(e) => {
+                e.preventDefault();
+                return false;
+              }}
+              onCopy={(e) => {
+                e.preventDefault();
+                return false;
+              }}
+            >
+              {captchaText}
+            </p>
+            <input
+              className="p-1 captcha-field "
+              type="text"
+              value={userInput}
+              onChange={inputChange}
+              placeholder="Type Captcha here"
+            />
+            <button
+              className="submit-button text-center p-[5px] "
+              type="submit"
+              onClick={checkCaptcha}
+            >
+              Submit
+            </button>
+          </div>
         </div>
         <button
-          className={
-            "px-[15px] py-[20px]  text-center continue-button " +
-            (!differentPassword && !apiMessage.length
-              ? " lg:mt-[60px] mt-[20px] "
-              : "")
-          }
+          className="p-[15px] text-center continue-button "
           onClick={(e) => {
             if (isChecked) {
               handleCreateNewAccount(e);

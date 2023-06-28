@@ -25,7 +25,7 @@ export default function Header({
               ref={destination}
               type="text"
               placeholder="Search Result destination"
-              className="bg-transparent"
+              className="bg-transparent "
             />
           </div>
           <DatePicker setDateData={setCheckInDate} type={"Check In"} />

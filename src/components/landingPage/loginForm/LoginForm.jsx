@@ -97,9 +97,9 @@ const LoginForm = () => {
           Welcome to Trouvaille
         </h2>
 
-        <div className="flex flex-col lg:w-[900px] w-[90%] md:px-[20px] md:py-[20px] mt-[15px] login-details px-[20px] py-[15px] lg:py-[50px] lg:px-[60px] justify-center">
+        <div className="flex flex-col lg:w-[900px] w-[90%] md:px-[20px] md:py-[20px] mt-[15px]  gap-[1rem] lg:gap-[1.3rem] login-details px-[20px] py-[20px] lg:py-[40px] lg:px-[40px] justify-center">
           <input
-            className="  input-fields p-[1.5rem] mt-[9px] w-[100%]"
+            className="  input-fields p-[1.2rem] w-[100%]"
             type="text"
             placeholder="Enter Email ID"
             ref={emailRef}
@@ -113,9 +113,9 @@ const LoginForm = () => {
             className="text-red-800 bg-transparent text-xl"
           ></h4>
 
-          <div className=" input-fields pr-[15px]  lg:mt-[60px] mt-[30px] flex flex-row items-center justify-between">
+          <div className=" input-fields pr-[15px] flex flex-row items-center justify-between">
             <input
-              className=" p-[1.5rem] w-[100%] bg-transparent"
+              className=" p-[1.2rem] w-[100%] bg-transparent"
               type={showPassword ? "text" : "password"}
               placeholder="Password"
               ref={passwordRef}
@@ -134,7 +134,7 @@ const LoginForm = () => {
               <img className="input-icon" src={eye} alt="view-icon" />
             </button>
           </div>
-          <div className="flex flex-row mt-[20px] lg:mt-[26px] text-[14px] gap-[11px]">
+          <div className="flex flex-row  text-[14px] gap-[11px]">
             <input
               type="checkbox"
               name="remember-me"
@@ -145,22 +145,16 @@ const LoginForm = () => {
             <p className="grey-text">Remember Me</p>
           </div>
           <button
-            className="lg:mt-[27px] mt-[20px] px-[15px] py-[20px] lg:py-[24px] text-center continue-button"
+            className=" px-[15px] py-[15px] text-center continue-button"
             onClick={logInHandler}
           >
             CONTINUE
           </button>
           <div className="flex justify-between">
-            <Link
-              className="text-center grey-text mt-[10px] lg:mt-[30px]"
-              to="/setPassword"
-            >
+            <Link className="text-center grey-text " to="/setPassword">
               Forget Password
             </Link>
-            <Link
-              className="text-center lg:text[25px  grey-text mt-[10px] lg:mt-[30px]"
-              to="/signup"
-            >
+            <Link className="text-center lg:text[25px  grey-text" to="/signup">
               Create Account
             </Link>
           </div>

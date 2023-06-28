@@ -2,8 +2,8 @@
   position: relative;
   .date {
     position: absolute;
-    width: 100%;
-    top: 2rem;
+    max-width: 20rem;
+    top: 5rem;
     left: -2rem;
     background: rgba(255, 255, 255, 0.647);
     backdrop-filter: blur(15px);
@@ -12,7 +12,7 @@
     z-index: 60;
     color: white;
     .rdrMonths {
-      margin: auto;
+      font-size: 0.6rem;
     }
     .rdrDayNumber {
       background: #bed1ff60;
@@ -22,6 +22,9 @@
     }
     .rdrSelected {
       color: white;
+    }
+    .rdrMonthAndYearWrapper {
+      font-size: 0.6rem;
     }
   }
 }

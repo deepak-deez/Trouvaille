@@ -100,13 +100,23 @@ function Navbar({ setActive }) {
   return (
     <nav
       className={
-        "p-2 sm:p-5 lg:px-[10] lg:py-5 2xl:px-[4rem] 2xl:py-[1.6rem] transition-all duration-500 " +
+        "p-2 sm:p-5 lg:px-[10] lg:py-4 2xl:px-[4rem] 2xl:py-[1.2rem] transition-all duration-500 " +
         (isScrolled ? "bg-white text-black nav-box-shadow " : "")
       }
     >
-      <div ref={refMenu} className="flex justify-between flex-wrap">
+      <div
+        ref={refMenu}
+        className={
+          "flex " +
+          (dashboardLocations.find(
+            (location) => location === currentPageLocation
+          )
+            ? "justify-start"
+            : "justify-between ")
+        }
+      >
         <button
-          className="collapse-button xl:hidden"
+          className="collapse-button xl:hidden w-10 h-10"
           onClick={(e) => {
             navCollapse ? setnavColapse(false) : setnavColapse(true);
             handleClickOutside(e);
@@ -115,7 +125,7 @@ function Navbar({ setActive }) {
           <img src={menuHamburger} alt="menu-hamburger" />
         </button>
         <Link to="/searchResult">
-          <div className="flex gap-2">
+          <div className="flex gap-2 scale-75">
             <img src={logo} className="" alt="logo" />
             <div className="flex flex-col">
               <h4 className="text-[30.68px]">trouvaille</h4>
@@ -136,26 +146,23 @@ function Navbar({ setActive }) {
             <li>
               <Link to="/trips">Trips</Link>
             </li>
-            <li>
-              <Link to="/contacts">Contacts</Link>
-            </li>
           </ul>
         ) : (
           ""
         )}
 
-        {dashboardLocations.find(
+        {!dashboardLocations.find(
           (location) => location === currentPageLocation
         ) ? (
-          <div className="flex gap-10 2xl:gap-[4.1rem] items-center">
+          <div className="flex lg:gap-10 2xl:gap-[4.1rem] items-center">
             <div ref={refNoti} className="my-auto relative hidden xl:block">
-              <p className="absolute text-center pt-1 h-8 w-8 bg-green-600 rounded-full left-[-1rem] text-white font-bold">
+              <p className="absolute text-center pt-1 h-6 w-6 text-[10px] bg-green-600 rounded-full left-[-0.8rem] text-white font-bold">
                 {notisUnread.length}
               </p>
               <button onClick={handleNotificationPopUp} className="my-auto">
                 <img
                   src={notificationIcon}
-                  className=" mt-2 w-8  h-full  my-auto"
+                  className=" mt-2 w-6  h-full  my-auto"
                   alt="notification-icon"
                 />
               </button>
@@ -172,7 +179,7 @@ function Navbar({ setActive }) {
             <Link to={"/booking"}>
               <img
                 src={bookingsIcon}
-                className="hidden xl:block w-8 h-full"
+                className="hidden xl:block w-6 h-full"
                 alt="document-icon"
               />
             </Link>
@@ -184,7 +191,7 @@ function Navbar({ setActive }) {
             >
               <div className="rounded-[50%] border-salte-300 border-4">
                 <img
-                  className="h-10 w-10 rounded-[50%]"
+                  className="h-8 w-8 rounded-[50%]"
                   src={
                     FrontendUserData?.data?.userDetails?.userDetails?.image
                       ? FrontendUserData?.data?.userDetails?.userDetails?.image
@@ -226,9 +233,6 @@ function Navbar({ setActive }) {
               </li>
               <li>
                 <Link to="/trips">Trips</Link>
-              </li>
-              <li>
-                <Link to="/contacts">Contacts</Link>
               </li>
             </ul>
           </div>

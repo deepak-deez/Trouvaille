@@ -66,22 +66,6 @@ export default function TripDetails(props) {
     if (!FrontendUserData) navigate("/");
   });
 
-  // useEffect(() => {
-  //   GetApiDatas(
-  //     setTripDetails,
-  //     setAmmenityImgData,
-  //     setOcassionImgData,
-  //     setUserdatabase,
-  //     currentUserId,
-  //     currentTripId.id
-  //   );
-  // }, []);
-
-  // useEffect(() => {
-  //   setTripResponseData(tripDetails?.data?.data[0]);
-  //   setFeaturesData();
-  // }, [tripDetails]);
-
   const acitivitiesData = tripDetails && tripDetails[0]?.activities;
   const durationData = tripDetails && tripDetails[0]?.duration;
   const ammenitiesData = tripDetails && tripDetails[0]?.amenities;
