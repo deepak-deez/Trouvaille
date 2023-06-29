@@ -30,8 +30,8 @@ export default function Dates(props) {
         }
         onClick={detailsClickHandler}
       >
-        <h2 className="text-[30px] lg:text-[40px]">{date[0]}</h2>
-        <p className="text-[18px] lg:text-[22px]">{date[1].substring(0, 3)}</p>
+        <h2>{date[0]}</h2>
+        <p>{date[1].substring(0, 3)}</p>
       </div>
       {toShow && (
         <div className="flex flex-col  gap-0 absolute ">

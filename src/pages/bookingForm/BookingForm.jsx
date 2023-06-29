@@ -3,6 +3,8 @@ import "./style.scss";
 import Details from "../../components/bookingForm/details/Details";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Footer from "../../components/footer/Footer";
+
 const BookingForm = (props) => {
   const location = useLocation();
   const bookingFormData = location.state;
@@ -15,6 +17,7 @@ const BookingForm = (props) => {
   return (
     <header className="booking-form pt-[10rem] pb-[5rem]">
       <Details bookingFormData={bookingFormData} />
+      <Footer />
     </header>
   );
 };

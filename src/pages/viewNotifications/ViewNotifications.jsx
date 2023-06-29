@@ -3,7 +3,7 @@ import "./style.scss";
 import Notification from "../../components/viewNotifications/Notification";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import Footer from "../../components/footer/Footer";
 const BookingList = () => {
   const { FrontendUserData } = useSelector((state) => state.user);
   const navigate = useNavigate();
@@ -13,6 +13,7 @@ const BookingList = () => {
   return (
     <header className="notification-page pt-[10rem] pb-[5rem]">
       <Notification />
+      <Footer />
     </header>
   );
 };

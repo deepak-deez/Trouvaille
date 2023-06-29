@@ -11,9 +11,9 @@ import youtubeIcon from "../../assets/images/footer/youtube-icon.svg";
 import appleIcon from "../../assets/images/footer/apple-icon.svg";
 import pinterestIcon from "../../assets/images/footer/pinterest-icon.svg";
 
-export default function Footer() {
+function Footer() {
   return (
-    <footer className="flex flex-col gap-3 lg:gap-8 xl:gap-0 lg:px-[2rem] 2xl:px-[10rem]">
+    <footer className="flex flex-col gap-3 lg:gap-8 xl:gap-0 lg:px-[2rem] mt-8 lg:mt-[5rem] 2xl:px-[10rem]">
       <p className="text-center my-[2rem] text-[#B4BBC1] text-[16px]">
         Get Social with us
       </p>
@@ -114,3 +114,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+export default React.memo(Footer);

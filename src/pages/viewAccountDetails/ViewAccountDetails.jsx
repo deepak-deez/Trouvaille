@@ -7,6 +7,7 @@ import Editprofile from "../../components/accountDetails/editProfile/Editprofile
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { updateFrontendUserData } from "../../redux/slices/userSlice";
+import Footer from "../../components/footer/Footer";
 
 const ViewAccDetails = ({ active, setActive }) => {
   const dispatch = useDispatch();
@@ -48,6 +49,8 @@ const ViewAccDetails = ({ active, setActive }) => {
           title="edit-profile"
         />
       )}
+
+      <Footer />
     </section>
   );
 };

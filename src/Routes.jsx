@@ -16,7 +16,6 @@ import BookingList from "./pages/bookingList/BookingList.jsx";
 import BookingDetails from "./pages/bookingDetails/BookingDetails.jsx";
 import Navbar from "./components/navbar/Navbar.jsx";
 import ViewNotification from "./pages/viewNotifications/ViewNotifications.jsx";
-import Footer from "./components/footer/Footer.jsx";
 import PageNotAvailable from "./components/pageNotAvailable/PageNotAvailable.jsx";
 
 const Router = () => {
@@ -53,7 +52,6 @@ const Router = () => {
         />
         <Route path="*" element={<PageNotAvailable />} />
       </Routes>
-      <Footer />
     </BrowserRouter>
   );
 };

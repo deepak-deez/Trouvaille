@@ -5,6 +5,7 @@ import Header from "../../components/tripsPage/header/Header";
 import TripCategory from "../../components/searchResult/tripCategory/TripCategory";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Footer from "../../components/footer/Footer";
 
 export default function Trips() {
   const [checkinDate, setCheckinDate] = useState("");
@@ -35,6 +36,7 @@ export default function Trips() {
         checkinDate={checkinDate}
         checkOutDate={checkoutDate}
       />
+      <Footer />
     </section>
   );
 }

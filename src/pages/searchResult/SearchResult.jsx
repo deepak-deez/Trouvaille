@@ -5,7 +5,7 @@ import Header from "../../components/searchResult/header/Header";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import LoadingScreen from "../../components/loading/loadingScreen";
-
+import Footer from "../../components/footer/Footer";
 export default function SearchResult() {
   const { FrontendUserData, error, loading } = useSelector(
     (state) => state.user
@@ -18,9 +18,10 @@ export default function SearchResult() {
   return (
     <>
       {loading && <LoadingScreen />}
-      <section className="search-result pb-[5rem]">
+      <section className="search-result ">
         <Header />
         <TripCategory />
+        <Footer />
       </section>
     </>
   );

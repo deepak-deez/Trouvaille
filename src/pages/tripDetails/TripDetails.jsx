@@ -19,6 +19,7 @@ import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import loader from "../../../src/assets/loaders/airplaneLoading.gif";
 import NoResponse from "../../components/noResponse/NoResponse";
+import Footer from "../../components/footer/Footer";
 
 export default function TripDetails(props) {
   const location = useLocation();
@@ -220,13 +221,17 @@ export default function TripDetails(props) {
             })}
           </ul>
         </section>
+        <Footer />
       </section>
     );
   } else {
     return (
-      <NoResponse
-      //inlude statusCode and response message in the parameters
-      />
+      <>
+        <NoResponse
+        //inlude statusCode and response message in the parameters
+        />
+        <Footer />
+      </>
     );
   }
 }

@@ -5,6 +5,8 @@ import { getUserBookingById } from "../../redux/slices/bookingSlice";
 import "./style.scss";
 import PassengerDetails from "../../components/bookignDetails/passengerDetails/PassengerDetails";
 import { useDispatch, useSelector } from "react-redux";
+import Footer from "../../components/footer/Footer";
+
 export default function BookingDetails(props) {
   const { bookingData } = useSelector((state) => state.booking);
   const location = useLocation();
@@ -78,6 +80,7 @@ export default function BookingDetails(props) {
             </div>
           </div>
         </section>
+        <Footer />
       </section>
     );
   }
