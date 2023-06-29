@@ -10,8 +10,6 @@ export default function PriceSlider({
   const [filterSliderValue, setFilterSliderValue] = useState(0);
   let allPackagesData = useRef();
   let maxPrice = useRef();
-  let minPrice = useRef();
-
   const [max, setMax] = useState();
 
   const tripPrice = [];
@@ -24,9 +22,11 @@ export default function PriceSlider({
     allPackagesData = await getAllApiData().then((res) => {
       return res;
     });
-    console.log(allPackagesData);
+
     allPackagesData.forEach((element) => {
-      if (element.status === "Active ") tripPrice.push(element.price);
+      if (element.status === "Active") {
+        tripPrice.push(element.price);
+      }
     });
     maxPrice = 0;
 
@@ -44,7 +44,6 @@ export default function PriceSlider({
     const filterRequirementsCopy = { ...filterRequirements };
     filterRequirementsCopy.price = filterSliderValue;
     setFilterRequirements(filterRequirementsCopy);
-    console.log(filterRequirements);
   };
   return (
     <div className="flex flex-col gap-5 lg:w-1/4 xl:w-full">
