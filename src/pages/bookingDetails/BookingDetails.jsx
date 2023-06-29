@@ -5,12 +5,19 @@ import { getUserBookingById } from "../../redux/slices/bookingSlice";
 import "./style.scss";
 import PassengerDetails from "../../components/bookignDetails/passengerDetails/PassengerDetails";
 import { useDispatch, useSelector } from "react-redux";
+<<<<<<< Updated upstream
 import Footer from "../../components/footer/Footer";
 
 export default function BookingDetails(props) {
+=======
+import { useParams } from "react-router-dom/dist/umd/react-router-dom.development";
+
+export default function BookingDetails() {
+>>>>>>> Stashed changes
   const { bookingData } = useSelector((state) => state.booking);
   const location = useLocation();
-  const userDetail = location.state;
+  const userDetail = useParams();
+
   const [userBookingDetails, setUserBookingDetails] = useState();
   const [success, setSuccess] = useState();
   const dispatch = useDispatch();

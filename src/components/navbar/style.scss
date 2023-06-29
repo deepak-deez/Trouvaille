@@ -4,7 +4,17 @@ $nav-input-grey-bg: #e2e2e2;
 $nav-profile-grey-bg: #dadbe0;
 
 nav {
-  z-index: 99;
+  z-index: 200;
+  .navbar-main-logo {
+    zoom: 0.5;
+    margin: auto 0;
+  }
+  @media screen and (min-width: 768px) {
+    .navbar-main-logo {
+      zoom: 1;
+      margin: auto 0;
+    }
+  }
   h4 {
     font-family: "Montserrat", sans-serif;
     font-weight: 600;
@@ -100,6 +110,9 @@ nav {
     100% {
       transform: translateX(-100%);
     }
+  }
+  .shadow-hard {
+    box-shadow: 0rem 0.5rem 5rem 1rem rgba(0, 0, 0, 0.244);
   }
 }
 .nav-box-shadow {

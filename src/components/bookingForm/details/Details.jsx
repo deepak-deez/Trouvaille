@@ -71,28 +71,9 @@ const Details = (props) => {
     console.log("Other Passenger : ", otherPassengerDetails);
     if (userName.current.value && address.current.value) {
       dispatch(createBooking(bookingFormDetails));
-
-      // socket.on("connect", () => {
-      //   console.log(socket.id);
-      // });
     } else {
       SweetAlert("warning", "", "All fields are required!");
     }
-    // try {
-    //   const response = await axios.post(
-    //     `${process.env.REACT_APP_API_HOST}trip-booking`,
-    //     bookingFormDetails
-    //   );
-    //   setsucessModal(!sucessModal);
-    // } catch (err) {
-    //   swal.fire({
-    //     icon: "error",
-    //     title: "Oops...",
-    //     text: err.message,
-    //     timer: "2500",
-    //     buttons: true,
-    //   });
-    // }
   };
   useEffect(() => {
     if (bookingData) {
