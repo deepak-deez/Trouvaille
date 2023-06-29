@@ -82,7 +82,6 @@ export default function NotificationPopUp({
           View All
         </Link>
       </div>
-
       {statusNotis
         ?.slice(0)
         .reverse()
@@ -115,6 +114,13 @@ export default function NotificationPopUp({
             </div>
           );
         })}
+      {statusNotis?.length <= 0 ? (
+        <div className="text-4xl text-stone-300 font-semibold text-center mt-36">
+          No Notifications Found
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

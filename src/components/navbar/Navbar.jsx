@@ -158,23 +158,25 @@ function Navbar({ setActive }) {
         {!dashboardLocations.find(
           (location) => location === currentPageLocation
         ) ? (
-          <div className="flex gap-1 sm:gap-5 lg:gap-10 2xl:gap-[4.1rem] items-center">
-            <div ref={refNoti} className="my-auto relative ">
+          <div className="flex gap-1 sm:gap-5 lg:gap-10 2xl:gap-[4.1rem] items-center ">
+            <div
+              ref={refNoti}
+              className="my-auto relative notification-container cursor-pointer"
+              onClick={handleNotificationPopUp}
+            >
               <p
                 className={
-                  "absolute text-center pt-1 h-6 w-6 text-[10px] bg-green-600 rounded-full left-[-0.8rem] text-white font-bold" +
+                  "notification-unread-count absolute text-center pt-1 h-6 w-6 text-[10px] bg-green-600 rounded-full left-[-0.8rem] text-white font-bold  transition-all duration-200 " +
                   (notisUnread.length <= 0 ? " hidden " : " block")
                 }
               >
                 {notisUnread.length}
               </p>
-              <button onClick={handleNotificationPopUp} className="my-auto">
-                <img
-                  src={notificationIcon}
-                  className=" mt-2 w-6  h-full  my-auto"
-                  alt="notification-icon"
-                />
-              </button>
+              <img
+                src={notificationIcon}
+                className=" mt-2 w-6  h-full  my-auto"
+                alt="notification-icon"
+              />
               <div className={showNotis ? " block shadow-hard " : " hidden "}>
                 <NotificationPopUp
                   setShowNotis={setShowNotis}
@@ -185,7 +187,10 @@ function Navbar({ setActive }) {
               </div>
             </div>
 
-            <Link to={"/booking"}>
+            <Link
+              to={"/booking"}
+              className="xl:hover:scale-125 transition-all duration-200"
+            >
               <img
                 src={bookingsIcon}
                 className="hidden xl:block w-6 h-full"
@@ -193,6 +198,7 @@ function Navbar({ setActive }) {
               />
             </Link>
             <button
+              className="xl:hover:scale-125 transition-all duration-200"
               onClick={() => {
                 navigate("/accountDetails");
                 setActive("view-account");

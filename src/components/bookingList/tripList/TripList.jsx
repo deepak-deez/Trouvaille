@@ -7,7 +7,7 @@ import { getAllUserBooking } from "../../../redux/slices/bookingSlice";
 import LoadingScreen from "../../loading/loadingScreen";
 export default function TripList() {
   const { FrontendUserData } = useSelector((state) => state.user);
-  const userId = FrontendUserData.data?.userDetails?._id;
+  const userId = FrontendUserData?.data?.userDetails?._id;
   const [userBookingDetails, setUserBookingDetails] = useState();
   const { bookingData, loading } = useSelector((state) => state.booking);
 

@@ -30,7 +30,7 @@ export default function BookingDetails() {
 
   if (bookingData) {
     return (
-      <section className="booking-details pb-[5rem] min-h-screen">
+      <section className="booking-details  min-h-screen">
         <section className="md:mx-20 xl:mx-44 min-[1920px]:mx-[20rem] pt-[100px]">
           <h1 className="text-center ">Trip details</h1>
           <div className="details-container md:p-10 mt-9">

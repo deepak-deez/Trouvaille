@@ -92,6 +92,9 @@ nav {
   .nav-open {
     animation: nav-open 0.5s;
   }
+  .notification-container:hover .notification-unread-count {
+    transform: scale(1.3);
+  }
   @keyframes nav-open {
     0% {
       transform: translateX(-100%);
