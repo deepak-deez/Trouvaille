@@ -15,6 +15,7 @@ const ResetPassword = () => {
   const [emptyFieldMessage, setEmptyFieldsMessage] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [pwdError, setPwdError] = useState(false);
+  const [differentPassword, setDifferentPassword] = useState(false);
   const url = useLocation();
   const resetPasswordData = {};
   const navigate = useNavigate();
@@ -44,7 +45,9 @@ const ResetPassword = () => {
     try {
       if (passwordRef.current.value === confirmPasswordRef.current.value) {
         document.getElementById("confirmPassword").textContent = "";
+        setDifferentPassword(false);
       } else {
+        setDifferentPassword(true);
         throw new Error("Passwords don't match!");
       }
     } catch (err) {
@@ -60,7 +63,7 @@ const ResetPassword = () => {
       <div className="flex flex-col lg:w-[900px] w-[90%] md:p-10 login-details px-[25px] py-[15px] lg:py-[45px] lg:px-[60px] justify-center mt-10">
         <div className=" input-fields px-[25px]  flex flex-row items-center justify-between">
           <input
-            className="w-[100%] bg-transparent lg:px-[39px] px-[15px] py-[15px] lg:py-[25px] "
+            className="w-[100%] bg-transparent  px-[15px] py-[15px]  "
             type={showPassword ? "" : "password"}
             placeholder="New Password"
             ref={passwordRef}
@@ -78,13 +81,13 @@ const ResetPassword = () => {
         <h4
           id="validPassword"
           className={
-            "font-bold bg-transparent text-xl " +
+            "font-bold bg-transparent text-[16px] " +
             (pwdError ? "text-red-700" : "text-green-700")
           }
         ></h4>
         <div className=" input-fields px-[25px]  flex flex-row items-center justify-between mt-[25px]">
           <input
-            className="w-[100%] bg-transparent lg:px-[39px] px-[15px] py-[15px] lg:py-[25px] "
+            className="w-[100%] bg-transparent  px-[15px] py-[15px] "
             type={"password"}
             placeholder="Confirm Password"
             ref={confirmPasswordRef}
@@ -93,15 +96,20 @@ const ResetPassword = () => {
         </div>
         <h4
           id="confirmPassword"
-          className="text-red-700 font-bold bg-transparent text-xl"
+          className="text-red-700 font-bold bg-transparent text-[16px]"
         ></h4>
         <button
-          className="lg:mt-[27px] mt-[20px] px-[15px] py-[20px] lg:py-[24px] text-center save-button"
+          className="lg:mt-[27px] mt-[20px] px-[15px] py-[20px]  text-center save-button"
           onClick={async () => {
             resetPasswordData["newPassword"] = passwordRef.current.value;
             resetPasswordData["id"] = params.id;
             resetPasswordData["token"] = params.token;
-            if (passwordRef.current.value.length && pwdError === false) {
+            if (
+              passwordRef.current.value.length &&
+              confirmPasswordRef.current.value &&
+              pwdError === false &&
+              !differentPassword
+            ) {
               const response = await axios.post(
                 `http://localhost:7000/set-password/Frontend-user`,
                 resetPasswordData

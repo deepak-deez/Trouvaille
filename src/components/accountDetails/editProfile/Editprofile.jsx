@@ -80,7 +80,7 @@ export default function EditProfile({ setActive, active }) {
     );
 
     try {
-      if (nameRef.current.value.length) {
+      if (nameRef.current.value.length && isNaN(nameRef.current.value)) {
         document.getElementById("nameField").textContent = "";
         dispatch(
           updateUser({
@@ -89,6 +89,8 @@ export default function EditProfile({ setActive, active }) {
             formdata: formData,
           })
         );
+      } else if (!isNaN(nameRef.current.value)) {
+        throw new Error("Name can't be a number!");
       } else {
         throw new Error("Name is required!");
       }
@@ -155,7 +157,7 @@ export default function EditProfile({ setActive, active }) {
                   <label
                     htmlFor="profileImg"
                     className={
-                      "bg-white bg-opacity-50 backdrop-blur-sm rounded-xl my-3 px-5 text-2xl cursor-pointer hover:bg-green-600 hover:bg-opacity-30 hover:text-gray-400 transition-all duration-200 " +
+                      "bg-white bg-opacity-50 backdrop-blur-sm rounded-xl my-3 px-5 text-lg cursor-pointer hover:bg-green-600 hover:bg-opacity-30 hover:text-gray-400 transition-all duration-200 " +
                       (uploadImgBtnDisplay ? "block" : "hidden")
                     }
                   >
@@ -199,9 +201,9 @@ export default function EditProfile({ setActive, active }) {
               </h5>
               <h4 className="mb-[1.5rem] grey-text">Name</h4>
               <div className="flex flex-co relative">
-                <div className="flex mb-[2.6rem] w-full rounded-2xl px-[1.2rem] bg-white">
+                <div className="flex mb-[2.6rem] w-full rounded-2xl pr-[1rem] bg-white">
                   <input
-                    className=" bg-transparent outline-none w-[100%] grey-text py-[1rem] "
+                    className=" bg-transparent outline-none w-[100%] name-field grey-text py-[1rem] "
                     type="text"
                     placeholder="Your Name"
                     defaultValue={userName ? userName : ""}
