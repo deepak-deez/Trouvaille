@@ -25,7 +25,6 @@ export default function TripList() {
     }
   }, [bookingData]);
 
-  console.log(userBookingDetails);
   return (
     <>
       {loading && <LoadingScreen />}
@@ -33,42 +32,39 @@ export default function TripList() {
         <h2 className="md:text-[40px] text-center my-[10px] lg:my-[30px] text-[30px]">
           Trip List
         </h2>
-        <div className="bookings-table-container overflow-x-scroll w-[90%] md:max-w-fit">
-          <table className="text-center trip-list pt-[20px]">
-            <tbody>
-              <tr className="text-[#E0DBD9]">
-                <th>Trip Title</th>
-                <th>Duration</th>
-                <th>No. Of Passenger</th>
-                <th>Price</th>
-                <th>Status</th>
-                <th>Action</th>
-              </tr>
-              {userBookingDetails && userBookingDetails ? (
-                userBookingDetails?.data.map((data, index) => {
-                  return (
-                    <TripNames
-                      key={index}
-                      title={data.title}
-                      duration={data.tripDetails.duration}
-                      passengers={data.otherPassenger.length}
-                      price={data.tripDetails.price}
-                      status={data.bookingStatus}
-                      bookingId={data._id}
-                      userId={userId}
-                    />
-                  );
-                })
-              ) : (
-                <tr>
-                  <th colSpan="6" className="text-4xl font-bold text-[#E0DBD9]">
-                    No Bookings Found
-                  </th>
+        {userBookingDetails ? (
+          <div className="bookings-table-container overflow-x-scroll w-[90%] md:max-w-fit">
+            <table className="text-center trip-list pt-[20px]">
+              <tbody>
+                <tr className="text-[#E0DBD9]">
+                  <th>Trip Title</th>
+                  <th>Duration</th>
+                  <th>No. Of Passenger</th>
+                  <th>Price</th>
+                  <th>Status</th>
+                  <th>Action</th>
                 </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
+                {userBookingDetails &&
+                  userBookingDetails?.data.map((data, index) => {
+                    return (
+                      <TripNames
+                        key={index}
+                        title={data.title}
+                        duration={data.tripDetails.duration}
+                        passengers={data.otherPassenger.length}
+                        price={data.tripDetails.price}
+                        status={data.bookingStatus}
+                        bookingId={data._id}
+                        userId={userId}
+                      />
+                    );
+                  })}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <h2 className="text-[2rem] ">No Bookings Found</h2>
+        )}
       </section>
     </>
   );

@@ -37,7 +37,7 @@ export default function EditProfile({ setActive, active }) {
   const userGender = FrontendUserData?.data?.userDetails?.userDetails?.gender;
   const userMarried =
     FrontendUserData?.data?.userDetails?.userDetails?.maritalStatus;
-  const [destination, setDestination] = useState();
+  const [destination, setDestination] = useState("");
 
   useEffect(() => {
     const img = FrontendUserData?.data?.userDetails?.userDetails?.image
@@ -59,6 +59,7 @@ export default function EditProfile({ setActive, active }) {
   };
 
   const updateDetailsHandler = async () => {
+    console.log(destination);
     const imgUrl = imageUrlState;
     console.log(nameRef.current.value);
 
@@ -80,7 +81,10 @@ export default function EditProfile({ setActive, active }) {
     );
 
     try {
-      if (nameRef.current.value.length && isNaN(nameRef.current.value)) {
+      if (
+        nameRef.current.value.length &&
+        isNaN(nameRef.current.value.charAt(0))
+      ) {
         document.getElementById("nameField").textContent = "";
         dispatch(
           updateUser({
@@ -89,10 +93,10 @@ export default function EditProfile({ setActive, active }) {
             formdata: formData,
           })
         );
-      } else if (!isNaN(nameRef.current.value)) {
-        throw new Error("Name can't be a number!");
-      } else {
+      } else if (!nameRef.current.value.length) {
         throw new Error("Name is required!");
+      } else if (!isNaN(nameRef.current.value.charAt(0))) {
+        throw new Error("Name can't be a number!");
       }
     } catch (error) {
       document.getElementById("nameField").textContent = error.message;
@@ -217,7 +221,7 @@ export default function EditProfile({ setActive, active }) {
                 </div>
                 <h4
                   id="nameField"
-                  className="text-red-700 font-bold absolute mt-[3.5rem] bg-transparent text-md"
+                  className="text-red-700 font-bold absolute mt-[3.5rem] bg-transparent text-sm"
                 ></h4>
               </div>
               <h4 className="mb-[1.5rem] grey-text">DOB</h4>

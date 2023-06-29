@@ -109,7 +109,7 @@ export default function TripDetails(props) {
     return (
       <section className="trip-details " style={backgroundImg}>
         <Header location={locationName} />
-        <section className="md:px-8 xl:px-24 2xl:px-40 min-[1920px]:px-[16rem] trip-fetched-details pb-[16rem] dark-gradient">
+        <section className="md:px-8 xl:px-24 2xl:px-40 min-[1920px]:px-[16rem] trip-fetched-details dark-gradient">
           <h1 className="pt-[5rem] lg:text-start">Itinerary</h1>
           <ul className="flex flex-wrap lg:justify-start sm:flex-row gap-5 text-[#838597] my-[3rem] text-[22px]">
             <li>Maximum guests 12</li>
@@ -220,8 +220,8 @@ export default function TripDetails(props) {
               );
             })}
           </ul>
+          <Footer />
         </section>
-        <Footer />
       </section>
     );
   } else {

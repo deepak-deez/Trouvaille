@@ -11,7 +11,7 @@ const EditProfile = () => {
     if (!FrontendUserData) navigate("/");
   });
   return (
-    <section className="account-details pt-[10rem] pb-[5rem]">
+    <section className="account-details pt-[10rem] ">
       <Header />
       <Footer />
     </section>

@@ -15,7 +15,7 @@ const BookingForm = (props) => {
   });
 
   return (
-    <header className="booking-form pt-[10rem] pb-[5rem]">
+    <header className="booking-form pt-[10rem] ">
       <Details bookingFormData={bookingFormData} />
       <Footer />
     </header>

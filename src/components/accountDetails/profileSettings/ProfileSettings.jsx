@@ -15,33 +15,8 @@ export default function ProfileSettings({ setActive }) {
     (state) => state.user
   );
 
-  // console.log(
-  //   "Profile:",
-  //   FrontendUserData,
-  //   "ID :",
-  //   FrontendUserData.data.userDetails._id
-  // );
-  // const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/${FrontendUserData.data.userDetails.userType}/${FrontendUserData.data.userDetails._id}`;
-  // const [responseData, setResponseData] = useState();
-
-  // const updateDataHandler = async () => {
-  //   try {
-  //     // console.log(dataBaseUrl);
-  //     // const getUpdatedData = await axios.get(dataBaseUrl);
-  //     // console.log("API data :", getUpdatedData);
-  //     setResponseData(FrontendUserData);
-  //   } catch (err) {
-  //     return err;
-  //   }
-  // };
-  // useEffect(() => {
-  //   console.log("Empty");
-  //   updateDataHandler();
-  // }, []);
-  // console.log("response", responseData);
-
   const profileImage = FrontendUserData?.data?.userDetails?.userDetails?.image;
-  const userLcoation = FrontendUserData?.data?.userDetails?.userDetails?.place;
+  const userLocation = FrontendUserData?.data?.userDetails?.userDetails?.place;
   const userName = FrontendUserData?.data?.userDetails?.userDetails?.name;
   const userDOB = FrontendUserData?.data?.userDetails?.userDetails?.DOB;
   const userGender = FrontendUserData?.data?.userDetails?.userDetails?.gender;
@@ -103,7 +78,9 @@ export default function ProfileSettings({ setActive }) {
             </h2>
             <div className="flex gap-[1rem] items-center">
               <span className=" grey-text">
-                {userLcoation ? userLcoation : "Location"}
+                {userLocation && userLocation !== ""
+                  ? userLocation
+                  : "Location"}
               </span>
               <i className="fa-solid fa-circle text-[0.8rem]"></i>
               <span className=" grey-text">
