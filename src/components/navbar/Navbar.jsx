@@ -166,7 +166,7 @@ function Navbar({ setActive }) {
             >
               <p
                 className={
-                  "notification-unread-count absolute text-center pt-1 h-6 w-6 text-[10px] bg-green-600 rounded-full left-[-0.8rem] text-white font-bold  transition-all duration-200 " +
+                  "notification-unread-count absolute text-center pt-1 h-6 w-6 text-[10px] bg-green-600 rounded-full left-[-0.8rem] top-[-0.5rem] text-white font-bold  transition-all duration-200 " +
                   (notisUnread.length <= 0 ? " hidden " : " block")
                 }
               >
@@ -207,12 +207,12 @@ function Navbar({ setActive }) {
               <div className="rounded-[50%] border-salte-300 border-4">
                 <img
                   className="h-8 w-8 rounded-[50%]"
-                  src={
-                    FrontendUserData?.data?.userDetails?.userDetails?.image
-                      ? FrontendUserData?.data?.userDetails?.userDetails?.image
-                      : profileIcon
-                  }
+                  src={FrontendUserData?.data?.userDetails?.userDetails?.image}
                   alt="profile-icon"
+                  onError={({ currentTarget }) => {
+                    currentTarget.onerror = null;
+                    currentTarget.src = profileIcon;
+                  }}
                 />
               </div>
             </button>

@@ -169,9 +169,13 @@ export default function EditProfile({ setActive, active }) {
                   </label>
                 </div>
                 <img
-                  className="profile-img"
+                  className="profile-img object-cover w-full h-full"
                   src={profileImg}
                   alt="profile-img"
+                  onError={({ currentTarget }) => {
+                    currentTarget.onerror = null;
+                    currentTarget.src = defaultProfileImage;
+                  }}
                 />
               </div>
               <h4 className="text-center grey-text grey-text underline mt-[0.8rem]">

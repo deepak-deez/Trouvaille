@@ -45,7 +45,9 @@ export default function BookingDetails() {
                   {bookingData?.data[0]?.title}
                 </h2>
                 <div className="basic-information text-white lg:grid ">
-                  <h4 className="mb-5">Basic Information</h4>
+                  <h4 className="mb-5 bg-white text-[#bc4e37] font-[600] px-5 py-2 rounded-lg">
+                    Basic Information
+                  </h4>
                   <div className="flex flex-wrap justify-between p-3">
                     <p className="break-all">
                       Full Name : <span>{bookingData?.data[0]?.name}</span>
@@ -64,7 +66,9 @@ export default function BookingDetails() {
               </div>
             </div>
             <div className="mt-5 all-passenger-details">
-              <h4>Other Passengers details</h4>
+              <h4 className="bg-white text-[#bc4e37] font-[600] px-5 py-2 rounded-lg">
+                Other Passengers details
+              </h4>
               <div className="mt-5 flex flex-wrap justify-between gap-10">
                 {bookingData?.data[0]?.otherPassenger?.map((data, index) => {
                   return (
