@@ -161,7 +161,7 @@ function Navbar({ setActive }) {
           <div className="flex gap-1 sm:gap-5 lg:gap-10 2xl:gap-[4.1rem] items-center ">
             <div
               ref={refNoti}
-              className="my-auto relative notification-container cursor-pointer"
+              className="relative notification-container cursor-pointer my-auto"
               onClick={handleNotificationPopUp}
             >
               <p
@@ -174,7 +174,7 @@ function Navbar({ setActive }) {
               </p>
               <img
                 src={notificationIcon}
-                className=" mt-2 w-6  h-full  my-auto"
+                className="w-6  h-full  my-auto"
                 alt="notification-icon"
               />
               <div className={showNotis ? " block shadow-hard " : " hidden "}>
