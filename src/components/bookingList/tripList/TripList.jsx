@@ -28,7 +28,7 @@ export default function TripList() {
   return (
     <>
       {loading && <LoadingScreen />}
-      <section className="flex flex-col trip-list-container justify-center items-center ">
+      <section className="flex flex-col trip-list-container items-center min-h-screen">
         <h2 className="md:text-[40px] text-center my-[10px] lg:my-[30px] text-[30px]">
           Trip List
         </h2>

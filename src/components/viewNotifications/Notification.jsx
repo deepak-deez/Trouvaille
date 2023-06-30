@@ -50,6 +50,18 @@ export default function Notification() {
     );
   };
 
+  const viewAllBtnHandler = () => {
+    statusNotis?.data.forEach(async ({ _id }) => {
+      const markasReadApi =
+        process.env.REACT_APP_API_HOST + "set-notification-mark-read/" + _id;
+      try {
+        const response = await axios.get(markasReadApi);
+      } catch (err) {
+        console.error(err);
+      }
+    });
+  };
+
   useEffect(() => {
     getAllApiData(userId, setUserBookingDetails);
   }, []);
@@ -82,7 +94,10 @@ export default function Notification() {
               );
             })}
         </ul>
-        <button className="px-5 py-2 bg-slate-200 ml-auto block mt-10 rounded-xl">
+        <button
+          className="px-5 py-2 bg-slate-200 ml-auto block mt-10 rounded-xl"
+          onClick={viewAllBtnHandler}
+        >
           Mark All As Read
         </button>
       </div>

@@ -69,14 +69,7 @@ const Details = (props) => {
     bookingFormDetails["address"] = address.current.value;
     bookingFormDetails["name"] = userName.current.value;
 
-    if (
-      userName.current.value &&
-      address.current.value &&
-      otherPassengerDetails.firstName &&
-      otherPassengerDetails.lastName &&
-      otherPassengerDetails.gender &&
-      otherPassengerDetails.age
-    ) {
+    if (userName.current.value && address.current.value) {
       dispatch(createBooking(bookingFormDetails));
     } else {
       SweetAlert("warning", "", "All fields are required!");

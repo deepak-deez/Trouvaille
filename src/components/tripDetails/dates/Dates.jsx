@@ -33,7 +33,7 @@ export default function Dates(props) {
         <h2>{date[0]}</h2>
         <p>{date[1].substring(0, 3)}</p>
       </div>
-      {toShow && (
+      {toShow && props?.detail ? (
         <div className="flex flex-col  gap-0 absolute ">
           <div className="up-arrow ml-5"></div>
           <div className="  bg-[#a53c27f0] text-white z-[2] p-5  rounded-2xl">
@@ -42,6 +42,8 @@ export default function Dates(props) {
             </h3>
           </div>
         </div>
+      ) : (
+        ""
       )}
     </div>
   );
