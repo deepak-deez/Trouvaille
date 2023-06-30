@@ -19,7 +19,7 @@ const ResetPasswordPage = () => {
       SweetAlert("error", err?.response?.data?.message);
     }
   };
-  console.log(response, "response : ");
+
   useEffect(() => {
     validation();
   }, []);

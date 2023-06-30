@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-// import store from "../../../redux/store";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./style.scss";
 import profileImg from "../../../assets/images/accountDetails/profileSettings/profile-img.png";
 import defaultProfileImg from "../../../assets/images/accountDetails/profileSettings/defaultProfileImage.png";
 import editIcon from "../../../assets/images/accountDetails/profileSettings/edit.svg";
-// import axios from "axios";
 import SignOut from "../../SignOut/SignOut";
 import ProfileSideBar from "../profileSideBar/ProfileSideBar";
 

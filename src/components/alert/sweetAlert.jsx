@@ -2,9 +2,7 @@ import Swal from "sweetalert2";
 
 const SweetAlert = (type, data, warningText) => {
   try {
-    console.log(type, " :trt: ", data);
     if (type === "success") {
-      console.log(data);
       Swal.fire({
         position: "center",
         width: "40vw",
@@ -31,13 +29,11 @@ const SweetAlert = (type, data, warningText) => {
     } else if (type === "warning") {
       Swal.fire({
         className: "pop-top",
-        // position: "top",
         icon: "warning",
         title: "Oops...",
         text: warningText,
         showConfirmButton: false,
         width: "40vh",
-        // toast: true,
         timer: 1500,
         timerProgressBar: true,
       });

@@ -133,7 +133,6 @@ const SignUp = () => {
     }
   };
 
-  console.log(FrontendUserData);
   useEffect(() => {
     if (FrontendUserData?.success) {
       swal.fire({
@@ -154,7 +153,6 @@ const SignUp = () => {
 
   useEffect(() => {
     if (error) {
-      console.log("error: ", error);
       SweetAlert("error", error);
     }
   }, [error]);

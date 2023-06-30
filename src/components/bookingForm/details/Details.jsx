@@ -20,7 +20,6 @@ const Details = (props) => {
   const address = useRef();
   const userName = useRef();
   const dispatch = useDispatch();
-  const [emptyFieldsMessage, setEmptyFieldsMessage] = useState(false);
   const { bookingData, loading, error } = useSelector((state) => state.booking);
   const phoneNumberRef = useRef();
   const otherPassengerDetails = [];
@@ -75,6 +74,7 @@ const Details = (props) => {
       SweetAlert("warning", "", "All fields are required!");
     }
   };
+
   useEffect(() => {
     if (bookingData) {
       setsucessModal(!sucessModal);
@@ -93,8 +93,6 @@ const Details = (props) => {
       };
 
       socket.emit("sendCurrentBooking", notificationObj);
-
-      console.log("Emitted : ", notificationObj);
     }
   }, bookingData);
 
