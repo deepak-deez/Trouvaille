@@ -9,9 +9,6 @@ import TripsPage from "./pages/tripsPage/Trips.jsx";
 import TripDetails from "./pages/tripDetails/TripDetails.jsx";
 import BookingForm from "./pages/bookingForm/BookingForm.jsx";
 import AccountDetails from "./pages/viewAccountDetails/ViewAccountDetails.jsx";
-import EditAccountDetails from "./pages/editAccountDetails/EditAccountDetails.jsx";
-import Profile from "./pages/profileSettings/ProfileSettings.jsx";
-import EditProfile from "./pages/editProfile/EditProfile.jsx";
 import BookingList from "./pages/bookingList/BookingList.jsx";
 import BookingDetails from "./pages/bookingDetails/BookingDetails.jsx";
 import Navbar from "./components/navbar/Navbar.jsx";
@@ -42,9 +39,6 @@ const Router = () => {
           path="/accountDetails"
           element={<AccountDetails active={active} setActive={setActive} />}
         />
-        <Route path="/editAccDetails" element={<EditAccountDetails />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/editProfile" element={<EditProfile />} />
         <Route path="/booking" element={<BookingList />} />
         <Route
           path="/bookingDetails/:userId/:bookingId"

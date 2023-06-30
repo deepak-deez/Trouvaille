@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./style.scss";
 import axios from "axios";
-// import Swal from "sweetalert2";
 import SweetAlert from "../../alert/sweetAlert";
 import ProfileSideBar from "../profileSideBar/ProfileSideBar";
 import SignOut from "../../SignOut/SignOut";
@@ -16,7 +15,6 @@ import { ClassNameConfigurator } from "@mui/base";
 export default function EditAccountDetails({ setActive }) {
   const { FrontendUserData } = useSelector((state) => state.user);
   const [checkPass, setCheckPass] = useState(true);
-  // const [emptyFields, setEmptyFields] = useState();
   const [newPasswordValid, setNewPasswordValid] = useState(false);
   const [confirmPasswordValid, setConfirmPasswordValid] = useState(false);
   const [pwdError, setPwdError] = useState(false);

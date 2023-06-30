@@ -15,21 +15,16 @@ const GetApiDatas = async (
   currentTripId
 ) => {
   const { tripPackage } = useSelector((state) => state.tripPackage);
-  // const getErrTripDetails = `${process.env.REACT_APP_API_HOST}get-trip-details/trip-package/6465bc874e71527`;
-  // const getTripDetailsUrl = `${process.env.REACT_APP_API_HOST}get-trip-details/trip-package/${currentTripId}`;
   const getAmmenityDataUrl = `${process.env.REACT_APP_API_HOST}get-feature/amenity`;
   const getOcassionDataUrl = `${process.env.REACT_APP_API_HOST}get-feature/occasion`;
   const getUserDatabaseUrl = `${process.env.REACT_APP_API_HOST}database/Frontend-user`;
 
-  // const getTripDetails = await axios.get(getTripDetailsUrl);
   const getAmmenityData = await axios.get(getAmmenityDataUrl);
   const getOcassionData = await axios.get(getOcassionDataUrl);
   const getUserDatabase = await axios.get(
     `${getUserDatabaseUrl}/${currentUserId}`
   );
 
- 
-  // setTripDetails(getTripDetails);
   setAmmenityImgData(getAmmenityData);
   setOcassionImgData(getOcassionData);
   setUserDatabaseData(getUserDatabase);

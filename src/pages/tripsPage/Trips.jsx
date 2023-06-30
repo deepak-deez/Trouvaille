@@ -18,7 +18,7 @@ export default function Trips() {
   useEffect(() => {
     if (!FrontendUserData) navigate("/");
   });
-  console.log(checkinDate);
+
   return (
     <section className="trips ">
       <Header

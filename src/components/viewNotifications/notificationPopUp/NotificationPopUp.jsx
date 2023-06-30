@@ -86,7 +86,6 @@ export default function NotificationPopUp({
         ?.slice(0)
         .reverse()
         .map((data, index) => {
-          console.log(timestampConvert(data.createdAt));
           return (
             <div
               key={index}

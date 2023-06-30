@@ -16,7 +16,6 @@ const initialState = {
 export const getFeature = createAsyncThunk(
   `${nameSpace}/getFeature`,
   async (featureName, { rejectWithValue }) => {
-    console.log(featureName);
     try {
       const result = await axios.get(`${API}get-feature/${featureName}`);
       if (result) return result.data;
@@ -29,7 +28,6 @@ export const getFeature = createAsyncThunk(
 export const getFilteredFeature = createAsyncThunk(
   `${nameSpace}/getFilteredFeature`,
   async (filterRequirements, { rejectWithValue }) => {
-    console.log(filterRequirements);
     try {
       const result = await axios.post(
         `${API}get-filtered-feature/trip-package`,
@@ -88,7 +86,3 @@ const featureSlice = createSlice({
 });
 
 export default featureSlice.reducer;
-// get-filtered-feature/trip-package
-// get-feature/category
-// get-feature/amenity
-// get-feature/occasion

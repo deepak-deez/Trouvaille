@@ -17,11 +17,10 @@ export const getAllPackages = createAsyncThunk(
   async () => {
     try {
       const result = await axios.get(`${API}get-module/trip-package`);
-      console.log(result);
       if (result) return result;
       return result;
     } catch (err) {
-      return (err.response.data.message);
+      return err.response.data.message;
     }
   }
 );
@@ -29,7 +28,6 @@ export const getAllPackages = createAsyncThunk(
 export const getPackagesById = createAsyncThunk(
   `${nameSpace}/getPackagesById`,
   async (tripId, { rejectWithValue }) => {
-    console.log(tripId);
     try {
       const result = await axios.get(
         `${API}get-trip-details/trip-package/${tripId}`

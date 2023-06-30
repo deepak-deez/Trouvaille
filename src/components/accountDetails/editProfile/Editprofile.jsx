@@ -49,7 +49,6 @@ export default function EditProfile({ setActive, active }) {
 
   const uploadImgHandler = (e) => {
     try {
-      console.log(e.target.files[0]);
       setImageUrlState(e.target.files[0]);
       setProfileImg(URL.createObjectURL(e.target.files[0]));
       setUploadImgBtnDisplay(!uploadImgBtnDisplay);
@@ -59,9 +58,7 @@ export default function EditProfile({ setActive, active }) {
   };
 
   const updateDetailsHandler = async () => {
-    console.log(destination);
     const imgUrl = imageUrlState;
-    console.log(nameRef.current.value);
 
     const formData = new FormData();
 
@@ -71,14 +68,6 @@ export default function EditProfile({ setActive, active }) {
     formData.append("DOB", DOBRef.current.value);
     formData.append("gender", genderRef.current.value);
     formData.append("maritalStatus", maritalStatusRef.current.value);
-    let arr = [];
-    console.log(
-      "formData",
-      formData.forEach((value, key) => {
-        arr.push(value);
-        console.log(key, " : ", value);
-      })
-    );
 
     try {
       if (
@@ -103,7 +92,6 @@ export default function EditProfile({ setActive, active }) {
     }
   };
   if (updatedUserData?.success) {
-    console.log(updatedUserData);
     SweetAlert("success", updatedUserData.message);
 
     setActive("profile");

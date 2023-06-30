@@ -10,7 +10,6 @@ export default function ViewAccountDetails({ setActive }) {
 
   let userData;
   if (FrontendUserData?.success) {
-    console.log(FrontendUserData);
     userData = {
       email: FrontendUserData?.data?.userDetails?.email,
       phNumber: FrontendUserData?.data?.userDetails?.phone,
@@ -21,7 +20,6 @@ export default function ViewAccountDetails({ setActive }) {
   if (FrontendUserData?.success) {
     return (
       <header className="sm:mx-20 2xl:mx-[18.75rem] h-screen">
-        {console.log(userData)}
         <div className="flex justify-between px-10 xl:px-0 lg:text-[20px]">
           <div className="flex">
             <h2

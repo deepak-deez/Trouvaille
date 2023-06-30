@@ -11,7 +11,10 @@ export default function TripNames(props) {
       userId: props.userId,
     };
     navigate(
-      "/bookingDetails/" + FrontendUserData.userId + "/" + FrontendUserData.bookingId,
+      "/bookingDetails/" +
+        FrontendUserData.userId +
+        "/" +
+        FrontendUserData.bookingId,
       { state: FrontendUserData }
     );
   };
@@ -37,4 +40,3 @@ export default function TripNames(props) {
     </tr>
   );
 }
-// }

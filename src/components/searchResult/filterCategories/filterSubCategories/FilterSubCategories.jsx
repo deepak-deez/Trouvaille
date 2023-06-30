@@ -31,24 +31,19 @@ export default function FilterSubCategories({
     const checkboxValue = e.target.name;
     const { checked, value } = e.target; //destructuring the event target
     if (checked) {
-      console.log(checkboxValue);
       const setFilterRequirementsCopy = { ...filterRequirements }; //Spreading the state object
       currentSelections = setFilterRequirementsCopy[title]; //Getting the array of the current filter category
-      console.log(currentSelections); //Logging the array
       currentSelections.push(checkboxValue); //Pushing the checkbox value to the array
-      console.log(setFilterRequirementsCopy[title]);
       setFilterRequirements(setFilterRequirementsCopy); //Setting the state with the new array
     }
     if (!checked) {
       const setFilterRequirementsCopy = { ...filterRequirements }; //Spreading the state object
       currentSelections = setFilterRequirementsCopy[title]; //Getting the array of the current filter category`
-      console.log(currentSelections); //Logging the array
       const index = currentSelections.indexOf(checkboxValue); //Getting the index of the checkbox value
       if (index > -1) {
         //Checking if the checkbox value is present in the array
         currentSelections.splice(index, 1); //Removing the checkbox value from the array
       }
-      console.log(setFilterRequirementsCopy[title]);
       setFilterRequirements(setFilterRequirementsCopy); //Setting the state with the new array
     }
   };

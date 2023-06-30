@@ -10,7 +10,6 @@ export default function SearchBar(props) {
 
   return (
     <div className="nav-serach-area hidden xl:hidden">
-      {/* //Change The className to xl:flex to display the Search Again */}
       <input
         type="text"
         ref={searchRef}

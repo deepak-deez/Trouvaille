@@ -50,8 +50,6 @@ function Navbar({ setActive }) {
 
     const response = await axios.get(allNotisApi);
 
-    console.log("initial response : ", response);
-
     setStatusNotis(response?.data);
 
     setNotisUnread(
