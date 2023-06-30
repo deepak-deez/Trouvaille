@@ -69,10 +69,10 @@ export default function Header({
             Search
           </button>
         </div>
-        <h1 className="mt-[5rem] 2xl:mt-[9rem]">
+        <h1 className="mt-[5rem] 2xl:mt-[9rem] mx-auto">
           Make your Trip as beautiful as you
         </h1>
-        <h2 className="bg-[#BC4E37]  heading-main">
+        <h2 className="bg-[#BC4E37] heading-main">
           Choose your exotic holidays
         </h2>
       </header>

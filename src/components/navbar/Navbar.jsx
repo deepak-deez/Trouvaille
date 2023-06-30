@@ -6,7 +6,7 @@ import logo from "../../assets/images/navbar/logo.svg";
 import searchIcon from "../../assets/images/navbar/search-icon.svg";
 import notificationIcon from "../../assets/images/navbar/notification-icon.svg";
 import bookingsIcon from "../../assets/images/navbar/document-icon.svg";
-import profileIcon from "../../assets/images/navbar/user-profile-icon.svg";
+import defaultProfileIcon from "../../assets/images/navbar/user-profile-icon.svg";
 import menuHamburger from "../../assets/images/navbar/menu-hamburger.svg";
 import SearchBar from "./searchBar/SearchBar";
 import { useSelector } from "react-redux";
@@ -205,12 +205,16 @@ function Navbar({ setActive }) {
               <div className="rounded-[50%] border-salte-300 border-4">
                 <img
                   className="h-8 w-8 rounded-[50%]"
-                  src={FrontendUserData?.data?.userDetails?.userDetails?.image}
-                  alt="profile-icon"
+                  src={
+                    FrontendUserData?.data?.userDetails?.userDetails?.image
+                      ? FrontendUserData?.data?.userDetails?.userDetails?.image
+                      : defaultProfileIcon
+                  }
                   onError={({ currentTarget }) => {
                     currentTarget.onerror = null;
-                    currentTarget.src = profileIcon;
+                    currentTarget.src = defaultProfileIcon;
                   }}
+                  alt="profile-icon"
                 />
               </div>
             </button>
