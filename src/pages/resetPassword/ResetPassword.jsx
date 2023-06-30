@@ -5,6 +5,7 @@ import { useLocation, useParams } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import SweetAlert from "../../components/alert/sweetAlert";
+import Footer from "../../components/footer/Footer";
 
 const ResetPasswordPage = () => {
   const url = useLocation();
@@ -26,6 +27,7 @@ const ResetPasswordPage = () => {
     return (
       <header className="landing-page reset-password-page flex flex-col h-screen">
         <ResetPassword />
+        <Footer />
       </header>
     );
   } else {
@@ -41,6 +43,7 @@ const ResetPasswordPage = () => {
         >
           Take Me Back?
         </Link>
+        <Footer />
       </div>
     );
   }

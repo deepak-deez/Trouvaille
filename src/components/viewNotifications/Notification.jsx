@@ -2,10 +2,9 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import getAllApiData from "./logic";
-import { notifications } from "./data";
 import TripNotifications from "./tripNotifications/TripNotifications";
-import socketIOClient from "socket.io-client";
 import socket from "../../functions/socket";
+import { getUserBookingById } from "../../redux/slices/bookingSlice";
 import axios from "axios";
 import "./style.scss";
 
@@ -15,6 +14,8 @@ export default function Notification() {
   const [userBookingDetails, setUserBookingDetails] = useState();
   const [notisUnread, setNotisUnread] = useState([]);
   const [statusNotis, setStatusNotis] = useState("");
+
+  const frontendUserId = FrontendUserData?.data?.userDetails._id;
 
   useEffect(() => {
     if (!statusNotis) {
@@ -49,6 +50,18 @@ export default function Notification() {
     );
   };
 
+  const viewAllBtnHandler = () => {
+    statusNotis?.data.forEach(async ({ _id }) => {
+      const markasReadApi =
+        process.env.REACT_APP_API_HOST + "set-notification-mark-read/" + _id;
+      try {
+        const response = await axios.get(markasReadApi);
+      } catch (err) {
+        console.error(err);
+      }
+    });
+  };
+
   useEffect(() => {
     getAllApiData(userId, setUserBookingDetails);
   }, []);
@@ -74,12 +87,17 @@ export default function Notification() {
                   notisUnread={notisUnread}
                   setNotisUnread={setNotisUnread}
                   _id={data._id}
+                  refId={data.refId}
                   key={index}
+                  frontendUserId={frontendUserId}
                 />
               );
             })}
         </ul>
-        <button className="px-5 py-2 bg-slate-200 ml-auto block mt-10 rounded-xl">
+        <button
+          className="px-5 py-2 bg-slate-200 ml-auto block mt-10 rounded-xl"
+          onClick={viewAllBtnHandler}
+        >
           Mark All As Read
         </button>
       </div>

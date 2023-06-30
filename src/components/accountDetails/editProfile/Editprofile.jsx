@@ -37,7 +37,7 @@ export default function EditProfile({ setActive, active }) {
   const userGender = FrontendUserData?.data?.userDetails?.userDetails?.gender;
   const userMarried =
     FrontendUserData?.data?.userDetails?.userDetails?.maritalStatus;
-  const [destination, setDestination] = useState();
+  const [destination, setDestination] = useState("");
 
   useEffect(() => {
     const img = FrontendUserData?.data?.userDetails?.userDetails?.image
@@ -59,6 +59,7 @@ export default function EditProfile({ setActive, active }) {
   };
 
   const updateDetailsHandler = async () => {
+    console.log(destination);
     const imgUrl = imageUrlState;
     console.log(nameRef.current.value);
 
@@ -80,7 +81,10 @@ export default function EditProfile({ setActive, active }) {
     );
 
     try {
-      if (nameRef.current.value.length) {
+      if (
+        nameRef.current.value.length &&
+        isNaN(nameRef.current.value.charAt(0))
+      ) {
         document.getElementById("nameField").textContent = "";
         dispatch(
           updateUser({
@@ -89,8 +93,10 @@ export default function EditProfile({ setActive, active }) {
             formdata: formData,
           })
         );
-      } else {
+      } else if (!nameRef.current.value.length) {
         throw new Error("Name is required!");
+      } else if (!isNaN(nameRef.current.value.charAt(0))) {
+        throw new Error("Name can't be a number!");
       }
     } catch (error) {
       document.getElementById("nameField").textContent = error.message;
@@ -155,7 +161,7 @@ export default function EditProfile({ setActive, active }) {
                   <label
                     htmlFor="profileImg"
                     className={
-                      "bg-white bg-opacity-50 backdrop-blur-sm rounded-xl my-3 px-5 text-2xl cursor-pointer hover:bg-green-600 hover:bg-opacity-30 hover:text-gray-400 transition-all duration-200 " +
+                      "bg-white bg-opacity-50 backdrop-blur-sm rounded-xl my-3 px-5 text-lg cursor-pointer hover:bg-green-600 hover:bg-opacity-30 hover:text-gray-400 transition-all duration-200 " +
                       (uploadImgBtnDisplay ? "block" : "hidden")
                     }
                   >
@@ -163,9 +169,13 @@ export default function EditProfile({ setActive, active }) {
                   </label>
                 </div>
                 <img
-                  className="profile-img"
+                  className="profile-img object-cover w-full h-full"
                   src={profileImg}
                   alt="profile-img"
+                  onError={({ currentTarget }) => {
+                    currentTarget.onerror = null;
+                    currentTarget.src = defaultProfileImage;
+                  }}
                 />
               </div>
               <h4 className="text-center grey-text grey-text underline mt-[0.8rem]">
@@ -199,9 +209,9 @@ export default function EditProfile({ setActive, active }) {
               </h5>
               <h4 className="mb-[1.5rem] grey-text">Name</h4>
               <div className="flex flex-co relative">
-                <div className="flex mb-[2.6rem] w-full rounded-2xl px-[1.2rem] bg-white">
+                <div className="flex mb-[2.6rem] w-full rounded-2xl pr-[1rem] bg-white">
                   <input
-                    className=" bg-transparent outline-none w-[100%] grey-text py-[1rem] "
+                    className=" bg-transparent outline-none w-[100%] name-field grey-text py-[1rem] "
                     type="text"
                     placeholder="Your Name"
                     defaultValue={userName ? userName : ""}
@@ -215,7 +225,7 @@ export default function EditProfile({ setActive, active }) {
                 </div>
                 <h4
                   id="nameField"
-                  className="text-red-700 font-bold absolute mt-[3.5rem] bg-transparent text-md"
+                  className="text-red-700 font-bold absolute mt-[3.5rem] bg-transparent text-sm"
                 ></h4>
               </div>
               <h4 className="mb-[1.5rem] grey-text">DOB</h4>

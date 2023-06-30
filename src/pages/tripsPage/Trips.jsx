@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./style.scss";
 import Header from "../../components/tripsPage/header/Header";
 import TripCategory from "../../components/searchResult/tripCategory/TripCategory";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Footer from "../../components/footer/Footer";
 
 export default function Trips() {
   const [checkinDate, setCheckinDate] = useState("");
@@ -19,7 +20,7 @@ export default function Trips() {
   });
   console.log(checkinDate);
   return (
-    <section className="trips pb-[5rem]">
+    <section className="trips ">
       <Header
         setFilterPerson={setFilterPerson}
         setFilterDestination={setFilterDestination}
@@ -35,6 +36,7 @@ export default function Trips() {
         checkinDate={checkinDate}
         checkOutDate={checkoutDate}
       />
+      <Footer />
     </section>
   );
 }

@@ -5,10 +5,14 @@ import { getUserBookingById } from "../../redux/slices/bookingSlice";
 import "./style.scss";
 import PassengerDetails from "../../components/bookignDetails/passengerDetails/PassengerDetails";
 import { useDispatch, useSelector } from "react-redux";
-export default function BookingDetails(props) {
+import Footer from "../../components/footer/Footer";
+import { useParams } from "react-router-dom/dist/umd/react-router-dom.development";
+
+export default function BookingDetails() {
   const { bookingData } = useSelector((state) => state.booking);
   const location = useLocation();
-  const userDetail = location.state;
+  const userDetail = useParams();
+
   const [userBookingDetails, setUserBookingDetails] = useState();
   const [success, setSuccess] = useState();
   const dispatch = useDispatch();
@@ -26,7 +30,7 @@ export default function BookingDetails(props) {
 
   if (bookingData) {
     return (
-      <section className="booking-details pb-[5rem] min-h-screen">
+      <section className="booking-details  min-h-screen">
         <section className="md:mx-20 xl:mx-44 min-[1920px]:mx-[20rem] pt-[100px]">
           <h1 className="text-center ">Trip details</h1>
           <div className="details-container md:p-10 mt-9">
@@ -41,7 +45,9 @@ export default function BookingDetails(props) {
                   {bookingData?.data[0]?.title}
                 </h2>
                 <div className="basic-information text-white lg:grid ">
-                  <h4 className="mb-5">Basic Information</h4>
+                  <h4 className="mb-5 bg-white text-[#bc4e37] font-[600] px-5 py-2 rounded-lg">
+                    Basic Information
+                  </h4>
                   <div className="flex flex-wrap justify-between p-3">
                     <p className="break-all">
                       Full Name : <span>{bookingData?.data[0]?.name}</span>
@@ -60,7 +66,9 @@ export default function BookingDetails(props) {
               </div>
             </div>
             <div className="mt-5 all-passenger-details">
-              <h4>Other Passengers details</h4>
+              <h4 className="bg-white text-[#bc4e37] font-[600] px-5 py-2 rounded-lg">
+                Other Passengers details
+              </h4>
               <div className="mt-5 flex flex-wrap justify-between gap-10">
                 {bookingData?.data[0]?.otherPassenger?.map((data, index) => {
                   return (
@@ -78,6 +86,7 @@ export default function BookingDetails(props) {
             </div>
           </div>
         </section>
+        <Footer />
       </section>
     );
   }

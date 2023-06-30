@@ -20,7 +20,7 @@ const Details = (props) => {
   const address = useRef();
   const userName = useRef();
   const dispatch = useDispatch();
-
+  const [emptyFieldsMessage, setEmptyFieldsMessage] = useState(false);
   const { bookingData, loading, error } = useSelector((state) => state.booking);
   const phoneNumberRef = useRef();
   const otherPassengerDetails = [];
@@ -68,39 +68,17 @@ const Details = (props) => {
     bookingFormDetails["otherPassenger"] = otherPassengerDetails;
     bookingFormDetails["address"] = address.current.value;
     bookingFormDetails["name"] = userName.current.value;
-    console.log("Other Passenger : ", otherPassengerDetails);
+
     if (userName.current.value && address.current.value) {
       dispatch(createBooking(bookingFormDetails));
-
-      // socket.on("connect", () => {
-      //   console.log(socket.id);
-      // });
     } else {
       SweetAlert("warning", "", "All fields are required!");
     }
-    // try {
-    //   const response = await axios.post(
-    //     `${process.env.REACT_APP_API_HOST}trip-booking`,
-    //     bookingFormDetails
-    //   );
-    //   setsucessModal(!sucessModal);
-    // } catch (err) {
-    //   swal.fire({
-    //     icon: "error",
-    //     title: "Oops...",
-    //     text: err.message,
-    //     timer: "2500",
-    //     buttons: true,
-    //   });
-    // }
   };
   useEffect(() => {
     if (bookingData) {
-      // console.log(bookingData);
-      // SweetAlert("success", bookingData.message);
       setsucessModal(!sucessModal);
       dispatch(resetBooking());
-      console.log(bookingData.data._id, " : id");
 
       const notificationObj = {
         userType: "Frontend-user",
@@ -160,33 +138,15 @@ const Details = (props) => {
 
   const checkValidUserName = () => {
     try {
-      console.log(userName.current.value);
-      if (validName.test(userName.current.value)) {
-        setErrorField(false);
-        document.getElementById("validUserName").textContent = "";
+      if (!isNaN(userName.current.value.charAt(0))) {
+        setErrorField(true);
+        throw new Error("Name can't be a number!");
       } else {
-        if (userName.current.value) {
-          setErrorField(true);
-          throw new Error("Enter a valid Name");
-        }
+        document.getElementById("validUserName").textContent = "";
+        setErrorField(false);
       }
     } catch (err) {
       document.getElementById("validUserName").textContent = err.message;
-    }
-  };
-
-  const checkValidPhoneNumber = () => {
-    try {
-      console.log(phoneNumberRef.current.value);
-      if (validName.test(phoneNumberRef.current.value)) {
-        setErrorField(false);
-        document.getElementById("validPhone").textContent = "Great!";
-      } else {
-        setErrorField(true);
-        throw new Error("Not a valid Phone Number");
-      }
-    } catch (err) {
-      document.getElementById("validPhone").textContent = err.message;
     }
   };
 
@@ -209,7 +169,7 @@ const Details = (props) => {
             <h4
               id="validUserName"
               className={
-                "font-bold bg-transparent text-xl absolute top-28 " +
+                "font-bold bg-transparent text-xl absolute  " +
                 (errorField ? "text-red-700" : "text-green-700")
               }
             ></h4>
@@ -223,12 +183,11 @@ const Details = (props) => {
               defaultValue={bookingFormDetails.phone}
               ref={phoneNumberRef}
               disabled={true}
-              onChange={checkValidPhoneNumber}
             />
             <h4
               id="validPhone"
               className={
-                "font-bold bg-transparent text-xl absolute top-28 " +
+                "font-bold bg-transparent text-xl absolute  " +
                 (errorField ? "text-red-700" : "text-green-700")
               }
             ></h4>
@@ -250,7 +209,7 @@ const Details = (props) => {
 
           <div className="flex input-fields items-center justify-between lg:px-[30px] px-[15px] ">
             <input
-              className=" w-[100%] py-[20px] bg-transparent other-passenger"
+              className=" w-[100%] passenger-field py-[20px] bg-transparent other-passenger"
               type="number"
               placeholder="Other Passenger (number)"
               defaultValue={props.bookingFormData.guestsSelected}

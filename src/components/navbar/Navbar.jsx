@@ -11,11 +11,9 @@ import menuHamburger from "../../assets/images/navbar/menu-hamburger.svg";
 import SearchBar from "./searchBar/SearchBar";
 import { useSelector } from "react-redux";
 import NotificationPopUp from "../viewNotifications/notificationPopUp/NotificationPopUp";
-import socketIOClient from "socket.io-client";
 import axios from "axios";
 import socket from "../../functions/socket";
-
-// const ENDPOINT = "http:flocalhost:7000";
+import { notifications } from "../viewNotifications/data";
 
 function Navbar({ setActive }) {
   const navigate = useNavigate();
@@ -26,7 +24,7 @@ function Navbar({ setActive }) {
   const { FrontendUserData } = useSelector((state) => state.user);
   const refNoti = useRef(null);
   const [notisUnread, setNotisUnread] = useState([]);
-  const [statusNotis, setStatusNotis] = useState("");
+  const [statusNotis, setStatusNotis] = useState();
 
   useEffect(() => {
     if (!statusNotis) {
@@ -51,6 +49,8 @@ function Navbar({ setActive }) {
       localStorage.getItem("id");
 
     const response = await axios.get(allNotisApi);
+
+    console.log("initial response : ", response);
 
     setStatusNotis(response?.data);
 
@@ -82,6 +82,10 @@ function Navbar({ setActive }) {
   };
 
   const handleNotificationPopUp = () => {
+    if (window.innerWidth <= 768) {
+      navigate("/notifications");
+      return;
+    }
     setShowNotis(!showNotis);
   };
 
@@ -124,8 +128,8 @@ function Navbar({ setActive }) {
         >
           <img src={menuHamburger} alt="menu-hamburger" />
         </button>
-        <Link to="/searchResult">
-          <div className="flex gap-2 scale-75">
+        <Link to="/searchResult" className="navbar-main-logo">
+          <div className="flex gap-2">
             <img src={logo} className="" alt="logo" />
             <div className="flex flex-col">
               <h4 className="text-[30.68px]">trouvaille</h4>
@@ -154,19 +158,26 @@ function Navbar({ setActive }) {
         {!dashboardLocations.find(
           (location) => location === currentPageLocation
         ) ? (
-          <div className="flex lg:gap-10 2xl:gap-[4.1rem] items-center">
-            <div ref={refNoti} className="my-auto relative hidden xl:block">
-              <p className="absolute text-center pt-1 h-6 w-6 text-[10px] bg-green-600 rounded-full left-[-0.8rem] text-white font-bold">
+          <div className="flex gap-1 sm:gap-5 lg:gap-10 2xl:gap-[4.1rem] items-center ">
+            <div
+              ref={refNoti}
+              className="relative notification-container cursor-pointer my-auto"
+              onClick={handleNotificationPopUp}
+            >
+              <p
+                className={
+                  "notification-unread-count absolute text-center pt-1 h-6 w-6 text-[10px] bg-green-600 rounded-full left-[-0.8rem] top-[-0.5rem] text-white font-bold  transition-all duration-200 " +
+                  (notisUnread.length <= 0 ? " hidden " : " block")
+                }
+              >
                 {notisUnread.length}
               </p>
-              <button onClick={handleNotificationPopUp} className="my-auto">
-                <img
-                  src={notificationIcon}
-                  className=" mt-2 w-6  h-full  my-auto"
-                  alt="notification-icon"
-                />
-              </button>
-              <div className={showNotis ? " block " : " hidden "}>
+              <img
+                src={notificationIcon}
+                className="w-6  h-full  my-auto"
+                alt="notification-icon"
+              />
+              <div className={showNotis ? " block shadow-hard " : " hidden "}>
                 <NotificationPopUp
                   setShowNotis={setShowNotis}
                   statusNotis={statusNotis?.data}
@@ -176,7 +187,10 @@ function Navbar({ setActive }) {
               </div>
             </div>
 
-            <Link to={"/booking"}>
+            <Link
+              to={"/booking"}
+              className="xl:hover:scale-125 transition-all duration-200"
+            >
               <img
                 src={bookingsIcon}
                 className="hidden xl:block w-6 h-full"
@@ -184,6 +198,7 @@ function Navbar({ setActive }) {
               />
             </Link>
             <button
+              className="xl:hover:scale-125 transition-all duration-200"
               onClick={() => {
                 navigate("/accountDetails");
                 setActive("view-account");
@@ -192,12 +207,12 @@ function Navbar({ setActive }) {
               <div className="rounded-[50%] border-salte-300 border-4">
                 <img
                   className="h-8 w-8 rounded-[50%]"
-                  src={
-                    FrontendUserData?.data?.userDetails?.userDetails?.image
-                      ? FrontendUserData?.data?.userDetails?.userDetails?.image
-                      : profileIcon
-                  }
+                  src={FrontendUserData?.data?.userDetails?.userDetails?.image}
                   alt="profile-icon"
+                  onError={({ currentTarget }) => {
+                    currentTarget.onerror = null;
+                    currentTarget.src = profileIcon;
+                  }}
                 />
               </div>
             </button>
@@ -219,13 +234,6 @@ function Navbar({ setActive }) {
               <li className="flex justify-between">
                 <Link to="/searchResult">Home</Link>
                 <div className="flex gap-10">
-                  <Link to={"/notifications"}>
-                    <img
-                      src={notificationIcon}
-                      className="w-[25px] h-[27px]"
-                      alt="notification-icon"
-                    />
-                  </Link>
                   <Link to={"/booking"}>
                     <img src={bookingsIcon} alt="bookings-icon" />
                   </Link>

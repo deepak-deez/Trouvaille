@@ -15,33 +15,8 @@ export default function ProfileSettings({ setActive }) {
     (state) => state.user
   );
 
-  // console.log(
-  //   "Profile:",
-  //   FrontendUserData,
-  //   "ID :",
-  //   FrontendUserData.data.userDetails._id
-  // );
-  // const dataBaseUrl = `${process.env.REACT_APP_API_HOST}database/${FrontendUserData.data.userDetails.userType}/${FrontendUserData.data.userDetails._id}`;
-  // const [responseData, setResponseData] = useState();
-
-  // const updateDataHandler = async () => {
-  //   try {
-  //     // console.log(dataBaseUrl);
-  //     // const getUpdatedData = await axios.get(dataBaseUrl);
-  //     // console.log("API data :", getUpdatedData);
-  //     setResponseData(FrontendUserData);
-  //   } catch (err) {
-  //     return err;
-  //   }
-  // };
-  // useEffect(() => {
-  //   console.log("Empty");
-  //   updateDataHandler();
-  // }, []);
-  // console.log("response", responseData);
-
   const profileImage = FrontendUserData?.data?.userDetails?.userDetails?.image;
-  const userLcoation = FrontendUserData?.data?.userDetails?.userDetails?.place;
+  const userLocation = FrontendUserData?.data?.userDetails?.userDetails?.place;
   const userName = FrontendUserData?.data?.userDetails?.userDetails?.name;
   const userDOB = FrontendUserData?.data?.userDetails?.userDetails?.DOB;
   const userGender = FrontendUserData?.data?.userDetails?.userDetails?.gender;
@@ -68,23 +43,17 @@ export default function ProfileSettings({ setActive }) {
         </div>
         <div className="flex flex-col sm:flex-row gap-[2rem] items-center xl:items-start mt-[1.5rem] sm:mt-[2rem] profile-section ">
           <div className="flex flex-col h-[180px] w-[150px] profile-img overflow-hidden">
-            {console.log(
-              FrontendUserData?.data?.userDetails?.userDetails?.image,
-              "Profile Image : ",
-              profileImage
-            )}
             {profileImage && (
               <img
                 className={
                   "profile-img" +
                   (FrontendUserData?.success ? " block " : " hidden ")
                 }
-                src={
-                  FrontendUserData?.data?.userDetails?.userDetails?.image &&
-                  FrontendUserData?.data?.userDetails?.userDetails?.image
-                    ? FrontendUserData?.data?.userDetails?.userDetails?.image
-                    : profileImg
-                }
+                src={FrontendUserData?.data?.userDetails?.userDetails?.image}
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null;
+                  currentTarget.src = defaultProfileImg;
+                }}
                 alt="profile-img"
               />
             )}
@@ -92,6 +61,10 @@ export default function ProfileSettings({ setActive }) {
               src={defaultProfileImg}
               alt="defaultProfileImage"
               className={profileImage ? " hidden " : " block profile-img "}
+              onError={({ currentTarget }) => {
+                currentTarget.onerror = null;
+                currentTarget.src = defaultProfileImg;
+              }}
             />
             <h4 className="text-center grey-text grey-text underline mt-[0.8rem]">
               User Dashboard
@@ -99,12 +72,13 @@ export default function ProfileSettings({ setActive }) {
           </div>
           <div className="flex flex-col items-center sm:items-start gap-[1rem]">
             <h2 className="grey-text">
-              {console.log(FrontendUserData)}
               {FrontendUserData?.data?.userDetails?.email}
             </h2>
             <div className="flex gap-[1rem] items-center">
               <span className=" grey-text">
-                {userLcoation ? userLcoation : "Location"}
+                {userLocation && userLocation !== ""
+                  ? userLocation
+                  : "Location"}
               </span>
               <i className="fa-solid fa-circle text-[0.8rem]"></i>
               <span className=" grey-text">

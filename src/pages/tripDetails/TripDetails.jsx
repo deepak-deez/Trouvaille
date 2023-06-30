@@ -17,8 +17,8 @@ import Faqs from "../../components/tripDetails/faqs/Faqs";
 import GetApiDatas from "./logic";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import loader from "../../../src/assets/loaders/airplaneLoading.gif";
 import NoResponse from "../../components/noResponse/NoResponse";
+import Footer from "../../components/footer/Footer";
 
 export default function TripDetails(props) {
   const location = useLocation();
@@ -27,9 +27,6 @@ export default function TripDetails(props) {
 
   const { FrontendUserData } = useSelector((state) => state.user);
   const [tripDetails, setTripDetails] = useState();
-  // const [ocassionImgData, setOcassionImgData] = useState();
-  // const [ammenityImgData, setAmmenityImgData] = useState();
-  // const [userDatabase, setUserdatabase] = useState();
   const [toShowDetails, setToShowDetails] = useState(false);
   const [details, setDetails] = useState(false);
   const [tripResponseData, setTripResponseData] = useState();
@@ -108,10 +105,10 @@ export default function TripDetails(props) {
     return (
       <section className="trip-details " style={backgroundImg}>
         <Header location={locationName} />
-        <section className="md:px-8 xl:px-24 2xl:px-40 min-[1920px]:px-[16rem] trip-fetched-details pb-[16rem] dark-gradient">
+        <section className="md:px-8 xl:px-24 2xl:px-40 min-[1920px]:px-[16rem] trip-fetched-details dark-gradient">
           <h1 className="pt-[5rem] lg:text-start">Itinerary</h1>
           <ul className="flex flex-wrap lg:justify-start sm:flex-row gap-5 text-[#838597] my-[3rem] text-[22px]">
-            <li>Maximum guests 12</li>
+            <li>Maximum guests {tripDetails[0]?.maximumGuests}</li>
             <li>Explore {explorePlaces} PLaces </li>
             <li>Available for 6 guests</li>
           </ul>
@@ -219,14 +216,18 @@ export default function TripDetails(props) {
               );
             })}
           </ul>
+          <Footer />
         </section>
       </section>
     );
   } else {
     return (
-      <NoResponse
-      //inlude statusCode and response message in the parameters
-      />
+      <>
+        <NoResponse
+        //inlude statusCode and response message in the parameters
+        />
+        <Footer />
+      </>
     );
   }
 }

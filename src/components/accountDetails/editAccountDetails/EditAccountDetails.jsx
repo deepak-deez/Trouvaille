@@ -11,11 +11,12 @@ import {
   mediumRegexPassword,
   strongRegexPassword,
 } from "../../../constants/regex";
+import { ClassNameConfigurator } from "@mui/base";
 
 export default function EditAccountDetails({ setActive }) {
   const { FrontendUserData } = useSelector((state) => state.user);
   const [checkPass, setCheckPass] = useState(true);
-  const [emptyFields, setEmptyFields] = useState();
+  // const [emptyFields, setEmptyFields] = useState();
   const [newPasswordValid, setNewPasswordValid] = useState(false);
   const [confirmPasswordValid, setConfirmPasswordValid] = useState(false);
   const [pwdError, setPwdError] = useState(false);
@@ -57,16 +58,13 @@ export default function EditAccountDetails({ setActive }) {
         } else {
           setNewPasswordValid(true);
           document.getElementById("newPassword").textContent = "";
+          updatePasswords();
         }
       }
     } catch (err) {
       document.getElementById("newPassword").textContent = err.message;
     }
   };
-
-  useEffect(() => {
-    updatePasswords();
-  }, [newPasswordValid]);
 
   const updatePasswords = async () => {
     const verifyOldPassUrl = `${process.env.REACT_APP_API_HOST}login/${FrontendUserData.data.userDetails.userType}`;
@@ -84,21 +82,12 @@ export default function EditAccountDetails({ setActive }) {
             id: FrontendUserData.data.userDetails._id,
             newPassword: newPassRef.current.value,
           });
-          console.log("update Status :", updatePassRes);
-
-          if (updatePassRes.data.success) {
-            console.log(updatePassRes);
-            SweetAlert("success", updatePassRes);
-            // Swal.fire("Success!", "Pasword Updated!", "success");
+          if (updatePassRes?.data?.success) {
             setActive("view-account");
-          } else SweetAlert("error", updatePassRes.response.data.message);
+            SweetAlert("success", updatePassRes.data.message);
+          } else SweetAlert("error", updatePassRes.data.message);
         }
-        // else {
-        //   SweetAlert("warning", "", checkOldPass.response.data.message);
-        //   setCheckPass(false);
-        // }
       } catch (err) {
-        console.log("Err : ", err);
         SweetAlert("warning", "", err.response.data.message);
         setCheckPass(false);
       }
@@ -106,6 +95,7 @@ export default function EditAccountDetails({ setActive }) {
   };
 
   const checkValidPassword = () => {
+    handlePasswordCheck();
     try {
       if (strongRegexPassword.test(newPassRef.current.value)) {
         setPwdError(false);

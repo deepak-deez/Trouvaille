@@ -34,6 +34,7 @@
       backdrop-filter: blur(5px);
       transition: all 0.5s;
       border-radius: 32px;
+      border: rgba(255, 255, 255, 0.355) 1px solid;
     }
     div.date:hover {
       background: $bg-orange-gradient;
@@ -41,6 +42,18 @@
 
     h2 {
       color: $color-grey-v1;
+      font-size: 22px;
+
+      @media screen and (min-width: 1024px) {
+        font-size: 40px;
+      }
+    }
+    p {
+      font-size: 18px;
+
+      @media screen and (min-width: 1024px) {
+        font-size: 22px;
+      }
     }
     @media screen and (min-width: 1024px) {
       div.date {

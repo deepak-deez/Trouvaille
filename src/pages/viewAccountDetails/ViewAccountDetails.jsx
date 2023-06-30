@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./style.scss";
 import ViewAccountDetails from "../../components/accountDetails/viewAccountDetails/ViewAccountDetails";
 import EditAccountDetails from "../../components/accountDetails/editAccountDetails/EditAccountDetails";
@@ -6,10 +6,8 @@ import ProfileSettings from "../../components/accountDetails/profileSettings/Pro
 import Editprofile from "../../components/accountDetails/editProfile/Editprofile";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  updateFrontendUserData,
-  updateUserDetails,
-} from "../../redux/slices/userSlice";
+import { updateFrontendUserData } from "../../redux/slices/userSlice";
+import Footer from "../../components/footer/Footer";
 
 const ViewAccDetails = ({ active, setActive }) => {
   const dispatch = useDispatch();
@@ -19,17 +17,16 @@ const ViewAccDetails = ({ active, setActive }) => {
   useEffect(() => {
     if (updatedUserData) {
       dispatch(updateFrontendUserData(updatedUserData));
-      // dispatch(updateUserDetails());
     }
   }, [updatedUserData]);
-  // console.log(updatedUserData, FrontendUserData);
   const navigate = useNavigate();
+
   useEffect(() => {
     if (!FrontendUserData) navigate("/");
   }, []);
 
   return (
-    <section className="account-details pt-[7rem] pb-[5rem]">
+    <section className=" min-h-screen account-details pt-[7rem]">
       {active === "view-account" && (
         <ViewAccountDetails
           setActive={setActive}
@@ -52,6 +49,8 @@ const ViewAccDetails = ({ active, setActive }) => {
           title="edit-profile"
         />
       )}
+
+      <Footer />
     </section>
   );
 };

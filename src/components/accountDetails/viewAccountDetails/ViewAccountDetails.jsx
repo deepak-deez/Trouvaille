@@ -19,12 +19,6 @@ export default function ViewAccountDetails({ setActive }) {
   }
 
   if (FrontendUserData?.success) {
-    // const userData = {
-    //   email: userDetails?.data?.data.userDetails?.email,
-    //   phNumber: userDetails?.data?.data.userDetails?.phone,
-    //   password: userDetails?.data?.data.userDetails?.password,
-    // };
-
     return (
       <header className="sm:mx-20 2xl:mx-[18.75rem] h-screen">
         {console.log(userData)}

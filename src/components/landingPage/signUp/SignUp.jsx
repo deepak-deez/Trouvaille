@@ -213,7 +213,7 @@ const SignUp = () => {
           <h4
             id="validPassword"
             className={
-              "font-bold bg-transparent text-[16px] absolute mt-[3.3rem]" +
+              "font-bold bg-transparent text-[16px] absolute mt-[3.3rem] " +
               (pwdError ? "text-red-700" : "text-green-700")
             }
           ></h4>
@@ -299,6 +299,8 @@ const SignUp = () => {
           onClick={(e) => {
             if (isChecked) {
               handleCreateNewAccount(e);
+            } else {
+              SweetAlert("warning", "", "Captcha not provided!!");
             }
           }}
         >

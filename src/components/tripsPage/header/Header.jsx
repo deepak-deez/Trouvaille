@@ -17,7 +17,7 @@ export default function Header({
   return (
     <>
       <header>
-        <div className="flex flex-col xl:flex-row lg:justify-between gap-5 bg-white p-7 rounded-[3rem] lg:mx-[5rem] xl:mx-[12rem] min-[1920px]:mx-[32rem]">
+        <div className="flex flex-col xl:flex-row lg:justify-between gap-5 bg-white p-7 rounded-[3rem] lg:mx-[5rem] xl:mx-[12rem] min-[1920px]:mx-[20rem]">
           {/* Remove the classname hidden from the classlist */}
           <div className="flex flex-col gap-2">
             <h4>Where to</h4>

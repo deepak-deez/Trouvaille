@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 import { notifications } from "../data";
 import { Link } from "react-router-dom";
 import "./style.scss";
-import { format, compareDesc } from "date-fns";
+import { format } from "date-fns";
 import { useNavigate } from "react-router-dom/dist/umd/react-router-dom.development";
+import { getUserBookingById } from "../../../redux/slices/bookingSlice";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import timestampConvert from "../../../functions/convertDate";
 
 export default function NotificationPopUp({
   statusNotis,
@@ -13,6 +16,12 @@ export default function NotificationPopUp({
   setNotisUnread,
 }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { bookingData } = useSelector((state) => state.booking);
+
+  const { FrontendUserData } = useSelector((state) => state.user);
+  const froneendUserId = FrontendUserData?.data?.userDetails._id;
+  const currentPort = window.location.port;
 
   const handleNavigate = async (e) => {
     const parentElement = e.target.parentElement;
@@ -34,13 +43,14 @@ export default function NotificationPopUp({
         );
 
         setNotisUnread(notisUnreadCopy);
-        parentElement.classList.toggle("bg-blue-100");
+        parentElement.classList.remove("bg-blue-100");
       }
     } catch (err) {
       console.error(err);
     }
 
-    navigate("/booking");
+    dispatch(getUserBookingById);
+
     setShowNotis(false);
   };
 
@@ -57,10 +67,10 @@ export default function NotificationPopUp({
   };
 
   return (
-    <div className="notification-popup absolute bottom-[-1rem] right-0 top-[110%] w-[25rem]  h-[30rem]  bg-white p-4 rounded-3xl shadow-2xl">
-      <div className=" flex justify-between py-5 bg-white w-full">
+    <div className="notification-popup absolute bottom-[-1rem] right-[-2rem] top-[110%] w-[25rem]  h-[30rem] overflow-auto  bg-stone-200 rounded-3xl shadow-hard text-sm">
+      <div className=" flex justify-between py-5 bg-white w-full sticky top-0 px-4 shadow-xl ">
         <button
-          className="px-5 py-2  bg-slate-300 rounded-2xl"
+          className="px-5 py-2  bg-slate-300 rounded-2xl "
           onClick={viewAllBtnHandler}
         >
           Mark All As Read
@@ -72,35 +82,45 @@ export default function NotificationPopUp({
           View All
         </Link>
       </div>
-      <div className="overflow-auto h-[23rem] rounded-2xl bg-white">
-        {statusNotis?.reverse().map((data, index) => {
-          {
-            console.log(data.title, " read status : ", data.readStatus);
-          }
+      {statusNotis
+        ?.slice(0)
+        .reverse()
+        .map((data, index) => {
+          console.log(timestampConvert(data.createdAt));
           return (
             <div
               key={index}
               className={
-                "notification-popup-item p-3 border border-orange-700 my-2 rounded-3xl " +
-                (data.readStatus ? "" : " bg-blue-100 ")
+                "m-4 notification-popup-item p-3 border border-orange-700 rounded-3xl shadow-xl flex flex-col gap-2 " +
+                (data.readStatus ? " bg-white " : " bg-blue-100 ")
               }
             >
-              <h2 className="font-bold">{data.title}</h2>
-              <p className="my-3">{data.description}</p>
-              <p className="text-right text-xs text-gray-400">
-                {data.createdAt}
+              <h2 className="font-bold text-orange-600">{data.title}</h2>
+              <p className="my-3 leading-loose text-blue-500">
+                {data.description}
               </p>
-              <button
+              <p className="text-right text-xs text-gray-400">
+                At {timestampConvert(data.createdAt)} on{" "}
+                {format(new Date(data.createdAt.split("T")[0]), "dd-MM-yyyy")}
+              </p>
+              <Link
                 data-notification-id={data._id}
                 onClick={handleNavigate}
+                to={`${window.location.origin}/bookingDetails/${froneendUserId}/${data?.refId}`}
                 className=" text-center text-xs p-2 bg-orange-700 text-white rounded-3xl"
               >
                 View Details
-              </button>
+              </Link>
             </div>
           );
         })}
-      </div>
+      {statusNotis?.length <= 0 ? (
+        <div className="text-4xl text-stone-300 font-semibold text-center mt-36">
+          No Notifications Found
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

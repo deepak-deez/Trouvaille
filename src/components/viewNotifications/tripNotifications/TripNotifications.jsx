@@ -1,5 +1,8 @@
 import React from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import timestampConvert from "../../../functions/convertDate";
+import { format } from "date-fns";
 import "./style.scss";
 
 export default function TripNotifications({
@@ -10,6 +13,8 @@ export default function TripNotifications({
   readStatus,
   notisUnread,
   setNotisUnread,
+  frontendUserId,
+  refId,
 }) {
   const markAsReadBtnHandler = async ({ target }) => {
     const parentElement = target.parentElement.parentElement;
@@ -29,7 +34,7 @@ export default function TripNotifications({
           1
         );
         setNotisUnread(notisUnreadCopy);
-        parentElement.classList.toggle("bg-blue-100");
+        parentElement.classList.remove("bg-blue-100");
       }
     } catch (err) {
       console.log(err);
@@ -39,27 +44,30 @@ export default function TripNotifications({
   return (
     <li
       className={
-        "notification-li flex flex-col lg:flex-row justify-between bg-white grey-text rounded-tl-xl rounded-bl-xl rounded-tr-xl rounded-br-xl h-auto my-5 " +
+        "notification-li flex flex-col lg:flex-row justify-between grey-text rounded-tl-xl rounded-bl-xl rounded-tr-xl rounded-br-xl h-auto my-5 " +
         (!readStatus ? " bg-blue-100 " : " bg-stone-100 ")
       }
     >
-      <div className="flex flex-col py-[30px] px-2 md:px-[30px]">
+      <div className="flex flex-col gap-2 py-[20px] pb-3 px-2 md:px-[30px]">
         <h4 className="text-orange-500 font-bold underline">{title}</h4>
-        <span className="text-green-600">{description}</span>
-        <p>
-          With booking ID : <span className="text-blue-600">{_id}</span>
-        </p>
+        <span className="text-stone-950">{description}</span>
+        <p className="text-blue-500">Booking ID : {_id}</p>
       </div>
 
       <div className="rounded-tr-xl rounded-br-xl py-[3px] lg:px-[40px] px-[20px] my-auto">
-        <button
+        <Link
           data-booking-id={_id}
-          className="px-[25px] py-[10px] view-button text-[white] ml-auto"
           onClick={markAsReadBtnHandler}
+          to={`${window.location.origin}/bookingDetails/${frontendUserId}/${refId}`}
+          className=" block text-center text-xs p-2 bg-orange-700 text-white rounded-3xl"
         >
-          Mark As Read
-        </button>
-        <p className="text-grey-200 text-base text-right">{createdAt}</p>
+          View Details
+        </Link>
+
+        <p className="text-grey-200 text-base text-right">
+          At {timestampConvert(createdAt)} on{" "}
+          {format(new Date(createdAt.split("T")[0]), "dd-MM-yyyy")}
+        </p>
       </div>
     </li>
   );

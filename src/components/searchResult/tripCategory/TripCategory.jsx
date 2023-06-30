@@ -58,11 +58,6 @@ export default function TripCategory({
     document.addEventListener("click", hideOnClickOutside, true);
   }, []);
 
-  // useEffect(() => {
-  //   // getAllApiData(setAllPackagesData);
-  //   console.log("Hello");
-  // }, []);
-
   useEffect(() => {
     if (filterPerson !== "") handleFilterRequirements();
   }, [filterPerson]);
@@ -161,14 +156,6 @@ export default function TripCategory({
     }
   };
 
-  // const getTripCategory = async () => {
-  //   const response = await axios.get(
-  //     `${process.env.REACT_APP_API_HOST}get-feature/category`
-  //   );
-
-  //   setAllTripCategory(response.data.data);
-  // };
-
   const handleClickedCategory = (e, targetSelected) => {
     const parentElement = document.querySelector(
       `[data-category-selected="${targetSelected}"]`
@@ -192,7 +179,7 @@ export default function TripCategory({
     <>
       {loading && <LoadingScreen />}
       <section className="trip-category">
-        <div className="flex justify-center 2xl:justify-between flex-wrap gap-7 lg:gap-12 trip-category-icons ">
+        <div className="flex justify-center 2xl:justify-between overflow-auto flex-wrap gap-1 lg:gap-12 trip-category-icons ">
           {allTripCategory?.map((response, index) => {
             return (
               <div
@@ -201,7 +188,7 @@ export default function TripCategory({
                 key={index}
               >
                 <div
-                  className="category border-[5px] rounded-[2.5rem] cursor-pointer transition-all duration-200 max-w-[9rem] max-h-[9rem] flex justify-center"
+                  className="category border-[5px] rounded-[2.5rem] cursor-pointer transition-all duration-200 min-w-[1rem] min-h-[1rem] lg:max-w-[9rem] lg:max-h-[9rem] flex justify-center"
                   data-category-selected={response.title}
                 >
                   <img
@@ -211,7 +198,7 @@ export default function TripCategory({
                       currentTarget.onerror = null; // prevents looping
                       currentTarget.src = defaultCategoryImg;
                     }}
-                    className="category-icon saturate-0 m-8 lg:m-0 lg:p-7"
+                    className="category-icon saturate-0 m-2 md:m-8 lg:m-0 lg:p-7"
                   />
                 </div>
                 <p className="text-center text-[16px] max-w-[9rem] category-title">
